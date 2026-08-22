@@ -20,6 +20,8 @@ class Device(Base):
     token_hash: Mapped[str] = mapped_column(String(64))
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
     last_seen_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    # 하트비트 요청의 소스 IP — 대시보드가 기기의 라이브 스트림(/stream, /capture)에 접근할 때 사용
+    ip_address: Mapped[str | None] = mapped_column(String(45), nullable=True)
 
     readings: Mapped[list["SensorReading"]] = relationship(back_populates="device", cascade="all, delete-orphan")
     door_events: Mapped[list["DoorEvent"]] = relationship(back_populates="device", cascade="all, delete-orphan")

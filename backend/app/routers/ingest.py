@@ -1,20 +1,13 @@
-from pathlib import Path
-from uuid import uuid4
-
-from fastapi import APIRouter, Depends, File, Header, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, Header, HTTPException, Request, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.config import get_settings
 from app.database import get_db
-from app.detection import detect_objects
-from app.models import Capture, DetectedObject, Device, DoorEvent, SensorReading, utcnow
+from app.models import Device, DoorEvent, SensorReading, utcnow
 from app.schemas import SensorIngest
 from app.security import verify_device_token
 
 router = APIRouter(prefix="/api/devices", tags=["ingest"])
-
-ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp"}
 
 
 def get_authorized_device(
@@ -61,37 +54,17 @@ def ingest_sensor_reading(
     return {"ok": True}
 
 
-@router.post("/{device_id}/captures", status_code=status.HTTP_201_CREATED)
-async def ingest_capture(
+@router.post("/{device_id}/heartbeat", status_code=status.HTTP_200_OK)
+def ingest_heartbeat(
+    request: Request,
     device: Device = Depends(get_authorized_device),
-    file: UploadFile = File(...),
     db: Session = Depends(get_db),
 ) -> dict:
-    if file.content_type not in ALLOWED_IMAGE_TYPES:
-        raise HTTPException(status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, detail="Unsupported image type")
+    """기기가 살아있고 어떤 IP에서 라이브 스트림(/stream, /capture)을 서빙 중인지 알려준다.
 
-    settings = get_settings()
-    device_dir = settings.media_path / "captures" / device.id
-    device_dir.mkdir(parents=True, exist_ok=True)
-
-    now = utcnow()
-    extension = Path(file.filename or "").suffix or ".jpg"
-    filename = f"{now:%Y%m%dT%H%M%S}_{uuid4().hex[:8]}{extension}"
-    dest = device_dir / filename
-    dest.write_bytes(await file.read())
-
-    detections = detect_objects(dest)
-
-    capture = Capture(device_id=device.id, captured_at=now, image_path=f"captures/{device.id}/{filename}")
-    db.add(capture)
-    db.flush()
-    for detection in detections:
-        db.add(DetectedObject(capture_id=capture.id, label=detection.label, confidence=detection.confidence))
-
-    device.last_seen_at = now
+    IP는 기기가 스스로 보고하는 값이 아니라 이 요청의 실제 소스 주소를 사용한다.
+    """
+    device.ip_address = request.client.host if request.client else None
+    device.last_seen_at = utcnow()
     db.commit()
-
-    return {
-        "capture_id": capture.id,
-        "detected": [{"label": d.label, "confidence": d.confidence} for d in detections],
-    }
+    return {"ok": True}

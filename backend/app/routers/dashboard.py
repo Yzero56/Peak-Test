@@ -1,7 +1,9 @@
 import json
+import urllib.error
+import urllib.request
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
 from app import services
@@ -11,6 +13,8 @@ from app.models import Capture, Device
 from app.schemas import DeviceCreate
 from app.security import generate_device_token, hash_token, require_login
 from app.templating import templates
+
+SCAN_TIMEOUT_SECONDS = 5
 
 router = APIRouter(dependencies=[Depends(require_login)])
 
@@ -77,7 +81,7 @@ def create_device(
 
 
 @router.get("/devices/{device_id}", response_class=HTMLResponse)
-def device_detail(request: Request, device_id: str, db: Session = Depends(get_db)):
+def device_detail(request: Request, device_id: str, scan_error: str | None = None, db: Session = Depends(get_db)):
     device = db.get(Device, device_id)
     if device is None:
         raise HTTPException(status_code=404, detail="Device not found")
@@ -91,6 +95,7 @@ def device_detail(request: Request, device_id: str, db: Session = Depends(get_db
         }
         for r in reversed(readings)
     ]
+    captures = services.recent_captures(db, device_id, limit=1)
     return templates.TemplateResponse(
         request,
         "dashboard/device_detail.html",
@@ -101,10 +106,31 @@ def device_detail(request: Request, device_id: str, db: Session = Depends(get_db
             "latest": readings[0] if readings else None,
             "gas_status": services.classify_gas(readings[0].gas_resistance_ohm) if readings else "알 수 없음",
             "door_events": services.recent_door_events(db, device_id),
-            "captures": services.recent_captures(db, device_id, limit=24),
+            "capture": captures[0] if captures else None,
             "chart_points_json": json.dumps(chart_points),
+            "scan_error": scan_error,
         },
     )
+
+
+@router.post("/devices/{device_id}/scan")
+def scan_device(device_id: str, db: Session = Depends(get_db)):
+    device = db.get(Device, device_id)
+    if device is None:
+        raise HTTPException(status_code=404, detail="Device not found")
+
+    if not device.ip_address or not services.is_online(device):
+        return RedirectResponse(f"/devices/{device_id}?scan_error=offline", status_code=status.HTTP_303_SEE_OTHER)
+
+    try:
+        req = urllib.request.Request(f"http://{device.ip_address}/capture")
+        with urllib.request.urlopen(req, timeout=SCAN_TIMEOUT_SECONDS) as resp:
+            image_bytes = resp.read()
+    except (urllib.error.URLError, TimeoutError, ConnectionError):
+        return RedirectResponse(f"/devices/{device_id}?scan_error=unreachable", status_code=status.HTTP_303_SEE_OTHER)
+
+    services.save_capture(db, device, image_bytes)
+    return RedirectResponse(f"/devices/{device_id}", status_code=status.HTTP_303_SEE_OTHER)
 
 
 @router.get("/captures", response_class=HTMLResponse)

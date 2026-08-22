@@ -1,14 +1,25 @@
 <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
   {% for card in device_cards %}
-  <a href="/devices/{{ card.device.id }}" class="block rounded-2xl bg-white p-4 shadow-sm hover:shadow-md">
+  <div class="rounded-2xl bg-white p-4 shadow-sm hover:shadow-md">
     <div class="flex items-center justify-between">
-      <span class="font-bold">{{ card.device.name }}</span>
+      <a href="/devices/{{ card.device.id }}" class="font-bold hover:underline">{{ card.device.name }}</a>
       <span class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if card.online else 'text-neutral-400' }}">
         <span class="h-2 w-2 rounded-full {{ 'bg-emerald-500' if card.online else 'bg-neutral-300' }}"></span>
         {{ "온라인" if card.online else "오프라인" }}
       </span>
     </div>
-    <p class="mt-1 text-xs text-neutral-400">{{ card.device.id }}</p>
+    <div class="mt-1 flex items-center justify-between">
+      <p class="text-xs text-neutral-400">{{ card.device.id }}</p>
+      {% if card.online and card.device.ip_address %}
+      <a
+        href="http://{{ card.device.ip_address }}:81/stream"
+        target="_blank"
+        rel="noopener"
+        class="text-xs text-neutral-500 underline hover:text-neutral-900">
+        라이브 보기
+      </a>
+      {% endif %}
+    </div>
 
     {% if card.reading %}
     <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
@@ -34,7 +45,7 @@
     {% else %}
     <p class="mt-3 text-sm text-neutral-400">아직 수신된 센서값이 없어요</p>
     {% endif %}
-  </a>
+  </div>
   {% else %}
   <p class="text-sm text-neutral-500">
     등록된 기기가 없어요. <a href="/devices/new" class="underline">기기를 등록</a>해서 시작하세요.

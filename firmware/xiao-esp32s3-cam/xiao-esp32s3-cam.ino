@@ -1,8 +1,14 @@
-// XIAO ESP32-S3 Sense — Wi-Fi 카메라 캡처 업로더
+// XIAO ESP32-S3 Sense — Wi-Fi 라이브 카메라 서버
 //
-// 배선/시리얼 케이블 없이, 보드가 자체 Wi-Fi로 백엔드(FastAPI)에 직접 접속해
-// 주기적으로 사진을 찍어 POST /api/devices/{DEVICE_ID}/captures 로 업로드한다.
-// 시리얼(115200)은 디버그 로그 출력용일 뿐, 데이터 전송 경로가 아니다.
+// 사진을 찍어 백엔드에 계속 쌓아두는 대신, 보드가 자체 Wi-Fi로 HTTP 서버를 열어
+// 실시간 라이브 뷰(/stream)와 정지 프레임(/capture)을 직접 서빙한다.
+// 백엔드는 "지금 스캔하기"를 누른 순간에만 /capture를 가져가 인식하고,
+// 대시보드는 /stream을 <img>로 그대로 띄워 라이브 영상을 보여준다.
+// 이 서버에는 별도 인증이 없다 — 같은 Wi-Fi(LAN)에 있으면 누구나 접근 가능하니
+// 로컬 데모 범위로만 사용할 것.
+//
+// 보드는 주기적으로 백엔드에 "하트비트"만 보낸다(사진 없음) — 이걸로 백엔드가
+// last_seen_at과 자신의 IP를 기억해서 대시보드가 /stream, /capture 주소를 알 수 있다.
 //
 // 준비물:
 //   - Arduino IDE의 "esp32 by Espressif Systems" 보드 패키지 설치
@@ -11,6 +17,7 @@
 // 자세한 절차는 firmware/xiao-esp32s3-cam/README.md 참고.
 
 #include "esp_camera.h"
+#include "esp_http_server.h"
 #include <WiFi.h>
 #include <HTTPClient.h>
 
@@ -34,14 +41,18 @@
 #define HREF_GPIO_NUM 47
 #define PCLK_GPIO_NUM 13
 
-// 촬영 주기(ms). 필요에 맞게 조정.
-#ifndef CAPTURE_INTERVAL_MS
-#define CAPTURE_INTERVAL_MS 60000
+// 하트비트 주기(ms).
+#ifndef HEARTBEAT_INTERVAL_MS
+#define HEARTBEAT_INTERVAL_MS 15000
 #endif
 
-static const char *UPLOAD_BOUNDARY = "----FridgeCamBoundary7d1c9";
+static const char *STREAM_BOUNDARY = "frame";
+static const char *STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=frame";
+static const char *STREAM_PART_HEADER = "Content-Type: image/jpeg\r\nContent-Length: %u\r\n\r\n";
 
-unsigned long lastCaptureAt = 0;
+httpd_handle_t camServer = NULL;     // 포트 80 — /capture (짧은 요청)
+httpd_handle_t streamServer = NULL;  // 포트 81 — /stream (연결이 계속 열려있음)
+unsigned long lastHeartbeatAt = 0;
 
 bool initCamera() {
   camera_config_t config = {};
@@ -66,13 +77,14 @@ bool initCamera() {
   config.xclk_freq_hz = 20000000;
   config.pixel_format = PIXFORMAT_JPEG;
 
+  // 라이브 스트리밍이 매끄럽도록 정지 캡처보다 낮은 해상도를 기본값으로 사용.
   if (psramFound()) {
-    config.frame_size = FRAMESIZE_UXGA;
-    config.jpeg_quality = 10;
+    config.frame_size = FRAMESIZE_SVGA;  // 800x600
+    config.jpeg_quality = 12;
     config.fb_count = 2;
   } else {
-    config.frame_size = FRAMESIZE_SVGA;
-    config.jpeg_quality = 12;
+    config.frame_size = FRAMESIZE_VGA;  // 640x480
+    config.jpeg_quality = 14;
     config.fb_count = 1;
   }
 
@@ -104,54 +116,93 @@ void connectWiFi() {
   }
 }
 
-bool uploadCapture(camera_fb_t *fb) {
-  String head = String("--") + UPLOAD_BOUNDARY + "\r\n" +
-                "Content-Disposition: form-data; name=\"file\"; filename=\"capture.jpg\"\r\n" +
-                "Content-Type: image/jpeg\r\n\r\n";
-  String tail = String("\r\n--") + UPLOAD_BOUNDARY + "--\r\n";
-
-  size_t bodyLen = head.length() + fb->len + tail.length();
-  uint8_t *body = (uint8_t *)malloc(bodyLen);
-  if (body == nullptr) {
-    Serial.println("[upload] 버퍼 할당 실패 (메모리 부족)");
-    return false;
-  }
-  memcpy(body, head.c_str(), head.length());
-  memcpy(body + head.length(), fb->buf, fb->len);
-  memcpy(body + head.length() + fb->len, tail.c_str(), tail.length());
-
-  HTTPClient http;
-  String url = String(BACKEND_BASE_URL) + "/api/devices/" + DEVICE_ID + "/captures";
-  http.begin(url);
-  http.addHeader("X-Device-Token", DEVICE_TOKEN);
-  http.addHeader("Content-Type", String("multipart/form-data; boundary=") + UPLOAD_BOUNDARY);
-
-  int status = http.POST(body, bodyLen);
-  if (status > 0) {
-    Serial.printf("[upload] 응답 %d: %s\n", status, http.getString().c_str());
-  } else {
-    Serial.printf("[upload] 요청 실패: %s\n", http.errorToString(status).c_str());
-  }
-
-  http.end();
-  free(body);
-  return status == 201;
-}
-
-void captureAndUpload() {
-  if (WiFi.status() != WL_CONNECTED) {
-    Serial.println("[cam] Wi-Fi 미연결, 촬영 건너뜀");
-    return;
-  }
-
+// GET /capture — 정지 프레임 1장
+static esp_err_t captureHandler(httpd_req_t *req) {
   camera_fb_t *fb = esp_camera_fb_get();
   if (fb == nullptr) {
-    Serial.println("[cam] 프레임 캡처 실패");
-    return;
+    httpd_resp_send_500(req);
+    return ESP_FAIL;
+  }
+  httpd_resp_set_type(req, "image/jpeg");
+  esp_err_t res = httpd_resp_send(req, (const char *)fb->buf, fb->len);
+  esp_camera_fb_return(fb);
+  return res;
+}
+
+// GET /stream — MJPEG 라이브 스트림 (multipart/x-mixed-replace)
+static esp_err_t streamHandler(httpd_req_t *req) {
+  esp_err_t res = httpd_resp_set_type(req, STREAM_CONTENT_TYPE);
+  if (res != ESP_OK) return res;
+
+  char partHeader[64];
+  while (true) {
+    camera_fb_t *fb = esp_camera_fb_get();
+    if (fb == nullptr) {
+      res = ESP_FAIL;
+      break;
+    }
+
+    String boundary = String("--") + STREAM_BOUNDARY + "\r\n";
+    res = httpd_resp_send_chunk(req, boundary.c_str(), boundary.length());
+    if (res == ESP_OK) {
+      size_t hlen = snprintf(partHeader, sizeof(partHeader), STREAM_PART_HEADER, fb->len);
+      res = httpd_resp_send_chunk(req, partHeader, hlen);
+    }
+    if (res == ESP_OK) {
+      res = httpd_resp_send_chunk(req, (const char *)fb->buf, fb->len);
+    }
+    if (res == ESP_OK) {
+      res = httpd_resp_send_chunk(req, "\r\n", 2);
+    }
+
+    esp_camera_fb_return(fb);
+    if (res != ESP_OK) break;
+  }
+  return res;
+}
+
+void startCameraServer() {
+  // /stream 핸들러는 연결이 끊길 때까지 반복문에서 계속 프레임을 보내며 서버의
+  // 요청 처리 태스크를 점유한다. 같은 서버에 /capture를 같이 두면 누군가 라이브
+  // 영상을 보고 있는 동안 스캔 요청이 응답을 못 받는다 — 그래서 포트를 분리한다
+  // (Espressif 공식 CameraWebServer 예제와 동일한 이유의 동일한 해결책).
+  httpd_config_t camConfig = HTTPD_DEFAULT_CONFIG();
+  camConfig.server_port = 80;
+  camConfig.ctrl_port = 32768;
+  httpd_uri_t captureUri = { "/capture", HTTP_GET, captureHandler, nullptr };
+  if (httpd_start(&camServer, &camConfig) == ESP_OK) {
+    httpd_register_uri_handler(camServer, &captureUri);
+    Serial.println("[cam] /capture 서버 시작됨 (포트 80)");
+  } else {
+    Serial.println("[cam] /capture 서버 시작 실패");
   }
 
-  uploadCapture(fb);
-  esp_camera_fb_return(fb);
+  httpd_config_t streamConfig = HTTPD_DEFAULT_CONFIG();
+  streamConfig.server_port = 81;
+  streamConfig.ctrl_port = 32769;
+  httpd_uri_t streamUri = { "/stream", HTTP_GET, streamHandler, nullptr };
+  if (httpd_start(&streamServer, &streamConfig) == ESP_OK) {
+    httpd_register_uri_handler(streamServer, &streamUri);
+    Serial.println("[cam] /stream 서버 시작됨 (포트 81)");
+  } else {
+    Serial.println("[cam] /stream 서버 시작 실패");
+  }
+}
+
+void sendHeartbeat() {
+  if (WiFi.status() != WL_CONNECTED) return;
+
+  HTTPClient http;
+  String url = String(BACKEND_BASE_URL) + "/api/devices/" + DEVICE_ID + "/heartbeat";
+  http.begin(url);
+  http.addHeader("X-Device-Token", DEVICE_TOKEN);
+  http.addHeader("Content-Type", "application/json");
+
+  int status = http.POST("{}");
+  if (status <= 0) {
+    Serial.printf("[heartbeat] 요청 실패: %s\n", http.errorToString(status).c_str());
+  }
+  http.end();
 }
 
 void setup() {
@@ -163,13 +214,14 @@ void setup() {
   }
 
   connectWiFi();
+  startCameraServer();
 }
 
 void loop() {
   connectWiFi();
 
-  if (millis() - lastCaptureAt >= CAPTURE_INTERVAL_MS) {
-    lastCaptureAt = millis();
-    captureAndUpload();
+  if (millis() - lastHeartbeatAt >= HEARTBEAT_INTERVAL_MS) {
+    lastHeartbeatAt = millis();
+    sendHeartbeat();
   }
 }

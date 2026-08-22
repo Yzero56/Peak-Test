@@ -6,12 +6,12 @@
 
 스마트 냉장고 시스템 — 카메라 기반 재료 인식(VLM) + 자동 재고 관리 + 유통기한 알림 + 레시피 추천. 3인~4인 팀 프로젝트, 발표용 데모 포함. 
 
-핵심 파이프라인: `ESP32-S3 카메라 촬영(전/후 비교) → FastAPI 백엔드 → VLM API(재료 인식) → DB 업데이트 → React Native 앱 푸시 알림 / 웹 대시보드 표시`
+핵심 파이프라인: `ESP32-S3가 라이브 영상(/stream)·정지 프레임(/capture)을 직접 서빙 → 대시보드에서 "지금 스캔하기" → 백엔드가 그 순간 프레임을 pull해 VLM API(재료 인식) → DB 업데이트(기기당 최신 1건, 쌓지 않음) → React Native 앱 푸시 알림 / 웹 대시보드 표시`
 
 ## 기술 스택
 
-- **엣지 디바이스**: XIAO ESP32-S3 Sense (OV2640, 필요시 OV5640 업그레이드), BME680 가스센서, RTC, 도어/PIR 트리거 센서. 카메라 펌웨어(`firmware/xiao-esp32s3-cam/`)는 USB 시리얼이 아니라 **자체 Wi-Fi로 백엔드에 직접 업로드**하며, Wi-Fi/기기 토큰은 커밋되지 않는 `secrets.h`로 분리(`secrets.h.example` 참고). 설정 방법은 해당 폴더 README 참고
-- **통신**: ESP32 → Wi-Fi → FastAPI 백엔드, **HTTP REST로 확정**. 센서값은 JSON(`POST /api/devices/{id}/sensors`), 카메라 이미지는 멀티파트(`POST /api/devices/{id}/captures`)로 전송. 기기별 토큰(`X-Device-Token` 헤더)으로 인증
+- **엣지 디바이스**: XIAO ESP32-S3 Sense (OV2640, 필요시 OV5640 업그레이드), BME680 가스센서, RTC, 도어/PIR 트리거 센서. 카메라 펌웨어(`firmware/xiao-esp32s3-cam/`)는 USB 시리얼이 아니라 **자체 Wi-Fi로 라이브 영상을 직접 서빙**한다(`/stream`, `/capture` — 인증 없음, LAN 전용). 이미지를 백엔드로 쌓아 올리지 않고, 백엔드가 스캔 시점에만 프레임을 가져간다(pull). Wi-Fi/기기 토큰은 커밋되지 않는 `secrets.h`로 분리(`secrets.h.example` 참고). 설정 방법은 해당 폴더 README 참고
+- **통신**: ESP32 → Wi-Fi → FastAPI 백엔드, **HTTP REST로 확정**. 센서값은 JSON(`POST /api/devices/{id}/sensors`), 기기 하트비트는 `POST /api/devices/{id}/heartbeat`(IP·생존 갱신). 카메라 이미지는 기기가 push하지 않고 백엔드가 `GET http://{기기IP}/capture`로 pull. 기기별 토큰(`X-Device-Token` 헤더)으로 인증
 - **백엔드**: `backend/` 디렉토리, FastAPI (Python) + Jinja2/HTMX 관리자 대시보드(별도 프론트엔드 빌드 없음). VLM API 연동(Claude / OpenAI / Gemini 중 택)은 아직 목업(`backend/app/detection.py`)이며 교체 지점만 분리해둠. 대시보드 로그인은 공용 비밀번호 세션 인증, 실행 방법은 `backend/README.md` 참고
 - **프론트엔드**: React Native (Expo) + TypeScript + NativeWind — 단일 코드베이스로 모바일 앱(iOS/Android)과 웹 대시보드(`react-native-web`, 발표용)를 동시 대응
 - **초기 개발 단계**: 센서(도어/가스)·식재료 데이터는 목업(mock) 데이터로 시작, 이후 FastAPI 연동으로 교체

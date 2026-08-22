@@ -3,7 +3,9 @@ from datetime import timedelta
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models import Capture, Device, DoorEvent, SensorReading, utcnow
+from app.config import get_settings
+from app.detection import detect_objects
+from app.models import Capture, DetectedObject, Device, DoorEvent, SensorReading, utcnow
 
 ONLINE_WITHIN = timedelta(minutes=5)
 
@@ -68,3 +70,31 @@ def recent_captures(db: Session, device_id: str | None = None, limit: int = 24) 
     if device_id:
         stmt = stmt.where(Capture.device_id == device_id)
     return list(db.execute(stmt).scalars().all())
+
+
+def save_capture(db: Session, device: Device, image_bytes: bytes) -> Capture:
+    """기기의 스캔 결과를 저장한다. 쌓아두지 않고 기기당 최신 1건만 남긴다."""
+    settings = get_settings()
+    device_dir = settings.media_path / "captures" / device.id
+    device_dir.mkdir(parents=True, exist_ok=True)
+    dest = device_dir / "latest.jpg"
+
+    old_captures = list(db.execute(select(Capture).where(Capture.device_id == device.id)).scalars().all())
+    for old in old_captures:
+        db.delete(old)
+    db.flush()
+
+    dest.write_bytes(image_bytes)
+
+    now = utcnow()
+    capture = Capture(device_id=device.id, captured_at=now, image_path=f"captures/{device.id}/latest.jpg")
+    db.add(capture)
+    db.flush()
+
+    for detection in detect_objects(dest):
+        db.add(DetectedObject(capture_id=capture.id, label=detection.label, confidence=detection.confidence))
+
+    device.last_seen_at = now
+    db.commit()
+    db.refresh(capture)
+    return capture
