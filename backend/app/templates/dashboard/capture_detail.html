@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}캡처 상세 · 냉장고 지킴이 관리자{% endblock %}
+{% block content %}
+<a href="/captures" class="text-sm text-neutral-500 hover:text-neutral-900">← 캡처 목록</a>
+
+<div class="mt-2 grid gap-6 sm:grid-cols-2">
+  <img src="/media/captures/{{ capture.id }}" class="w-full rounded-2xl object-cover shadow-sm" />
+
+  <div>
+    <h1 class="text-lg font-bold">
+      <a href="/devices/{{ capture.device_id }}" class="hover:underline">{{ capture.device.name }}</a>
+    </h1>
+    <p class="text-xs text-neutral-400">{{ capture.captured_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
+
+    <h2 class="mb-2 mt-4 text-sm font-bold text-neutral-700">인식된 객체</h2>
+    <div class="rounded-2xl bg-white shadow-sm">
+      {% for obj in capture.objects %}
+      <div class="flex justify-between border-b border-neutral-100 px-4 py-2.5 text-sm last:border-0">
+        <span>{{ obj.label }}</span>
+        <span class="text-neutral-400">{{ "%.0f"|format(obj.confidence * 100) + "%" if obj.confidence is not none else "-" }}</span>
+      </div>
+      {% else %}
+      <p class="px-4 py-3 text-sm text-neutral-400">인식된 객체가 없어요</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

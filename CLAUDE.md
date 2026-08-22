@@ -11,8 +11,8 @@
 ## 기술 스택
 
 - **엣지 디바이스**: XIAO ESP32-S3 Sense (OV2640, 필요시 OV5640 업그레이드), BME680 가스센서, RTC, 도어/PIR 트리거 센서
-- **통신**: ESP32 → Wi-Fi → FastAPI 백엔드 (MQTT 또는 HTTP, 확정된 프로토콜을 여기에 기록)
-- **백엔드**: FastAPI (Python), VLM API 연동(Claude / OpenAI / Gemini 중 택), 이미지 전/후 비교 프롬프트 파이프라인
+- **통신**: ESP32 → Wi-Fi → FastAPI 백엔드, **HTTP REST로 확정**. 센서값은 JSON(`POST /api/devices/{id}/sensors`), 카메라 이미지는 멀티파트(`POST /api/devices/{id}/captures`)로 전송. 기기별 토큰(`X-Device-Token` 헤더)으로 인증
+- **백엔드**: `backend/` 디렉토리, FastAPI (Python) + Jinja2/HTMX 관리자 대시보드(별도 프론트엔드 빌드 없음). VLM API 연동(Claude / OpenAI / Gemini 중 택)은 아직 목업(`backend/app/detection.py`)이며 교체 지점만 분리해둠. 대시보드 로그인은 공용 비밀번호 세션 인증, 실행 방법은 `backend/README.md` 참고
 - **프론트엔드**: React Native (Expo) + TypeScript + NativeWind — 단일 코드베이스로 모바일 앱(iOS/Android)과 웹 대시보드(`react-native-web`, 발표용)를 동시 대응
 - **초기 개발 단계**: 센서(도어/가스)·식재료 데이터는 목업(mock) 데이터로 시작, 이후 FastAPI 연동으로 교체
 

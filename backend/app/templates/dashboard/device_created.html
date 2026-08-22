@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}기기 등록 완료 · 냉장고 지킴이 관리자{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-md rounded-2xl bg-white p-6 shadow-sm">
+  <h1 class="text-lg font-bold">'{{ device.name }}' 등록 완료</h1>
+  <p class="mt-1 text-sm text-neutral-500">
+    아래 토큰은 지금 한 번만 보여드려요. 기기 펌웨어의 <code>X-Device-Token</code> 헤더 값으로 저장해주세요.
+  </p>
+
+  <div class="mt-4 break-all rounded-lg bg-neutral-900 px-3 py-3 font-mono text-sm text-white">{{ token }}</div>
+
+  <dl class="mt-4 text-sm text-neutral-600">
+    <div class="flex justify-between border-b border-neutral-100 py-2">
+      <dt>기기 ID</dt>
+      <dd class="font-mono">{{ device.id }}</dd>
+    </div>
+    <div class="flex justify-between py-2">
+      <dt>인입 엔드포인트</dt>
+      <dd class="font-mono text-xs">/api/devices/{{ device.id }}/sensors, /captures</dd>
+    </div>
+  </dl>
+
+  <a href="/devices/{{ device.id }}" class="mt-4 inline-block text-sm font-semibold text-neutral-900 underline">
+    기기 상세로 이동 →
+  </a>
+</div>
+{% endblock %}

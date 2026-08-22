@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}{{ device.name }} · 냉장고 지킴이 관리자{% endblock %}
+{% block content %}
+<a href="/" class="text-sm text-neutral-500 hover:text-neutral-900">← 개요</a>
+
+<div class="mt-2 flex items-center justify-between">
+  <div>
+    <h1 class="text-lg font-bold">{{ device.name }}</h1>
+    <p class="text-xs text-neutral-400">{{ device.id }}</p>
+  </div>
+  <span class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if online else 'text-neutral-400' }}">
+    <span class="h-2 w-2 rounded-full {{ 'bg-emerald-500' if online else 'bg-neutral-300' }}"></span>
+    {{ "온라인" if online else "오프라인" }}
+  </span>
+</div>
+
+<div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+  <div class="rounded-2xl bg-white p-4 shadow-sm">
+    <p class="text-xs text-neutral-400">도어</p>
+    <p class="mt-1 text-lg font-bold">
+      {{ "열림" if latest and latest.door_open else "닫힘" if latest and latest.door_open is not none else "-" }}
+    </p>
+  </div>
+  <div class="rounded-2xl bg-white p-4 shadow-sm">
+    <p class="text-xs text-neutral-400">가스 상태</p>
+    <p class="mt-1 text-lg font-bold {{ 'text-red-600' if gas_status == '위험' else 'text-amber-600' if gas_status == '주의' else '' }}">
+      {{ gas_status }}
+    </p>
+  </div>
+  <div class="rounded-2xl bg-white p-4 shadow-sm">
+    <p class="text-xs text-neutral-400">온도</p>
+    <p class="mt-1 text-lg font-bold">
+      {{ "%.1f"|format(latest.temperature_c) + "°C" if latest and latest.temperature_c is not none else "-" }}
+    </p>
+  </div>
+  <div class="rounded-2xl bg-white p-4 shadow-sm">
+    <p class="text-xs text-neutral-400">습도</p>
+    <p class="mt-1 text-lg font-bold">
+      {{ "%.0f"|format(latest.humidity_pct) + "%" if latest and latest.humidity_pct is not none else "-" }}
+    </p>
+  </div>
+</div>
+
+<h2 class="mb-2 mt-6 text-sm font-bold text-neutral-700">온습도 추이 (최근 {{ readings|length }}건)</h2>
+<div class="rounded-2xl bg-white p-4 shadow-sm">
+  <canvas id="readingsChart" height="90"></canvas>
+</div>
+
+<div class="mt-6 grid gap-6 sm:grid-cols-2">
+  <div>
+    <h2 class="mb-2 text-sm font-bold text-neutral-700">도어 이벤트</h2>
+    <div class="rounded-2xl bg-white shadow-sm">
+      {% for event in door_events %}
+      <div class="flex justify-between border-b border-neutral-100 px-4 py-2.5 text-sm last:border-0">
+        <span>{{ "열림" if event.is_open else "닫힘" }}</span>
+        <span class="text-neutral-400">{{ event.changed_at.strftime("%m/%d %H:%M:%S") }}</span>
+      </div>
+      {% else %}
+      <p class="px-4 py-3 text-sm text-neutral-400">기록된 도어 이벤트가 없어요</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div>
+    <h2 class="mb-2 text-sm font-bold text-neutral-700">캡처</h2>
+    <div class="grid grid-cols-3 gap-2">
+      {% for capture in captures %}
+      <a href="/captures/{{ capture.id }}">
+        <img src="/media/captures/{{ capture.id }}" class="aspect-square w-full rounded-lg object-cover" />
+      </a>
+      {% else %}
+      <p class="col-span-3 text-sm text-neutral-400">아직 캡처된 사진이 없어요</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script>
+  const points = {{ chart_points_json | safe }};
+  new Chart(document.getElementById("readingsChart"), {
+    type: "line",
+    data: {
+      labels: points.map((p) => p.t.slice(11, 16)),
+      datasets: [
+        {
+          label: "온도(°C)",
+          data: points.map((p) => p.temperature_c),
+          borderColor: "#5c8a82",
+          tension: 0.3,
+        },
+        {
+          label: "습도(%)",
+          data: points.map((p) => p.humidity_pct),
+          borderColor: "#a9762b",
+          tension: 0.3,
+        },
+      ],
+    },
+    options: { responsive: true, plugins: { legend: { position: "bottom" } } },
+  });
+</script>
+{% endblock %}

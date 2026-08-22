@@ -41,3 +41,11 @@ example
 # generated native folders
 /ios
 /android
+
+# backend (FastAPI)
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.env
+backend/*.db
+backend/media/

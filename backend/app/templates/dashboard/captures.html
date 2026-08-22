@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}캡처 · 냉장고 지킴이 관리자{% endblock %}
+{% block content %}
+<div class="mb-4 flex items-center justify-between">
+  <h1 class="text-lg font-bold">캡처 목록</h1>
+  <form method="get" action="/captures">
+    <select name="device_id" onchange="this.form.submit()" class="rounded-lg border border-neutral-200 px-3 py-2 text-sm">
+      <option value="">전체 기기</option>
+      {% for d in devices %}
+      <option value="{{ d.id }}" {{ "selected" if d.id == selected_device_id else "" }}>{{ d.name }}</option>
+      {% endfor %}
+    </select>
+  </form>
+</div>
+
+<div class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+  {% for capture in captures %}
+  <a href="/captures/{{ capture.id }}" class="block">
+    <img src="/media/captures/{{ capture.id }}" class="aspect-square w-full rounded-xl object-cover shadow-sm" />
+    <p class="mt-1 truncate text-xs text-neutral-500">{{ capture.captured_at.strftime("%m/%d %H:%M") }}</p>
+  </a>
+  {% else %}
+  <p class="text-sm text-neutral-400">아직 캡처된 사진이 없어요</p>
+  {% endfor %}
+</div>
+{% endblock %}

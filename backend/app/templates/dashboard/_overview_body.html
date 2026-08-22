@@ -1,0 +1,54 @@
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {% for card in device_cards %}
+  <a href="/devices/{{ card.device.id }}" class="block rounded-2xl bg-white p-4 shadow-sm hover:shadow-md">
+    <div class="flex items-center justify-between">
+      <span class="font-bold">{{ card.device.name }}</span>
+      <span class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if card.online else 'text-neutral-400' }}">
+        <span class="h-2 w-2 rounded-full {{ 'bg-emerald-500' if card.online else 'bg-neutral-300' }}"></span>
+        {{ "온라인" if card.online else "오프라인" }}
+      </span>
+    </div>
+    <p class="mt-1 text-xs text-neutral-400">{{ card.device.id }}</p>
+
+    {% if card.reading %}
+    <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
+      <div>
+        <dt class="text-xs text-neutral-400">도어</dt>
+        <dd>{{ "열림" if card.reading.door_open else "닫힘" if card.reading.door_open is not none else "-" }}</dd>
+      </div>
+      <div>
+        <dt class="text-xs text-neutral-400">가스 상태</dt>
+        <dd class="{{ 'text-red-600' if card.gas_status == '위험' else 'text-amber-600' if card.gas_status == '주의' else '' }}">
+          {{ card.gas_status }}
+        </dd>
+      </div>
+      <div>
+        <dt class="text-xs text-neutral-400">온도</dt>
+        <dd>{{ "%.1f"|format(card.reading.temperature_c) + "°C" if card.reading.temperature_c is not none else "-" }}</dd>
+      </div>
+      <div>
+        <dt class="text-xs text-neutral-400">습도</dt>
+        <dd>{{ "%.0f"|format(card.reading.humidity_pct) + "%" if card.reading.humidity_pct is not none else "-" }}</dd>
+      </div>
+    </dl>
+    {% else %}
+    <p class="mt-3 text-sm text-neutral-400">아직 수신된 센서값이 없어요</p>
+    {% endif %}
+  </a>
+  {% else %}
+  <p class="text-sm text-neutral-500">
+    등록된 기기가 없어요. <a href="/devices/new" class="underline">기기를 등록</a>해서 시작하세요.
+  </p>
+  {% endfor %}
+</div>
+
+<h2 class="mb-3 mt-8 text-sm font-bold text-neutral-700">최근 캡처</h2>
+<div class="flex gap-3 overflow-x-auto pb-2">
+  {% for capture in captures %}
+  <a href="/captures/{{ capture.id }}" class="block flex-none">
+    <img src="/media/captures/{{ capture.id }}" class="h-28 w-28 rounded-xl object-cover" />
+  </a>
+  {% else %}
+  <p class="text-sm text-neutral-400">아직 캡처된 사진이 없어요</p>
+  {% endfor %}
+</div>
