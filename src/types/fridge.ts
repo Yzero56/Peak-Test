@@ -1,42 +1,79 @@
-export type DoorStatus = {
-  isOpen: boolean;
-  lastChangedAt: string; // ISO timestamp
-};
+export type Category = '채소' | '육류·계란' | '유제품' | '수산물' | '기타';
 
-export type GasLevel = 'normal' | 'caution' | 'danger';
+export type Location = '냉장' | '냉동' | '실온';
 
-export type GasStatus = {
-  level: GasLevel;
-  ppm: number;
-  lastUpdatedAt: string; // ISO timestamp
-};
-
-export type FoodCategory = '채소' | '과일' | '유제품' | '육류' | '수산물' | '가공식품' | '기타';
-
-export type FoodItem = {
-  id: string;
-  /** 사용자가 이름을 지정하지 않은 경우 undefined — 이 때는 썸네일로 표시 */
-  name?: string;
-  thumbnailEmoji: string;
-  category: FoodCategory;
-  quantity: string;
-  addedAt: string; // ISO date
-  expiresAt: string; // ISO date
-};
-
-export type NotificationDigest = {
-  id: string;
-  date: string; // ISO date, 요약이 발송된 날짜
-  summary: string;
-  itemCount: number;
-  read: boolean;
-};
-
-export type RecipeSuggestion = {
-  id: string;
+export type InventoryItem = {
+  id: number;
   name: string;
-  emoji: string;
-  usesIngredients: string[];
-  missingIngredients: string[];
-  cookTimeMinutes: number;
+  category: Category;
+  quantity: string;
+  expiresAt: string; // ISO date (YYYY-MM-DD)
+  location: Location;
+};
+
+export type RecipeIngredient = {
+  name: string;
+  amount: string;
+  /** 이 재료를 다 쓰면 재고에서 완전히 빠지는 핵심 재료인지 여부 */
+  essential: boolean;
+};
+
+export type RecipeDef = {
+  id: string;
+  title: string;
+  time: string;
+  level: string;
+  kcal: number;
+  note: string;
+  uses: RecipeIngredient[];
+  steps: string[];
+};
+
+export type MealLogEntry = {
+  date: string; // ISO date (YYYY-MM-DD)
+  slot: '아침' | '점심' | '저녁';
+  title: string;
+  kcal: number;
+};
+
+export type NotificationLeadTime = '1일 전' | '3일 전' | '7일 전';
+
+export type NotificationToggles = {
+  urgent: boolean;
+  low: boolean;
+  digest: boolean;
+  plan: boolean;
+};
+
+export type NotificationSettings = {
+  leadTime: NotificationLeadTime;
+  toggles: NotificationToggles;
+};
+
+export type RecipeSortOrder = 'match' | 'urgent' | 'time';
+
+export type InventoryViewMode = 'exp' | 'name' | 'cat';
+
+export type AddMode = 'manual' | 'photo' | 'quick';
+
+export type ManualAddForm = {
+  name: string;
+  quantity: string;
+  expiresAt: string;
+  category: Category;
+  location: Location;
+};
+
+export type ScanCandidate = {
+  name: string;
+  quantity: string;
+  expiresAt: string;
+  category: Category;
+  location: Location;
+};
+
+export type ToastState = {
+  message: string;
+  actionLabel: string;
+  onAction: () => void;
 };

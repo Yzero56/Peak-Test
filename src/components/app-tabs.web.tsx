@@ -20,10 +20,16 @@ export default function AppTabs() {
       <TabList asChild>
         <CustomTabList>
           <TabTrigger name="home" href="/" asChild>
-            <TabButton>홈</TabButton>
+            <TabButton>재고</TabButton>
           </TabTrigger>
-          <TabTrigger name="explore" href="/explore" asChild>
-            <TabButton>식재료</TabButton>
+          <TabTrigger name="recipes" href="/recipes" asChild>
+            <TabButton>레시피</TabButton>
+          </TabTrigger>
+          <TabTrigger name="meals" href="/meals" asChild>
+            <TabButton>식단</TabButton>
+          </TabTrigger>
+          <TabTrigger name="settings" href="/settings" asChild>
+            <TabButton>설정</TabButton>
           </TabTrigger>
         </CustomTabList>
       </TabList>
