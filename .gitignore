@@ -49,3 +49,7 @@ backend/**/__pycache__/
 backend/.env
 backend/*.db
 backend/media/
+backend/*.log
+
+# firmware (Arduino secrets — Wi-Fi/기기 토큰)
+firmware/**/secrets.h
