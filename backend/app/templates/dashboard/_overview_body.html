@@ -10,7 +10,7 @@
     </div>
     <div class="mt-1 flex items-center justify-between">
       <p class="text-xs text-neutral-400">{{ card.device.id }}</p>
-      {% if card.online and card.device.ip_address %}
+      {% if card.online and card.device.ip_address and card.camera_on %}
       <a
         href="http://{{ card.device.ip_address }}:81/stream"
         target="_blank"
@@ -20,6 +20,12 @@
       </a>
       {% endif %}
     </div>
+    {% if card.live_active %}
+    <p class="mt-1 flex items-center gap-1.5 text-xs text-emerald-600">
+      <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      실시간 탐지 중
+    </p>
+    {% endif %}
 
     {% if card.reading %}
     <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
@@ -57,7 +63,9 @@
 <div class="flex gap-3 overflow-x-auto pb-2">
   {% for capture in captures %}
   <a href="/captures/{{ capture.id }}" class="block flex-none">
-    <img src="/media/captures/{{ capture.id }}" class="h-28 w-28 rounded-xl object-cover" />
+    <img
+      src="/media/captures/{{ capture.id }}?t={{ capture.captured_at.strftime('%Y%m%d%H%M%S%f') }}"
+      class="h-28 w-28 rounded-xl object-cover" />
   </a>
   {% else %}
   <p class="text-sm text-neutral-400">아직 캡처된 사진이 없어요</p>

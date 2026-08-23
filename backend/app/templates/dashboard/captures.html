@@ -16,7 +16,9 @@
 <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
   {% for capture in captures %}
   <a href="/captures/{{ capture.id }}" class="block">
-    <img src="/media/captures/{{ capture.id }}" class="aspect-square w-full rounded-xl object-cover shadow-sm" />
+    <img
+      src="/media/captures/{{ capture.id }}?t={{ capture.captured_at.strftime('%Y%m%d%H%M%S%f') }}"
+      class="aspect-square w-full rounded-xl object-cover shadow-sm" />
     <p class="mt-1 truncate text-xs text-neutral-500">{{ capture.captured_at.strftime("%m/%d %H:%M") }}</p>
   </a>
   {% else %}

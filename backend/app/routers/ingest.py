@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Header, HTTPException, Request, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app import live_scan
 from app.database import get_db
 from app.models import Device, DoorEvent, SensorReading, utcnow
 from app.schemas import SensorIngest
@@ -39,6 +40,7 @@ def ingest_sensor_reading(
         )
     )
 
+    door_changed = False
     if payload.door_open is not None:
         last_event = db.execute(
             select(DoorEvent)
@@ -46,11 +48,21 @@ def ingest_sensor_reading(
             .order_by(DoorEvent.changed_at.desc())
             .limit(1)
         ).scalar_one_or_none()
-        if last_event is None or last_event.is_open != payload.door_open:
+        door_changed = last_event is None or last_event.is_open != payload.door_open
+        if door_changed:
             db.add(DoorEvent(device_id=device.id, is_open=payload.door_open, changed_at=now))
 
     device.last_seen_at = now
     db.commit()
+
+    # 문이 열리면 자동 스캔 루프 시작, 닫히면 중단 — 실제 상태 전환일 때만 반응한다
+    # (매 하트비트/센서 전송마다 스레드를 다시 만들지 않도록).
+    if door_changed:
+        if payload.door_open:
+            live_scan.start(device.id)
+        else:
+            live_scan.stop(device.id)
+
     return {"ok": True}
 
 

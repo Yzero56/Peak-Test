@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
-from app import services
+from app import live_scan, services
 from app.config import get_settings
 from app.database import get_db
 from app.models import Capture, Device
@@ -26,6 +26,10 @@ def _device_card(db: Session, device: Device) -> dict:
         "online": services.is_online(device),
         "reading": reading,
         "gas_status": services.classify_gas(reading.gas_resistance_ohm) if reading else "알 수 없음",
+        "live_active": live_scan.is_active(device.id),
+        # 문이 닫히면 기기가 카메라 전원 자체를 끄므로(전력 절약), 라이브 뷰 링크는
+        # 온라인 여부와 별개로 door_open일 때만 의미가 있다.
+        "camera_on": bool(reading and reading.door_open),
     }
 
 
@@ -109,6 +113,43 @@ def device_detail(request: Request, device_id: str, scan_error: str | None = Non
             "capture": captures[0] if captures else None,
             "chart_points_json": json.dumps(chart_points),
             "scan_error": scan_error,
+            "live_active": live_scan.is_active(device_id),
+            "camera_on": bool(readings and readings[0].door_open),
+        },
+    )
+
+
+@router.get("/partials/devices/{device_id}/status")
+def device_status(device_id: str, db: Session = Depends(get_db)) -> dict:
+    """라이브 뷰가 기기의 IP 변경(DHCP 재할당 등)과 카메라 전원 on/off(문 개폐)를
+    폴링으로 스스로 따라가기 위한 엔드포인트. door_open은 문이 닫혔다가 다시 열릴 때
+    (=카메라가 막 다시 켜졌을 때) 대시보드가 죽은 스트림 연결을 새로 맺도록 알려준다.
+    """
+    device = db.get(Device, device_id)
+    if device is None:
+        raise HTTPException(status_code=404, detail="Device not found")
+    reading = services.latest_reading(db, device_id)
+    return {
+        "online": services.is_online(device),
+        "ip_address": device.ip_address,
+        "door_open": reading.door_open if reading else None,
+    }
+
+
+@router.get("/partials/devices/{device_id}/live", response_class=HTMLResponse)
+def device_live_partial(request: Request, device_id: str, db: Session = Depends(get_db)):
+    device = db.get(Device, device_id)
+    if device is None:
+        raise HTTPException(status_code=404, detail="Device not found")
+
+    captures = services.recent_captures(db, device_id, limit=1)
+    return templates.TemplateResponse(
+        request,
+        "dashboard/_device_live_status.html",
+        {
+            "device": device,
+            "capture": captures[0] if captures else None,
+            "live_active": live_scan.is_active(device_id),
         },
     )
 

@@ -1,0 +1,31 @@
+<div class="flex items-center justify-between">
+  <h2 class="text-sm font-bold text-neutral-700">최근 스캔 결과</h2>
+  <span class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if live_active else 'text-neutral-400' }}">
+    <span class="h-2 w-2 rounded-full {{ 'bg-emerald-500 animate-pulse' if live_active else 'bg-neutral-300' }}"></span>
+    {{ "실시간 탐지 중 (문 열림)" if live_active else "실시간 탐지 꺼짐 (문 닫힘)" }}
+  </span>
+</div>
+
+{% if capture %}
+<div class="mt-2 overflow-hidden rounded-2xl bg-white shadow-sm">
+  <a href="/captures/{{ capture.id }}">
+    <img
+      src="/media/captures/{{ capture.id }}?t={{ capture.captured_at.strftime('%Y%m%d%H%M%S%f') }}"
+      class="aspect-square w-full object-cover" />
+  </a>
+  <div class="p-3">
+    <p class="text-xs text-neutral-400">{{ capture.captured_at.strftime("%m/%d %H:%M:%S") }}</p>
+    <div class="mt-2 flex flex-wrap gap-1.5">
+      {% for obj in capture.objects %}
+      <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs text-emerald-800">
+        {{ obj.label }} {{ "%.0f"|format(obj.confidence * 100) if obj.confidence is not none else "" }}%
+      </span>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="mt-2 rounded-2xl bg-white p-4 text-sm text-neutral-400 shadow-sm">
+  아직 스캔한 결과가 없어요. 문을 열면 자동으로 스캔이 시작돼요.
+</div>
+{% endif %}

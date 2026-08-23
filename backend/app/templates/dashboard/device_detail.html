@@ -8,9 +8,9 @@
     <h1 class="text-lg font-bold">{{ device.name }}</h1>
     <p class="text-xs text-neutral-400">{{ device.id }}</p>
   </div>
-  <span class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if online else 'text-neutral-400' }}">
-    <span class="h-2 w-2 rounded-full {{ 'bg-emerald-500' if online else 'bg-neutral-300' }}"></span>
-    {{ "온라인" if online else "오프라인" }}
+  <span id="device-online-badge" class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if online else 'text-neutral-400' }}">
+    <span id="device-online-dot" class="h-2 w-2 rounded-full {{ 'bg-emerald-500' if online else 'bg-neutral-300' }}"></span>
+    <span id="device-online-text">{{ "온라인" if online else "오프라인" }}</span>
   </span>
 </div>
 
@@ -30,22 +30,26 @@
   <p class="mt-2 text-sm text-red-600">기기의 라이브 서버에 연결하지 못했어요. 같은 Wi-Fi에 있는지 확인해주세요.</p>
   {% endif %}
 
-  {% if online and device.ip_address %}
-  <img
-    src="http://{{ device.ip_address }}:81/stream"
-    class="mt-3 aspect-video w-full rounded-xl bg-neutral-900 object-cover"
-    alt="라이브 영상" />
-  {% else %}
-  <div class="mt-3 flex h-48 items-center justify-center rounded-xl bg-neutral-100 text-sm text-neutral-400">
-    기기가 온라인이 되면 라이브 영상이 여기에 표시돼요
+  <div id="live-view-container">
+    {% if online and device.ip_address and camera_on %}
+    <img
+      id="live-stream-img"
+      data-ip="{{ device.ip_address }}"
+      src="http://{{ device.ip_address }}:81/stream"
+      class="mt-3 aspect-video w-full rounded-xl bg-neutral-900 object-cover"
+      alt="라이브 영상" />
+    {% else %}
+    <div id="live-view-placeholder" class="mt-3 flex h-48 items-center justify-center rounded-xl bg-neutral-100 text-sm text-neutral-400">
+      {{ "문이 열리면 라이브 영상이 여기에 표시돼요" if online else "기기가 온라인이 되면 라이브 영상이 여기에 표시돼요" }}
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
 </div>
 
 <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
   <div class="rounded-2xl bg-white p-4 shadow-sm">
     <p class="text-xs text-neutral-400">도어</p>
-    <p class="mt-1 text-lg font-bold">
+    <p id="door-status-text" class="mt-1 text-lg font-bold">
       {{ "열림" if latest and latest.door_open else "닫힘" if latest and latest.door_open is not none else "-" }}
     </p>
   </div>
@@ -89,29 +93,12 @@
     </div>
   </div>
 
-  <div>
-    <h2 class="mb-2 text-sm font-bold text-neutral-700">최근 스캔 결과</h2>
-    {% if capture %}
-    <div class="overflow-hidden rounded-2xl bg-white shadow-sm">
-      <a href="/captures/{{ capture.id }}">
-        <img src="/media/captures/{{ capture.id }}" class="aspect-square w-full object-cover" />
-      </a>
-      <div class="p-3">
-        <p class="text-xs text-neutral-400">{{ capture.captured_at.strftime("%m/%d %H:%M:%S") }}</p>
-        <div class="mt-2 flex flex-wrap gap-1.5">
-          {% for obj in capture.objects %}
-          <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs text-emerald-800">
-            {{ obj.label }} {{ "%.0f"|format(obj.confidence * 100) if obj.confidence is not none else "" }}%
-          </span>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-    {% else %}
-    <div class="rounded-2xl bg-white p-4 text-sm text-neutral-400 shadow-sm">
-      아직 스캔한 결과가 없어요. "지금 스캔하기"를 눌러보세요.
-    </div>
-    {% endif %}
+  <div
+    id="live-status"
+    hx-get="/partials/devices/{{ device.id }}/live"
+    hx-trigger="every 5s"
+    hx-swap="innerHTML">
+    {% include "dashboard/_device_live_status.html" %}
   </div>
 </div>
 
@@ -139,5 +126,67 @@
     },
     options: { responsive: true, plugins: { legend: { position: "bottom" } } },
   });
+</script>
+<script>
+  // 기기 IP는 Wi-Fi DHCP 재할당 등으로 바뀔 수 있고, 문이 닫히면 기기가 카메라
+  // 전원 자체를 꺼서(전력 절약) 기존 스트림 연결이 끊긴다. 페이지를 새로고침하지
+  // 않아도 라이브 뷰가 최신 상태를 따라가도록 주기적으로 확인하고, IP가 바뀌었거나
+  // 문이 막 다시 열렸을(=카메라가 막 켜졌을) 때만 <img>를 다시 만든다
+  // (그 외에는 스트림 연결을 그대로 유지해서 불필요하게 끊지 않는다).
+  let lastDoorOpen = null;
+  let doorBaselineSet = false;
+
+  async function refreshDeviceStatus() {
+    try {
+      const res = await fetch("/partials/devices/{{ device.id }}/status");
+      if (!res.ok) return;
+      const data = await res.json();
+
+      const dot = document.getElementById("device-online-dot");
+      const text = document.getElementById("device-online-text");
+      const badge = document.getElementById("device-online-badge");
+      if (dot && text && badge) {
+        badge.classList.toggle("text-emerald-600", data.online);
+        badge.classList.toggle("text-neutral-400", !data.online);
+        dot.classList.toggle("bg-emerald-500", data.online);
+        dot.classList.toggle("bg-neutral-300", !data.online);
+        text.textContent = data.online ? "온라인" : "오프라인";
+      }
+
+      const doorText = document.getElementById("door-status-text");
+      if (doorText) {
+        doorText.textContent = data.door_open === true ? "열림" : data.door_open === false ? "닫힘" : "-";
+      }
+
+      const container = document.getElementById("live-view-container");
+      if (!container) return;
+      const currentImg = document.getElementById("live-stream-img");
+
+      const doorJustReopened = doorBaselineSet && lastDoorOpen === false && data.door_open === true;
+      lastDoorOpen = data.door_open;
+      doorBaselineSet = true;
+
+      if (data.online && data.ip_address && data.door_open) {
+        const ipChanged = !currentImg || currentImg.dataset.ip !== data.ip_address;
+        if (ipChanged || doorJustReopened) {
+          container.innerHTML =
+            '<img id="live-stream-img" data-ip="' + data.ip_address + '" ' +
+            'src="http://' + data.ip_address + ':81/stream?r=' + Date.now() + '" ' +
+            'class="mt-3 aspect-video w-full rounded-xl bg-neutral-900 object-cover" alt="라이브 영상" />';
+        }
+      } else if (currentImg || !document.getElementById("live-view-placeholder")) {
+        const msg = data.online
+          ? "문이 열리면 라이브 영상이 여기에 표시돼요"
+          : "기기가 온라인이 되면 라이브 영상이 여기에 표시돼요";
+        container.innerHTML =
+          '<div id="live-view-placeholder" class="mt-3 flex h-48 items-center justify-center rounded-xl bg-neutral-100 text-sm text-neutral-400">' +
+          msg + "</div>";
+      }
+    } catch (err) {
+      // 네트워크 순간 끊김 정도는 무시하고 다음 폴링에서 다시 시도한다.
+    }
+  }
+  refreshDeviceStatus();
+  setInterval(refreshDeviceStatus, 2000);
 </script>
 {% endblock %}

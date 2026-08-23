@@ -10,6 +10,17 @@
 // 보드는 주기적으로 백엔드에 "하트비트"만 보낸다(사진 없음) — 이걸로 백엔드가
 // last_seen_at과 자신의 IP를 기억해서 대시보드가 /stream, /capture 주소를 알 수 있다.
 //
+// 리드스위치(D10/GPIO9)로 문 개폐를 감지해 /api/devices/{id}/sensors로
+// door_open 값을 보고한다. 백엔드는 door_open=true를 받으면 자동 스캔 루프를
+// 시작하고(문이 열려있는 동안 몇 초 간격으로 /capture를 가져가 인식), false를
+// 받으면 멈춘다 — 즉 "실시간 탐지 on/off"는 이 door_open 신호로 제어된다.
+//
+// 문이 닫히면(=실시간 탐지 off) 전력 절약을 위해 카메라 자체도 esp_camera_deinit()으로
+// 꺼버리고, 문이 열리면 다시 esp_camera_init()으로 켠다. XIAO ESP32-S3 Sense는
+// 카메라 PWDN 핀이 배선되어 있지 않아(PWDN_GPIO_NUM = -1) 완전한 전원 차단은 아니고
+// 클럭(XCLK)·DMA 등 소프트웨어 레벨에서 끄는 것이다. 카메라가 꺼져있는 동안
+// /capture, /stream은 503을 응답한다(HTTP 서버 자체는 계속 떠 있음).
+//
 // 준비물:
 //   - Arduino IDE의 "esp32 by Espressif Systems" 보드 패키지 설치
 //   - 보드: "XIAO_ESP32S3" 선택 후 Tools > PSRAM: "OPI PSRAM"으로 설정
@@ -46,6 +57,19 @@
 #define HEARTBEAT_INTERVAL_MS 15000
 #endif
 
+// ===== 리드스위치 (도어 센서) =====
+// D10 = GPIO9. 카메라가 GPIO 10~18/38~40/47/48을 이미 쓰고 있어서 D10을 사용.
+// 배선: 한쪽 핀을 D10, 다른 쪽을 GND에 연결하고 INPUT_PULLUP을 쓴다.
+// 리드스위치가 붙어있으면(자력으로 접점이 붙어 회로가 닫힘) GND로 끌려가
+// LOW = 문 닫힘. 떨어지면(접점 개방) 풀업으로 HIGH = 문 열림.
+#define REED_GPIO_NUM 9
+#ifndef DOOR_POLL_INTERVAL_MS
+#define DOOR_POLL_INTERVAL_MS 300
+#endif
+#ifndef DOOR_DEBOUNCE_MS
+#define DOOR_DEBOUNCE_MS 150
+#endif
+
 static const char *STREAM_BOUNDARY = "frame";
 static const char *STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=frame";
 static const char *STREAM_PART_HEADER = "Content-Type: image/jpeg\r\nContent-Length: %u\r\n\r\n";
@@ -53,6 +77,17 @@ static const char *STREAM_PART_HEADER = "Content-Type: image/jpeg\r\nContent-Len
 httpd_handle_t camServer = NULL;     // 포트 80 — /capture (짧은 요청)
 httpd_handle_t streamServer = NULL;  // 포트 81 — /stream (연결이 계속 열려있음)
 unsigned long lastHeartbeatAt = 0;
+
+bool doorOpen = false;
+bool doorStateKnown = false;
+bool doorRawLast = false;
+unsigned long doorStableSince = 0;
+unsigned long lastDoorPollAt = 0;
+
+// 카메라 전원 상태. deinit/init을 캡처·스트림 핸들러의 esp_camera_fb_get()과
+// 동시에 호출하면 드라이버 내부 상태가 깨질 수 있어 뮤텍스로 직렬화한다.
+volatile bool cameraActive = false;
+SemaphoreHandle_t cameraMutex = nullptr;
 
 bool initCamera() {
   camera_config_t config = {};
@@ -118,26 +153,49 @@ void connectWiFi() {
 
 // GET /capture — 정지 프레임 1장
 static esp_err_t captureHandler(httpd_req_t *req) {
-  camera_fb_t *fb = esp_camera_fb_get();
+  if (!cameraActive) {
+    httpd_resp_set_status(req, "503 Service Unavailable");
+    httpd_resp_set_type(req, "text/plain");
+    return httpd_resp_sendstr(req, "camera off (door closed)");
+  }
+
+  xSemaphoreTake(cameraMutex, portMAX_DELAY);
+  camera_fb_t *fb = cameraActive ? esp_camera_fb_get() : nullptr;
   if (fb == nullptr) {
+    xSemaphoreGive(cameraMutex);
     httpd_resp_send_500(req);
     return ESP_FAIL;
   }
   httpd_resp_set_type(req, "image/jpeg");
   esp_err_t res = httpd_resp_send(req, (const char *)fb->buf, fb->len);
   esp_camera_fb_return(fb);
+  xSemaphoreGive(cameraMutex);
   return res;
 }
 
 // GET /stream — MJPEG 라이브 스트림 (multipart/x-mixed-replace)
 static esp_err_t streamHandler(httpd_req_t *req) {
+  if (!cameraActive) {
+    httpd_resp_set_status(req, "503 Service Unavailable");
+    httpd_resp_set_type(req, "text/plain");
+    return httpd_resp_sendstr(req, "camera off (door closed)");
+  }
+
   esp_err_t res = httpd_resp_set_type(req, STREAM_CONTENT_TYPE);
   if (res != ESP_OK) return res;
 
   char partHeader[64];
   while (true) {
-    camera_fb_t *fb = esp_camera_fb_get();
+    if (!cameraActive) {
+      // 스트리밍 도중 문이 닫혀 카메라가 꺼진 경우 — 연결을 정리하고 빠져나간다.
+      res = ESP_FAIL;
+      break;
+    }
+
+    xSemaphoreTake(cameraMutex, portMAX_DELAY);
+    camera_fb_t *fb = cameraActive ? esp_camera_fb_get() : nullptr;
     if (fb == nullptr) {
+      xSemaphoreGive(cameraMutex);
       res = ESP_FAIL;
       break;
     }
@@ -156,6 +214,7 @@ static esp_err_t streamHandler(httpd_req_t *req) {
     }
 
     esp_camera_fb_return(fb);
+    xSemaphoreGive(cameraMutex);
     if (res != ESP_OK) break;
   }
   return res;
@@ -189,6 +248,72 @@ void startCameraServer() {
   }
 }
 
+// 문이 열릴 때 카메라를 켠다. 스트림/캡처 핸들러와 동시에 esp_camera_init()이
+// 실행되지 않도록 뮤텍스로 보호한다.
+void powerUpCamera() {
+  if (cameraActive) return;
+  xSemaphoreTake(cameraMutex, portMAX_DELAY);
+  bool ok = initCamera();
+  cameraActive = ok;
+  xSemaphoreGive(cameraMutex);
+  Serial.println(ok ? "[cam] 카메라 켬 (문 열림)" : "[cam] 카메라 재초기화 실패");
+}
+
+// 문이 닫힐 때 전력 절약을 위해 카메라를 끈다(클럭/DMA 해제, 완전한 전원 차단은 아님).
+void powerDownCamera() {
+  if (!cameraActive) return;
+  xSemaphoreTake(cameraMutex, portMAX_DELAY);
+  cameraActive = false;  // 새 fb_get 진입을 막은 뒤에 deinit
+  esp_camera_deinit();
+  xSemaphoreGive(cameraMutex);
+  Serial.println("[cam] 전력 절약을 위해 카메라 끔 (문 닫힘)");
+}
+
+// 문 상태(door_open)를 백엔드로 보고한다 — 이 신호로 백엔드의 자동 스캔 루프가 켜지고 꺼진다.
+void reportDoorState() {
+  if (WiFi.status() != WL_CONNECTED) return;
+
+  HTTPClient http;
+  String url = String(BACKEND_BASE_URL) + "/api/devices/" + DEVICE_ID + "/sensors";
+  http.begin(url);
+  http.addHeader("X-Device-Token", DEVICE_TOKEN);
+  http.addHeader("Content-Type", "application/json");
+
+  String body = String("{\"door_open\":") + (doorOpen ? "true" : "false") + "}";
+  int status = http.POST(body);
+  if (status <= 0) {
+    Serial.printf("[door] 상태 전송 실패: %s\n", http.errorToString(status).c_str());
+  } else {
+    Serial.printf("[door] %s 보고됨 (HTTP %d)\n", doorOpen ? "열림" : "닫힘", status);
+  }
+  http.end();
+}
+
+// 리드스위치를 주기적으로 읽고, 짧은 디바운스 뒤 상태가 실제로 바뀌었을 때만 보고한다.
+void pollDoorSensor() {
+  if (millis() - lastDoorPollAt < DOOR_POLL_INTERVAL_MS) return;
+  lastDoorPollAt = millis();
+
+  bool raw = digitalRead(REED_GPIO_NUM) == HIGH;  // HIGH = 자석 없음 = 문 열림
+  if (raw != doorRawLast) {
+    doorRawLast = raw;
+    doorStableSince = millis();
+  }
+  if (millis() - doorStableSince < DOOR_DEBOUNCE_MS) return;
+
+  if (!doorStateKnown || raw != doorOpen) {
+    doorOpen = raw;
+    doorStateKnown = true;
+    if (doorOpen) {
+      powerUpCamera();  // 백엔드가 바로 /capture를 당겨갈 수 있도록 보고 전에 켠다
+      reportDoorState();
+    } else {
+      reportDoorState();  // 꺼짐 보고가 확실히 나간 뒤에 끈다
+      powerDownCamera();
+    }
+  }
+}
+
 void sendHeartbeat() {
   if (WiFi.status() != WL_CONNECTED) return;
 
@@ -209,16 +334,21 @@ void setup() {
   Serial.begin(115200);
   delay(300);
 
-  if (!initCamera()) {
-    Serial.println("[cam] 카메라 초기화 실패 — 배선/보드 설정을 확인하세요");
-  }
+  cameraMutex = xSemaphoreCreateMutex();
 
+  pinMode(REED_GPIO_NUM, INPUT_PULLUP);
+  doorRawLast = digitalRead(REED_GPIO_NUM) == HIGH;
+  doorStableSince = millis();
+
+  // 카메라는 여기서 바로 켜지 않는다 — 곧이어 loop()의 첫 pollDoorSensor() 호출이
+  // 실제 문 상태를 판정해서 powerUpCamera()/powerDownCamera()로 맞춰준다.
   connectWiFi();
   startCameraServer();
 }
 
 void loop() {
   connectWiFi();
+  pollDoorSensor();
 
   if (millis() - lastHeartbeatAt >= HEARTBEAT_INTERVAL_MS) {
     lastHeartbeatAt = millis();

@@ -44,7 +44,13 @@ uvicorn app.main:app --reload --port 8000
 카메라 이미지는 더 이상 기기가 백엔드로 push하지 않습니다. ESP32가 자체
 HTTP 서버로 `/stream`(라이브 MJPEG), `/capture`(정지 프레임)를 직접 서빙하고,
 대시보드에서 "지금 스캔하기"를 누르면 백엔드가 그 순간 `/capture`를
-pull해서 인식·저장합니다(기기당 최신 1건만 유지, 쌓이지 않음). 자세한 흐름은
+pull해서 인식·저장합니다(기기당 최신 1건만 유지, 쌓이지 않음).
+
+또한 리드스위치로 감지한 `door_open` 값이 `/sensors`로 들어오면(값이 실제로
+바뀌었을 때만) `app/live_scan.py`가 기기별 백그라운드 스레드를 시작/중단합니다:
+문이 열려있는 동안 몇 초 간격으로 자동으로 `/capture`를 가져가 인식하고,
+닫히면 멈춥니다. 즉 "지금 스캔하기"는 수동 1회 트리거, 리드스위치는
+문이 열려있는 동안의 자동 반복 트리거입니다. 자세한 흐름은
 `firmware/xiao-esp32s3-cam/README.md` 참고.
 
 ## 구조
@@ -54,6 +60,8 @@ pull해서 인식·저장합니다(기기당 최신 1건만 유지, 쌓이지 �
   실제 VLM(Claude/OpenAI/Gemini)을 붙일 때는 `detect_objects()` 내부만 교체하면 됩니다.
 - `app/services.py`의 `save_capture()` — "지금 스캔하기" 시 호출되는 곳. 기기의 기존 캡처를
   지우고 새 캡처 1건으로 교체한 뒤 `detect_objects()`를 실행합니다.
+- `app/live_scan.py` — 문 열림/닫힘에 따른 자동 스캔 반복 루프(기기별 백그라운드 스레드).
+  `routers/ingest.py`의 `/sensors`에서 `door_open` 상태 전환을 감지해 시작/중단시킵니다.
 - `app/security.py` — 관리자 대시보드는 공용 비밀번호 세션 로그인, 기기 인입 API는 기기별 토큰(SHA-256 해시 저장) 인증.
 - 미디어(캡처 이미지)는 `backend/media/captures/{device_id}/latest.jpg`에 저장되고, 로그인한 관리자만
   `/media/captures/{capture_id}`로 조회할 수 있습니다 (공개 정적 경로 아님). 단, ESP32 자체의
