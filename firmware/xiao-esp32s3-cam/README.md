@@ -73,5 +73,8 @@ Sense는 카메라 PWDN 핀이 배선되어 있지 않아 완전한 전원 차�
   다른 보드(OV5640 업그레이드 등)로 교체 시 핀맵을 다시 확인하세요.
 - 리드스위치는 D10(GPIO9)에 연결되어 있고(`REED_GPIO_NUM`), 폴링 주기(`DOOR_POLL_INTERVAL_MS`,
   기본 300ms)와 디바운스 시간(`DOOR_DEBOUNCE_MS`, 기본 150ms)은 스케치 상단에서 조정 가능합니다.
-- BME680 온습도/가스 센서 업로드 펌웨어는 아직 포함되어 있지 않습니다 — 필요해지면
-  같은 방식(`POST /api/devices/{id}/sensors`)으로 추가하면 됩니다.
+- BME680 온습도/가스 센서는 I2C(SDA/SCL, 보드 기본 D4/D5)로 연결하면 됩니다.
+  `bme680_sensor.h`/`.cpp`에 분리되어 있고(esp_camera.h와 Adafruit_Sensor.h를 같은
+  파일에서 include하면 둘 다 정의하는 `sensor_t` 타입이 충돌해서 별도 파일로 뺐습니다),
+  기본 10초 주기(`ENV_POLL_INTERVAL_MS`)로 읽어 door_open과 함께 `/sensors`로 보고합니다.
+  주소는 0x76/0x77을 자동으로 둘 다 시도합니다.

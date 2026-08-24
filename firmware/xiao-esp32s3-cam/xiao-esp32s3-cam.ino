@@ -32,6 +32,12 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
+// BME680 관련 코드(Wire.h, Adafruit_BME680.h)는 bme680_sensor.cpp로 분리되어 있다.
+// esp_camera.h와 Adafruit_Sensor.h를 같은 번역 단위에서 include하면 둘 다 정의하는
+// sensor_t 타입 이름이 충돌해서 컴파일이 깨지기 때문 — 원시 타입만 노출하는
+// 이 헤더를 통해서만 접근한다.
+#include "bme680_sensor.h"
+
 #include "secrets.h"
 
 // ===== XIAO ESP32-S3 Sense 카메라(OV2640) 핀맵 =====
@@ -70,6 +76,14 @@
 #define DOOR_DEBOUNCE_MS 150
 #endif
 
+// ===== BME680 온습도/가스 센서 (I2C) =====
+// XIAO ESP32-S3 Sense의 보드 라벨 SDA/SCL 핀(D4=GPIO5, D5=GPIO6, 보드 기본 Wire 핀)에
+// 그대로 연결했다고 가정 — Wire.begin()에 핀을 안 넘기면 보드 변형(variant) 기본값을 쓴다.
+// 주소는 SDO 핀 상태에 따라 0x76(LOW, 기본) 또는 0x77(HIGH)이라 둘 다 시도한다.
+#ifndef ENV_POLL_INTERVAL_MS
+#define ENV_POLL_INTERVAL_MS 10000
+#endif
+
 static const char *STREAM_BOUNDARY = "frame";
 static const char *STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=frame";
 static const char *STREAM_PART_HEADER = "Content-Type: image/jpeg\r\nContent-Length: %u\r\n\r\n";
@@ -83,6 +97,13 @@ bool doorStateKnown = false;
 bool doorRawLast = false;
 unsigned long doorStableSince = 0;
 unsigned long lastDoorPollAt = 0;
+
+bool envSensorReady = false;
+bool envReadingValid = false;
+float lastTemperatureC = 0;
+float lastHumidityPct = 0;
+float lastGasResistanceOhm = 0;
+unsigned long lastEnvPollAt = 0;
 
 // 카메라 전원 상태. deinit/init을 캡처·스트림 핸들러의 esp_camera_fb_get()과
 // 동시에 호출하면 드라이버 내부 상태가 깨질 수 있어 뮤텍스로 직렬화한다.
@@ -269,8 +290,10 @@ void powerDownCamera() {
   Serial.println("[cam] 전력 절약을 위해 카메라 끔 (문 닫힘)");
 }
 
-// 문 상태(door_open)를 백엔드로 보고한다 — 이 신호로 백엔드의 자동 스캔 루프가 켜지고 꺼진다.
-void reportDoorState() {
+// door_open + (있으면) 최근 BME680 값을 한 번에 백엔드로 보고한다.
+// 문 상태만 따로 보내면 그 사이 온습도/가스 값이 대시보드에서 "-"로 비어 보이므로,
+// 알고 있는 최신값을 매번 같이 실어 보내 하나의 완전한 스냅샷으로 유지한다.
+void reportSensors() {
   if (WiFi.status() != WL_CONNECTED) return;
 
   HTTPClient http;
@@ -279,14 +302,42 @@ void reportDoorState() {
   http.addHeader("X-Device-Token", DEVICE_TOKEN);
   http.addHeader("Content-Type", "application/json");
 
-  String body = String("{\"door_open\":") + (doorOpen ? "true" : "false") + "}";
+  String body = String("{\"door_open\":") + (doorOpen ? "true" : "false");
+  if (envReadingValid) {
+    body += ",\"temperature_c\":" + String(lastTemperatureC, 2);
+    body += ",\"humidity_pct\":" + String(lastHumidityPct, 2);
+    body += ",\"gas_resistance_ohm\":" + String(lastGasResistanceOhm, 0);
+  }
+  body += "}";
+
   int status = http.POST(body);
   if (status <= 0) {
-    Serial.printf("[door] 상태 전송 실패: %s\n", http.errorToString(status).c_str());
+    Serial.printf("[sensors] 전송 실패: %s\n", http.errorToString(status).c_str());
   } else {
-    Serial.printf("[door] %s 보고됨 (HTTP %d)\n", doorOpen ? "열림" : "닫힘", status);
+    Serial.printf("[sensors] door=%s 보고됨 (HTTP %d)\n", doorOpen ? "열림" : "닫힘", status);
   }
   http.end();
+}
+
+// BME680 초기화(실제 구현은 bme680_sensor.cpp — 주소 0x76/0x77 자동 시도).
+void initEnvSensor() {
+  envSensorReady = bme680Init();
+  Serial.println(envSensorReady ? "[env] BME680 초기화 완료" : "[env] BME680 초기화 실패 (배선/주소 확인 필요)");
+}
+
+// 주기적으로 BME680을 읽고, 값을 캐시해둔 뒤 door_open과 함께 보고한다.
+void pollEnvSensor() {
+  if (!envSensorReady) return;
+  if (millis() - lastEnvPollAt < ENV_POLL_INTERVAL_MS) return;
+  lastEnvPollAt = millis();
+
+  if (!bme680Read(lastTemperatureC, lastHumidityPct, lastGasResistanceOhm)) {
+    Serial.println("[env] BME680 읽기 실패");
+    return;
+  }
+  envReadingValid = true;
+  Serial.printf("[env] 온도 %.1f C, 습도 %.1f %%, 가스 %.0f ohm\n", lastTemperatureC, lastHumidityPct, lastGasResistanceOhm);
+  reportSensors();
 }
 
 // 리드스위치를 주기적으로 읽고, 짧은 디바운스 뒤 상태가 실제로 바뀌었을 때만 보고한다.
@@ -306,9 +357,9 @@ void pollDoorSensor() {
     doorStateKnown = true;
     if (doorOpen) {
       powerUpCamera();  // 백엔드가 바로 /capture를 당겨갈 수 있도록 보고 전에 켠다
-      reportDoorState();
+      reportSensors();
     } else {
-      reportDoorState();  // 꺼짐 보고가 확실히 나간 뒤에 끈다
+      reportSensors();  // 꺼짐 보고가 확실히 나간 뒤에 끈다
       powerDownCamera();
     }
   }
@@ -340,6 +391,8 @@ void setup() {
   doorRawLast = digitalRead(REED_GPIO_NUM) == HIGH;
   doorStableSince = millis();
 
+  initEnvSensor();
+
   // 카메라는 여기서 바로 켜지 않는다 — 곧이어 loop()의 첫 pollDoorSensor() 호출이
   // 실제 문 상태를 판정해서 powerUpCamera()/powerDownCamera()로 맞춰준다.
   connectWiFi();
@@ -349,6 +402,7 @@ void setup() {
 void loop() {
   connectWiFi();
   pollDoorSensor();
+  pollEnvSensor();
 
   if (millis() - lastHeartbeatAt >= HEARTBEAT_INTERVAL_MS) {
     lastHeartbeatAt = millis();
