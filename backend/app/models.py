@@ -74,3 +74,17 @@ class DetectedObject(Base):
     confidence: Mapped[float | None] = mapped_column(Float, nullable=True)
 
     capture: Mapped[Capture] = relationship(back_populates="objects")
+
+
+class InventoryItem(Base):
+    """앱(모바일)이 공유하는 재고 항목. 단일 냉장고를 가정해 기기에 종속되지 않는다."""
+
+    __tablename__ = "inventory_items"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(120))
+    category: Mapped[str] = mapped_column(String(20))
+    quantity: Mapped[str] = mapped_column(String(40))
+    expires_at: Mapped[str] = mapped_column(String(10))  # "YYYY-MM-DD" — 프론트와 동일 포맷 그대로 저장
+    location: Mapped[str] = mapped_column(String(10))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)

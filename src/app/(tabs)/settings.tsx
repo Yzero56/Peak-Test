@@ -1,8 +1,10 @@
-import { Platform, Pressable, ScrollView, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Platform, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Chip } from '@/components/fridge/chip';
 import { BottomTabInset, Spacing } from '@/constants/theme';
+import { getApiConfig, setApiConfig } from '@/lib/api-config';
 import { useFridge } from '@/state/fridge-store';
 import type { NotificationLeadTime, NotificationToggles } from '@/types/fridge';
 import { decorateItem } from '@/utils/fridge-logic';
@@ -29,9 +31,33 @@ const TOGGLE_META: { key: keyof NotificationToggles; label: string; desc: string
 ];
 
 export default function SettingsScreen() {
-  const { items, meals, leadTime, setLeadTime, toggles, toggleSetting } = useFridge();
+  const { items, meals, leadTime, setLeadTime, toggles, toggleSetting, backendConnected, reloadFromBackend } =
+    useFridge();
 
   const dueCount = items.map((i) => decorateItem(i)).filter((i) => i.dday <= LEAD_DAYS[leadTime]).length;
+
+  const [baseUrlInput, setBaseUrlInput] = useState('');
+  const [tokenInput, setTokenInput] = useState('');
+  const [checking, setChecking] = useState(false);
+  const [checkResult, setCheckResult] = useState<'idle' | 'ok' | 'fail'>('idle');
+
+  useEffect(() => {
+    getApiConfig().then((config) => {
+      if (config) {
+        setBaseUrlInput(config.baseUrl);
+        setTokenInput(config.token);
+      }
+    });
+  }, []);
+
+  const saveBackendConfig = async () => {
+    if (!baseUrlInput.trim() || !tokenInput.trim()) return;
+    setChecking(true);
+    await setApiConfig({ baseUrl: baseUrlInput, token: tokenInput });
+    const ok = await reloadFromBackend();
+    setCheckResult(ok ? 'ok' : 'fail');
+    setChecking(false);
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
@@ -87,6 +113,55 @@ export default function SettingsScreen() {
             <Text className="text-[15px] text-neutral-900">기록된 식단</Text>
             <Text className="text-[15px] text-neutral-500">{meals.length}끼</Text>
           </View>
+        </View>
+
+        <View className="mt-3 rounded-[22px] bg-white p-[18px] shadow-sm">
+          <View className="flex-row items-center justify-between">
+            <Text className="text-[15.5px] text-neutral-900">백엔드 연결</Text>
+            <View className="flex-row items-center gap-1.5">
+              <View className={`h-2 w-2 rounded-full ${backendConnected ? 'bg-emerald-500' : 'bg-neutral-300'}`} />
+              <Text className="text-xs text-neutral-500">{backendConnected ? '연결됨' : '연결 안 됨'}</Text>
+            </View>
+          </View>
+          <Text className="mt-1 text-xs leading-5 text-neutral-500">
+            재고를 팀원들과 공유하려면 백엔드 서버 주소와 토큰을 입력하세요. 비워두면 이 기기에만 남는
+            임시 데이터를 사용해요.
+          </Text>
+          <View className="mt-3 gap-2.5">
+            <TextInput
+              className="min-h-[44px] rounded-xl bg-neutral-100 px-3 text-[15px] text-neutral-900"
+              placeholder="https://xxxx.trycloudflare.com"
+              placeholderTextColor="#a8adaa"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={baseUrlInput}
+              onChangeText={setBaseUrlInput}
+            />
+            <TextInput
+              className="min-h-[44px] rounded-xl bg-neutral-100 px-3 text-[15px] text-neutral-900"
+              placeholder="토큰 (관리자 비밀번호)"
+              placeholderTextColor="#a8adaa"
+              autoCapitalize="none"
+              autoCorrect={false}
+              secureTextEntry
+              value={tokenInput}
+              onChangeText={setTokenInput}
+            />
+          </View>
+          <Pressable
+            onPress={saveBackendConfig}
+            disabled={checking}
+            className="mt-3 rounded-full bg-neutral-900 py-3 shadow-sm">
+            <Text className="text-center text-[14.5px] font-semibold text-white">
+              {checking ? '확인 중...' : '저장하고 연결 확인'}
+            </Text>
+          </Pressable>
+          {checkResult === 'ok' ? (
+            <Text className="mt-2 text-xs text-emerald-600">연결됐어요. 재고가 백엔드와 동기화돼요.</Text>
+          ) : null}
+          {checkResult === 'fail' ? (
+            <Text className="mt-2 text-xs text-red-600">연결하지 못했어요. 주소와 토큰을 확인해주세요.</Text>
+          ) : null}
         </View>
       </ScrollView>
     </SafeAreaView>

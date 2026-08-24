@@ -80,7 +80,7 @@ export default function HomeScreen() {
 
           <Text className="mt-5 text-[25px] leading-8 text-neutral-900">
             {heroPre}
-            <Text className="font-bold text-accent-800">{heroWord}</Text>
+            <Text className="rounded-sm bg-amber-200">{heroWord}</Text>
             {heroPost}
           </Text>
           <Text className="mt-2 text-[13px] text-neutral-600">{heroSub}</Text>

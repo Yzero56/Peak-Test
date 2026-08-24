@@ -31,7 +31,7 @@ export function ItemSheet() {
             <IconAvatar emoji={item.emoji} bgClass={item.iconBgClass} size={44} fontSize={22} />
             <Text className="text-[23px] text-neutral-900">{item.name}</Text>
           </View>
-          <View className={`rounded-full px-3 py-1.5 ${item.pill.containerClass}`}>
+          <View className={`shrink-0 rounded-full px-3 py-1.5 ${item.pill.containerClass}`}>
             <Text className={`text-xs ${item.pill.textClass}`}>{item.ddayLabel}</Text>
           </View>
         </View>

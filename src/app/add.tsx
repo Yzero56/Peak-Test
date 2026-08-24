@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Chip } from '@/components/fridge/chip';
 import { IconAvatar } from '@/components/fridge/icon-avatar';
-import { categoryOptions, locationOptions, quickAddNames, scanCandidates } from '@/data/mock-fridge-data';
+import { categoryOptions, locationOptions, quickAddNames } from '@/data/mock-fridge-data';
 import { useFridge } from '@/state/fridge-store';
 import type { AddMode } from '@/types/fridge';
 import { chipTone, ddayLabel, decorateItem, iconFor } from '@/utils/fridge-logic';
@@ -25,6 +25,7 @@ export default function AddScreen() {
     updateManualForm,
     submitManualAdd,
     scanned,
+    scanCandidates,
     startScan,
     scanPicked,
     toggleScanPick,
@@ -128,7 +129,11 @@ export default function AddScreen() {
           <View>
             <View className="h-[180px] items-center justify-center gap-2 rounded-[22px] bg-white px-6 shadow-sm">
               <Text className="text-[16px] text-neutral-900">
-                {scanned ? '3가지를 찾았어요' : '사진을 찍어 주세요'}
+                {scanned
+                  ? scanCandidates.length > 0
+                    ? `${scanCandidates.length}가지를 찾았어요`
+                    : '찾은 재료가 없어요'
+                  : '사진을 찍어 주세요'}
               </Text>
               <Text className="text-center text-xs leading-5 text-neutral-500">
                 영수증이나 냉장고 안을 찍으면{'\n'}재료와 유통기한을 대신 적어드려요
