@@ -7,13 +7,14 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from app import live_scan, services
 from app.config import get_settings
-from app.database import Base, SessionLocal, engine
+from app.database import Base, SessionLocal, engine, ensure_schema
 from app.models import Device
 from app.routers import app_api, auth, dashboard, ingest
 
 settings = get_settings()
 
 Base.metadata.create_all(bind=engine)
+ensure_schema()  # 기존 DB 파일에 새로 추가된 컬럼(가스 baseline 등) 채워넣기
 settings.media_path.mkdir(parents=True, exist_ok=True)  # media 디렉토리 생성 보장
 
 app = FastAPI(title="냉장고 지킴이 관리 백엔드")

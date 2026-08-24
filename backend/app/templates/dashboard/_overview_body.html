@@ -37,6 +37,9 @@
         <dt class="text-xs text-neutral-400">가스 상태</dt>
         <dd class="{{ 'text-red-600' if card.gas_status == '위험' else 'text-amber-600' if card.gas_status == '주의' else '' }}">
           {{ card.gas_status }}
+          {% if card.gas_anomaly %}
+          <span class="ml-1 rounded-full bg-red-100 px-1.5 py-0.5 text-[10px] font-bold text-red-700">이상 신호</span>
+          {% endif %}
         </dd>
       </div>
       <div>

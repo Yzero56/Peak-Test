@@ -14,7 +14,7 @@
       class="aspect-square w-full object-cover" />
   </a>
   <div class="p-3">
-    <p class="text-xs text-neutral-400">{{ capture.captured_at.strftime("%m/%d %H:%M:%S") }}</p>
+    <p class="text-xs text-neutral-400">{{ capture.captured_at | kst("%m/%d %H:%M:%S") }}</p>
     <div class="mt-2 flex flex-wrap gap-1.5">
       {% for obj in capture.objects %}
       <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs text-emerald-800">

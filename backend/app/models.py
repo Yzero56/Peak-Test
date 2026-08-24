@@ -22,6 +22,10 @@ class Device(Base):
     last_seen_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     # 하트비트 요청의 소스 IP — 대시보드가 기기의 라이브 스트림(/stream, /capture)에 접근할 때 사용
     ip_address: Mapped[str | None] = mapped_column(String(45), nullable=True)
+    # 추세 기반 가스 이상 감지용 baseline — 재료를 새로 넣은 시점(재고 추가)의 가스 저항값을
+    # 저장해두고, 이후 값이 여기서 일정 %만큼 떨어지면 "이상 신호"로 본다(절대 임계값 대신).
+    baseline_gas_resistance_ohm: Mapped[float | None] = mapped_column(Float, nullable=True)
+    baseline_gas_set_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
     readings: Mapped[list["SensorReading"]] = relationship(back_populates="device", cascade="all, delete-orphan")
     door_events: Mapped[list["DoorEvent"]] = relationship(back_populates="device", cascade="all, delete-orphan")

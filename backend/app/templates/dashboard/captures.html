@@ -19,7 +19,7 @@
     <img
       src="/media/captures/{{ capture.id }}?t={{ capture.captured_at.strftime('%Y%m%d%H%M%S%f') }}"
       class="aspect-square w-full rounded-xl object-cover shadow-sm" />
-    <p class="mt-1 truncate text-xs text-neutral-500">{{ capture.captured_at.strftime("%m/%d %H:%M") }}</p>
+    <p class="mt-1 truncate text-xs text-neutral-500">{{ capture.captured_at | kst("%m/%d %H:%M") }}</p>
   </a>
   {% else %}
   <p class="text-sm text-neutral-400">아직 캡처된 사진이 없어요</p>

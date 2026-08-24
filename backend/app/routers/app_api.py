@@ -56,6 +56,13 @@ def create_inventory_items(payload: list[InventoryItemIn], db: Session = Depends
     db.commit()
     for item in created:
         db.refresh(item)
+
+    # 재료를 새로 넣은 시점 = 가스 이상 감지의 baseline을 다시 잡는 기준점.
+    # (단일 냉장고 가정이라 device 종속 없이 전체 기기에 적용)
+    for device in services.all_devices(db):
+        services.set_gas_baseline(db, device)
+    db.commit()
+
     return [_to_out(i) for i in created]
 
 

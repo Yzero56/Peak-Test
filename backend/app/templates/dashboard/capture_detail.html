@@ -12,7 +12,7 @@
     <h1 class="text-lg font-bold">
       <a href="/devices/{{ capture.device_id }}" class="hover:underline">{{ capture.device.name }}</a>
     </h1>
-    <p class="text-xs text-neutral-400">{{ capture.captured_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
+    <p class="text-xs text-neutral-400">{{ capture.captured_at | kst("%Y-%m-%d %H:%M:%S") }}</p>
 
     <h2 class="mb-2 mt-4 text-sm font-bold text-neutral-700">인식된 객체</h2>
     <div class="rounded-2xl bg-white shadow-sm">

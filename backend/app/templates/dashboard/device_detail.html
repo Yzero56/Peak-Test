@@ -55,19 +55,22 @@
   </div>
   <div class="rounded-2xl bg-white p-4 shadow-sm">
     <p class="text-xs text-neutral-400">가스 상태</p>
-    <p class="mt-1 text-lg font-bold {{ 'text-red-600' if gas_status == '위험' else 'text-amber-600' if gas_status == '주의' else '' }}">
+    <p id="gas-status-text" class="mt-1 text-lg font-bold {{ 'text-red-600' if gas_status == '위험' else 'text-amber-600' if gas_status == '주의' else '' }}">
       {{ gas_status }}
+    </p>
+    <p id="gas-anomaly-badge" class="mt-1 text-xs font-bold text-red-600 {{ '' if gas_anomaly else 'hidden' }}">
+      ⚠ baseline 대비 하락 — 이상 신호
     </p>
   </div>
   <div class="rounded-2xl bg-white p-4 shadow-sm">
     <p class="text-xs text-neutral-400">온도</p>
-    <p class="mt-1 text-lg font-bold">
+    <p id="temperature-text" class="mt-1 text-lg font-bold">
       {{ "%.1f"|format(latest.temperature_c) + "°C" if latest and latest.temperature_c is not none else "-" }}
     </p>
   </div>
   <div class="rounded-2xl bg-white p-4 shadow-sm">
     <p class="text-xs text-neutral-400">습도</p>
-    <p class="mt-1 text-lg font-bold">
+    <p id="humidity-text" class="mt-1 text-lg font-bold">
       {{ "%.0f"|format(latest.humidity_pct) + "%" if latest and latest.humidity_pct is not none else "-" }}
     </p>
   </div>
@@ -85,7 +88,7 @@
       {% for event in door_events %}
       <div class="flex justify-between border-b border-neutral-100 px-4 py-2.5 text-sm last:border-0">
         <span>{{ "열림" if event.is_open else "닫힘" }}</span>
-        <span class="text-neutral-400">{{ event.changed_at.strftime("%m/%d %H:%M:%S") }}</span>
+        <span class="text-neutral-400">{{ event.changed_at | kst("%m/%d %H:%M:%S") }}</span>
       </div>
       {% else %}
       <p class="px-4 py-3 text-sm text-neutral-400">기록된 도어 이벤트가 없어요</p>
@@ -188,5 +191,40 @@
   }
   refreshDeviceStatus();
   setInterval(refreshDeviceStatus, 2000);
+
+  // 온도/습도/가스는 도어·카메라 스트림만큼 반응성이 필요하지 않아 5분 간격으로 갱신.
+  async function refreshEnvStatus() {
+    try {
+      const res = await fetch("/partials/devices/{{ device.id }}/status");
+      if (!res.ok) return;
+      const data = await res.json();
+
+      const tempText = document.getElementById("temperature-text");
+      if (tempText) {
+        tempText.textContent = data.temperature_c != null ? data.temperature_c.toFixed(1) + "°C" : "-";
+      }
+
+      const humidityText = document.getElementById("humidity-text");
+      if (humidityText) {
+        humidityText.textContent = data.humidity_pct != null ? Math.round(data.humidity_pct) + "%" : "-";
+      }
+
+      const gasText = document.getElementById("gas-status-text");
+      if (gasText) {
+        gasText.textContent = data.gas_status;
+        gasText.classList.toggle("text-red-600", data.gas_status === "위험");
+        gasText.classList.toggle("text-amber-600", data.gas_status === "주의");
+      }
+
+      const gasAnomalyBadge = document.getElementById("gas-anomaly-badge");
+      if (gasAnomalyBadge) {
+        gasAnomalyBadge.classList.toggle("hidden", !data.gas_anomaly);
+      }
+    } catch (err) {
+      // 네트워크 순간 끊김 정도는 무시하고 다음 폴링에서 다시 시도한다.
+    }
+  }
+  refreshEnvStatus();
+  setInterval(refreshEnvStatus, 5 * 60 * 1000);
 </script>
 {% endblock %}

@@ -26,6 +26,7 @@ def _device_card(db: Session, device: Device) -> dict:
         "online": services.is_online(device),
         "reading": reading,
         "gas_status": services.classify_gas(reading.gas_resistance_ohm) if reading else "알 수 없음",
+        "gas_anomaly": services.gas_anomaly(device, reading.gas_resistance_ohm if reading else None),
         "live_active": live_scan.is_active(device.id),
         # 문이 닫히면 기기가 카메라 전원 자체를 끄므로(전력 절약), 라이브 뷰 링크는
         # 온라인 여부와 별개로 door_open일 때만 의미가 있다.
@@ -93,7 +94,9 @@ def device_detail(request: Request, device_id: str, scan_error: str | None = Non
     readings = services.recent_readings(db, device_id, limit=50)
     chart_points = [
         {
-            "t": r.recorded_at.isoformat(),
+            # 차트 라벨이 문자열을 그대로 슬라이싱해서 시:분을 뽑아 쓰므로(JS Date 파싱 아님)
+            # KST로 미리 변환한 값을 내려줘야 화면에 실제 시각이 맞게 뜬다.
+            "t": services.to_kst(r.recorded_at).isoformat(),
             "temperature_c": r.temperature_c,
             "humidity_pct": r.humidity_pct,
         }
@@ -109,6 +112,8 @@ def device_detail(request: Request, device_id: str, scan_error: str | None = Non
             "readings": readings,
             "latest": readings[0] if readings else None,
             "gas_status": services.classify_gas(readings[0].gas_resistance_ohm) if readings else "알 수 없음",
+            "gas_anomaly": services.gas_anomaly(device, readings[0].gas_resistance_ohm if readings else None),
+            "baseline_gas_resistance_ohm": device.baseline_gas_resistance_ohm,
             "door_events": services.recent_door_events(db, device_id),
             "capture": captures[0] if captures else None,
             "chart_points_json": json.dumps(chart_points),
@@ -133,6 +138,10 @@ def device_status(device_id: str, db: Session = Depends(get_db)) -> dict:
         "online": services.is_online(device),
         "ip_address": device.ip_address,
         "door_open": reading.door_open if reading else None,
+        "temperature_c": reading.temperature_c if reading else None,
+        "humidity_pct": reading.humidity_pct if reading else None,
+        "gas_status": services.classify_gas(reading.gas_resistance_ohm) if reading else "알 수 없음",
+        "gas_anomaly": services.gas_anomaly(device, reading.gas_resistance_ohm if reading else None),
     }
 
 
