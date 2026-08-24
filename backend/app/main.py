@@ -5,8 +5,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 
+from app import live_scan, services
 from app.config import get_settings
-from app.database import Base, engine
+from app.database import Base, SessionLocal, engine
+from app.models import Device
 from app.routers import app_api, auth, dashboard, ingest
 
 settings = get_settings()
@@ -33,3 +35,18 @@ app.include_router(app_api.router)
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 STATIC_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+
+@app.on_event("startup")
+def resume_live_scans() -> None:
+    """서버 재시작(--reload 포함) 시 live_scan의 인메모리 상태는 초기화되지만,
+    문이 이미 열려있는 기기는 다음 door_open 전환 전까지 재시작 신호가 오지 않는다.
+    그래서 시작 시점에 문이 열려있는 상태인 기기를 찾아 자동 스캔을 다시 붙여준다."""
+    db = SessionLocal()
+    try:
+        for device in db.query(Device).all():
+            reading = services.latest_reading(db, device.id)
+            if reading and reading.door_open:
+                live_scan.start(device.id)
+    finally:
+        db.close()

@@ -11,7 +11,9 @@ SESSION_KEY = "authed"
 
 
 def check_admin_password(password: str) -> bool:
-    return hmac.compare_digest(password, get_settings().admin_password)
+    # compare_digest는 비-ASCII 문자가 섞인 str을 주면 TypeError를 던지므로
+    # (로그인 폼에 한글 등이 섞여 들어오는 경우가 있음) bytes로 맞춰서 비교한다.
+    return hmac.compare_digest(password.encode("utf-8"), get_settings().admin_password.encode("utf-8"))
 
 
 def log_in(request: Request) -> None:
