@@ -1,6 +1,7 @@
-# Peak-Test — 냉장고 지킴이
+# PeakTest-HJ README
 
-스마트 냉장고 대시보드 프론트엔드. 도어/가스 센서 상태, 식재료 D-day 시각화, 알림, 오늘의 추천 레시피를 보여줍니다. 자세한 프로젝트 배경과 규칙은 [CLAUDE.md](./CLAUDE.md) 참고.
+스마트 냉장고 대시보드 프론트엔드. 도어/가스 센서 상태, 식재료 D-day 시각화, 알림, 오늘의 추천 레시피를 보여줍니다. 
+자세한 프로젝트 배경과 규칙은 [CLAUDE.md](./CLAUDE.md) 참고.
 
 [Expo](https://expo.dev) + React Native + NativeWind 기반이며, `create-expo-app`으로 스캐폴딩되었습니다.
 
@@ -61,9 +62,3 @@ To learn more about developing your project with Expo, look at the following res
 - [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
