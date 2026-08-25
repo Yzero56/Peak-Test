@@ -33,3 +33,9 @@ pip install -r requirements.txt
 - `category_classifier.joblib` — 종류 분류기(텀블러/반찬 용기/생수병), DINOv2 임베딩 기반.
   바로 사용 가능하며, 재학습이 필요하면 `prepare_category_dataset.py` → `train_category_classifier.py`
   순서로 실행 (학습 데이터: `category_dataset_prepared_v2/`).
+
+## 프로젝트 전체 구조
+
+용기 종류 분류 외에도 같은 냉장고 프로젝트의 이전 단계(YOLO 위치 탐지, DINOv2 기반 개체
+재식별/자동 등록 DB, 여러 실시간 프로토타입)가 함께 들어있다. 전체 배경과 각 파일의 역할,
+진행 이력은 `project_handoff.md`를 참고.
