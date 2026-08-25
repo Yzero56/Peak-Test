@@ -21,6 +21,8 @@ async def find_item(session: AsyncSession, data: RefrigeratorEventCreate) -> Foo
     )
     if item is not None:
         return item
+    if data.food_name is None:
+        return None
     return await session.scalar(
         select(FoodItem)
         .where(FoodItem.display_name == data.food_name, FoodItem.status != FoodItemStatus.DISCARDED)
@@ -38,17 +40,21 @@ async def process_refrigerator_event(
 
     timestamp = data.timestamp or datetime.now(timezone.utc)
     box = data.bounding_box
+    food_name = data.food_name or "미확인 식품"
     detection = Detection(
         image_id=data.image_id,
         device_id=data.device_id,
         container_id=data.container_id,
-        label=data.food_name,
+        label=food_name,
         confidence=data.confidence,
         bbox_x=box.x if box else None,
         bbox_y=box.y if box else None,
         bbox_width=box.width if box else None,
         bbox_height=box.height if box else None,
         motion_direction=data.motion_direction,
+        recognition_status=data.recognition_status,
+        similarity=data.similarity,
+        embedding_model=data.embedding_model,
         detected_at=timestamp,
     )
     session.add(detection)
@@ -67,7 +73,7 @@ async def process_refrigerator_event(
         action = "already_present"
     else:
         item = FoodItem(
-            display_name=data.food_name,
+            display_name=food_name,
             category=data.category,
             container_id=data.container_id,
             quantity=data.quantity,

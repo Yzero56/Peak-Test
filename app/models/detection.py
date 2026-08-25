@@ -30,6 +30,9 @@ class Detection(UUIDPrimaryKeyMixin, Base):
     bbox_height: Mapped[Decimal | None] = mapped_column(Numeric(6, 4))
     # 1번 파트의 IN/OUT 모션 판정 결과를 함께 받을 수 있게 둔다.
     motion_direction: Mapped[str | None] = mapped_column(String(10))
+    recognition_status: Mapped[str | None] = mapped_column(String(20))
+    similarity: Mapped[Decimal | None] = mapped_column(Numeric(5, 4))
+    embedding_model: Mapped[str | None] = mapped_column(String(100))
     detected_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=text("now()"), nullable=False
     )

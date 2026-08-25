@@ -14,11 +14,14 @@ class RefrigeratorEventCreate(BaseModel):
 
     container_id: str = Field(min_length=1, max_length=64)
     motion_direction: Literal["in", "out"]
-    food_name: str = Field(min_length=1, max_length=200)
+    food_name: str | None = Field(default=None, max_length=200)
     image_id: uuid.UUID | None = None
     device_id: str | None = Field(default=None, max_length=64)
     timestamp: datetime | None = None
     confidence: Decimal = Field(default=Decimal("1"), ge=0, le=1)
+    recognition_status: Literal["new", "matched", "unknown"] = "unknown"
+    similarity: Decimal | None = Field(default=None, ge=0, le=1)
+    embedding_model: str | None = Field(default=None, max_length=100)
     bounding_box: BoundingBox | None = None
     category: str | None = Field(default=None, max_length=50)
     storage_type: StorageType = StorageType.REFRIGERATOR

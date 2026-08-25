@@ -44,5 +44,8 @@ class DetectionResponse(BaseModel):
     label: str
     confidence: Decimal
     motion_direction: str | None
+    recognition_status: str | None
+    similarity: Decimal | None
+    embedding_model: str | None
     detected_at: datetime
     bounding_box: BoundingBox | None = None
