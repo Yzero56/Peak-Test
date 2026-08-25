@@ -9,6 +9,7 @@ __pycache__/
 .claude/settings.local.json
 esp32-skills/
 mqtt-classroom/
+wifi_profile.xml
 
 # 이 프로젝트(냉장고 용기 인식)와 무관한 다른 실험/스크래치 파일
 analog_read_a0/
