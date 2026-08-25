@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.food import FoodItem, FoodItemStatus
@@ -17,7 +17,8 @@ async def get_food_item(session: AsyncSession, item_id: uuid.UUID) -> FoodItem |
 
 
 async def create_food_item(session: AsyncSession, data: FoodItemCreate) -> FoodItem:
-    item = FoodItem(**data.model_dump())
+    next_id = (await session.scalar(select(func.max(FoodItem.legacy_id)))) or 0
+    item = FoodItem(**data.model_dump(), legacy_id=next_id + 1)
     session.add(item)
     await session.commit()
     await session.refresh(item)

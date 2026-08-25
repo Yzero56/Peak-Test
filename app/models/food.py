@@ -51,6 +51,7 @@ class FoodItem(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     )
     display_name: Mapped[str] = mapped_column(String(200), nullable=False)
     category: Mapped[str | None] = mapped_column(String(50))
+    legacy_id: Mapped[int | None] = mapped_column(Integer, unique=True, index=True)
     # 2번 파트가 판정한 용기 식별자. 하드웨어 연동 전에는 비어 있을 수 있다.
     container_id: Mapped[str | None] = mapped_column(String(64))
     quantity: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False, default=1)

@@ -59,6 +59,29 @@ def to_response(item: FoodItem) -> FoodItemResponse:
     return response
 
 
+def to_legacy_response(item: FoodItem) -> dict:
+    """4번 앱의 기존 숫자 ID/필드명을 유지하는 compatibility payload."""
+    days_remaining, _ = get_expiry_status(item.expires_at)
+    category = {
+        "vegetable": "채소", "meat": "육류·계란", "dairy": "유제품",
+        "seafood": "수산물", "other": "기타",
+    }.get(item.category or "other", "기타")
+    storage_value = item.storage_type.value if hasattr(item.storage_type, "value") else item.storage_type
+    location = {"refrigerator": "냉장", "freezer": "냉동", "room": "실온"}[storage_value]
+    return {
+        "id": item.legacy_id,
+        "name": item.display_name,
+        "category": category,
+        "quantity": item.unit or str(item.quantity),
+        "expiresAt": item.expires_at.isoformat() if item.expires_at else "",
+        "location": location,
+    }
+
+
+async def get_legacy_item(session: AsyncSession, item_id: int) -> FoodItem | None:
+    return await session.scalar(select(FoodItem).where(FoodItem.legacy_id == item_id))
+
+
 @router.post("", response_model=FoodItemResponse, status_code=status.HTTP_201_CREATED)
 async def create_item(
     data: FoodItemCreate,

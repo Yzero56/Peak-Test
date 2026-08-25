@@ -12,6 +12,7 @@ from app.api.routes.cooking import router as cooking_router
 from app.api.routes.advertisements import router as advertisements_router
 from app.api.routes.detections import router as detections_router
 from app.api.routes.sensors import router as sensors_router
+from app.api.routes.legacy import router as legacy_router, scan_router as legacy_scan_router
 from app.core.config import settings
 
 app = FastAPI(
@@ -38,4 +39,6 @@ app.include_router(cooking_router, prefix=settings.api_v1_prefix)
 app.include_router(advertisements_router, prefix=settings.api_v1_prefix)
 app.include_router(detections_router, prefix=settings.api_v1_prefix)
 app.include_router(sensors_router, prefix=settings.api_v1_prefix)
+app.include_router(legacy_router, prefix="/api")
+app.include_router(legacy_scan_router, prefix="/api")
 app.mount("/dashboard", StaticFiles(directory="app/static", html=True), name="dashboard")
