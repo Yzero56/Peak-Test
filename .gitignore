@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+
+# 사전학습 가중치 - 코드 실행 시 ultralytics/torch가 자동으로 재다운로드함 (용량이 커서 커밋 제외)
+/weights/
+/yolov8*-worldv2.pt
+
+.claude/settings.local.json
+esp32-skills/
+mqtt-classroom/

@@ -1,0 +1,7 @@
+{
+  "recommended_threshold": 0.369,
+  "balanced_accuracy": 0.82963,
+  "same_accuracy": 0.888889,
+  "different_accuracy": 0.77037,
+  "known_identity_accuracy": 0.837037
+}

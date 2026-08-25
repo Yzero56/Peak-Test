@@ -1,0 +1,29 @@
+﻿path,true_label,predicted_label,confidence,correct
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (1).jpg,drink_container,drink_container,0.411986,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (10).jpg,drink_container,drink_container,0.396166,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (2).jpg,drink_container,drink_container,0.417098,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (3).jpg,drink_container,drink_container,0.419197,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (5).jpg,drink_container,drink_container,0.416133,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (7).jpg,drink_container,drink_container,0.418102,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (8).jpg,drink_container,drink_container,0.393215,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (9).jpg,drink_container,drink_container,0.403185,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.1.jpg,food_container,food_container,0.476905,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.10.jpg,food_container,food_container,0.381755,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.2.jpg,food_container,food_container,0.473474,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.4.jpg,food_container,food_container,0.391791,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.5.jpg,food_container,food_container,0.408055,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.6.jpg,food_container,food_container,0.471956,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.7.jpg,food_container,food_container,0.452442,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.8.jpg,food_container,food_container,0.452414,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (11).jpg,water_bottle,water_bottle,0.421319,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (14).jpg,water_bottle,water_bottle,0.375076,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (16).jpg,water_bottle,water_bottle,0.428241,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (17).jpg,water_bottle,water_bottle,0.405390,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (23).jpg,water_bottle,drink_container,0.371058,False
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (31).jpg,water_bottle,water_bottle,0.450720,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (44).jpg,water_bottle,water_bottle,0.370776,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (52).jpg,water_bottle,water_bottle,0.446898,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (62).jpg,water_bottle,water_bottle,0.488777,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (66).jpg,water_bottle,water_bottle,0.494887,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (68).jpg,water_bottle,water_bottle,0.481217,True
+C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (70).jpg,water_bottle,water_bottle,0.470808,True

@@ -1,0 +1,20 @@
+{
+  "total": 401,
+  "accepted": 279,
+  "rejected": 122,
+  "by_split_class": {
+    "test/drink_container": 8,
+    "test/food_container": 8,
+    "test/water_bottle": 12,
+    "train/drink_container": 38,
+    "train/food_container": 112,
+    "train/water_bottle": 64,
+    "val/food_container": 23,
+    "val/water_bottle": 14
+  },
+  "split_strategies": {
+    "food_container": "object_id_split",
+    "drink_container": "object_id_split",
+    "water_bottle": "image_split_single_object_limitation"
+  }
+}

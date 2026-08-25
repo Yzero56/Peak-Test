@@ -1,0 +1,402 @@
+﻿source,class_name,object_id,split,status,crop,confidence,prompt,box
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (1).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (10).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (10).jpg,0.239290,food bowl,"[0, 51, 207, 196]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (100).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (11).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (11).jpg,0.231137,food bowl,"[0, 57, 202, 201]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (12).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (12).jpg,0.243061,food bowl,"[0, 62, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (13).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (13).jpg,0.179140,food bowl,"[0, 71, 239, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (14).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (14).jpg,0.217043,food bowl,"[0, 70, 234, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (15).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (15).jpg,0.049069,food bowl,"[0, 32, 209, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (16).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (16).jpg,0.038209,plastic box,"[0, 0, 240, 75]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (17).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (17).jpg,0.090091,food storage container,"[47, 5, 240, 222]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (18).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (19).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (19).jpg,0.041764,food bowl,"[28, 59, 217, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (2).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (20).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (20).jpg,0.029377,plastic box,"[52, 58, 236, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (21).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (21).jpg,0.068665,food bowl,"[0, 0, 193, 227]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (22).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (23).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (24).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (24).jpg,0.061143,food bowl,"[75, 19, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (25).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (25).jpg,0.057707,food bowl,"[103, 37, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (26).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (27).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (28).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (28).jpg,0.025038,food bowl,"[91, 0, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (29).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (3).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (3).jpg,0.102733,food bowl,"[0, 53, 240, 228]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (30).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (30).jpg,0.044296,food bowl,"[86, 34, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (31).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (31).jpg,0.024060,food bowl,"[52, 65, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (32).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (32).jpg,0.050316,food bowl,"[56, 50, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (33).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (33).jpg,0.078259,food bowl,"[80, 6, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (34).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (34).jpg,0.112851,food bowl,"[91, 0, 240, 239]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (35).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (35).jpg,0.039149,food storage container,"[115, 8, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (36).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (36).jpg,0.176119,food storage container,"[21, 0, 240, 210]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (37).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (37).jpg,0.042692,food storage container,"[37, 0, 240, 237]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (39).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (4).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (4).jpg,0.252080,plastic box,"[0, 0, 236, 120]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (40).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (41).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (42).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (42).jpg,0.037139,food bowl,"[125, 51, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (43).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (43).jpg,0.044093,food bowl,"[68, 47, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (44).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (45).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (47).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (48).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (48).jpg,0.083001,food bowl,"[6, 38, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (49).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (5).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (5).jpg,0.161976,plastic box,"[0, 0, 227, 119]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (50).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (50).jpg,0.034254,food bowl,"[26, 11, 214, 209]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (53).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (54).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (55).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (56).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (56).jpg,0.034046,food bowl,"[5, 0, 240, 215]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (57).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (57).jpg,0.048847,food bowl,"[44, 0, 240, 215]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (58).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (58).jpg,0.024097,food bowl,"[55, 17, 240, 216]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (59).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (6).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (6).jpg,0.039071,food bowl,"[0, 76, 173, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (60).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (60).jpg,0.021794,food bowl,"[52, 12, 240, 220]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (61).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (61).jpg,0.034289,food bowl,"[59, 12, 240, 214]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (62).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (62).jpg,0.041459,food bowl,"[86, 21, 240, 222]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (63).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (63).jpg,0.039103,food bowl,"[115, 25, 240, 232]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (64).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (64).jpg,0.029829,food bowl,"[79, 41, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (65).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (65).jpg,0.029124,food bowl,"[19, 41, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (66).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (66).jpg,0.037029,food bowl,"[0, 28, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (67).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (67).jpg,0.031805,food bowl,"[6, 18, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (68).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (68).jpg,0.022952,food bowl,"[39, 4, 240, 231]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (69).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (7).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (7).jpg,0.168695,food bowl,"[0, 67, 167, 227]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (70).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (71).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (71).jpg,0.027827,food bowl,"[15, 28, 204, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (72).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (73).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (74).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (74).jpg,0.048727,food bowl,"[1, 69, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (75).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (76).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (76).jpg,0.087442,food bowl,"[105, 0, 240, 175]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (77).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (78).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (78).jpg,0.078276,food bowl,"[110, 16, 240, 189]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (79).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (79).jpg,0.027472,food bowl,"[38, 28, 218, 185]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (8).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (8).jpg,0.201458,food bowl,"[0, 57, 195, 212]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (80).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (80).jpg,0.021673,food bowl,"[32, 15, 220, 177]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (81).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (82).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (82).jpg,0.024495,plastic box,"[18, 12, 211, 185]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (83).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (84).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (84).jpg,0.021962,food bowl,"[0, 0, 214, 220]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (85).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (85).jpg,0.034885,food bowl,"[0, 0, 208, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (86).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (86).jpg,0.029774,food bowl,"[0, 0, 196, 227]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (87).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (87).jpg,0.057332,food bowl,"[0, 0, 163, 228]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (88).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (88).jpg,0.055517,food bowl,"[0, 0, 156, 239]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (9).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (9).jpg,0.218735,food bowl,"[0, 49, 200, 196]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (90).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (90).jpg,0.044779,food bowl,"[0, 0, 185, 233]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (91).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (92).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (92).jpg,0.021381,food bowl,"[35, 0, 240, 239]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (93).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (94).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (95).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (97).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (97).jpg,0.020442,food bowl,"[66, 0, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (98).jpg,food_container,원형용기,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\밥용기\원형용기 (99).jpg,food_container,원형용기,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\원형용기__원형용기 (99).jpg,0.052951,food storage container,"[0, 61, 224, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.1.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.1.jpg,0.072883,plastic box,"[45, 107, 157, 179]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.10.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.10.jpg,0.122641,food bowl,"[82, 111, 206, 201]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.2.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.2.jpg,0.070241,plastic box,"[67, 114, 179, 184]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.3.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.3.jpg,0.088318,plastic box,"[74, 119, 168, 208]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.4.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.4.jpg,0.105549,food bowl,"[85, 118, 192, 193]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.5.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.5.jpg,0.112182,food bowl,"[71, 129, 207, 197]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.6.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.6.jpg,0.156282,food bowl,"[69, 113, 172, 183]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.7.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.7.jpg,0.067202,plastic box,"[54, 110, 176, 207]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.8.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.8.jpg,0.025443,food bowl,"[60, 106, 216, 209]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\2.9.jpg,food_container,2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\2__2.9.jpg,0.081992,food bowl,"[61, 87, 200, 168]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.1.jpg,food_container,3,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\3__3.1.jpg,0.239662,plastic box,"[53, 94, 187, 184]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.10.jpg,food_container,3,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\3__3.10.jpg,0.099447,plastic box,"[80, 108, 186, 207]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.2.jpg,food_container,3,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\3__3.2.jpg,0.071696,plastic box,"[88, 100, 200, 194]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.3.jpg,food_container,3,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\3__3.3.jpg,0.098327,plastic box,"[74, 110, 209, 191]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.4.jpg,food_container,3,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\3__3.4.jpg,0.237529,plastic box,"[91, 107, 191, 190]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.5.jpg,food_container,3,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\3__3.5.jpg,0.109291,food bowl,"[0, 98, 40, 138]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.6.jpg,food_container,3,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.7.jpg,food_container,3,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.8.jpg,food_container,3,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\3__3.8.jpg,0.104033,plastic box,"[71, 110, 152, 182]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\3.9.jpg,food_container,3,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\3__3.9.jpg,0.190098,plastic box,"[56, 112, 209, 211]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.1.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.1.jpg,0.123118,plastic box,"[49, 126, 184, 198]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.10.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.10.jpg,0.052663,plastic box,"[81, 111, 216, 167]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.2.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.2.jpg,0.086307,plastic box,"[58, 123, 167, 209]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.3.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.3.jpg,0.168532,plastic box,"[53, 127, 185, 203]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.4.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.4.jpg,0.139413,plastic box,"[74, 129, 179, 213]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.5.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.5.jpg,0.191262,plastic box,"[69, 130, 182, 211]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.6.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.6.jpg,0.199746,plastic box,"[57, 135, 177, 211]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.7.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.7.jpg,0.182803,plastic box,"[64, 138, 155, 210]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.8.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.8.jpg,0.118437,plastic box,"[50, 136, 157, 213]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\4.9.jpg,food_container,4,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\4__4.9.jpg,0.101432,plastic box,"[72, 117, 204, 173]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.1.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.1.jpg,0.386466,food bowl,"[41, 119, 159, 202]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.10.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.10.jpg,0.433023,food bowl,"[105, 72, 240, 184]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.2.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.2.jpg,0.504322,food bowl,"[54, 102, 172, 186]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.3.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.3.jpg,0.294036,food bowl,"[61, 82, 217, 202]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.4.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.4.jpg,0.367459,food bowl,"[76, 98, 223, 210]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.5.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.5.jpg,0.276160,food bowl,"[59, 99, 199, 202]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.6.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.6.jpg,0.028544,food bowl,"[58, 75, 186, 188]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.7.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.7.jpg,0.310058,food bowl,"[71, 102, 154, 162]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.8.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.8.jpg,0.060178,food bowl,"[97, 50, 233, 169]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\6.9.jpg,food_container,6,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\6__6.9.jpg,0.022374,food bowl,"[82, 47, 202, 167]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (1).jpg,food_container,box1,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (10).jpg,food_container,box1,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (2).jpg,food_container,box1,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box1__box1 (2).jpg,0.031867,plastic box,"[222, 45, 240, 92]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (3).jpg,food_container,box1,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box1__box1 (3).jpg,0.026686,food storage container,"[32, 21, 207, 196]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (4).jpg,food_container,box1,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (5).jpg,food_container,box1,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (6).jpg,food_container,box1,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (7).jpg,food_container,box1,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box1__box1 (7).jpg,0.028628,plastic box,"[80, 28, 198, 165]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (8).jpg,food_container,box1,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box1__box1 (8).jpg,0.039663,food storage container,"[44, 0, 227, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box1 (9).jpg,food_container,box1,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box1__box1 (9).jpg,0.027131,food bowl,"[78, 56, 198, 202]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.1.jpg,food_container,box2,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.10.jpg,food_container,box2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box2__box2.10.jpg,0.070112,food bowl,"[54, 112, 238, 206]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.11.jpg,food_container,box2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box2__box2.11.jpg,0.050891,food bowl,"[36, 18, 217, 158]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.2.jpg,food_container,box2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box2__box2.2.jpg,0.045193,plastic box,"[97, 16, 238, 154]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.3.jpg,food_container,box2,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.4.jpg,food_container,box2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box2__box2.4.jpg,0.080330,food bowl,"[24, 89, 214, 186]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.5.jpg,food_container,box2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box2__box2.5.jpg,0.175653,food bowl,"[0, 67, 177, 157]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.6.jpg,food_container,box2,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.7.jpg,food_container,box2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box2__box2.7.jpg,0.064444,food bowl,"[59, 96, 213, 191]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.8.jpg,food_container,box2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box2__box2.8.jpg,0.201348,food bowl,"[83, 124, 186, 175]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box2.9.jpg,food_container,box2,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\food_container\box2__box2.9.jpg,0.053659,food bowl,"[53, 127, 213, 209]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.1.jpg,food_container,box3,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.1.jpg,0.082565,plastic box,"[62, 47, 239, 161]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.10.jpg,food_container,box3,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.10.jpg,0.072245,plastic box,"[33, 115, 212, 196]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.2.jpg,food_container,box3,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.2.jpg,0.092646,food bowl,"[65, 65, 240, 181]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.3.jpg,food_container,box3,test,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.4.jpg,food_container,box3,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.4.jpg,0.040887,food bowl,"[25, 20, 216, 125]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.5.jpg,food_container,box3,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.5.jpg,0.021806,food bowl,"[72, 61, 209, 129]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.6.jpg,food_container,box3,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.6.jpg,0.041976,food bowl,"[74, 42, 220, 140]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.7.jpg,food_container,box3,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.7.jpg,0.027242,plastic box,"[40, 53, 181, 166]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.8.jpg,food_container,box3,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\food_container\box3__box3.8.jpg,0.029598,plastic box,"[68, 14, 219, 165]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\box3.9.jpg,food_container,box3,test,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (1).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (10).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (11).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (13).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (14).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (16).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (17).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (18).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (19).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (2).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (20).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (21).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (22).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (23).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (23).jpg,0.020972,plastic box,"[0, 63, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (24).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (24).jpg,0.062521,food storage container,"[7, 81, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (25).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (27).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (3).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (32).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (32).jpg,0.100131,food bowl,"[49, 0, 240, 221]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (33).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (34).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (34).jpg,0.028834,food bowl,"[48, 0, 240, 223]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (35).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (36).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (4).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (41).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (42).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (43).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (44).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (45).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (48).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (49).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (5).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (50).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (51).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (52).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (53).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (54).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (55).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (55).jpg,0.082535,food bowl,"[26, 31, 187, 195]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (56).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (56).jpg,0.057737,food bowl,"[43, 60, 184, 176]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (57).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (57).jpg,0.022754,food bowl,"[46, 49, 193, 171]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (58).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (58).jpg,0.039823,food bowl,"[36, 29, 196, 168]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (59).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (59).jpg,0.037636,food bowl,"[36, 27, 198, 168]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (6).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (60).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (60).jpg,0.034603,food bowl,"[52, 0, 239, 166]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (61).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (67).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (68).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (69).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (69).jpg,0.030945,plastic box,"[0, 72, 239, 196]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (7).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (70).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (70).jpg,0.035062,plastic box,"[10, 72, 240, 195]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (71).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (71).jpg,0.042874,plastic box,"[9, 96, 240, 234]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (72).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (72).jpg,0.043633,plastic box,"[22, 103, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (73).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (73).jpg,0.095544,plastic box,"[70, 63, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (74).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (75).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (77).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (78).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (78).jpg,0.041938,plastic box,"[0, 76, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (79).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (8).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (8).jpg,0.020062,food bowl,"[28, 15, 240, 204]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (80).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (81).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (81).jpg,0.040817,plastic box,"[20, 0, 240, 102]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (82).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (84).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (85).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (87).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (88).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (88).jpg,0.036882,food storage container,"[42, 36, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (89).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (89).jpg,0.099346,food storage container,"[14, 38, 214, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (9).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (90).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (90).jpg,0.203319,food storage container,"[0, 30, 204, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (91).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (92).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (92).jpg,0.080033,food storage container,"[87, 15, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (93).jpg,food_container,락앤락,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\food_container\락앤락__락앤락 (93).jpg,0.104411,food storage container,"[83, 13, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (94).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (95).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (96).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (97).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (98).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\용기\락앤락 (99).jpg,food_container,락앤락,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (1).jpg,drink_container,2,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (1).jpg,0.526736,coffee mug,"[951, 843, 2007, 3258]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (10).jpg,drink_container,2,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (10).jpg,0.448890,coffee mug,"[1372, 159, 2738, 2638]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (2).jpg,drink_container,2,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (2).jpg,0.558244,coffee mug,"[880, 369, 2239, 3241]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (3).jpg,drink_container,2,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (3).jpg,0.800018,drinking cup,"[1033, 781, 1945, 2987]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (4).jpg,drink_container,2,test,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (5).jpg,drink_container,2,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (5).jpg,0.341791,travel mug,"[1060, 905, 2006, 3823]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (6).jpg,drink_container,2,test,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (7).jpg,drink_container,2,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (7).jpg,0.281753,travel mug,"[835, 214, 2146, 3806]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (8).jpg,drink_container,2,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (8).jpg,0.441770,coffee mug,"[276, 331, 2181, 3814]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\2 (9).jpg,drink_container,2,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\drink_container\2__2 (9).jpg,0.631098,drinking cup,"[101, 0, 2411, 3668]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.1.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.1.jpg,0.259397,coffee mug,"[42, 60, 80, 121]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.10.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.10.jpg,0.290590,drinking cup,"[186, 71, 212, 97]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.11.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.11.jpg,0.151453,coffee mug,"[0, 1, 34, 82]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.2.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.2.jpg,0.219880,coffee mug,"[0, 8, 41, 121]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.3.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.3.jpg,0.258926,drinking cup,"[54, 77, 89, 138]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.4.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.4.jpg,0.020819,coffee mug,"[66, 0, 107, 47]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.5.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.5.jpg,0.216544,coffee mug,"[0, 0, 21, 62]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.6.jpg,drink_container,5,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.7.jpg,drink_container,5,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.8.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.8.jpg,0.138789,travel mug,"[99, 5, 122, 47]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\5.9.jpg,drink_container,5,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\5__5.9.jpg,0.163308,drinking cup,"[188, 61, 218, 89]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.1.jpg,drink_container,cup,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\cup__cup.1.jpg,0.723176,drinking cup,"[55, 4, 190, 223]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.10.jpg,drink_container,cup,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\cup__cup.10.jpg,0.055332,drinking cup,"[70, 32, 198, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.2.jpg,drink_container,cup,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\cup__cup.2.jpg,0.041888,drinking cup,"[40, 7, 201, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.3.jpg,drink_container,cup,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.4.jpg,drink_container,cup,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\cup__cup.4.jpg,0.024862,drinking cup,"[80, 28, 222, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.5.jpg,drink_container,cup,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.6.jpg,drink_container,cup,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\cup__cup.6.jpg,0.232277,coffee mug,"[88, 3, 193, 209]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.7.jpg,drink_container,cup,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\cup__cup.7.jpg,0.612325,drinking cup,"[26, 0, 173, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.8.jpg,drink_container,cup,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\cup__cup.8.jpg,0.291012,drinking cup,"[53, 0, 210, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\cup.9.jpg,drink_container,cup,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\mug.1.jpg,drink_container,mug,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\mug__mug.1.jpg,0.036584,travel mug,"[49, 36, 166, 224]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\mug.2.jpg,drink_container,mug,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\mug__mug.2.jpg,0.150350,travel mug,"[60, 29, 162, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\mug.3.jpg,drink_container,mug,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\mug__mug.3.jpg,0.151820,coffee mug,"[56, 48, 152, 224]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\mug.4.jpg,drink_container,mug,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\mug__mug.4.jpg,0.045895,travel mug,"[177, 135, 197, 174]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\mug.5.jpg,drink_container,mug,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\mug__mug.5.jpg,0.191751,drinking cup,"[78, 13, 173, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\mug.6.jpg,drink_container,mug,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\mug.7.jpg,drink_container,mug,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\mug__mug.7.jpg,0.479407,coffee mug,"[0, 9, 150, 210]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\mug.8.jpg,drink_container,mug,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\mug__mug.8.jpg,0.044294,coffee mug,"[62, 29, 143, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033722_344_001.jpg,drink_container,텀블러_새물건1_20260825_033722_344_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033722_344_001__텀블러_새물건1_20260825_033722_344_001.jpg,0.046862,coffee mug,"[57, 18, 157, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033730_172_001.jpg,drink_container,텀블러_새물건1_20260825_033730_172_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033730_172_001__텀블러_새물건1_20260825_033730_172_001.jpg,0.145781,drinking cup,"[61, 18, 148, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033734_117_001.jpg,drink_container,텀블러_새물건1_20260825_033734_117_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033734_117_001__텀블러_새물건1_20260825_033734_117_001.jpg,0.040437,drinking cup,"[53, 24, 136, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033748_367_001.jpg,drink_container,텀블러_새물건1_20260825_033748_367_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033748_367_001__텀블러_새물건1_20260825_033748_367_001.jpg,0.072773,coffee mug,"[59, 4, 147, 238]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033800_505_001.jpg,drink_container,텀블러_새물건1_20260825_033800_505_001,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033807_634_001.jpg,drink_container,텀블러_새물건1_20260825_033807_634_001,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033842_056_001.jpg,drink_container,텀블러_새물건1_20260825_033842_056_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033842_056_001__텀블러_새물건1_20260825_033842_056_001.jpg,0.248159,coffee mug,"[0, 0, 149, 207]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033901_321_001.jpg,drink_container,텀블러_새물건1_20260825_033901_321_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033901_321_001__텀블러_새물건1_20260825_033901_321_001.jpg,0.299471,drinking cup,"[84, 16, 220, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033913_572_001.jpg,drink_container,텀블러_새물건1_20260825_033913_572_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033913_572_001__텀블러_새물건1_20260825_033913_572_001.jpg,0.284872,drinking cup,"[58, 19, 179, 230]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033917_929_001.jpg,drink_container,텀블러_새물건1_20260825_033917_929_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033917_929_001__텀블러_새물건1_20260825_033917_929_001.jpg,0.765539,drinking cup,"[33, 32, 174, 230]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033928_026_001.jpg,drink_container,텀블러_새물건1_20260825_033928_026_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033928_026_001__텀블러_새물건1_20260825_033928_026_001.jpg,0.579986,drinking cup,"[31, 41, 152, 239]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033932_804_001.jpg,drink_container,텀블러_새물건1_20260825_033932_804_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033932_804_001__텀블러_새물건1_20260825_033932_804_001.jpg,0.154772,coffee mug,"[41, 67, 168, 192]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033939_894_001.jpg,drink_container,텀블러_새물건1_20260825_033939_894_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033939_894_001__텀블러_새물건1_20260825_033939_894_001.jpg,0.068946,coffee mug,"[40, 95, 147, 202]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033946_365_001.jpg,drink_container,텀블러_새물건1_20260825_033946_365_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_033946_365_001__텀블러_새물건1_20260825_033946_365_001.jpg,0.084589,drinking cup,"[10, 3, 172, 238]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_033955_160_001.jpg,drink_container,텀블러_새물건1_20260825_033955_160_001,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_034005_959_001.jpg,drink_container,텀블러_새물건1_20260825_034005_959_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_034005_959_001__텀블러_새물건1_20260825_034005_959_001.jpg,0.303497,drinking cup,"[53, 0, 170, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_034011_843_001.jpg,drink_container,텀블러_새물건1_20260825_034011_843_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_034011_843_001__텀블러_새물건1_20260825_034011_843_001.jpg,0.448818,drinking cup,"[47, 0, 173, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_034020_999_001.jpg,drink_container,텀블러_새물건1_20260825_034020_999_001,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_034039_224_001.jpg,drink_container,텀블러_새물건1_20260825_034039_224_001,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\drink_container\텀블러_새물건1_20260825_034039_224_001__텀블러_새물건1_20260825_034039_224_001.jpg,0.063063,travel mug,"[23, 0, 150, 225]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\텀블러\텀블러_새물건1_20260825_034054_584_001.jpg,drink_container,텀블러_새물건1_20260825_034054_584_001,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (1).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (1).jpg,0.806825,bottle,"[95, 37, 177, 229]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (10).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (10).jpg,0.836349,bottle,"[77, 0, 177, 215]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (100).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (100).jpg,0.061522,bottle,"[75, 0, 240, 177]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (11).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (11).jpg,0.844516,bottle,"[75, 0, 175, 223]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (12).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (12).jpg,0.537598,bottle,"[79, 0, 184, 237]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (13).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (13).jpg,0.534232,bottle,"[77, 0, 183, 238]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (14).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (14).jpg,0.119256,bottle,"[78, 4, 194, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (15).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (15).jpg,0.450652,bottle,"[79, 7, 199, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (16).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (16).jpg,0.062269,bottle,"[89, 0, 212, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (17).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (17).jpg,0.024536,bottle,"[106, 0, 221, 221]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (18).jpg,water_bottle,생수병,val,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (19).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (19).jpg,0.058185,bottle,"[87, 7, 209, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (2).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (2).jpg,0.734801,bottle,"[91, 36, 177, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (20).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (20).jpg,0.565591,bottle,"[85, 13, 201, 238]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (21).jpg,water_bottle,생수병,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (22).jpg,water_bottle,생수병,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (23).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (23).jpg,0.036359,bottle,"[144, 34, 174, 104]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (24).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (24).jpg,0.884734,bottle,"[114, 0, 230, 237]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (25).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (25).jpg,0.734459,bottle,"[113, 0, 236, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (26).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (26).jpg,0.873418,bottle,"[106, 0, 222, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (27).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (27).jpg,0.859064,bottle,"[94, 0, 220, 231]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (28).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (28).jpg,0.800638,bottle,"[95, 0, 226, 234]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (29).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (29).jpg,0.822938,bottle,"[99, 0, 230, 235]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (3).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (3).jpg,0.807738,bottle,"[98, 32, 183, 230]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (30).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (30).jpg,0.879135,bottle,"[94, 0, 220, 235]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (31).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (31).jpg,0.692200,bottle,"[74, 0, 212, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (32).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (32).jpg,0.566433,bottle,"[67, 0, 209, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (33).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (33).jpg,0.764384,bottle,"[61, 0, 236, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (34).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (34).jpg,0.818438,bottle,"[50, 0, 233, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (35).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (35).jpg,0.802500,bottle,"[50, 0, 239, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (36).jpg,water_bottle,생수병,test,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (37).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (37).jpg,0.764770,bottle,"[57, 0, 219, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (38).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (38).jpg,0.605503,bottle,"[62, 0, 201, 238]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (39).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (39).jpg,0.648149,bottle,"[69, 0, 205, 238]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (4).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (4).jpg,0.557909,bottle,"[113, 22, 201, 222]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (40).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (40).jpg,0.787202,bottle,"[75, 0, 227, 220]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (41).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (41).jpg,0.459501,bottle,"[98, 15, 182, 172]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (42).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (42).jpg,0.372945,bottle,"[126, 71, 197, 174]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (43).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (43).jpg,0.418053,bottle,"[129, 76, 194, 165]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (44).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (44).jpg,0.308488,bottle,"[133, 64, 210, 162]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (45).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (45).jpg,0.071236,bottle,"[126, 64, 208, 165]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (46).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (46).jpg,0.126635,bottle,"[125, 76, 208, 173]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (47).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (47).jpg,0.132571,bottle,"[126, 74, 210, 180]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (48).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (48).jpg,0.035250,bottle,"[104, 77, 207, 186]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (49).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (49).jpg,0.299034,bottle,"[99, 79, 230, 193]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (5).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (5).jpg,0.633382,bottle,"[114, 13, 203, 223]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (50).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (50).jpg,0.117707,bottle,"[78, 61, 238, 186]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (51).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (51).jpg,0.503530,bottle,"[56, 41, 240, 185]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (52).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (52).jpg,0.276646,bottle,"[31, 18, 240, 177]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (53).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (53).jpg,0.247141,bottle,"[8, 17, 229, 182]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (54).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (54).jpg,0.570959,bottle,"[8, 11, 200, 185]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (55).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (55).jpg,0.451842,bottle,"[35, 0, 182, 173]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (56).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (56).jpg,0.454405,bottle,"[84, 0, 240, 174]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (57).jpg,water_bottle,생수병,test,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (58).jpg,water_bottle,생수병,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (59).jpg,water_bottle,생수병,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (6).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (6).jpg,0.879454,bottle,"[91, 7, 175, 210]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (60).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (60).jpg,0.056046,bottle,"[39, 0, 240, 186]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (61).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (61).jpg,0.157882,bottle,"[0, 46, 228, 230]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (62).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (62).jpg,0.105342,bottle,"[22, 20, 240, 217]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (63).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (63).jpg,0.169896,bottle,"[8, 26, 240, 222]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (64).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (64).jpg,0.100082,bottle,"[21, 21, 240, 215]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (65).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (65).jpg,0.031761,bottle,"[32, 28, 240, 229]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (66).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (66).jpg,0.085827,bottle,"[24, 35, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (67).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (67).jpg,0.397033,bottle,"[6, 0, 240, 237]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (68).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (68).jpg,0.722582,bottle,"[25, 0, 240, 225]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (69).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (69).jpg,0.235206,bottle,"[35, 0, 240, 225]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (7).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (7).jpg,0.846282,bottle,"[66, 2, 157, 216]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (70).jpg,water_bottle,생수병,test,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\test\water_bottle\생수병__생수병 (70).jpg,0.047077,bottle,"[31, 0, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (71).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (71).jpg,0.160836,bottle,"[47, 52, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (72).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (72).jpg,0.033338,bottle,"[55, 21, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (73).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (73).jpg,0.074791,bottle,"[13, 12, 193, 231]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (74).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (74).jpg,0.326572,bottle,"[0, 18, 155, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (75).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (75).jpg,0.245761,bottle,"[0, 5, 134, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (76).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (76).jpg,0.175841,bottle,"[0, 8, 134, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (77).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (77).jpg,0.057260,bottle,"[0, 0, 104, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (78).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (78).jpg,0.183821,bottle,"[0, 1, 91, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (79).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (79).jpg,0.673782,bottle,"[0, 32, 95, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (8).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (8).jpg,0.862277,bottle,"[61, 0, 160, 208]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (80).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (80).jpg,0.824850,bottle,"[0, 53, 112, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (81).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (81).jpg,0.161802,bottle,"[55, 0, 240, 169]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (82).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (82).jpg,0.027872,bottle,"[87, 41, 240, 228]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (84).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (84).jpg,0.076196,bottle,"[8, 44, 240, 231]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (85).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (85).jpg,0.456311,bottle,"[0, 41, 197, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (86).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (86).jpg,0.533830,bottle,"[0, 45, 175, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (87).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (87).jpg,0.258778,bottle,"[0, 36, 159, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (88).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (88).jpg,0.496307,bottle,"[0, 68, 149, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (89).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (89).jpg,0.752718,bottle,"[6, 70, 186, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (9).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (9).jpg,0.820645,bottle,"[84, 0, 186, 208]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (90).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (90).jpg,0.281673,bottle,"[41, 68, 225, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (91).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (91).jpg,0.823572,bottle,"[10, 50, 228, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (92).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (92).jpg,0.465922,bottle,"[0, 14, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (93).jpg,water_bottle,생수병,val,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\val\water_bottle\생수병__생수병 (93).jpg,0.026660,bottle,"[28, 35, 240, 240]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (94).jpg,water_bottle,생수병,train,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (95).jpg,water_bottle,생수병,test,rejected,,,,
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (96).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (96).jpg,0.137082,bottle,"[36, 0, 240, 225]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (97).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (97).jpg,0.044848,bottle,"[10, 22, 240, 230]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (98).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (98).jpg,0.055134,bottle,"[37, 8, 240, 206]"
+C:\Users\PKNU-ICEE\Desktop\project\학습용 데이터\생수병\생수병 (99).jpg,water_bottle,생수병,train,accepted,C:\Users\PKNU-ICEE\Desktop\project\category_dataset_prepared_v2\train\water_bottle\생수병__생수병 (99).jpg,0.076426,bottle,"[60, 0, 240, 188]"

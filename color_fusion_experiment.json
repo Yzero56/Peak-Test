@@ -1,0 +1,82 @@
+{
+  "results": {
+    "color_only": {
+      "recommended_threshold": 0.66,
+      "balanced_accuracy": 0.747222,
+      "same_accuracy": 0.607407,
+      "different_accuracy": 0.887037,
+      "known_identity_accuracy": 0.714815
+    },
+    "dino_0.1_color_0.9": {
+      "recommended_threshold": 0.652,
+      "balanced_accuracy": 0.762963,
+      "same_accuracy": 0.57037,
+      "different_accuracy": 0.955556,
+      "known_identity_accuracy": 0.711111
+    },
+    "dino_0.2_color_0.8": {
+      "recommended_threshold": 0.623,
+      "balanced_accuracy": 0.777778,
+      "same_accuracy": 0.596296,
+      "different_accuracy": 0.959259,
+      "known_identity_accuracy": 0.711111
+    },
+    "dino_0.3_color_0.7": {
+      "recommended_threshold": 0.594,
+      "balanced_accuracy": 0.781481,
+      "same_accuracy": 0.6,
+      "different_accuracy": 0.962963,
+      "known_identity_accuracy": 0.72963
+    },
+    "dino_0.4_color_0.6": {
+      "recommended_threshold": 0.575,
+      "balanced_accuracy": 0.777778,
+      "same_accuracy": 0.585185,
+      "different_accuracy": 0.97037,
+      "known_identity_accuracy": 0.751852
+    },
+    "dino_0.5_color_0.5": {
+      "recommended_threshold": 0.526,
+      "balanced_accuracy": 0.787037,
+      "same_accuracy": 0.648148,
+      "different_accuracy": 0.925926,
+      "known_identity_accuracy": 0.785185
+    },
+    "dino_0.6_color_0.4": {
+      "recommended_threshold": 0.513,
+      "balanced_accuracy": 0.800926,
+      "same_accuracy": 0.677778,
+      "different_accuracy": 0.924074,
+      "known_identity_accuracy": 0.807407
+    },
+    "dino_0.7_color_0.3": {
+      "recommended_threshold": 0.473,
+      "balanced_accuracy": 0.821296,
+      "same_accuracy": 0.803704,
+      "different_accuracy": 0.838889,
+      "known_identity_accuracy": 0.833333
+    },
+    "dino_0.8_color_0.2": {
+      "recommended_threshold": 0.46,
+      "balanced_accuracy": 0.837963,
+      "same_accuracy": 0.866667,
+      "different_accuracy": 0.809259,
+      "known_identity_accuracy": 0.840741
+    },
+    "dino_0.9_color_0.1": {
+      "recommended_threshold": 0.469,
+      "balanced_accuracy": 0.837037,
+      "same_accuracy": 0.833333,
+      "different_accuracy": 0.840741,
+      "known_identity_accuracy": 0.851852
+    }
+  },
+  "best_method": "dino_0.8_color_0.2",
+  "best_result": {
+    "recommended_threshold": 0.46,
+    "balanced_accuracy": 0.837963,
+    "same_accuracy": 0.866667,
+    "different_accuracy": 0.809259,
+    "known_identity_accuracy": 0.840741
+  }
+}

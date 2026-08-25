@@ -1,0 +1,33 @@
+{
+  "results": {
+    "cls": {
+      "recommended_threshold": 0.473,
+      "balanced_accuracy": 0.825926,
+      "same_accuracy": 0.818519,
+      "different_accuracy": 0.833333,
+      "known_identity_accuracy": 0.82963
+    },
+    "patch_mean": {
+      "recommended_threshold": 0.688,
+      "balanced_accuracy": 0.783333,
+      "same_accuracy": 0.688889,
+      "different_accuracy": 0.877778,
+      "known_identity_accuracy": 0.740741
+    },
+    "cls_patch": {
+      "recommended_threshold": 0.584,
+      "balanced_accuracy": 0.815741,
+      "same_accuracy": 0.737037,
+      "different_accuracy": 0.894444,
+      "known_identity_accuracy": 0.788889
+    }
+  },
+  "best_feature": "cls",
+  "best_result": {
+    "recommended_threshold": 0.473,
+    "balanced_accuracy": 0.825926,
+    "same_accuracy": 0.818519,
+    "different_accuracy": 0.833333,
+    "known_identity_accuracy": 0.82963
+  }
+}

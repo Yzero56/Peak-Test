@@ -1,0 +1,55 @@
+{
+  "database": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\known_containers.db",
+  "containers": {
+    "Container_001": {
+      "label_for_test": "락앤락",
+      "source_images": 100,
+      "registered_features": 78,
+      "yolo_skipped": [
+        "락앤락 (12).jpg",
+        "락앤락 (15).jpg",
+        "락앤락 (26).jpg",
+        "락앤락 (28).jpg",
+        "락앤락 (29).jpg",
+        "락앤락 (30).jpg",
+        "락앤락 (31).jpg",
+        "락앤락 (37).jpg",
+        "락앤락 (38).jpg",
+        "락앤락 (39).jpg",
+        "락앤락 (40).jpg",
+        "락앤락 (46).jpg",
+        "락앤락 (47).jpg",
+        "락앤락 (62).jpg",
+        "락앤락 (63).jpg",
+        "락앤락 (64).jpg",
+        "락앤락 (65).jpg",
+        "락앤락 (66).jpg",
+        "락앤락 (76).jpg",
+        "락앤락 (83).jpg",
+        "락앤락 (86).jpg",
+        "락앤락 (100).jpg"
+      ]
+    },
+    "Container_002": {
+      "label_for_test": "생수병",
+      "source_images": 100,
+      "registered_features": 99,
+      "yolo_skipped": [
+        "생수병 (83).jpg"
+      ]
+    },
+    "Container_003": {
+      "label_for_test": "원형용기",
+      "source_images": 100,
+      "registered_features": 94,
+      "yolo_skipped": [
+        "원형용기 (38).jpg",
+        "원형용기 (46).jpg",
+        "원형용기 (51).jpg",
+        "원형용기 (52).jpg",
+        "원형용기 (89).jpg",
+        "원형용기 (96).jpg"
+      ]
+    }
+  }
+}
