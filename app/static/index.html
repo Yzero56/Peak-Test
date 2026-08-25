@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PEAK Smart Dashboard</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; }
+    body { max-width: 960px; margin: 0 auto; padding: 24px; color: #172033; background: #f5f7fb; }
+    h1 { margin-bottom: 4px; }
+    .muted { color: #667085; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0; }
+    .card, .item { background: white; border: 1px solid #e4e7ec; border-radius: 12px; padding: 16px; }
+    .number { display: block; font-size: 28px; font-weight: 700; margin-top: 6px; }
+    .items { display: grid; gap: 10px; }
+    .item { display: flex; justify-content: space-between; gap: 16px; }
+    .status { font-weight: 600; }
+    .fresh { color: #087443; }
+    .expiring_soon { color: #b54708; }
+    .expired { color: #b42318; }
+    .unknown { color: #667085; }
+    .ad { margin-top: 28px; background: #101828; color: white; border-radius: 16px; padding: 20px; }
+    button { border: 0; border-radius: 8px; padding: 10px 14px; font-weight: 700; cursor: pointer; }
+    video { display: block; width: 100%; max-height: 520px; margin-top: 16px; border-radius: 10px; background: #000; }
+    @media (max-width: 640px) { body { padding: 16px; } .cards { grid-template-columns: repeat(2, 1fr); } .item { display: block; } }
+  </style>
+</head>
+<body>
+  <h1>PEAK Smart</h1>
+  <p class="muted">Food expiry and cooking status</p>
+  <section class="cards" id="summary" aria-live="polite"></section>
+  <h2>Active food items</h2>
+  <section class="items" id="items"><p class="muted">Loading...</p></section>
+  <section class="ad">
+    <h2>MiniMax 테스트 광고</h2>
+    <p id="ad-status">15초 세로 테스트 영상을 생성해 브라우저에서 재생합니다.</p>
+    <button id="create-ad">테스트 광고 생성</button>
+    <video id="ad-video" controls playsinline hidden></video>
+  </section>
+  <script>
+    const labels = [
+      ['total_active', 'Active'],
+      ['fresh', 'Fresh'],
+      ['expiring_soon', 'Expiring soon'],
+      ['expired', 'Expired']
+    ];
+    const summary = document.querySelector('#summary');
+    const items = document.querySelector('#items');
+    const adButton = document.querySelector('#create-ad');
+    const adStatus = document.querySelector('#ad-status');
+    const adVideo = document.querySelector('#ad-video');
+    fetch('/api/v1/dashboard/summary')
+      .then(response => { if (!response.ok) throw new Error('Dashboard API failed'); return response.json(); })
+      .then(data => {
+        summary.innerHTML = labels.map(([key, label]) => `<div class="card"><span>${label}</span><span class="number">${data[key]}</span></div>`).join('');
+        if (!data.items.length) { items.innerHTML = '<p class="muted">No active food items.</p>'; return; }
+        items.innerHTML = data.items.map(item => `<article class="item"><div><strong>${item.display_name}</strong><div class="muted">${item.expires_at ?? 'Expiry unknown'}</div></div><div class="status ${item.expiry_status}">${item.can_cook ? 'Cooking candidate' : 'Do not cook'}<br><small>${item.expiry_status}</small></div></article>`).join('');
+      })
+      .catch(error => { summary.innerHTML = `<p>${error.message}</p>`; items.innerHTML = ''; });
+
+    adButton.addEventListener('click', async () => {
+      adButton.disabled = true;
+      adVideo.hidden = true;
+      adStatus.textContent = 'MiniMax에서 영상을 생성하는 중입니다...';
+      try {
+        const created = await fetch('/api/v1/advertisements/test-video', { method: 'POST' });
+        if (!created.ok) throw new Error(await created.text());
+        const { task_id: taskId } = await created.json();
+        let task;
+        for (let attempt = 0; attempt < 60; attempt++) {
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          const response = await fetch(`/api/v1/advertisements/test-video/${taskId}`);
+          if (!response.ok) throw new Error(await response.text());
+          task = (await response.json()).task;
+          adStatus.textContent = `생성 상태: ${task.status}`;
+          if (task.status === 'succeeded' || task.status === 'failed' || task.status === 'cancelled') break;
+        }
+        if (!task || task.status !== 'succeeded') throw new Error(task?.error?.message || '영상 생성 시간이 초과되었습니다.');
+        adVideo.src = `/api/v1/advertisements/test-video/${taskId}/stream`;
+        adVideo.hidden = false;
+        adStatus.textContent = '생성이 완료되었습니다.';
+      } catch (error) {
+        adStatus.textContent = `생성 실패: ${error.message}`;
+      } finally {
+        adButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
