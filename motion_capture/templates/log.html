@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>이벤트 로그 — 개발자 모드</title>
+<style>
+  :root {
+    --bg: #f7f8fa; --surface: #ffffff; --surface-alt: #f2f4f6; --border: #e5e8eb;
+    --text: #191f28; --text-secondary: #4e5968; --text-tertiary: #8b95a1;
+    --accent: #3182f6; --accent-strong: #1b64da; --accent-soft: #eaf2ff;
+    --success: #1ec191; --success-soft: #e3f9f1;
+    --danger: #f04452; --danger-soft: #fdeceb;
+    --warn: #d97a06; --warn-soft: #fdf1de;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --shadow: 0 1px 2px rgba(25,31,40,.04), 0 8px 24px rgba(25,31,40,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121317; --surface: #1c1e22; --surface-alt: #24262b; --border: #2e3136;
+      --text: #f2f4f6; --text-secondary: #b0b8c1; --text-tertiary: #7c8591;
+      --accent: #5b9bfd; --accent-strong: #86b6ff; --accent-soft: rgba(91,155,253,.16);
+      --success: #35d9a8; --success-soft: rgba(53,217,168,.14);
+      --danger: #ff6b76; --danger-soft: rgba(255,107,118,.14);
+      --warn: #f0a93e; --warn-soft: rgba(240,169,62,.14);
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 680px; margin: 0 auto; padding: 0 16px 48px; }
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+    padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;
+    margin: 0 -16px 16px;
+  }
+  .topbar h1 { font-size: 16px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .topbar a { font-size: 13px; font-weight: 700; color: var(--accent-strong); text-decoration: none; }
+
+  .summary-row { display: flex; gap: 8px; margin-bottom: 14px; }
+  .summary-card {
+    flex: 1; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 12px; text-align: center;
+  }
+  .summary-card .num { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .summary-card .label { font-size: 11.5px; color: var(--text-tertiary); font-weight: 700; margin-top: 2px; }
+  .summary-card.in .num { color: var(--success); }
+  .summary-card.out .num { color: var(--warn); }
+  .summary-card.unknown .num { color: var(--text-tertiary); }
+
+  .signal-table {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 12px 14px; margin-bottom: 14px;
+  }
+  .signal-table .st-title { font-size: 11.5px; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px; }
+  .signal-table table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .signal-table th { text-align: left; color: var(--text-tertiary); font-weight: 700; padding: 3px 4px; }
+  .signal-table td { padding: 3px 4px; font-variant-numeric: tabular-nums; }
+  .signal-table td.in { color: var(--success); font-weight: 700; }
+  .signal-table td.out { color: var(--warn); font-weight: 700; }
+  .signal-table td.unknown { color: var(--text-tertiary); }
+  .signal-table .primary { background: var(--accent-soft); border-radius: 6px; }
+
+  .filter-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .filter-row button {
+    flex: 1; border: none; background: var(--surface-alt); color: var(--text-secondary);
+    font-size: 12.5px; font-weight: 700; padding: 9px 6px; border-radius: 10px;
+    cursor: pointer; font-family: inherit; min-width: 70px;
+  }
+  .filter-row button.active { background: var(--accent-soft); color: var(--accent-strong); }
+
+  .compare-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 12px 14px; margin-bottom: 16px;
+    font-size: 12.5px; color: var(--text-secondary);
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  .compare-card b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .compare-card .rate { font-size: 20px; font-weight: 800; color: var(--accent-strong); font-variant-numeric: tabular-nums; }
+
+  .event-list { display: flex; flex-direction: column; gap: 12px; }
+  .event-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: var(--shadow);
+    padding: 14px;
+  }
+  .event-card.disagree { border-color: var(--danger); border-width: 1.5px; }
+  .badge-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge-row .tag {
+    font-size: 10.5px; font-weight: 700; color: var(--text-tertiary);
+    align-self: center; margin-right: -2px;
+  }
+  .event-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+  .badge { font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 999px; }
+  .badge.in { background: var(--success-soft); color: var(--success); }
+  .badge.out { background: var(--warn-soft); color: var(--warn); }
+  .badge.unknown { background: var(--surface-alt); color: var(--text-tertiary); }
+  .event-time { font-size: 12px; color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
+
+  .event-body { display: flex; gap: 10px; }
+  .frames { display: flex; gap: 6px; flex: none; }
+  .frames .frame-box { text-align: center; }
+  .frames img {
+    width: 84px; height: 84px; border-radius: 10px; object-fit: cover;
+    background: var(--surface-alt); display: block;
+  }
+  .frames .frame-label { font-size: 10px; color: var(--text-tertiary); margin-top: 3px; font-weight: 700; }
+  .traj-box { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .traj-box svg { width: 100%; height: 84px; display: block; background: var(--surface-alt); border-radius: 10px; }
+  .traj-empty {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    font-size: 11.5px; color: var(--text-tertiary); background: var(--surface-alt); border-radius: 10px;
+  }
+
+  .best-row { margin-top: 10px; display: flex; gap: 10px; align-items: center; background: var(--accent-soft); border-radius: 10px; padding: 8px 10px; }
+  .best-row img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; background: var(--surface-alt); flex: none; }
+  .best-row .best-label { font-size: 11.5px; font-weight: 700; color: var(--accent-strong); }
+  .best-row .best-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+  .filmstrip-wrap { margin-top: 10px; }
+  .filmstrip-title { font-size: 10.5px; font-weight: 700; color: var(--text-tertiary); margin-bottom: 6px; }
+  .filmstrip { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+  .filmstrip .fs-item { flex: none; text-align: center; }
+  .filmstrip img {
+    width: 52px; height: 52px; border-radius: 8px; object-fit: cover;
+    background: var(--surface-alt); display: block; border: 2px solid transparent;
+  }
+  .filmstrip img.best { border-color: var(--accent); }
+  .filmstrip .fs-t { font-size: 9px; color: var(--text-tertiary); margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+  .event-meta {
+    display: flex; gap: 10px; margin-top: 10px; font-size: 11px; color: var(--text-secondary);
+    font-variant-numeric: tabular-nums; flex-wrap: wrap;
+  }
+
+  .empty-note { font-size: 13px; color: var(--text-tertiary); padding: 40px 0; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <h1>이벤트 로그</h1>
+      <a href="/">← 실시간 화면</a>
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-card in"><div class="num" id="cIn">0</div><div class="label">IN</div></div>
+      <div class="summary-card out"><div class="num" id="cOut">0</div><div class="label">OUT</div></div>
+      <div class="summary-card unknown"><div class="num" id="cUnknown">0</div><div class="label">모름</div></div>
+    </div>
+
+    <div class="signal-table">
+      <div class="st-title">신호별 판정 비교 (최종은 손-소지물 우선, 나머지는 참고용)</div>
+      <table id="signalTable"></table>
+    </div>
+
+    <div class="compare-card" id="compareCard" style="display:none">
+      <div>
+        <div><b id="cmpCompared">0</b>건 비교됨 (궤적 vs 플로우)</div>
+        <div style="margin-top:2px">서로 다르게 판정: <b id="cmpDisagree">0</b>건 · 그중 둘 다 확신: <b id="cmpBothConfident">0</b>건</div>
+      </div>
+      <div class="rate" id="cmpRate">-</div>
+    </div>
+
+    <div class="filter-row" id="filterRow">
+      <button data-f="all" class="active">전체</button>
+      <button data-f="in">IN</button>
+      <button data-f="out">OUT</button>
+      <button data-f="unknown">모름</button>
+      <button data-f="disagree">불일치만</button>
+    </div>
+
+    <div class="event-list" id="eventList"></div>
+    <p class="empty-note" id="emptyNote" style="display:none">아직 기록된 이벤트가 없어요</p>
+  </div>
+
+<script>
+const BADGE_LABEL = { in: 'IN · 넣음', out: 'OUT · 꺼냄', unknown: '판정 보류' };
+const COLOR = { in: '#1ec191', out: '#d97a06', unknown: '#8b95a1' };
+const SIGNAL_LABEL = { carry: '손-소지물(신규)', flow: '플로우', trajectory: '궤적', state: '문 세션(시작vs끝)' };
+let currentFilter = 'all';
+
+function sparkline(traj, cls) {
+  if (!traj || traj.length < 2) return null;
+  const W = 200, H = 84, PAD = 6;
+  const maxT = traj[traj.length - 1][0] || 1;
+  const pts = traj.map(([t, cx, cy]) => {
+    const x = PAD + (t / maxT) * (W - PAD * 2);
+    const y = PAD + cy * (H - PAD * 2); // cy 그대로: 0(선반 안쪽/위)이 위쪽, 1(진입부/아래)이 아래쪽
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  const color = COLOR[cls] || COLOR.unknown;
+  const startDot = pts.split(' ')[0].split(',');
+  const endDot = pts.split(' ').slice(-1)[0].split(',');
+  return `<svg viewBox="0 0 ${W} ${H}">
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="${startDot[0]}" cy="${startDot[1]}" r="3.5" fill="${color}" opacity="0.5" />
+    <circle cx="${endDot[0]}" cy="${endDot[1]}" r="3.5" fill="${color}" />
+  </svg>`;
+}
+
+function renderSignalTable(sc) {
+  if (!sc) { document.getElementById('signalTable').innerHTML = ''; return; }
+  const rows = ['carry', 'flow', 'trajectory', 'state'];
+  const html = `<tr><th>신호</th><th>IN</th><th>OUT</th><th>모름</th></tr>` +
+    rows.map(k => {
+      const c = sc[k] || { in: 0, out: 0, unknown: 0 };
+      const primary = k === 'carry' ? 'primary' : '';
+      return `<tr class="${primary}"><td>${SIGNAL_LABEL[k]}</td><td class="in">${c.in}</td><td class="out">${c.out}</td><td class="unknown">${c.unknown}</td></tr>`;
+    }).join('');
+  document.getElementById('signalTable').innerHTML = html;
+}
+
+function renderFilmstrip(ev) {
+  if (!ev.frames || !ev.frames.length) return '';
+  const bestI = ev.frames.reduce((maxI, fr, i, arr) => fr.obj_score > arr[maxI].obj_score ? i : maxI, 0);
+  const items = ev.frames.map((fr, i) => {
+    if (!fr.has_crop) return '';
+    const isBest = i === bestI;
+    return `<div class="fs-item">
+      <img src="/events/${ev.id}/frame/${i}.jpg" loading="lazy" class="${isBest ? 'best' : ''}" title="obj_score=${fr.obj_score}, hand=${fr.hand_count}" />
+      <div class="fs-t">${fr.t}s</div>
+    </div>`;
+  }).join('');
+  return `<div class="filmstrip-wrap">
+    <div class="filmstrip-title">세션 중 실제로 찍힌 프레임 전부 (${ev.frames.length}장 · 파란 테두리 = 채택된 프레임)</div>
+    <div class="filmstrip">${items}</div>
+  </div>`;
+}
+
+async function load() {
+  const backendFilter = currentFilter === 'disagree' ? 'all' : currentFilter;
+  const url = backendFilter === 'all' ? '/api/log?limit=200' : `/api/log?limit=200&classification=${backendFilter}`;
+  const r = await fetch(url);
+  const data = await r.json();
+
+  document.getElementById('cIn').textContent = data.counts.in || 0;
+  document.getElementById('cOut').textContent = data.counts.out || 0;
+  document.getElementById('cUnknown').textContent = data.counts.unknown || 0;
+  renderSignalTable(data.signal_counts);
+
+  const ag = data.agreement;
+  const compareCard = document.getElementById('compareCard');
+  if (ag && ag.compared > 0) {
+    compareCard.style.display = 'flex';
+    document.getElementById('cmpCompared').textContent = ag.compared;
+    document.getElementById('cmpDisagree').textContent = ag.disagree;
+    document.getElementById('cmpBothConfident').textContent = ag.both_confident_disagree;
+    document.getElementById('cmpRate').textContent = Math.round(ag.agree_rate * 100) + '%';
+  } else {
+    compareCard.style.display = 'none';
+  }
+
+  const list = document.getElementById('eventList');
+  let items = data.events;
+  if (currentFilter === 'disagree') {
+    items = items.filter(ev => ev.flow_classification && ev.classification !== ev.flow_classification);
+  }
+  document.getElementById('emptyNote').style.display = items.length ? 'none' : 'block';
+
+  list.innerHTML = items.map(ev => {
+    const time = new Date(ev.start_ts * 1000).toLocaleString('ko-KR', { hour12: false });
+    const spark = sparkline(ev.trajectory, ev.classification);
+    const isSession = ev.final_source === 'state';
+    const trajHtml = spark
+      ? `<div class="traj-box">${spark}</div>`
+      : `<div class="traj-empty">${isSession ? '문 세션 판정 (궤적 없음)' : '궤적 데이터 없음<br>(재시작 이전 기록)'}</div>`;
+    const hasFlow = ev.flow_classification !== undefined;
+    const disagree = hasFlow && ev.classification !== ev.flow_classification;
+    const finalCls = ev.final_classification || ev.classification;
+    const handInfo = ev.hand_first_ts != null
+      ? `문 열림 후 ${ev.hand_first_ts}s 만에 손 첫 감지`
+      : '이 세션에서 손 미감지';
+    return `<div class="event-card ${disagree ? 'disagree' : ''}">
+      <div class="event-head">
+        <div class="badge-row">
+          <span class="badge ${finalCls}" style="font-size:13px; padding:5px 12px;">${BADGE_LABEL[finalCls] || finalCls}</span>
+          ${ev.carry_classification !== undefined ? `<span class="tag">손-소지물</span><span class="badge ${ev.carry_classification}">${BADGE_LABEL[ev.carry_classification] || ev.carry_classification}</span>` : ''}
+          <span class="tag">궤적</span>
+          <span class="badge ${ev.classification}">${BADGE_LABEL[ev.classification] || ev.classification}</span>
+          ${hasFlow ? `<span class="tag">플로우</span><span class="badge ${ev.flow_classification}">${BADGE_LABEL[ev.flow_classification] || ev.flow_classification}</span>` : ''}
+          ${ev.state_classification !== undefined ? `<span class="tag">상태비교</span><span class="badge ${ev.state_classification}">${BADGE_LABEL[ev.state_classification] || ev.state_classification}</span>` : ''}
+        </div>
+        <span class="event-time">${time}</span>
+      </div>
+      <div class="event-body">
+        <div class="frames">
+          <div class="frame-box"><img src="/events/${ev.id}/start.jpg" loading="lazy" /><div class="frame-label">시작</div></div>
+          <div class="frame-box"><img src="/events/${ev.id}/end.jpg" loading="lazy" /><div class="frame-label">끝</div></div>
+        </div>
+        ${trajHtml}
+      </div>
+      ${ev.bbox ? `<div class="frames" style="margin-top:8px">
+        <div class="frame-box"><img src="/events/${ev.id}/start_crop.jpg" loading="lazy" /><div class="frame-label">시작vs끝 crop·시작</div></div>
+        <div class="frame-box"><img src="/events/${ev.id}/end_crop.jpg" loading="lazy" /><div class="frame-label">시작vs끝 crop·끝</div></div>
+      </div>` : ''}
+      ${ev.has_best_crop ? `<div class="best-row">
+        <img src="/events/${ev.id}/best_crop.jpg" loading="lazy" />
+        <div>
+          <div class="best-label">★ 가장 확실한 물체 크롭 (obj_score 최대 프레임, ${ev.best_ts}s 시점)</div>
+          <div class="best-sub">문 닫히기 전에 이미 세션 중 실시간으로 찍혀있던 것 — 대기 없음</div>
+        </div>
+      </div>` : ''}
+      ${renderFilmstrip(ev)}
+      <div class="event-meta">
+        <span>${ev.duration_s}s</span>
+        <span>${handInfo}</span>
+        <span>궤적 신뢰도 ${(ev.confidence * 100).toFixed(0)}%</span>
+        ${hasFlow ? `<span>플로우 신뢰도 ${(ev.flow_confidence * 100).toFixed(0)}%</span>` : ''}
+        ${ev.carry_confidence !== undefined ? `<span>손-소지물 신뢰도 ${(ev.carry_confidence * 100).toFixed(0)}%</span>` : ''}
+        <span>궤적 ${ev.trajectory_len}점</span>
+        ${ev.state_classification !== undefined ? `<span>상태비교 신뢰도 ${(ev.state_confidence * 100).toFixed(0)}%</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('filterRow').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-f]');
+  if (!btn) return;
+  currentFilter = btn.dataset.f;
+  document.querySelectorAll('#filterRow button').forEach(b => b.classList.toggle('active', b === btn));
+  load();
+});
+
+load();
+setInterval(load, 5000);
+</script>
+</body>
+</html>

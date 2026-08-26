@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "xiao-edgeimpulse-train": {
+      "source": "shain1912/esp32-skills",
+      "sourceType": "github",
+      "skillPath": "skills/xiao-edgeimpulse-train/SKILL.md",
+      "computedHash": "a68ca6866010e1e3ccfb24899b58514a745f6dda20a5b4b964f32db1b0a3752c"
+    },
+    "xiao-webcam-ap": {
+      "source": "shain1912/esp32-skills",
+      "sourceType": "github",
+      "skillPath": "skills/xiao-webcam-ap/SKILL.md",
+      "computedHash": "9330a129417cac4823d2087da91235550582b6a20f16b7c86b6c2a81fe83d309"
+    },
+    "xiao-webcam-sta": {
+      "source": "shain1912/esp32-skills",
+      "sourceType": "github",
+      "skillPath": "skills/xiao-webcam-sta/SKILL.md",
+      "computedHash": "04dd6a660af3dfd1ada6e9e065a6d3752c2a78ab28ca967e1650d40123fcd3d3"
+    }
+  }
+}

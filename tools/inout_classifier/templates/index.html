@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>냉장고 IN/OUT 판정</title>
+<style>
+  :root {
+    --bg: #f7f8fa; --surface: #ffffff; --surface-alt: #f2f4f6; --border: #e5e8eb;
+    --text: #191f28; --text-secondary: #4e5968; --text-tertiary: #8b95a1;
+    --accent: #3182f6; --accent-strong: #1b64da; --accent-soft: #eaf2ff;
+    --success: #1ec191; --success-soft: #e3f9f1;
+    --danger: #f04452; --danger-soft: #fdeceb;
+    --warn: #d97a06; --warn-soft: #fdf1de;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --shadow: 0 1px 2px rgba(25,31,40,.04), 0 8px 24px rgba(25,31,40,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121317; --surface: #1c1e22; --surface-alt: #24262b; --border: #2e3136;
+      --text: #f2f4f6; --text-secondary: #b0b8c1; --text-tertiary: #7c8591;
+      --accent: #5b9bfd; --accent-strong: #86b6ff; --accent-soft: rgba(91,155,253,.16);
+      --success: #35d9a8; --success-soft: rgba(53,217,168,.14);
+      --danger: #ff6b76; --danger-soft: rgba(255,107,118,.14);
+      --warn: #f0a93e; --warn-soft: rgba(240,169,62,.14);
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 560px; margin: 0 auto; padding: 0 16px 48px; }
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+    padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;
+    margin: 0 -16px 16px;
+  }
+  .topbar h1 { font-size: 16px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .topbar .sub { font-size: 11px; color: var(--text-tertiary); font-weight: 600; margin-top: 1px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px;
+  }
+  .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .pill.ok { background: var(--success-soft); color: var(--success); }
+  .pill.bad { background: var(--danger-soft); color: var(--danger); }
+
+  .lan-banner {
+    display: none; align-items: center; gap: 10px;
+    background: var(--accent-soft); color: var(--accent-strong);
+    border-radius: 14px; padding: 12px 14px; margin-bottom: 14px;
+    font-size: 13px; font-weight: 600;
+  }
+  .lan-banner.show { display: flex; }
+  .lan-banner .lan-url { display: block; font-family: var(--mono); font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 2px; word-break: break-all; }
+  .lan-banner button { flex: none; border: none; background: var(--surface); color: var(--accent-strong); font-size: 12px; font-weight: 700; padding: 7px 10px; border-radius: 9px; cursor: pointer; font-family: inherit; }
+
+  .warn-banner {
+    display: none; background: var(--warn-soft); color: var(--warn);
+    border-radius: 14px; padding: 12px 14px; margin-bottom: 14px;
+    font-size: 12.5px; font-weight: 600; line-height: 1.5;
+  }
+  .warn-banner.show { display: block; }
+
+  .preview-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); padding: 10px; margin-bottom: 14px; }
+  .preview-frame { position: relative; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; background: var(--surface-alt); display: flex; align-items: center; justify-content: center; }
+  .preview-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .preview-frame .placeholder { color: var(--text-tertiary); font-size: 13.5px; text-align: center; padding: 0 24px; }
+  .live-dot { position: absolute; top: 10px; left: 10px; display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,.55); color: #fff; font-size: 11.5px; font-weight: 700; padding: 5px 9px; border-radius: 999px; }
+  .live-dot .dot { width: 6px; height: 6px; border-radius: 50%; background: #ff4d4f; animation: blink 1.1s infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  .door-glow { position: absolute; inset: 0; border-radius: 14px; border: 4px solid var(--accent); opacity: 0; transition: opacity .15s ease; pointer-events: none; }
+  .door-glow.on { opacity: 1; }
+  .session-timer { position: absolute; top: 10px; right: 10px; display: none; align-items: center; gap: 6px; background: rgba(0,0,0,.55); color: #fff; font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; padding: 5px 9px; border-radius: 999px; font-family: var(--mono); }
+  .session-timer.show { display: flex; }
+  .session-timer.over { background: rgba(240,68,82,.85); }
+  .hand-badge { position: absolute; bottom: 10px; left: 10px; display: none; align-items: center; gap: 5px; background: rgba(30,193,145,.85); color: #fff; font-size: 11px; font-weight: 800; padding: 5px 9px; border-radius: 999px; }
+  .hand-badge.show { display: flex; }
+
+  .state-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); padding: 18px 20px; margin-bottom: 14px; text-align: center; }
+  .state-label { font-size: 12px; color: var(--text-tertiary); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+  .state-value { font-size: 22px; font-weight: 800; margin-top: 6px; }
+  .state-value.idle { color: var(--text-secondary); }
+  .state-value.open { color: var(--accent-strong); }
+
+  .result-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); padding: 16px; margin-bottom: 14px; }
+  .result-card.in { border-color: var(--success); }
+  .result-card.out { border-color: var(--warn); }
+  .result-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .result-head h2 { font-size: 13px; font-weight: 800; margin: 0; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .05em; }
+  .result-badge { font-size: 20px; font-weight: 800; padding: 6px 16px; border-radius: 999px; }
+  .result-badge.hand_only-pair { background: var(--surface-alt); color: var(--text-tertiary); }
+  .result-badge.in-pair { background: var(--success-soft); color: var(--success); }
+  .result-badge.out-pair { background: var(--warn-soft); color: var(--warn); }
+  .result-badge.none { background: var(--danger-soft); color: var(--danger); font-size: 14px; }
+  .result-pair img { width: 100%; border-radius: 12px; display: block; background: var(--surface-alt); margin-bottom: 10px; cursor: zoom-in; }
+  .score-rows { display: flex; flex-direction: column; gap: 8px; }
+  .score-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+  .score-row .k { width: 92px; flex: none; color: var(--text-secondary); font-weight: 700; }
+  .score-track { flex: 1; height: 8px; border-radius: 999px; background: var(--surface-alt); overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 999px; transition: width .3s ease; }
+  .score-fill.hand_only-pair { background: var(--text-tertiary); }
+  .score-fill.in-pair { background: var(--success); }
+  .score-fill.out-pair { background: var(--warn); }
+  .score-pct { width: 40px; flex: none; text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+  .result-empty { text-align: center; font-size: 13px; color: var(--text-tertiary); padding: 20px 0; }
+  .result-reason { text-align: center; font-size: 12px; color: var(--danger); margin-top: 8px; }
+
+  .section-label { font-size: 12.5px; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin: 20px 0 10px; }
+
+  .hist-list { display: flex; flex-direction: column; gap: 8px; }
+  .hist-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 10px 12px; display: flex; gap: 10px; align-items: center; }
+  .hist-card img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: var(--surface-alt); flex: none; cursor: zoom-in; }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,.88);
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .lightbox.show { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; border-radius: 8px; display: block; }
+  .lightbox-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 40px; height: 40px; border-radius: 50%; border: none;
+    background: rgba(255,255,255,.15); color: #fff; font-size: 20px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-hint {
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,.6); font-size: 12px; font-weight: 600;
+  }
+  .hist-body { flex: 1; min-width: 0; }
+  .hist-top { display: flex; align-items: center; gap: 8px; }
+  .hist-badge { font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 999px; }
+  .hist-badge.hand_only-pair { background: var(--surface-alt); color: var(--text-tertiary); }
+  .hist-badge.in-pair { background: var(--success-soft); color: var(--success); }
+  .hist-badge.out-pair { background: var(--warn-soft); color: var(--warn); }
+  .hist-badge.none { background: var(--danger-soft); color: var(--danger); }
+  .hist-time { font-size: 11px; color: var(--text-tertiary); }
+  .hist-sub { margin-top: 2px; font-size: 11.5px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+  .empty-note { font-size: 13px; color: var(--text-tertiary); padding: 24px 0; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div>
+        <h1>냉장고 IN/OUT 판정</h1>
+        <div class="sub">리드스위치 연동 · 실시간 자동 분류</div>
+      </div>
+      <span class="pill bad" id="statusPill">확인 중</span>
+    </div>
+
+    <div class="lan-banner" id="lanBanner">
+      📱&nbsp;
+      <div style="flex:1; min-width:0;">
+        폰에서 같은 와이파이로 접속
+        <span class="lan-url" id="lanUrl"></span>
+      </div>
+      <button id="lanCopyBtn">복사</button>
+    </div>
+
+    <div class="warn-banner" id="eiWarnBanner">
+      ⚠ 로컬 분류 모델(model/model.eim)이 없어서 분류를 건너뛰고 있어요 — 세션 감지/크롭까지만 동작합니다.
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-frame" id="previewFrame">
+        <div class="placeholder" id="previewPlaceholder">카메라 연결을 기다리는 중...</div>
+        <img id="previewImg" style="display:none" alt="카메라 실시간 화면" />
+        <div class="live-dot"><span class="dot"></span>LIVE</div>
+        <div class="door-glow" id="doorGlow"></div>
+        <div class="session-timer" id="sessionTimer">0.0s</div>
+        <div class="hand-badge" id="handBadge">✓ 크롭 영역 확정됨</div>
+      </div>
+    </div>
+
+    <div class="state-card">
+      <div class="state-label">문 상태</div>
+      <div class="state-value idle" id="doorState">확인 중</div>
+    </div>
+
+    <p class="section-label">최근 판정</p>
+    <div class="result-card" id="resultCard">
+      <div class="result-empty" id="resultEmpty">아직 판정된 세션이 없어요</div>
+      <div id="resultBody" style="display:none">
+        <div class="result-head">
+          <h2 id="resultTime">-</h2>
+          <span class="result-badge" id="resultBadge">-</span>
+        </div>
+        <div class="result-pair" id="resultPairWrap" style="display:none">
+          <img id="resultPairImg" alt="판정 합성사진" />
+        </div>
+        <div class="score-rows" id="scoreRows"></div>
+        <div class="result-reason" id="resultReason" style="display:none"></div>
+      </div>
+    </div>
+
+    <p class="section-label">기록</p>
+    <div class="hist-list" id="histList"></div>
+    <p class="empty-note" id="histEmpty" style="display:none">아직 기록이 없어요</p>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <img id="lightboxImg" alt="확대 이미지" />
+    <div class="lightbox-hint">탭하면 닫혀요</div>
+  </div>
+
+<script>
+const statusPill = document.getElementById('statusPill');
+const previewImg = document.getElementById('previewImg');
+const previewPlaceholder = document.getElementById('previewPlaceholder');
+const doorGlow = document.getElementById('doorGlow');
+const sessionTimer = document.getElementById('sessionTimer');
+const handBadge = document.getElementById('handBadge');
+const doorState = document.getElementById('doorState');
+const lanBanner = document.getElementById('lanBanner');
+const lanUrl = document.getElementById('lanUrl');
+const lanCopyBtn = document.getElementById('lanCopyBtn');
+const eiWarnBanner = document.getElementById('eiWarnBanner');
+const resultEmpty = document.getElementById('resultEmpty');
+const resultBody = document.getElementById('resultBody');
+const resultCard = document.getElementById('resultCard');
+const resultTime = document.getElementById('resultTime');
+const resultBadge = document.getElementById('resultBadge');
+const resultPairWrap = document.getElementById('resultPairWrap');
+const resultPairImg = document.getElementById('resultPairImg');
+const scoreRows = document.getElementById('scoreRows');
+const resultReason = document.getElementById('resultReason');
+const histList = document.getElementById('histList');
+const histEmpty = document.getElementById('histEmpty');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+
+const LABEL_TEXT = { 'hand_only-pair': '아무 일도 없음', 'in-pair': 'IN · 넣음', 'out-pair': 'OUT · 꺼냄', 'none': '판정 불가' };
+const DOOR_BUDGET_S = 5;
+let lastResultTs = null;
+
+lanCopyBtn.onclick = async () => {
+  try { await navigator.clipboard.writeText(lanUrl.textContent); lanCopyBtn.textContent = '복사됨'; setTimeout(() => { lanCopyBtn.textContent = '복사'; }, 1500); } catch (e) {}
+};
+
+// ---- 이미지 확대 보기 — 판정 결과/기록 사진을 눌러 큰 화면으로 확인 ----
+function openLightbox(src) {
+  lightboxImg.src = src;
+  lightbox.classList.add('show');
+}
+lightbox.onclick = () => lightbox.classList.remove('show');
+lightboxClose.onclick = (e) => { e.stopPropagation(); lightbox.classList.remove('show'); };
+// 이벤트 위임 — 결과/기록 영역에 나중에 생기는 img들도 클릭하면 확대되게
+document.getElementById('resultCard').addEventListener('click', (e) => {
+  if (e.target.tagName === 'IMG') openLightbox(e.target.src);
+});
+histList.addEventListener('click', (e) => {
+  if (e.target.tagName === 'IMG') openLightbox(e.target.src);
+});
+
+async function tickPreview() {
+  try {
+    const r = await fetch('/api/frame.jpg?t=' + Date.now());
+    if (r.ok) {
+      const blob = await r.blob();
+      const url = URL.createObjectURL(blob);
+      const old = previewImg.src;
+      previewImg.src = url;
+      previewImg.style.display = 'block';
+      previewPlaceholder.style.display = 'none';
+      if (old && old.startsWith('blob:')) URL.revokeObjectURL(old);
+    }
+  } catch (e) {}
+  setTimeout(tickPreview, 300);
+}
+tickPreview();
+
+function renderResult(entry) {
+  if (!entry) {
+    resultEmpty.style.display = 'block';
+    resultBody.style.display = 'none';
+    resultCard.className = 'result-card';
+    return;
+  }
+  resultEmpty.style.display = 'none';
+  resultBody.style.display = 'block';
+  const label = entry.label || 'none';
+  resultTime.textContent = new Date(entry.ts * 1000).toLocaleTimeString('ko-KR');
+  resultBadge.textContent = LABEL_TEXT[label] || label;
+  resultBadge.className = 'result-badge ' + label;
+  resultCard.className = 'result-card ' + (label === 'in-pair' ? 'in' : label === 'out-pair' ? 'out' : '');
+
+  if (entry.pair_filename) {
+    resultPairImg.src = `/sessions/${entry.pair_filename}?t=${Date.now()}`;
+    resultPairWrap.style.display = 'block';
+  } else {
+    resultPairWrap.style.display = 'none';
+  }
+
+  if (entry.scores) {
+    const order = ['in-pair', 'out-pair', 'hand_only-pair'];
+    scoreRows.innerHTML = order.map(k => {
+      const pct = Math.round((entry.scores[k] || 0) * 100);
+      return `<div class="score-row">
+        <span class="k">${LABEL_TEXT[k]}</span>
+        <div class="score-track"><div class="score-fill ${k}" style="width:${pct}%"></div></div>
+        <span class="score-pct">${pct}%</span>
+      </div>`;
+    }).join('');
+  } else {
+    scoreRows.innerHTML = '';
+  }
+
+  if (entry.reason) {
+    resultReason.textContent = entry.reason;
+    resultReason.style.display = 'block';
+  } else {
+    resultReason.style.display = 'none';
+  }
+}
+
+async function refreshStatus() {
+  try {
+    const r = await fetch('/api/status');
+    const s = await r.json();
+    statusPill.textContent = s.connected ? '연결됨' : '연결 안됨';
+    statusPill.className = 'pill ' + (s.connected ? 'ok' : 'bad');
+
+    const open = s.door_open === true;
+    const noSwitch = s.door_open === null || s.door_open === undefined;
+    doorState.textContent = noSwitch ? '리드스위치 없음' : (open ? '🚪 문 열림' : '🚪 문 닫힘');
+    doorState.className = 'state-value ' + (open ? 'open' : 'idle');
+    doorGlow.classList.toggle('on', open);
+
+    if (open && s.session_elapsed != null) {
+      sessionTimer.textContent = s.session_elapsed.toFixed(1) + 's';
+      sessionTimer.classList.add('show');
+      sessionTimer.classList.toggle('over', s.session_elapsed > DOOR_BUDGET_S);
+    } else {
+      sessionTimer.classList.remove('show');
+    }
+    handBadge.classList.toggle('show', open && s.hand_seen);
+
+    eiWarnBanner.classList.toggle('show', !s.ei_ready);
+
+    if (s.lan_url && !s.lan_url.includes(location.hostname)) {
+      lanUrl.textContent = s.lan_url;
+      lanBanner.classList.add('show');
+    } else {
+      lanBanner.classList.remove('show');
+    }
+
+    if (s.latest_result && s.latest_result.ts !== lastResultTs) {
+      lastResultTs = s.latest_result.ts;
+      renderResult(s.latest_result);
+      loadHistory();
+    }
+  } catch (e) {
+    statusPill.textContent = '서비스 연결 안됨';
+    statusPill.className = 'pill bad';
+  }
+}
+
+async function loadHistory() {
+  try {
+    const r = await fetch('/api/history?limit=30');
+    const items = await r.json();
+    histEmpty.style.display = items.length ? 'none' : 'block';
+    histList.innerHTML = items.map(ev => {
+      const label = ev.label || 'none';
+      const time = new Date(ev.ts * 1000).toLocaleString('ko-KR', { hour12: false });
+      const thumb = ev.pair_filename ? `/sessions/${ev.pair_filename}` : null;
+      const conf = ev.confidence != null ? `신뢰도 ${(ev.confidence * 100).toFixed(0)}%` : (ev.reason || '-');
+      return `<div class="hist-card">
+        ${thumb ? `<img src="${thumb}" loading="lazy" />` : '<div style="width:48px;height:48px;border-radius:8px;background:var(--surface-alt);flex:none"></div>'}
+        <div class="hist-body">
+          <div class="hist-top">
+            <span class="hist-badge ${label}">${LABEL_TEXT[label] || label}</span>
+            <span class="hist-time">${time}</span>
+          </div>
+          <div class="hist-sub">${conf}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch (e) {}
+}
+
+refreshStatus();
+loadHistory();
+setInterval(refreshStatus, 300);
+</script>
+</body>
+</html>

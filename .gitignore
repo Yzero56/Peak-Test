@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+data/raw_captures/
+data/raw_captures_sidebyside_archive/
+data/raw_captures_excluded_lowsignal/
+data/exports/
+data/inout_sessions/
+build/
+*.bin
+*.eim*
+.DS_Store
+tmp_preview/
+weights/
+*.pt

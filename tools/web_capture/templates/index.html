@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>냉장고 IN/OUT 데이터 수집</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --surface-alt: #f2f4f6;
+    --border: #e5e8eb;
+    --text: #191f28;
+    --text-secondary: #4e5968;
+    --text-tertiary: #8b95a1;
+    --accent: #3182f6;
+    --accent-strong: #1b64da;
+    --accent-soft: #eaf2ff;
+    --success: #1ec191;
+    --success-soft: #e3f9f1;
+    --danger: #f04452;
+    --danger-soft: #fdeceb;
+    --warn: #d97a06;
+    --shadow: 0 1px 2px rgba(25,31,40,.04), 0 8px 24px rgba(25,31,40,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121317;
+      --surface: #1c1e22;
+      --surface-alt: #24262b;
+      --border: #2e3136;
+      --text: #f2f4f6;
+      --text-secondary: #b0b8c1;
+      --text-tertiary: #7c8591;
+      --accent: #5b9bfd;
+      --accent-strong: #86b6ff;
+      --accent-soft: rgba(91,155,253,.16);
+      --success: #35d9a8;
+      --success-soft: rgba(53,217,168,.14);
+      --danger: #ff6b76;
+      --danger-soft: rgba(255,107,118,.14);
+      --warn: #f0a93e;
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 480px; margin: 0 auto; padding: 0 16px 48px; }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 0 -16px 20px;
+  }
+  .topbar h1 { font-size: 16px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; border-radius: 999px;
+  }
+  .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .pill.ok { background: var(--success-soft); color: var(--success); }
+  .pill.bad { background: var(--danger-soft); color: var(--danger); }
+
+  .lan-banner {
+    display: none;
+    align-items: center; gap: 10px;
+    background: var(--accent-soft); color: var(--accent-strong);
+    border-radius: 14px; padding: 12px 14px;
+    margin-bottom: 14px;
+    font-size: 13px; font-weight: 600;
+  }
+  .lan-banner.show { display: flex; }
+  .lan-banner .lan-icon { font-size: 18px; flex: none; }
+  .lan-banner .lan-text { flex: 1; min-width: 0; }
+  .lan-banner .lan-url {
+    display: block; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13.5px; font-weight: 700; color: var(--text);
+    margin-top: 2px; word-break: break-all;
+  }
+  .lan-banner button {
+    flex: none; border: none; background: var(--surface); color: var(--accent-strong);
+    font-size: 12px; font-weight: 700; padding: 7px 10px; border-radius: 9px;
+    cursor: pointer; font-family: inherit;
+  }
+
+  .preview-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; box-shadow: var(--shadow);
+    padding: 12px; margin-bottom: 14px;
+  }
+  .preview-frame {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--surface-alt);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .preview-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .preview-frame .placeholder { color: var(--text-tertiary); font-size: 13.5px; text-align: center; padding: 0 24px; }
+  .live-dot {
+    position: absolute; top: 10px; left: 10px;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(0,0,0,.55); color: #fff;
+    font-size: 11.5px; font-weight: 700;
+    padding: 5px 9px; border-radius: 999px;
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .live-dot.on { opacity: 1; }
+  .live-dot .dot { width: 6px; height: 6px; border-radius: 50%; background: #ff4d4f; animation: blink 1.1s infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+
+  .preview-actions { display: flex; gap: 8px; margin-top: 10px; }
+  .btn {
+    flex: 1;
+    border: none; border-radius: 12px;
+    font-size: 14px; font-weight: 700;
+    padding: 11px 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform .06s ease, opacity .15s ease, background .15s ease;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn-ghost { background: var(--surface-alt); color: var(--text); }
+  .btn-ghost:hover { background: var(--border); }
+  .btn-ghost.active { background: var(--accent-soft); color: var(--accent-strong); }
+
+  .btn-shutter {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 16px;
+    font-size: 16px; font-weight: 800;
+    padding: 17px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 35%, transparent);
+    transition: transform .06s ease, background .15s ease;
+    font-family: inherit;
+  }
+  .btn-shutter:hover { background: var(--accent-strong); }
+  .btn-shutter:active { transform: scale(.985); }
+  .btn-shutter:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; }
+  .btn-shutter .ring {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2.5px solid #fff;
+  }
+  .btn-record {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%;
+    background: var(--danger); color: #fff;
+    border: none; border-radius: 16px;
+    font-size: 16px; font-weight: 800;
+    padding: 17px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--danger) 35%, transparent);
+    transition: transform .06s ease, background .15s ease;
+    font-family: inherit;
+  }
+  .btn-record:active { transform: scale(.985); }
+  .btn-record:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; }
+  .btn-record .rec-dot {
+    width: 14px; height: 14px; border-radius: 50%; background: #fff; flex: none;
+  }
+  .btn-record.recording .rec-dot { border-radius: 4px; animation: blink 1s infinite; }
+  .record-meta {
+    display: none; align-items: center; justify-content: space-between;
+    font-size: 12.5px; color: var(--text-secondary); font-variant-numeric: tabular-nums;
+    margin: -2px 0 14px; padding: 0 2px;
+  }
+  .record-meta.show { display: flex; }
+  .record-meta b { color: var(--danger); font-weight: 800; }
+  .shutter-secondary-row { display: flex; justify-content: center; margin-bottom: 14px; }
+  .btn-text {
+    border: none; background: transparent; color: var(--text-tertiary);
+    font-size: 12.5px; font-weight: 700; padding: 4px 8px; cursor: pointer; font-family: inherit;
+  }
+  .btn-text:hover { color: var(--text-secondary); }
+  .rec-glow {
+    position: absolute; inset: 0; border-radius: 14px;
+    border: 4px solid var(--danger);
+    opacity: 0; transition: opacity .15s ease;
+    pointer-events: none;
+  }
+  .rec-glow.on { opacity: 1; }
+  .preset-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .preset-chip {
+    font-size: 12.5px; font-weight: 700;
+    padding: 7px 12px; border-radius: 999px;
+    background: var(--surface-alt); color: var(--text);
+    border: 1.5px solid transparent; cursor: pointer;
+    font-family: inherit;
+  }
+  .preset-chip.selected { background: var(--accent-soft); color: var(--accent-strong); border-color: var(--accent); }
+
+  .ba-card {
+    background: var(--surface); border: 1.5px solid var(--accent);
+    border-radius: 16px; box-shadow: var(--shadow);
+    padding: 14px 16px; margin-bottom: 14px;
+  }
+  .ba-card .ba-title { font-size: 13.5px; font-weight: 800; margin: 0 0 4px; }
+  .ba-card .ba-sub { font-size: 11.5px; color: var(--text-tertiary); margin: 0 0 12px; line-height: 1.5; }
+  .ba-shots { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 6px; align-items: center; margin-bottom: 12px; }
+  .ba-shot { aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--surface-alt); position: relative; }
+  .ba-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ba-shot.picking { cursor: crosshair; outline: 2px dashed #ffd23f; outline-offset: -2px; }
+  /* 손 위치 수동 지정 중엔 손톱만한 1/3 칸이 아니라 실제 카메라 화면(4:3) 크기로 크게 보여준다 —
+     클릭 좌표 정확도를 위해서도 필요함(작은 화면에서는 정밀 클릭이 어려움). */
+  .ba-shots:has(.ba-shot.picking) { grid-template-columns: 1fr; }
+  .ba-shots:has(.ba-shot.picking) .ba-arrow,
+  .ba-shots:has(.ba-shot.picking) #baBeforeShot,
+  .ba-shots:has(.ba-shot.picking) #baAfterShot { display: none; }
+  .ba-shot.picking { aspect-ratio: 4 / 3; }
+  .ba-shot .ba-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text-tertiary); text-align: center; padding: 0 6px; }
+  .ba-shot .ba-shot-label {
+    position: absolute; left: 3px; top: 3px; font-size: 9px; font-weight: 800;
+    background: rgba(0,0,0,.5); color: #fff; padding: 1px 5px; border-radius: 4px;
+  }
+  .ba-arrow { font-size: 16px; color: var(--text-tertiary); font-weight: 700; }
+  .ba-actions { display: flex; gap: 8px; }
+  .ba-actions button {
+    flex: 1; border: none; border-radius: 12px; font-size: 12.5px; font-weight: 700;
+    padding: 12px 6px; cursor: pointer; font-family: inherit;
+    transition: transform .06s ease, opacity .15s ease;
+  }
+  .ba-actions button:active { transform: scale(.97); }
+  .ba-actions button:disabled { opacity: .45; cursor: not-allowed; }
+  #baRefBtn { background: #ffd23f; color: #10230a; }
+  #baBeforeBtn { background: var(--surface-alt); color: var(--text); }
+  #baAfterBtn { background: var(--accent); color: #fff; }
+  .ba-result { margin-top: 10px; display: none; }
+  .ba-result.show { display: block; }
+  .ba-result img { width: 100%; border-radius: 10px; display: block; background: var(--surface-alt); }
+  .ba-result .cap { font-size: 10.5px; color: var(--success); font-weight: 700; margin-top: 5px; }
+  .ba-result .cap.warn { color: var(--danger); }
+  #baHandStatus.ok { color: var(--success); }
+  #baHandStatus.warn { color: var(--danger); }
+
+  .field-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: var(--shadow);
+    padding: 14px 16px; margin-bottom: 14px;
+  }
+  .field-label {
+    font-size: 12px; font-weight: 700; color: var(--text-tertiary);
+    text-transform: uppercase; letter-spacing: .05em; margin: 0 0 8px;
+  }
+  .label-input {
+    width: 100%; font-size: 15px; font-weight: 600;
+    padding: 11px 12px; border-radius: 10px;
+    border: 1.5px solid var(--border); background: var(--surface-alt);
+    color: var(--text); font-family: inherit;
+  }
+  .label-input:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip {
+    font-size: 12.5px; font-weight: 600;
+    padding: 6px 11px; border-radius: 999px;
+    background: var(--surface-alt); color: var(--text-secondary);
+    border: 1px solid transparent; cursor: pointer;
+    font-family: inherit;
+  }
+  .chip.selected { background: var(--accent-soft); color: var(--accent-strong); border-color: var(--accent); }
+  .count-note { margin-top: 10px; font-size: 13px; color: var(--text-secondary); }
+  .count-note b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+  .segmented {
+    display: flex; gap: 4px;
+    background: var(--surface-alt);
+    border-radius: 12px;
+    padding: 4px;
+  }
+  .segmented button {
+    flex: 1;
+    border: none; background: transparent;
+    border-radius: 9px;
+    padding: 9px 6px;
+    font-size: 13px; font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: inherit;
+    display: flex; flex-direction: column; align-items: center; gap: 1px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .segmented button small { font-size: 10.5px; font-weight: 600; opacity: .75; }
+  .segmented button.selected {
+    background: var(--surface); color: var(--accent-strong);
+    box-shadow: 0 1px 3px rgba(25,31,40,.12);
+  }
+
+  .gallery-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
+  .gallery-head h2 { font-size: 14px; font-weight: 800; margin: 0; }
+  .gallery-head span { font-size: 12.5px; color: var(--text-tertiary); }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  }
+  .gallery-grid a {
+    display: block; aspect-ratio: 1; border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--border); position: relative;
+  }
+  .gallery-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-grid .tag {
+    position: absolute; left: 4px; bottom: 4px;
+    background: rgba(0,0,0,.55); color: #fff;
+    font-size: 9.5px; font-weight: 700;
+    padding: 2px 5px; border-radius: 6px;
+    max-width: calc(100% - 8px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .empty-note { font-size: 13px; color: var(--text-tertiary); padding: 20px 0; text-align: center; }
+
+  .export-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: var(--shadow);
+    padding: 14px 16px; margin-top: 16px;
+  }
+  .export-card .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .export-card p { margin: 0; font-size: 13px; color: var(--text-secondary); }
+  .export-card button {
+    flex: none; border: none; background: var(--surface-alt); color: var(--text);
+    font-size: 13px; font-weight: 700; padding: 10px 14px; border-radius: 10px;
+    cursor: pointer; font-family: inherit;
+  }
+  .export-card button:disabled { opacity: .5; cursor: not-allowed; }
+  .export-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .export-list li {
+    display: flex; justify-content: space-between; font-size: 12.5px;
+    color: var(--text-secondary); background: var(--surface-alt);
+    border-radius: 8px; padding: 7px 10px;
+  }
+  .export-list li b { color: var(--text); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 12px);
+    background: var(--text); color: var(--bg);
+    font-size: 13.5px; font-weight: 600;
+    padding: 12px 18px; border-radius: 12px;
+    box-shadow: var(--shadow);
+    opacity: 0; pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
+    max-width: 90vw; text-align: center;
+    z-index: 50;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .toast.err { background: var(--danger); color: #fff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  /* ---- 개발자 모드: 촬영 각도/속도를 직접 눈으로 확인할 수 있게 하는 요소들 ---- */
+  .grid-overlay {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .15s ease;
+    background-image:
+      linear-gradient(color-mix(in srgb, #fff 70%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, #fff 70%, transparent) 1px, transparent 1px);
+    background-size: 33.333% 33.333%;
+    mix-blend-mode: difference;
+  }
+  .grid-overlay.on { opacity: 1; }
+  .latency-badge {
+    position: absolute; bottom: 10px; right: 10px;
+    background: rgba(0,0,0,.55); color: #fff;
+    font-size: 10.5px; font-weight: 700; font-variant-numeric: tabular-nums;
+    padding: 4px 8px; border-radius: 999px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .latency-badge.show { opacity: 1; }
+  .latency-badge.slow { background: color-mix(in srgb, var(--danger) 80%, transparent); }
+
+  .crop-box {
+    position: absolute; border: 2px dashed #ffd23f;
+    background: color-mix(in srgb, #ffd23f 12%, transparent);
+    display: none; pointer-events: none; border-radius: 4px;
+  }
+  .crop-box.show { display: block; }
+  .crop-box::before {
+    content: "크롭 영역"; position: absolute; left: 2px; top: -18px;
+    background: #ffd23f; color: #10230a; font-size: 10px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px; white-space: nowrap;
+  }
+  .crop-pick-dot {
+    position: absolute; width: 10px; height: 10px; border-radius: 50%;
+    background: #ffd23f; border: 2px solid #10230a;
+    transform: translate(-50%, -50%); pointer-events: none;
+  }
+  .preview-frame.picking { cursor: crosshair; }
+  .crop-hint {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,.65); color: #ffd23f;
+    font-size: 11.5px; font-weight: 700; padding: 5px 10px; border-radius: 999px;
+    display: none; white-space: nowrap;
+  }
+  .crop-hint.show { display: block; }
+
+  .dev-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: var(--shadow);
+    padding: 14px 16px; margin-bottom: 14px;
+  }
+  .dev-card .dev-label {
+    font-size: 11px; font-weight: 700; color: var(--text-tertiary);
+    text-transform: uppercase; letter-spacing: .05em; margin: 0 0 10px;
+  }
+  .dev-rows { display: flex; flex-direction: column; gap: 7px; }
+  .dev-row { display: flex; justify-content: space-between; font-size: 12.5px; }
+  .dev-row .k { color: var(--text-secondary); }
+  .dev-row .v { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text); }
+  .dev-row .v.ok { color: var(--success); }
+  .dev-row .v.warn { color: var(--warn); }
+  .dev-row .v.bad { color: var(--danger); }
+  .dev-row .v.muted { color: var(--text-tertiary); font-weight: 600; }
+
+  .result-card {
+    background: var(--surface); border: 1.5px solid var(--accent);
+    border-radius: 16px; box-shadow: var(--shadow);
+    padding: 14px 16px; margin-bottom: 14px; display: none;
+  }
+  .result-card.show { display: block; }
+  .result-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+  .result-head h3 { font-size: 13.5px; font-weight: 800; margin: 0; }
+  .result-head span { font-size: 11.5px; color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
+  .result-warn {
+    font-size: 12px; font-weight: 700; color: var(--danger);
+    background: var(--danger-soft); border-radius: 8px; padding: 6px 9px; margin: 8px 0;
+    display: none;
+  }
+  .result-warn.show { display: block; }
+  .result-pair { margin: 10px 0; }
+  .result-pair img { width: 100%; border-radius: 10px; display: block; background: var(--surface-alt); }
+  .result-pair .cap { font-size: 10.5px; color: var(--text-tertiary); margin-top: 4px; font-weight: 700; }
+  .filmstrip { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-top: 8px; }
+  .filmstrip .fs-item { flex: none; text-align: center; }
+  .filmstrip img {
+    width: 56px; height: 56px; border-radius: 8px; object-fit: cover;
+    background: var(--surface-alt); display: block; border: 2px solid transparent;
+  }
+  .filmstrip .fs-t { font-size: 9px; color: var(--text-tertiary); margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .filmstrip .fs-t.slow { color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <h1>냉장고 IN/OUT 데이터 수집</h1>
+      <span class="pill bad" id="statusPill">확인 중</span>
+    </div>
+    <p style="margin:-10px 0 16px; font-size:12.5px; color:var(--text-tertiary);">
+      라벨 고르고 녹화 시작 → 동작(넣기/빼기 등) 하고 → 녹화 정지. 동작 하나당 알아서 여러 장 찍혀요.
+    </p>
+
+    <div class="lan-banner" id="lanBanner">
+      <span class="lan-icon">📱</span>
+      <div class="lan-text">
+        폰에서 같은 와이파이로 접속
+        <span class="lan-url" id="lanUrl"></span>
+      </div>
+      <button id="lanCopyBtn">복사</button>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-frame" id="previewFrame">
+        <div class="placeholder" id="previewPlaceholder">미리보기를 시작하면<br />여기에 실시간 화면이 보여요</div>
+        <img id="previewImg" style="display:none" alt="카메라 미리보기" />
+        <div class="live-dot" id="liveDot"><span class="dot"></span>LIVE</div>
+        <div class="rec-glow" id="recGlow"></div>
+        <div class="grid-overlay" id="gridOverlay"></div>
+        <div class="latency-badge" id="latencyBadge">-</div>
+        <div class="crop-box" id="cropBox"></div>
+        <div class="crop-hint" id="cropHint">선반 왼쪽 위 클릭</div>
+      </div>
+      <div class="preview-actions">
+        <button class="btn btn-ghost" id="toggleLiveBtn">미리보기 시작</button>
+        <button class="btn btn-ghost" id="toggleGridBtn">격자 (각도 맞추기)</button>
+      </div>
+      <div class="preview-actions" style="margin-top:8px">
+        <button class="btn btn-ghost" id="cropPickBtn">📐 크롭 영역 지정</button>
+        <button class="btn btn-ghost" id="cropClearBtn" style="display:none">크롭 해제</button>
+      </div>
+    </div>
+
+    <div class="dev-card">
+      <p class="dev-label">개발자 모드 — 지금 상태</p>
+      <div class="dev-rows">
+        <div class="dev-row"><span class="k">미리보기 왕복 지연</span><span class="v muted" id="devPreviewMs">-</span></div>
+        <div class="dev-row"><span class="k">녹화 중 마지막 프레임 지연</span><span class="v muted" id="devCaptureMs">-</span></div>
+        <div class="dev-row"><span class="k">평균 프레임 간격 / fps</span><span class="v muted" id="devInterval">-</span></div>
+        <div class="dev-row"><span class="k">가장 느린 프레임 간격</span><span class="v muted" id="devMaxGap">-</span></div>
+      </div>
+    </div>
+
+    <div class="result-card" id="resultCard">
+      <div class="result-head">
+        <h3 id="resultTitle">방금 찍은 클립</h3>
+        <span id="resultMetaText">-</span>
+      </div>
+      <div class="result-warn" id="resultWarn"></div>
+      <div class="result-pair" id="resultPairWrap" style="display:none">
+        <img id="resultPairImg" alt="비교 합성사진" />
+        <div class="cap" id="resultPairCap">-</div>
+      </div>
+      <div class="filmstrip" id="resultFilmstrip"></div>
+    </div>
+
+    <div class="field-card">
+      <p class="field-label">라벨</p>
+      <div class="preset-row" id="presetRow">
+        <button class="preset-chip" data-label="in">넣기 (IN)</button>
+        <button class="preset-chip" data-label="out">빼기 (OUT)</button>
+        <button class="preset-chip" data-label="hand_only">손만 (물체 없음)</button>
+        <button class="preset-chip" data-label="holding">용기 들고 있는 정지컷</button>
+      </div>
+      <input class="label-input" id="labelInput" placeholder="예: in, out, hand_only" />
+      <div class="chip-row" id="chipRow"></div>
+      <p class="count-note">이 라벨로 지금까지 <b id="labelCount">0</b>장 찍었어요</p>
+    </div>
+
+    <button class="btn-record" id="recordBtn">
+      <span class="rec-dot"></span>
+      녹화 시작
+    </button>
+    <div class="record-meta" id="recordMeta">
+      <span id="recordStatusText">-</span>
+      <span><b id="recordCount">0</b>장 찍힘</span>
+    </div>
+    <div class="shutter-secondary-row">
+      <button class="btn-text" id="shutterBtn">한 장만 촬영</button>
+    </div>
+
+    <div class="ba-card">
+      <p class="ba-title">📐 선반 Before/After 촬영 (in/out 정확도 개선용)</p>
+      <p class="ba-sub">📍에서만 손을 보이게 뻗어서 위치를 잡고, ①②는 <b>손을 뺀 채로</b> 찍어요 — 학습 사진엔 손이 안 들어가고 "그 자리에 물건이 있었는지"만 순수하게 비교됩니다. 지금 라벨: <b id="baLabelName">in</b></p>
+      <div class="ba-shots">
+        <div class="ba-shot" id="baRefShot"><div class="ba-empty">위치 없음</div></div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-shot" id="baBeforeShot"><div class="ba-empty">Before 없음</div></div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-shot" id="baAfterShot"><div class="ba-empty">After 없음</div></div>
+      </div>
+      <div id="baHandStatus" style="font-size:10.5px; font-weight:700; margin-bottom:8px; min-height:13px;"></div>
+      <div class="shutter-secondary-row" id="baManualRow" style="display:none; margin-bottom:8px;">
+        <button class="btn-text" id="baManualBtn" style="color:var(--danger)">📍 손 위치 직접 찍기 (자동 인식 실패함)</button>
+      </div>
+      <div class="ba-actions">
+        <button id="baRefBtn">📍 위치 잡기</button>
+        <button id="baBeforeBtn" disabled>① Before</button>
+        <button id="baAfterBtn" disabled>② After</button>
+      </div>
+      <div class="ba-result" id="baResult">
+        <img id="baResultImg" alt="before/after 합성사진" />
+        <div class="cap">✓ "<span id="baResultLabel"></span>-pair"로 저장됨</div>
+        <div class="cap" id="baDiffPct" style="margin-top:2px"></div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <p class="field-label">화질 <span style="font-weight:600; text-transform:none; letter-spacing:normal;">— 녹화는 빠름 추천 (연속 촬영이라 느리면 프레임이 덜 찍혀요)</span></p>
+      <div class="segmented" id="qualitySeg">
+        <button data-q="fast">빠름<small>640×480</small></button>
+        <button data-q="standard">표준<small>800×600</small></button>
+        <button data-q="high">고화질<small>1600×1200</small></button>
+      </div>
+    </div>
+
+    <div class="gallery-head">
+      <h2>최근 촬영</h2>
+      <span id="totalCount"></span>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <p class="empty-note" id="emptyNote" style="display:none">아직 찍은 사진이 없어요</p>
+
+    <div class="export-card">
+      <div class="row">
+        <p>라벨별로 묶어서 컴퓨터에 ZIP으로 저장<br /><span style="font-size:11.5px">(예: egg.zip, soymilk.zip — data/exports/)</span></p>
+        <button id="exportBtn">ZIP 내보내기</button>
+      </div>
+      <ul class="export-list" id="exportList" style="display:none"></ul>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+const previewImg = document.getElementById('previewImg');
+const previewPlaceholder = document.getElementById('previewPlaceholder');
+const liveDot = document.getElementById('liveDot');
+const toggleLiveBtn = document.getElementById('toggleLiveBtn');
+const shutterBtn = document.getElementById('shutterBtn');
+const labelInput = document.getElementById('labelInput');
+const chipRow = document.getElementById('chipRow');
+const labelCountEl = document.getElementById('labelCount');
+const galleryGrid = document.getElementById('galleryGrid');
+const emptyNote = document.getElementById('emptyNote');
+const totalCountEl = document.getElementById('totalCount');
+const statusPill = document.getElementById('statusPill');
+const toast = document.getElementById('toast');
+const lanBanner = document.getElementById('lanBanner');
+const lanUrl = document.getElementById('lanUrl');
+const lanCopyBtn = document.getElementById('lanCopyBtn');
+const exportBtn = document.getElementById('exportBtn');
+const exportList = document.getElementById('exportList');
+const recordBtn = document.getElementById('recordBtn');
+const recordMeta = document.getElementById('recordMeta');
+const recordStatusText = document.getElementById('recordStatusText');
+const recordCountEl = document.getElementById('recordCount');
+const recGlow = document.getElementById('recGlow');
+const presetRow = document.getElementById('presetRow');
+const gridOverlay = document.getElementById('gridOverlay');
+const previewFrame = document.getElementById('previewFrame');
+const cropBox = document.getElementById('cropBox');
+const cropHint = document.getElementById('cropHint');
+const cropPickBtn = document.getElementById('cropPickBtn');
+const cropClearBtn = document.getElementById('cropClearBtn');
+const toggleGridBtn = document.getElementById('toggleGridBtn');
+const latencyBadge = document.getElementById('latencyBadge');
+const devPreviewMs = document.getElementById('devPreviewMs');
+const devCaptureMs = document.getElementById('devCaptureMs');
+const devInterval = document.getElementById('devInterval');
+const devMaxGap = document.getElementById('devMaxGap');
+const resultCard = document.getElementById('resultCard');
+const resultTitle = document.getElementById('resultTitle');
+const resultMetaText = document.getElementById('resultMetaText');
+const resultWarn = document.getElementById('resultWarn');
+const resultPairWrap = document.getElementById('resultPairWrap');
+const resultPairImg = document.getElementById('resultPairImg');
+const resultPairCap = document.getElementById('resultPairCap');
+const resultFilmstrip = document.getElementById('resultFilmstrip');
+const baLabelName = document.getElementById('baLabelName');
+const baRefShot = document.getElementById('baRefShot');
+const baBeforeShot = document.getElementById('baBeforeShot');
+const baAfterShot = document.getElementById('baAfterShot');
+const baRefBtn = document.getElementById('baRefBtn');
+const baBeforeBtn = document.getElementById('baBeforeBtn');
+const baAfterBtn = document.getElementById('baAfterBtn');
+const baResult = document.getElementById('baResult');
+const baResultImg = document.getElementById('baResultImg');
+const baResultLabel = document.getElementById('baResultLabel');
+const baHandStatus = document.getElementById('baHandStatus');
+const baManualRow = document.getElementById('baManualRow');
+const baManualBtn = document.getElementById('baManualBtn');
+const baDiffPct = document.getElementById('baDiffPct');
+
+let liveOn = false;
+let liveTimer = null;
+let recording = false;
+let recordPollTimer = null;
+let recordLatestSeq = -1;
+let currentLabel = localStorage.getItem('fov.lastLabel') || 'in';
+let currentQuality = localStorage.getItem('fov.lastQuality') || 'fast';
+labelInput.value = currentLabel;
+baLabelName.textContent = currentLabel;
+
+const qualitySeg = document.getElementById('qualitySeg');
+function renderQualitySeg() {
+  qualitySeg.querySelectorAll('button').forEach(btn => {
+    btn.classList.toggle('selected', btn.dataset.q === currentQuality);
+  });
+}
+qualitySeg.querySelectorAll('button').forEach(btn => {
+  btn.onclick = () => {
+    currentQuality = btn.dataset.q;
+    localStorage.setItem('fov.lastQuality', currentQuality);
+    renderQualitySeg();
+  };
+});
+renderQualitySeg();
+
+function showToast(msg, isErr) {
+  toast.textContent = msg;
+  toast.className = 'toast show' + (isErr ? ' err' : '');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => { toast.className = 'toast'; }, 2200);
+}
+
+async function refreshStatus() {
+  try {
+    const r = await fetch('/api/status');
+    const s = await r.json();
+    statusPill.textContent = s.connected ? '연결됨' : '연결 안됨';
+    statusPill.className = 'pill ' + (s.connected ? 'ok' : 'bad');
+    shutterBtn.disabled = !s.connected;
+    toggleLiveBtn.disabled = !s.connected;
+    if (!recording) recordBtn.disabled = !s.connected;
+    baBeforeBtn.disabled = !s.connected;
+    if (!s.connected) baAfterBtn.disabled = true;
+    totalCountEl.textContent = s.total_captures + '장 저장됨';
+    renderChips(s.labels || []);
+    updateLabelCount(s.labels || []);
+
+    if (s.lan_url && !s.lan_url.includes(location.hostname)) {
+      lanUrl.textContent = s.lan_url;
+      lanBanner.classList.add('show');
+    } else {
+      lanBanner.classList.remove('show');
+    }
+  } catch (e) {
+    statusPill.textContent = '서버 연결 안됨';
+    statusPill.className = 'pill bad';
+  }
+}
+
+let labelCounts = {};
+function renderChips(labels) {
+  chipRow.innerHTML = '';
+  labels.slice(0, 8).forEach(label => {
+    const chip = document.createElement('button');
+    chip.className = 'chip' + (label === currentLabel ? ' selected' : '');
+    chip.textContent = label;
+    chip.onclick = () => { currentLabel = label; labelInput.value = label; refreshStatus(); };
+    chipRow.appendChild(chip);
+  });
+}
+
+async function updateLabelCount() {
+  baLabelName.textContent = currentLabel;
+  try {
+    const r = await fetch('/api/gallery');
+    const items = await r.json();
+    const count = items.filter(it => it.label === currentLabel).length;
+    labelCountEl.textContent = count;
+  } catch (e) {}
+}
+
+async function loadGallery() {
+  const r = await fetch('/api/gallery');
+  const items = await r.json();
+  galleryGrid.innerHTML = '';
+  emptyNote.style.display = items.length ? 'none' : 'block';
+  items.forEach(it => {
+    const a = document.createElement('a');
+    a.href = it.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    const img = document.createElement('img');
+    img.src = it.url;
+    img.loading = 'lazy';
+    const tag = document.createElement('div');
+    tag.className = 'tag';
+    tag.textContent = it.label;
+    a.appendChild(img);
+    a.appendChild(tag);
+    galleryGrid.appendChild(a);
+  });
+}
+
+async function tickPreview() {
+  if (!liveOn) return;
+  // 녹화 중엔 같은 카메라를 두 갈래(미리보기 폴링 + 녹화 스레드)에서 동시에
+  // 쓰지 않게 미리보기 폴링을 잠깐 멈춘다 — 녹화 화면은 아래 tickRecordFrame이
+  // 대신 보여준다 (지금 찍히고 있는 실제 프레임이라 오히려 더 정확함).
+  if (recording) { liveTimer = setTimeout(tickPreview, 300); return; }
+  const t0 = performance.now();
+  try {
+    const r = await fetch('/api/preview', { method: 'POST' });
+    const ms = Math.round(performance.now() - t0);
+    if (r.ok) {
+      const blob = await r.blob();
+      const url = URL.createObjectURL(blob);
+      const old = previewImg.src;
+      previewImg.src = url;
+      previewImg.style.display = 'block';
+      previewPlaceholder.style.display = 'none';
+      if (old && old.startsWith('blob:')) URL.revokeObjectURL(old);
+      latencyBadge.textContent = ms + 'ms';
+      latencyBadge.classList.add('show');
+      latencyBadge.classList.toggle('slow', ms > 500);
+      devPreviewMs.textContent = ms + 'ms';
+      devPreviewMs.className = 'v ' + (ms > 500 ? 'bad' : ms > 250 ? 'warn' : 'ok');
+    }
+  } catch (e) {}
+  if (liveOn) liveTimer = setTimeout(tickPreview, 300);
+}
+
+async function tickRecordFrame(seq) {
+  if (seq === recordLatestSeq) return;
+  recordLatestSeq = seq;
+  try {
+    const r = await fetch('/api/record/latest.jpg?t=' + Date.now());
+    if (r.ok) {
+      const blob = await r.blob();
+      const url = URL.createObjectURL(blob);
+      const old = previewImg.src;
+      previewImg.src = url;
+      previewImg.style.display = 'block';
+      previewPlaceholder.style.display = 'none';
+      if (old && old.startsWith('blob:')) URL.revokeObjectURL(old);
+    }
+  } catch (e) {}
+}
+
+const SLOW_GAP_S = 0.5;   // 이보다 간격이 벌어지면 "느림"으로 표시 — 목표 0.12s의 4배
+const MIN_GOOD_FRAMES = 8; // 이보다 적으면 클립이 너무 짧아서 결정적 순간을 놓쳤을 가능성 경고
+
+function renderResult(data) {
+  const frames = data.frames || [];
+  resultTitle.textContent = `"${data.label}" 방금 찍은 클립`;
+  resultMetaText.textContent = `${data.count}장 · 평균 ${data.avg_interval_s ?? '-'}s(${data.fps ?? '-'}fps) · 최대 간격 ${data.max_gap_s ?? '-'}s`;
+
+  const warnings = [];
+  if (data.count < MIN_GOOD_FRAMES) warnings.push(`프레임이 ${data.count}장뿐이에요 — 동작 중간(손이 물체 잡는 순간)을 놓쳤을 수 있어요. 아래 필름스트립에서 직접 확인하세요.`);
+  if (data.max_gap_s && data.max_gap_s > SLOW_GAP_S) warnings.push(`프레임 사이가 최대 ${data.max_gap_s}s나 비었어요 — 그 사이에 중요한 순간이 있었을 수 있어요.`);
+  if (data.pair_mode === 'first_last') warnings.push(`⚠ 이 클립에서는 손을 한 번도 못 찾아서 첫/끝 프레임으로 대신 만들었어요 — 아래 사진이 둘 다 "손 없는" 장면일 가능성이 높습니다. 필름스트립을 확인하고 필요하면 다시 찍어주세요.`);
+  else if (data.pair_mode === 'none') warnings.push(`비교 사진을 못 만들었어요 — 프레임이 너무 적거나 저장에 실패했어요.`);
+  resultWarn.innerHTML = warnings.join('<br>');
+  resultWarn.classList.toggle('show', warnings.length > 0);
+
+  if (data.pair_url) {
+    resultPairImg.src = data.pair_url + '?t=' + Date.now();
+    resultPairWrap.style.display = 'block';
+    resultPairCap.textContent = data.pair_mode === 'hand'
+      ? '★ 손이 처음 보인 프레임 vs 마지막으로 보인 프레임의 변화량(diff) 이미지 — 빨강=생김, 파랑=없어짐 — in/out 학습은 이 사진으로'
+      : '첫 프레임 vs 마지막 프레임의 diff 이미지 (손을 못 찾아서 폴백됨 — 신뢰도 낮음)';
+  } else {
+    resultPairWrap.style.display = 'none';
+  }
+
+  resultFilmstrip.innerHTML = frames.map((f, i) => {
+    const gap = i > 0 ? (f.t - frames[i - 1].t) : 0;
+    const slow = gap > SLOW_GAP_S;
+    return `<div class="fs-item">
+      <img src="${f.url}" loading="lazy" title="capture ${f.capture_ms}ms" />
+      <div class="fs-t ${slow ? 'slow' : ''}">${f.t}s</div>
+    </div>`;
+  }).join('');
+
+  resultCard.classList.add('show');
+}
+
+async function pollRecordStatus() {
+  try {
+    const r = await fetch('/api/record/status');
+    const s = await r.json();
+    recording = s.active;
+    recordBtn.classList.toggle('recording', recording);
+    recGlow.classList.toggle('on', recording);
+    if (recording) {
+      recordBtn.lastChild.textContent = ` 정지 (${s.elapsed ?? 0}s)`;
+      recordMeta.classList.add('show');
+      recordStatusText.textContent = `"${s.label}" 녹화 중 · ${s.elapsed ?? 0}s / 12s`;
+      recordCountEl.textContent = s.count;
+      tickRecordFrame(s.seq);
+      if (s.last_capture_ms != null) {
+        devCaptureMs.textContent = s.last_capture_ms + 'ms';
+        devCaptureMs.className = 'v ' + (s.last_capture_ms > 800 ? 'bad' : s.last_capture_ms > 400 ? 'warn' : 'ok');
+      }
+      if (s.avg_interval_s != null) {
+        devInterval.textContent = `${s.avg_interval_s}s (${s.fps}fps)`;
+        devInterval.className = 'v ' + (s.avg_interval_s > SLOW_GAP_S ? 'warn' : 'ok');
+      }
+      if (s.max_gap_s != null) {
+        devMaxGap.textContent = s.max_gap_s + 's';
+        devMaxGap.className = 'v ' + (s.max_gap_s > SLOW_GAP_S ? 'bad' : 'ok');
+      }
+    } else {
+      const wasRecording = recordBtn.classList.contains('recording');
+      recordBtn.classList.remove('recording');
+      recGlow.classList.remove('on');
+      recordMeta.classList.remove('show');
+      recordBtn.lastChild.textContent = ' 녹화 시작';
+      if (recordPollTimer) { clearInterval(recordPollTimer); recordPollTimer = null; }
+      if (wasRecording) {
+        // 정지 버튼을 누른 게 아니라 서버 쪽 안전장치(RECORD_MAX_S)로 자동 종료된 경우
+        showToast('녹화 시간 초과로 자동 종료됨');
+        renderResult(s);
+        loadGallery();
+        refreshStatus();
+      }
+    }
+  } catch (e) {}
+}
+
+toggleLiveBtn.onclick = () => {
+  liveOn = !liveOn;
+  toggleLiveBtn.textContent = liveOn ? '미리보기 정지' : '미리보기 시작';
+  toggleLiveBtn.classList.toggle('active', liveOn);
+  liveDot.classList.toggle('on', liveOn);
+  if (liveOn) tickPreview();
+  else clearTimeout(liveTimer);
+};
+
+let gridOn = localStorage.getItem('fov.gridOn') === '1';
+function renderGridBtn() {
+  gridOverlay.classList.toggle('on', gridOn);
+  toggleGridBtn.classList.toggle('active', gridOn);
+}
+toggleGridBtn.onclick = () => {
+  gridOn = !gridOn;
+  localStorage.setItem('fov.gridOn', gridOn ? '1' : '0');
+  renderGridBtn();
+};
+renderGridBtn();
+
+// ---- 크롭 영역 지정 — Before/After 사진을 선반 하나만 클로즈업해서 학습시키기
+// 위한 기능. 카메라가 문틀에 고정돼 안 흔들리니, 한 번 지정한 좌표가 계속
+// 유효하다 — 서버가 이후 모든 Before/After 촬영에 이 영역을 자동 적용한다.
+let cropRegion = null;
+let picking = false;
+let pickFirst = null; // {x, y} 정규화 좌표(0~1)
+
+function renderCropBox() {
+  if (cropRegion) {
+    cropBox.style.left = (cropRegion.x0 * 100) + '%';
+    cropBox.style.top = (cropRegion.y0 * 100) + '%';
+    cropBox.style.width = ((cropRegion.x1 - cropRegion.x0) * 100) + '%';
+    cropBox.style.height = ((cropRegion.y1 - cropRegion.y0) * 100) + '%';
+    cropBox.classList.add('show');
+    cropClearBtn.style.display = 'block';
+  } else {
+    cropBox.classList.remove('show');
+    cropClearBtn.style.display = 'none';
+  }
+}
+
+async function loadCropRegion() {
+  try {
+    const r = await fetch('/api/crop-region');
+    const data = await r.json();
+    cropRegion = data.region;
+    renderCropBox();
+  } catch (e) {}
+}
+
+function clientToNorm(evt) {
+  const rect = previewFrame.getBoundingClientRect();
+  const x = (evt.clientX - rect.left) / rect.width;
+  const y = (evt.clientY - rect.top) / rect.height;
+  return { x: Math.min(1, Math.max(0, x)), y: Math.min(1, Math.max(0, y)) };
+}
+
+cropPickBtn.onclick = () => {
+  picking = true;
+  pickFirst = null;
+  previewFrame.classList.add('picking');
+  cropHint.textContent = '선반 왼쪽 위 클릭';
+  cropHint.classList.add('show');
+};
+
+cropClearBtn.onclick = async () => {
+  try {
+    await fetch('/api/crop-region', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ region: null }),
+    });
+    cropRegion = null;
+    renderCropBox();
+    showToast('크롭 해제됨 — 이제 전체 화면으로 찍혀요');
+  } catch (e) {}
+};
+
+previewFrame.addEventListener('click', async (evt) => {
+  if (!picking) return;
+  const pt = clientToNorm(evt);
+  if (!pickFirst) {
+    pickFirst = pt;
+    cropHint.textContent = '선반 오른쪽 아래 클릭';
+    return;
+  }
+  const region = {
+    x0: Math.min(pickFirst.x, pt.x), y0: Math.min(pickFirst.y, pt.y),
+    x1: Math.max(pickFirst.x, pt.x), y1: Math.max(pickFirst.y, pt.y),
+  };
+  picking = false;
+  pickFirst = null;
+  previewFrame.classList.remove('picking');
+  cropHint.classList.remove('show');
+  try {
+    const r = await fetch('/api/crop-region', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ region }),
+    });
+    const data = await r.json();
+    if (r.ok) {
+      cropRegion = data.region;
+      renderCropBox();
+      showToast('크롭 영역 저장됨 — 이제 Before/After가 이 영역만 찍어요');
+    } else {
+      showToast(data.error || '크롭 영역 저장 실패', true);
+    }
+  } catch (e) {
+    showToast('서버와 통신 실패', true);
+  }
+});
+
+loadCropRegion();
+
+function renderPresetRow() {
+  presetRow.querySelectorAll('.preset-chip').forEach(btn => {
+    btn.classList.toggle('selected', btn.dataset.label === currentLabel);
+  });
+}
+presetRow.querySelectorAll('.preset-chip').forEach(btn => {
+  btn.onclick = () => {
+    currentLabel = btn.dataset.label;
+    labelInput.value = currentLabel;
+    localStorage.setItem('fov.lastLabel', currentLabel);
+    renderPresetRow();
+    updateLabelCount();
+  };
+});
+renderPresetRow();
+
+labelInput.addEventListener('input', () => {
+  currentLabel = labelInput.value.trim() || 'untitled';
+  localStorage.setItem('fov.lastLabel', currentLabel);
+  renderPresetRow();
+  updateLabelCount();
+});
+
+shutterBtn.onclick = async () => {
+  shutterBtn.disabled = true;
+  const wasLive = liveOn;
+  if (wasLive) { liveOn = false; clearTimeout(liveTimer); }
+  try {
+    const r = await fetch('/api/capture', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ label: currentLabel, quality: currentQuality }),
+    });
+    const data = await r.json();
+    if (r.ok) {
+      const kb = Math.round(data.bytes / 1024);
+      showToast(`저장됨 · ${data.label} #${data.count} (${kb}KB)`);
+      loadGallery();
+      refreshStatus();
+    } else {
+      showToast(data.error || '촬영 실패', true);
+    }
+  } catch (e) {
+    showToast('서버와 통신 실패', true);
+  } finally {
+    shutterBtn.disabled = false;
+    if (wasLive) { liveOn = true; tickPreview(); }
+  }
+};
+
+// ---- 3단계 흐름: 📍 위치 잡기(손 보이게) → ① Before(손 빼고) → ② After(손 빼고) ----
+baRefBtn.onclick = async () => {
+  baRefBtn.disabled = true;
+  const wasLive = liveOn;
+  if (wasLive) { liveOn = false; clearTimeout(liveTimer); }
+  try {
+    const r = await fetch('/api/beforeafter/ref', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ label: currentLabel, quality: currentQuality }),
+    });
+    const data = await r.json();
+    if (r.ok) {
+      baRefShot.innerHTML = `<img src="/api/beforeafter/ref.jpg?t=${Date.now()}" />`;
+      baBeforeShot.innerHTML = `<div class="ba-empty">Before 없음</div>`;
+      baAfterShot.innerHTML = `<div class="ba-empty">After 없음</div>`;
+      baResult.classList.remove('show');
+      baBeforeBtn.disabled = false;
+      baAfterBtn.disabled = true;
+      if (data.hand_found) {
+        baHandStatus.textContent = '✓ 손 위치 찾음 — 이제 손 빼고 Before 찍으세요';
+        baHandStatus.className = 'ok';
+        baManualRow.style.display = 'none';
+      } else {
+        baHandStatus.textContent = '⚠ 손 못 찾음 — 아래에서 직접 위치를 지정해주세요';
+        baHandStatus.className = 'warn';
+        baManualRow.style.display = 'flex';
+        baBeforeBtn.disabled = true; // 위치 확정 전엔 Before 못 찍음
+      }
+    } else {
+      showToast(data.error || '위치 잡기 실패', true);
+    }
+  } catch (e) {
+    showToast('서버와 통신 실패', true);
+  } finally {
+    baRefBtn.disabled = false;
+    if (wasLive) { liveOn = true; tickPreview(); }
+  }
+};
+
+// ---- 자동 손 인식 실패 시 수동 폴백 — 위치 잡기 미리보기(크롭 안 된 원본)에서
+// 직접 두 번 클릭해서 영역을 지정한다.
+let baPicking = false;
+let baPickFirst = null;
+
+baManualBtn.onclick = () => {
+  baPicking = true;
+  baPickFirst = null;
+  baManualBtn.textContent = '📍 선반 왼쪽 위 클릭';
+  baRefShot.classList.add('picking');
+};
+
+baRefShot.addEventListener('click', async (evt) => {
+  if (!baPicking) return;
+  const img = baRefShot.querySelector('img');
+  if (!img) return;
+  const rect = img.getBoundingClientRect();
+  const x = Math.min(1, Math.max(0, (evt.clientX - rect.left) / rect.width));
+  const y = Math.min(1, Math.max(0, (evt.clientY - rect.top) / rect.height));
+  if (!baPickFirst) {
+    baPickFirst = { x, y };
+    baManualBtn.textContent = '📍 선반 오른쪽 아래 클릭';
+    return;
+  }
+  const region = {
+    x0: Math.min(baPickFirst.x, x), y0: Math.min(baPickFirst.y, y),
+    x1: Math.max(baPickFirst.x, x), y1: Math.max(baPickFirst.y, y),
+  };
+  baPicking = false;
+  baPickFirst = null;
+  baManualBtn.textContent = '📍 손 위치 직접 찍기 (자동 인식 실패함)';
+  baRefShot.classList.remove('picking');
+  try {
+    const r = await fetch('/api/beforeafter/manual-box', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ region }),
+    });
+    const data = await r.json();
+    if (r.ok) {
+      baRefShot.innerHTML = `<img src="/api/beforeafter/ref.jpg?t=${Date.now()}" />`;
+      baHandStatus.textContent = '✓ 직접 지정함 — 이제 손 빼고 Before 찍으세요';
+      baHandStatus.className = 'ok';
+      baManualRow.style.display = 'none';
+      baBeforeBtn.disabled = false;
+      showToast('영역 지정됨 — 손 빼고 Before 찍으세요');
+    } else {
+      showToast(data.error || '지정 실패', true);
+    }
+  } catch (e) {
+    showToast('서버와 통신 실패', true);
+  }
+});
+
+baBeforeBtn.onclick = async () => {
+  baBeforeBtn.disabled = true;
+  const wasLive = liveOn;
+  if (wasLive) { liveOn = false; clearTimeout(liveTimer); }
+  try {
+    const r = await fetch('/api/beforeafter/before', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quality: currentQuality }),
+    });
+    const data = await r.json();
+    if (r.ok) {
+      baBeforeShot.innerHTML = `<img src="/api/beforeafter/before.jpg?t=${Date.now()}" />`;
+      baAfterShot.innerHTML = `<div class="ba-empty">After 없음</div>`;
+      baResult.classList.remove('show');
+      baAfterBtn.disabled = false;
+      showToast('Before 저장됨 — 동작하고 손 뺀 채로 After 찍으세요');
+    } else {
+      showToast(data.error || 'Before 촬영 실패', true);
+    }
+  } catch (e) {
+    showToast('서버와 통신 실패', true);
+  } finally {
+    baBeforeBtn.disabled = false;
+    if (wasLive) { liveOn = true; tickPreview(); }
+  }
+};
+
+baAfterBtn.onclick = async () => {
+  baAfterBtn.disabled = true;
+  const wasLive = liveOn;
+  if (wasLive) { liveOn = false; clearTimeout(liveTimer); }
+  try {
+    const r = await fetch('/api/beforeafter/after', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quality: currentQuality }),
+    });
+    const data = await r.json();
+    if (r.ok) {
+      baAfterShot.innerHTML = data.pair_url ? `<img src="${data.pair_url}" />` : `<div class="ba-empty">저장됨</div>`;
+      if (data.pair_url) {
+        baResultImg.src = data.pair_url + '?t=' + Date.now();
+        baResultLabel.textContent = data.label;
+        baResult.classList.add('show');
+        const pct = data.diff_pct;
+        if (pct != null) {
+          const low = pct < 1.0; // 실측상 진짜 물건 변화는 보통 1.3%+ 였음 — 이보다 낮으면 의심
+          baDiffPct.textContent = low
+            ? `⚠ 변화량 ${pct}% — 낮아요. 물건이 잘 안 옮겨졌거나 화면 밖에서 옮겼을 수 있어요`
+            : `변화량 ${pct}% — 정상 범위`;
+          baDiffPct.classList.toggle('warn', low);
+        } else {
+          baDiffPct.textContent = '';
+        }
+        showToast(`"${data.label}-pair" 저장됨 — 다음은 📍 위치 잡기부터 다시`);
+      } else {
+        showToast('저장은 됐지만 합성사진 생성 실패', true);
+      }
+      loadGallery();
+      refreshStatus();
+    } else {
+      showToast(data.error || 'After 촬영 실패', true);
+    }
+  } catch (e) {
+    showToast('서버와 통신 실패', true);
+  } finally {
+    // 한 사이클 끝났으니 다음은 위치 잡기부터 다시 — 손 위치가 프레임마다
+    // 바뀔 수 있어서 매번 새로 확정하는 게 안전하다.
+    baBeforeBtn.disabled = true;
+    baAfterBtn.disabled = true;
+    baManualRow.style.display = 'none';
+    baHandStatus.textContent = '';
+    if (wasLive) { liveOn = true; tickPreview(); }
+  }
+};
+
+recordBtn.onclick = async () => {
+  recordBtn.disabled = true;
+  try {
+    if (!recording) {
+      const r = await fetch('/api/record/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ label: currentLabel, quality: currentQuality }),
+      });
+      const data = await r.json();
+      if (!r.ok) { showToast(data.error || '녹화 시작 실패', true); return; }
+      recording = true;
+      recordLatestSeq = -1;
+      recordBtn.classList.add('recording');
+      recGlow.classList.add('on');
+      if (!liveOn) { liveOn = true; liveDot.classList.add('on'); } // 미리보기 꺼져있었어도 녹화 중엔 화면 보이게
+      recordPollTimer = setInterval(pollRecordStatus, 250);
+    } else {
+      recordBtn.lastChild.textContent = ' 처리 중... (손 위치 분석)';
+      const r = await fetch('/api/record/stop', { method: 'POST' });
+      const data = await r.json();
+      if (r.ok) {
+        showToast(`녹화 종료 · "${data.label}" ${data.count}장 저장됨`);
+        renderResult(data);
+      }
+      recording = false;
+      recordBtn.classList.remove('recording');
+      recGlow.classList.remove('on');
+      if (recordPollTimer) { clearInterval(recordPollTimer); recordPollTimer = null; }
+      recordBtn.lastChild.textContent = ' 녹화 시작';
+      loadGallery();
+      refreshStatus();
+    }
+  } catch (e) {
+    showToast('서버와 통신 실패', true);
+  } finally {
+    recordBtn.disabled = false;
+  }
+};
+
+lanCopyBtn.onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(lanUrl.textContent);
+    showToast('주소 복사됨');
+  } catch (e) {
+    showToast('복사 실패 — 직접 입력해주세요', true);
+  }
+};
+
+exportBtn.onclick = async () => {
+  exportBtn.disabled = true;
+  exportBtn.textContent = '내보내는 중...';
+  try {
+    const r = await fetch('/api/export', { method: 'POST' });
+    const data = await r.json();
+    if (r.ok) {
+      exportList.innerHTML = data.exports.map(e =>
+        `<li><span>${e.filename}</span><b>${e.count}장</b></li>`).join('');
+      exportList.style.display = 'flex';
+      showToast(`${data.exports.length}개 라벨 ZIP 저장됨 · data/exports/`);
+    } else {
+      showToast(data.error || '내보내기 실패', true);
+    }
+  } catch (e) {
+    showToast('서버와 통신 실패', true);
+  } finally {
+    exportBtn.disabled = false;
+    exportBtn.textContent = 'ZIP 내보내기';
+  }
+};
+
+refreshStatus();
+loadGallery();
+setInterval(refreshStatus, 4000);
+</script>
+</body>
+</html>
