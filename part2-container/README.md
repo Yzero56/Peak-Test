@@ -25,14 +25,25 @@ pip install -r requirements.txt
   ```powershell
   powershell -File run_browser_category_realtime_multi.ps1
   ```
+- 개별 물건(인스턴스) 다중 인식 — 학습해둔 실사용 물건 12종(달걀곽/당근/라떼/반찬용기/밥용기/
+  사이다/스팸/아메리카노/우유/종이팩음료/콜라/파&마늘)을 화면에 여러 개 있어도 각각 구분 (포트 5007):
+  ```bash
+  python browser_instance_realtime_multi.py
+  ```
 
-실행 후 브라우저에서 `http://127.0.0.1:5003` 또는 `http://127.0.0.1:5005` 접속.
+실행 후 브라우저에서 `http://127.0.0.1:5003`, `5005`, `5007` 중 해당 주소로 접속.
 
 ## 학습된 모델
 
 - `category_classifier.joblib` — 종류 분류기(텀블러/반찬 용기/생수병), DINOv2 임베딩 기반.
   바로 사용 가능하며, 재학습이 필요하면 `prepare_category_dataset.py` → `train_category_classifier.py`
   순서로 실행 (학습 데이터: `category_dataset_prepared_v2/`).
+- `instance_classifier.joblib` — 실사용 물건 12종 개별 인식 분류기, DINOv2 임베딩 기반.
+  바로 사용 가능하며, 새 물건을 추가/재학습하려면:
+  1. `python browser_instance_collector.py` (포트 5006)로 물건 하나씩 냉장고에 넣고 라벨별로 사진 촬영
+     (`instance_dataset_raw/<라벨>/`에 저장, 저장소에는 포함 안 됨 — 각자 촬영 필요)
+  2. `python prepare_instance_dataset.py` — YOLO-World로 자동 크롭해 `instance_dataset_prepared/` 생성
+  3. `python train_instance_classifier.py` — `instance_classifier.joblib` 재생성
 
 ## 프로젝트 전체 구조
 

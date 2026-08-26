@@ -59,3 +59,11 @@ category_realtime_multi_log.csv
 realtime_recognition_log.csv
 recognition_log_v2.csv
 recognition_log_v2_improved.csv
+
+# 개별 물건 인식(instance) - 원본 촬영본/중간 산출물은 재현에 불필요해 커밋 제외 (최종 모델·전처리 결과만 남김)
+instance_dataset_raw/
+instance_classifier_embeddings.npz
+instance_classifier_predictions.csv
+instance_realtime_multi_log.csv
+instance_collector.log
+crop_stats.txt
