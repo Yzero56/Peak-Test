@@ -102,6 +102,16 @@ kang 백엔드는 클라이언트가 `POST /api/v1/food-images`로 직접 올리
 
 ### 3. 검증 필요 — 실제 하드웨어에서 아직 안 돌려봄
 
+- ✅ **소프트웨어 배선은 mock으로 검증 완료**: 하드웨어 없이 `firmware/board-a-door-container/mock_server.py`(순수 파이썬으로 `/door`·`/capture`·`/preview`·`/jpg` 계약을 흉내내는 시뮬레이터, 이번에 추가)에
+  YJ의 실제 `tools/inout_classifier/server.py`를 `--esp-host`로 그대로 붙여서 문 열림→세션→판정
+  시도까지 크래시 없이 돌아가는 것 확인함(`connected:true`, `poll_count`가 계속 늘어남).
+  단, 목업 이미지엔 손이 없어서 실제 IN/OUT 라벨은 안 나옴(정상 — "손을 못 찾아서
+  크롭 영역 확정 실패"로 정직하게 표시됨). **진짜 판정 정확도는 여전히 실물 하드웨어로만
+  확인 가능.**
+- ⚠️ **팀에 공유할 교훈**: 이 테스트 중 `pip install mediapipe`(버전 미지정)로 설치했다가
+  네이티브 크래시(`DrishtiMetalHelper`/`Check failed: service_ Service is unavailable`)가
+  났었다 — `requirements.txt`의 `mediapipe==0.10.35`로 다시 설치하니 바로 해결됨. 반드시
+  `pip install -r requirements.txt`로만 설치할 것, 버전 안 박고 개별 설치하지 말 것.
 - `firmware/board-a-door-container`의 STA/AP 폴백·mDNS. (YJ의 실제 최종 스케치
   `firmware/webcam_ap_capture/webcam_ap_capture.ino`는 Wi-Fi 비밀번호가 들어있어서
   `.gitignore`로 추적 해제돼 있었고 저장소 어디에도 없다 — 이번 통합 스케치는
