@@ -92,12 +92,49 @@ th{color:var(--muted);font-weight:600}
 .chrome-browser .url{margin-left:8px;background:#0f1012;color:#8b93a1;font-size:11px;padding:4px 10px;border-radius:6px;
   font-family:ui-monospace,monospace;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .iframe-card iframe{border:0;width:100%;flex:1;min-height:420px;background:#fff}
+
+/* ===== 오버랩 레이아웃(앱 중점) — 분할 레이아웃과 토글로 선택 ===== */
+.layout-switch{display:flex;gap:8px;margin-bottom:14px}
+.layout-switch button{padding:8px 16px;border-radius:9px;border:1px solid var(--line);background:var(--panel);
+  color:var(--muted);cursor:pointer;font-size:13px;font-weight:700;font-family:inherit}
+.layout-switch button.active{border-color:var(--accent);color:#fff;background:linear-gradient(180deg,#1a2740,var(--panel))}
+#scene2 .iframe-grid{display:grid}
+#scene2 .overlap-stage{display:none}
+#scene2[data-layout="overlap"] .iframe-grid{display:none}
+#scene2[data-layout="overlap"] .overlap-stage{display:flex}
+
+.overlap-stage{background:#080909;border-radius:18px;padding:24px;height:calc(100vh - 190px);
+  align-items:center;justify-content:center;position:relative;overflow:visible}
+body.fs .overlap-stage{border-radius:0;height:100vh}
+@media(max-width:900px){.overlap-stage{flex-direction:column;height:auto;padding:20px}}
+
+/* 앱(폰) — 중점, 크고 세로로 꽉 참 */
+.hero-phone{position:relative;z-index:4;flex:none;width:430px;height:100%}
+.hero-phone .phone-bezel{width:100%;height:100%;background:#111;border:12px solid #1a1a1a;border-radius:44px;
+  padding-top:34px;position:relative;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.06)}
+.hero-phone .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:90px;height:22px;
+  background:#1a1a1a;border-radius:14px;z-index:3}
+.hero-phone .home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:4px;
+  background:#e6e6e6;border-radius:3px;z-index:3;opacity:.85}
+.hero-phone iframe{border:0;width:100%;height:100%;background:#fff}
+
+/* 대시보드 — "컴퓨터 비율"(16:10), 폰 뒤에서 살짝만 겹침(=여백/프레임 영역만 가려지고
+   콘텐츠는 절대 안 가려지게 겹침폭을 26px로 작게 유지). 세로로 억지로 안 늘림. */
+.mini-dash{position:relative;z-index:2;flex:none;aspect-ratio:16/10;height:82%;margin-left:-26px;
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.mini-dash iframe{border:0;width:100%;flex:1;min-height:0;background:#fff}
+@media(max-width:900px){
+  .hero-phone{width:340px;height:560px}
+  .mini-dash{width:100%;height:auto;margin-left:0;margin-top:-30px;aspect-ratio:16/10}
+}
+
 .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
 .fsbtn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:9px 16px;border-radius:9px;
   cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;flex:none}
 .fsbtn:hover{border-color:var(--accent)}
 body.fs{padding:0}
-body.fs .topbar,body.fs .tabs{display:none}
+body.fs .topbar,body.fs .tabs,body.fs .layout-switch{display:none}
 body.fs .scene{padding:14px}
 body.fs .iframe-grid{height:100vh}
 </style></head><body>
@@ -138,7 +175,11 @@ body.fs .iframe-grid{height:100vh}
 </div>
 </div>
 
-<div id="scene2" class="scene">
+<div id="scene2" class="scene" data-layout="split">
+<div class="layout-switch">
+  <button id="layoutBtnSplit" class="active" onclick="setLayout('split')">분할</button>
+  <button id="layoutBtnOverlap" onclick="setLayout('overlap')">오버랩 (앱 중점)</button>
+</div>
 <div class="iframe-grid">
   <div class="iframe-card" id="paneApp">
     <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="appUrl">localhost:8081</span></div>
@@ -146,6 +187,19 @@ body.fs .iframe-grid{height:100vh}
   </div>
   <div class="iframe-card" id="paneDash">
     <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="dashUrl">localhost:8000/dashboard/</span></div>
+    <iframe src="/proxy/dashboard-page"></iframe>
+  </div>
+</div>
+<div class="overlap-stage">
+  <div class="hero-phone">
+    <div class="phone-bezel">
+      <div class="notch"></div>
+      <iframe src="/proxy/app-page"></iframe>
+      <div class="home-bar"></div>
+    </div>
+  </div>
+  <div class="mini-dash">
+    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">localhost:8000/dashboard/</span></div>
     <iframe src="/proxy/dashboard-page"></iframe>
   </div>
 </div>
@@ -166,6 +220,13 @@ function toggleFullscreen(){
   else{ document.exitFullscreen(); document.body.classList.remove('fs'); }
 }
 document.addEventListener('fullscreenchange', ()=>{ if(!document.fullscreenElement) document.body.classList.remove('fs'); });
+
+function setLayout(v){
+  document.getElementById('scene2').dataset.layout = v;
+  document.getElementById('layoutBtnSplit').classList.toggle('active', v==='split');
+  document.getElementById('layoutBtnOverlap').classList.toggle('active', v==='overlap');
+  if(v==='split') updatePaneWidths();
+}
 
 function showScene(n){
   document.getElementById('scene1').classList.toggle('active', n===1);
