@@ -3,7 +3,9 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import {
   createInventoryItems,
   deleteInventoryItem,
+  fetchClimate,
   fetchInventory,
+  fetchRecipes,
   fetchScanCandidates,
   patchInventoryItem,
 } from '@/lib/api';
@@ -12,6 +14,7 @@ import { initialInventory, initialMeals, scanCandidates as mockScanCandidates } 
 import type {
   AddMode,
   Category,
+  ClimateReading,
   InventoryItem,
   Location,
   ManualAddForm,
@@ -27,6 +30,12 @@ import type {
 import { bumpQuantity, ingredientsToConsume, toDateKey } from '@/utils/fridge-logic';
 
 const BACKEND_POLL_MS = 6000;
+const CLIMATE_POLL_MS = 5 * 60 * 1000;
+
+/** 정수 단위(도/％)로 반올림 — 소숫점 단위의 미세한 흔들림은 같은 값으로 취급한다. */
+function roundOrNull(value: number | null): number | null {
+  return value == null ? null : Math.round(value);
+}
 
 function allIndices(count: number): number[] {
   return Array.from({ length: count }, (_, i) => i);
@@ -46,6 +55,7 @@ function defaultManualForm(): ManualAddForm {
 
 type FridgeContextValue = {
   items: InventoryItem[];
+  recipeCatalog: RecipeDef[];
   meals: MealLogEntry[];
   rescuedCount: number;
   sheetItemId: number | null;
@@ -62,6 +72,7 @@ type FridgeContextValue = {
   leadTime: NotificationLeadTime;
   toggles: NotificationToggles;
   backendConnected: boolean;
+  climate: ClimateReading;
 
   setInventoryView: (v: InventoryViewMode) => void;
   setRecipeSort: (v: RecipeSortOrder) => void;
@@ -97,6 +108,7 @@ const FridgeContext = createContext<FridgeContextValue | null>(null);
 
 export function FridgeProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<InventoryItem[]>(initialInventory);
+  const [recipeCatalog, setRecipeCatalog] = useState<RecipeDef[]>([]);
   const [meals, setMeals] = useState<MealLogEntry[]>(initialMeals);
   const [rescuedCount, setRescuedCount] = useState(9);
   const [nextId, setNextId] = useState(100);
@@ -119,6 +131,7 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
     plan: true,
   });
   const [backendConnected, setBackendConnected] = useState(false);
+  const [climate, setClimate] = useState<ClimateReading>({ temperatureC: null, humidityPct: null });
   // 백엔드가 설정돼있는지는 폴링/뮤테이션 경로에서 매번 확인하지 않고 ref로 캐싱한다.
   const backendConfigured = useRef(false);
 
@@ -146,6 +159,46 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
     const interval = setInterval(loadFromBackend, BACKEND_POLL_MS);
     return () => clearInterval(interval);
   }, [loadFromBackend]);
+
+  // 센서(보드)는 계속 측정하지만, 화면 갱신은 5분 주기로만 확인하고 정수 단위로
+  // 실제 값이 바뀌었을 때만 반영한다(소숫점 단위 흔들림은 무시).
+  const loadClimate = useCallback(async () => {
+    const config = await getApiConfig();
+    if (!config) return;
+    try {
+      const reading = await fetchClimate();
+      setClimate((prev) => {
+        const changed =
+          roundOrNull(prev.temperatureC) !== roundOrNull(reading.temperatureC) ||
+          roundOrNull(prev.humidityPct) !== roundOrNull(reading.humidityPct);
+        return changed ? reading : prev;
+      });
+    } catch {
+      // 실패하면 마지막으로 알던 값을 그대로 둔다.
+    }
+  }, []);
+
+  useEffect(() => {
+    loadClimate();
+    const interval = setInterval(loadClimate, CLIMATE_POLL_MS);
+    return () => clearInterval(interval);
+  }, [loadClimate]);
+
+  // 레시피 DB는 자주 바뀌지 않아(백엔드도 1시간 캐시) 폴링 없이 한 번만 불러온다.
+  const loadRecipes = useCallback(async () => {
+    const config = await getApiConfig();
+    if (!config) return;
+    try {
+      const remote = await fetchRecipes();
+      if (remote.length > 0) setRecipeCatalog(remote);
+    } catch {
+      // 실패하면 이전에 불러온 값(있다면)을 그대로 둔다 — 목업 폴백 없음.
+    }
+  }, []);
+
+  useEffect(() => {
+    loadRecipes();
+  }, [loadRecipes]);
 
   const openSheet = useCallback((id: number) => setSheetItemId(id), []);
   const closeSheet = useCallback(() => setSheetItemId(null), []);
@@ -353,6 +406,7 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
   const value = useMemo<FridgeContextValue>(
     () => ({
       items,
+      recipeCatalog,
       meals,
       rescuedCount,
       sheetItemId,
@@ -369,6 +423,7 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
       leadTime,
       toggles,
       backendConnected,
+      climate,
 
       setInventoryView,
       setRecipeSort,
@@ -399,9 +454,9 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
       reloadFromBackend: loadFromBackend,
     }),
     [
-      items, meals, rescuedCount, sheetItemId, toast, recipeSort, inventoryView, addMode,
+      items, recipeCatalog, meals, rescuedCount, sheetItemId, toast, recipeSort, inventoryView, addMode,
       manualForm, scanned, scanCandidates, scanPicked, quickPicked, selectedDate, leadTime, toggles,
-      backendConnected, openSheet, closeSheet, bumpSheetQtyImpl, removeSheetItem, updateManualForm, submitManualAdd,
+      backendConnected, climate, openSheet, closeSheet, bumpSheetQtyImpl, removeSheetItem, updateManualForm, submitManualAdd,
       startScan, toggleScanPick, submitScanAdd, toggleQuickPick, submitQuickAdd, resetAddFlow,
       cookRecipe, toggleSetting, dismissToast, runToastAction, loadFromBackend,
     ],

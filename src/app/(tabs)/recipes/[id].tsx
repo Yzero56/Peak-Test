@@ -3,14 +3,13 @@ import { useMemo } from 'react';
 import { Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { recipeCatalog } from '@/data/mock-fridge-data';
 import { useFridge } from '@/state/fridge-store';
-import { decorateItem } from '@/utils/fridge-logic';
+import { decorateItem, ingredientMatches } from '@/utils/fridge-logic';
 
 export default function RecipeDetailScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { items, cookRecipe } = useFridge();
+  const { items, recipeCatalog, cookRecipe } = useFridge();
 
   const recipe = recipeCatalog.find((r) => r.id === id);
   const decorated = useMemo(() => items.map((i) => decorateItem(i)), [items]);
@@ -23,7 +22,7 @@ export default function RecipeDetailScreen() {
     );
   }
 
-  const have = recipe.uses.filter((u) => decorated.some((i) => i.name === u.name)).length;
+  const have = recipe.uses.filter((u) => decorated.some((i) => ingredientMatches(u.name, i.name))).length;
   const matchPct = Math.round((have / recipe.uses.length) * 100);
 
   const handleCook = () => {
@@ -59,7 +58,7 @@ export default function RecipeDetailScreen() {
         <View className="rounded-[22px] bg-white px-4 pb-2.5 pt-1.5 shadow-sm">
           <Text className="px-0 pb-1 pt-3 text-sm text-neutral-900">재료</Text>
           {recipe.uses.map((u) => {
-            const owned = decorated.find((i) => i.name === u.name);
+            const owned = decorated.find((i) => ingredientMatches(u.name, i.name));
             const urgentOwned = owned != null && owned.dday <= 1;
             const status = owned ? (urgentOwned ? '먼저 쓰기' : '있어요') : '없어요';
             const tone = owned

@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Chip } from '@/components/fridge/chip';
 import { RecipeListCard } from '@/components/fridge/recipe-list-card';
 import { BottomTabInset, Spacing } from '@/constants/theme';
-import { recipeCatalog } from '@/data/mock-fridge-data';
 import { useFridge } from '@/state/fridge-store';
 import type { RecipeSortOrder } from '@/types/fridge';
 import { decorateItem, matchRecipe, sortMatches } from '@/utils/fridge-logic';
@@ -30,12 +29,12 @@ const SORT_OPTIONS: { key: RecipeSortOrder; label: string }[] = [
 
 export default function RecipesScreen() {
   const router = useRouter();
-  const { items, recipeSort, setRecipeSort } = useFridge();
+  const { items, recipeCatalog, recipeSort, setRecipeSort } = useFridge();
 
   const decorated = useMemo(() => items.map((i) => decorateItem(i)), [items]);
   const matches = useMemo(
     () => sortMatches(recipeCatalog.map((r) => matchRecipe(r, decorated)), recipeSort),
-    [decorated, recipeSort],
+    [decorated, recipeSort, recipeCatalog],
   );
 
   return (
@@ -53,9 +52,17 @@ export default function RecipesScreen() {
         className="flex-1"
         contentContainerStyle={{ ...contentPadding, paddingHorizontal: 20, gap: 12 }}
         showsVerticalScrollIndicator={false}>
-        {matches.map((m) => (
-          <RecipeListCard key={m.recipe.id} match={m} onPress={() => router.push(`/recipes/${m.recipe.id}`)} />
-        ))}
+        {matches.length === 0 ? (
+          <View className="items-center rounded-2xl bg-white px-4 py-[22px] shadow-sm">
+            <Text className="text-center text-[13.5px] leading-5 text-neutral-500">
+              레시피를 불러오지 못했어요{'\n'}설정에서 백엔드 연결을 확인해주세요
+            </Text>
+          </View>
+        ) : (
+          matches.map((m) => (
+            <RecipeListCard key={m.recipe.id} match={m} onPress={() => router.push(`/recipes/${m.recipe.id}`)} />
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );

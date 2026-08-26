@@ -32,7 +32,9 @@ export function ItemSheet() {
             <Text className="text-[23px] text-neutral-900">{item.name}</Text>
           </View>
           <View className={`shrink-0 rounded-full px-3 py-1.5 ${item.pill.containerClass}`}>
-            <Text className={`text-xs ${item.pill.textClass}`}>{item.ddayLabel}</Text>
+            <Text numberOfLines={1} className={`text-xs ${item.pill.textClass}`}>
+              {item.ddayLabel}
+            </Text>
           </View>
         </View>
         <Text className="mt-2 text-xs text-neutral-500">

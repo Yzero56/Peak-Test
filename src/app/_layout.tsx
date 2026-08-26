@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import { DefaultTheme, ThemeProvider } from 'expo-router';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -14,6 +15,8 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
+      {/* 라이트 전용 앱이라 시스템이 다크 모드여도 상태바 아이콘은 항상 어두운 색(잘 보이는 쪽)으로 고정 */}
+      <StatusBar style="dark" />
       <FridgeProvider>
         <View style={{ flex: 1 }}>
           <Stack screenOptions={{ headerShown: false }}>

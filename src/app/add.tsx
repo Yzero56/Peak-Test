@@ -4,6 +4,7 @@ import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Chip } from '@/components/fridge/chip';
+import { DateField } from '@/components/fridge/date-field';
 import { IconAvatar } from '@/components/fridge/icon-avatar';
 import { categoryOptions, locationOptions, quickAddNames } from '@/data/mock-fridge-data';
 import { useFridge } from '@/state/fridge-store';
@@ -87,12 +88,9 @@ export default function AddScreen() {
                 </View>
                 <View className="flex-1">
                   <Field label="유통기한">
-                    <TextInput
-                      className="min-h-[44px] rounded-xl bg-neutral-100 px-3 text-[15px] text-neutral-900"
-                      placeholder="YYYY-MM-DD"
-                      placeholderTextColor="#a8adaa"
+                    <DateField
                       value={manualForm.expiresAt}
-                      onChangeText={(v) => updateManualForm({ expiresAt: v })}
+                      onChange={(v) => updateManualForm({ expiresAt: v })}
                     />
                   </Field>
                 </View>

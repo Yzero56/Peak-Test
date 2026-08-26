@@ -1,5 +1,5 @@
 import { getApiConfig } from '@/lib/api-config';
-import type { InventoryItem, ScanCandidate } from '@/types/fridge';
+import type { ClimateReading, InventoryItem, RecipeDef, ScanCandidate } from '@/types/fridge';
 
 /** 백엔드 설정이 없거나(미설정) 요청이 실패하면 던져진다 — 호출부는 이걸 잡아서 로컬 폴백을 쓴다. */
 export class ApiUnavailableError extends Error {}
@@ -53,4 +53,12 @@ export function deleteInventoryItem(id: number): Promise<void> {
 
 export function fetchScanCandidates(): Promise<ScanCandidate[]> {
   return apiFetch<ScanCandidate[]>('/api/scan-candidates');
+}
+
+export function fetchClimate(): Promise<ClimateReading> {
+  return apiFetch<ClimateReading>('/api/climate');
+}
+
+export function fetchRecipes(): Promise<RecipeDef[]> {
+  return apiFetch<RecipeDef[]>('/api/recipes');
 }

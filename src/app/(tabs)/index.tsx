@@ -7,7 +7,6 @@ import { Chip } from '@/components/fridge/chip';
 import { InventoryRow } from '@/components/fridge/inventory-row';
 import { RecipeHeroCard } from '@/components/fridge/recipe-hero-card';
 import { BottomTabInset, Spacing } from '@/constants/theme';
-import { recipeCatalog } from '@/data/mock-fridge-data';
 import { useFridge } from '@/state/fridge-store';
 import type { InventoryViewMode } from '@/types/fridge';
 import { decorateItem, groupByCategory, matchRecipe, sortMatches } from '@/utils/fridge-logic';
@@ -31,7 +30,11 @@ const VIEW_OPTIONS: { key: InventoryViewMode; label: string }[] = [
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { items, inventoryView, setInventoryView, openSheet, setRecipeSort } = useFridge();
+  const { items, recipeCatalog, inventoryView, setInventoryView, openSheet, setRecipeSort, climate } = useFridge();
+
+  const climateLabel = `${climate.temperatureC != null ? `${climate.temperatureC.toFixed(1)}°C` : '-'} · 습도 ${
+    climate.humidityPct != null ? `${Math.round(climate.humidityPct)}%` : '-'
+  }`;
 
   const decorated = useMemo(
     () => items.map((i) => decorateItem(i)).sort((a, b) => a.dday - b.dday),
@@ -48,11 +51,12 @@ export default function HomeScreen() {
 
   const matches = useMemo(
     () => sortMatches(recipeCatalog.map((r) => matchRecipe(r, decorated)), 'urgent').slice(0, 3),
-    [decorated],
+    [decorated, recipeCatalog],
   );
+  // 목업 레시피(재료 3~4개) 기준이던 50%는 API 레시피(평균 재료 9~10개)엔 너무 빡빡해서 25%로 낮췄다.
   const cookableCount = useMemo(
-    () => recipeCatalog.map((r) => matchRecipe(r, decorated)).filter((m) => m.pct >= 50).length,
-    [decorated],
+    () => recipeCatalog.map((r) => matchRecipe(r, decorated)).filter((m) => m.pct >= 25).length,
+    [decorated, recipeCatalog],
   );
 
   const orderedItems =
@@ -78,9 +82,11 @@ export default function HomeScreen() {
             </Pressable>
           </View>
 
+          <Text className="mt-1 text-xs text-neutral-500">{climateLabel}</Text>
+
           <Text className="mt-5 text-[25px] leading-8 text-neutral-900">
             {heroPre}
-            <Text className="rounded-sm bg-amber-200">{heroWord}</Text>
+            <Text className="rounded-sm bg-amber-200 font-bold">{heroWord}</Text>
             {heroPost}
           </Text>
           <Text className="mt-2 text-[13px] text-neutral-600">{heroSub}</Text>
@@ -91,18 +97,24 @@ export default function HomeScreen() {
               <Text className="text-xs text-accent-700">전체 보기</Text>
             </Pressable>
           </View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ gap: 9, marginTop: 10, paddingBottom: 2 }}>
-            {matches.map((m) => (
-              <RecipeHeroCard
-                key={m.recipe.id}
-                match={m}
-                onPress={() => router.push(`/recipes/${m.recipe.id}`)}
-              />
-            ))}
-          </ScrollView>
+          {matches.length === 0 ? (
+            <Text className="mt-2.5 text-[13px] text-neutral-400">
+              레시피를 불러오지 못했어요 · 설정에서 백엔드 연결을 확인해주세요
+            </Text>
+          ) : (
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ gap: 9, marginTop: 10, paddingBottom: 2 }}>
+              {matches.map((m) => (
+                <RecipeHeroCard
+                  key={m.recipe.id}
+                  match={m}
+                  onPress={() => router.push(`/recipes/${m.recipe.id}`)}
+                />
+              ))}
+            </ScrollView>
+          )}
         </View>
 
         <View className="mt-6 rounded-t-[26px] bg-white px-[18px] pt-[18px]">

@@ -77,3 +77,8 @@ export type ToastState = {
   actionLabel: string;
   onAction: () => void;
 };
+
+export type ClimateReading = {
+  temperatureC: number | null;
+  humidityPct: number | null;
+};

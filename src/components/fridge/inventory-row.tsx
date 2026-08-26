@@ -14,7 +14,9 @@ export function InventoryRow({ item, onPress }: { item: DecoratedItem; onPress: 
         <Text className="mt-1 text-xs text-neutral-500">{item.sub}</Text>
       </View>
       <View className={`shrink-0 items-center rounded-full px-2.5 py-1.5 ${item.pill.containerClass}`}>
-        <Text className={`text-xs ${item.pill.textClass}`}>{item.ddayLabel}</Text>
+        <Text numberOfLines={1} className={`text-xs ${item.pill.textClass}`}>
+          {item.ddayLabel}
+        </Text>
       </View>
     </Pressable>
   );
