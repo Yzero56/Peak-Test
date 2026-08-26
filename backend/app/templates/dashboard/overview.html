@@ -3,10 +3,12 @@
 {% block content %}
 <div class="mb-4 flex items-center justify-between">
   <h1 class="text-lg font-bold">기기 개요</h1>
+  {% if not read_only %}
   <a href="/devices/new" class="rounded-full bg-neutral-900 px-4 py-2 text-sm font-semibold text-white">＋ 기기 등록</a>
+  {% endif %}
 </div>
 
-<div id="overview-body" hx-get="/partials/overview" hx-trigger="every 5s" hx-swap="innerHTML">
+<div id="overview-body" hx-get="{{ overview_partial_url or '/partials/overview' }}" hx-trigger="every 5s" hx-swap="innerHTML">
   {% include "dashboard/_overview_body.html" %}
 </div>
 {% endblock %}

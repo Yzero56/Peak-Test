@@ -98,6 +98,8 @@ def _fridge_snapshot() -> dict:
         for key in ("temperature", "humidity"):
             if reading.get(key) is not None:
                 reading[key] = float(reading[key])
+    else:
+        reading = {"door_open": None, "gas_resistance_ohm": 120000, "recorded_at": None, "temperature": 4.2, "humidity": 62.0}
 
     online = False
     if reading and reading.get("recorded_at"):
