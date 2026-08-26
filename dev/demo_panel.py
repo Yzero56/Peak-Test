@@ -109,7 +109,10 @@ body.fs .overlap-stage{border-radius:0;height:100vh}
 @media(max-width:900px){.overlap-stage{flex-direction:column;height:auto;padding:20px}}
 
 /* 앱(폰) — 중점, 크고 세로로 꽉 참 */
-.hero-phone{position:relative;z-index:4;flex:none;width:430px;height:100%}
+/* 실제 아이폰 프레임 비율(9:19.5)로 고정 — 높이를 스테이지에 맞추고 폭은 비율로
+   자동 계산해서 실물 아이폰처럼 보이게 함(전에는 430px 고정폭에 높이를 억지로
+   꽉 채워서 폰이 통통해 보였음). */
+.hero-phone{position:relative;z-index:4;flex:none;height:100%;aspect-ratio:9/19.5;width:auto}
 .hero-phone .phone-bezel{width:100%;height:100%;background:#111;border:12px solid #1a1a1a;border-radius:44px;
   padding-top:34px;position:relative;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.06)}
 .hero-phone .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:90px;height:22px;
@@ -125,7 +128,7 @@ body.fs .overlap-stage{border-radius:0;height:100vh}
   display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.5)}
 .mini-dash iframe{border:0;width:100%;flex:1;min-height:0;background:#fff}
 @media(max-width:900px){
-  .hero-phone{width:340px;height:560px}
+  .hero-phone{height:560px;width:auto;aspect-ratio:9/19.5}
   .mini-dash{width:100%;height:auto;margin-left:0;margin-top:-30px;aspect-ratio:16/10}
 }
 
