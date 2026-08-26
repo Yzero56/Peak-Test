@@ -14,15 +14,17 @@ scan_router = APIRouter(prefix="/scan-candidates", tags=["legacy-scan"])
 recipe_router = APIRouter(prefix="/recipes", tags=["legacy-recipes"])
 
 
+LOCATION_MAP = {"냉장": StorageType.REFRIGERATOR, "냉동": StorageType.FREEZER, "실온": StorageType.ROOM}
+CATEGORY_MAP = {"채소": "vegetable", "육류·계란": "meat", "유제품": "dairy", "수산물": "seafood", "기타": "other"}
+
+
 def parse_payload(data: dict) -> dict:
-    location = {"냉장": StorageType.REFRIGERATOR, "냉동": StorageType.FREEZER, "실온": StorageType.ROOM}
-    category = {"채소": "vegetable", "육류·계란": "meat", "유제품": "dairy", "수산물": "seafood", "기타": "other"}
     return {
         "display_name": data["name"],
-        "category": category.get(data.get("category"), data.get("category")),
+        "category": CATEGORY_MAP.get(data.get("category"), data.get("category")),
         "quantity": 1,
         "unit": data.get("quantity"),
-        "storage_type": location[data.get("location", "냉장")],
+        "storage_type": LOCATION_MAP[data.get("location", "냉장")],
         "expires_at": date.fromisoformat(data["expiresAt"]) if data.get("expiresAt") else None,
         "date_source": DateSource.MANUAL if data.get("expiresAt") else DateSource.UNKNOWN,
         "status": FoodItemStatus.ACTIVE,
@@ -57,8 +59,18 @@ async def update_inventory(item_id: int, data: dict, session: AsyncSession = Dep
     if "quantity" in data:
         item.unit = data["quantity"]
     if "expiresAt" in data:
-        item.expires_at = data["expiresAt"] or None
+        item.expires_at = date.fromisoformat(data["expiresAt"]) if data["expiresAt"] else None
         item.date_source = DateSource.MANUAL if item.expires_at else DateSource.UNKNOWN
+    if "name" in data:
+        if not data["name"]:
+            raise HTTPException(status_code=422, detail="name must not be empty")
+        item.display_name = data["name"]
+    if "category" in data:
+        item.category = CATEGORY_MAP.get(data["category"], data["category"])
+    if "location" in data:
+        if data["location"] not in LOCATION_MAP:
+            raise HTTPException(status_code=422, detail=f"invalid location: {data['location']!r}")
+        item.storage_type = LOCATION_MAP[data["location"]]
     await session.commit()
     return to_legacy_response(item)
 
