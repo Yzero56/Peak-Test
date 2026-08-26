@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PEAK SMART | Launch presentation</title>
   <style>
-    :root { --ink:#101312; --paper:#f5f3ed; --lime:#d7f36b; --orange:#ff6845; --muted:#888c83; --line:rgba(245,243,237,.2); --safe:5%; }
+    :root { --ink:#304254; --paper:#ffffff; --lime:#f7f83e; --orange:#304254; --muted:#b8c3cc; --line:rgba(255,255,255,.25); --safe:5%; }
     * { box-sizing:border-box; }
     html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#080909; color:var(--paper); font-family:Pretendard,"Noto Sans KR","Malgun Gothic",system-ui,sans-serif; }
     button { font:inherit; }
@@ -19,7 +19,7 @@
     .slide.active { display:flex; flex-direction:column; animation:enter .5s ease both; }
     @keyframes enter { from { opacity:0; transform:translateY(1.5%); } to { opacity:1; transform:none; } }
     .slide.light { background:var(--paper); color:var(--ink); }
-    .slide.orange { background:var(--orange); color:var(--ink); }
+    .slide.orange { background:var(--lime); color:#111; }
     .eyebrow { margin-bottom:2%; font-size:clamp(9px,.7vw,14px); font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
     h1,h2,p { margin:0; }
     h1 { max-width:60%; font-size:clamp(42px,7.7vw,148px); line-height:.91; letter-spacing:-.1em; font-weight:950; }
@@ -34,6 +34,12 @@
     .center { align-items:center; justify-content:center; text-align:center; }
     .center h1,.center h2 { max-width:none; }
     .center .lead { max-width:760px; }
+    .canva-cover { padding:0; color:#fff; }
+    .canva-cover > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .cover-wash { position:absolute; inset:0; background:linear-gradient(90deg,rgba(48,66,84,.88),rgba(48,66,84,.25)); }
+    .cover-copy { position:relative; z-index:1; width:100%; padding:10% var(--safe) 7%; text-align:left; }
+    .cover-copy h1 { color:var(--lime); }
+    .cover-copy h2 { color:#fff; }
     .split { display:grid; grid-template-columns:1fr 1fr; gap:7%; align-items:center; width:100%; height:100%; }
     .big-stat { font-size:clamp(70px,15vw,280px); line-height:.75; letter-spacing:-.12em; color:var(--orange); font-weight:950; }
     .stat-copy { max-width:480px; margin-top:5%; font-size:clamp(22px,3vw,58px); line-height:1.03; letter-spacing:-.08em; font-weight:900; }
@@ -67,7 +73,7 @@
     .ad-slide { padding:0; background:#050505; align-items:stretch; justify-content:stretch; }
     .ad-frame { position:absolute; inset:0; display:grid; place-items:center; background:#050505; }
     .ad-frame video { width:100%; height:100%; object-fit:contain; background:#000; }
-    .ad-fallback { position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:var(--safe); background:radial-gradient(circle at 70% 35%,#29321f,#080909 54%); }
+    .ad-fallback { position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:var(--safe); background:radial-gradient(circle at 70% 35%,#304254,#101820 54%); }
     .ad-fallback h1 { max-width:none; font-size:clamp(42px,8vw,150px); }
     .play-ad { position:absolute; z-index:2; padding:18px 28px; border:1px solid var(--lime); border-radius:999px; background:var(--lime); color:var(--ink); font-size:clamp(11px,1vw,18px); font-weight:950; letter-spacing:.12em; cursor:pointer; }
     .ad-status { position:absolute; z-index:3; bottom:8%; left:0; right:0; text-align:center; color:#b6bcb0; font-size:clamp(9px,.7vw,13px); }
@@ -87,7 +93,7 @@
       <article class="slide ad-slide active" data-ad>
         <div class="ad-frame"><video id="ad-video" playsinline preload="metadata"></video><div class="ad-fallback" id="ad-fallback"><div><div class="eyebrow lime">A PEAK SMART FILM</div><h1>오늘도<br><span class="lime">피크</span> 찍었습니다.</h1></div></div><button class="play-ad" id="play-ad">PLAY AD</button><div class="ad-status" id="ad-status">광고를 준비하는 중입니다 · 16:9 / 30 SEC</div></div>
       </article>
-      <article class="slide center"><div class="eyebrow lime">PEAK SMART KITCHEN</div><h1>PEAK</h1><h2 class="lime">SMART 주방</h2><p class="lead">주방의 피크를 찍다.</p><div class="footer-note"><span>THE LAUNCH BEGINS</span><span>01</span></div></article>
+      <article class="slide center canva-cover"><img src="https://kangmina.my.canva.site/peak-smart/_assets/media/f29708c353d8158db5eab18f2641fae5.png" alt="PEAK SMART Canva cover"><div class="cover-wash"></div><div class="cover-copy"><div class="eyebrow">PEAK SMART KITCHEN</div><h1>PEAK</h1><h2>SMART 주방</h2><p class="lead">주방의 피크를 찍다.</p></div><div class="footer-note"><span>THE LAUNCH BEGINS</span><span>01</span></div></article>
       <article class="slide light"><div class="split"><div><div class="eyebrow orange-text">01 / The problem</div><div class="big-stat">?</div></div><div><h2>그런데,<br>실제 냉장고에서는<br>이런 일이 얼마나 자주 일어날까요?</h2><p class="lead">냉장고는 가득한데,<br>오늘 뭘 먹을지는 모릅니다.</p></div></div><div class="footer-note"><span>FROM CONCEPT TO KITCHEN</span><span>02</span></div></article>
       <article class="slide orange"><div class="eyebrow">02 / The insight</div><h2>기억해야 하는 건<br><span style="color:var(--paper)">음식이 아니라,</span><br>다음 행동입니다.</h2><div class="cards"><div class="card"><b>언제 샀지?</b><span>식품 정보가 기억에서 사라집니다.</span></div><div class="card"><b>먼저 뭘 먹지?</b><span>날짜는 있어도 선택은 어렵습니다.</span></div><div class="card"><b>그럴 땐?</b><span>사진 한 장으로 냉장고를 기록합니다.</span></div></div><div class="footer-note"><span>LESS INPUT. MORE CONFIDENCE.</span><span>03</span></div></article>
       <article class="slide"><div class="eyebrow lime">03 / Concept experience</div><div class="actual">CONCEPT / FULL EXPERIENCE</div><h2>찍고, 확인하고,<br><span class="lime">오늘의 한 끼</span>까지.</h2><p class="lead">PEAK가 식재료를 인식하고, 남은 재료를 기준으로 식단을 제안하는 전체적인 경험입니다.</p><div class="cards"><div class="card"><b>SCAN</b><span>냉장고 속 식재료를 촬영</span></div><div class="card"><b>UNDERSTAND</b><span>식품명과 날짜를 구조화</span></div><div class="card"><b>COOK</b><span>오늘 먼저 먹을 메뉴를 제안</span></div></div><div class="footer-note"><span>CONCEPT / NOT ALL LIVE YET</span><span>04</span></div></article>

@@ -8,15 +8,14 @@ from app.api.routes.food_items import get_legacy_item, to_legacy_response
 from app.core.database import get_db
 from app.models.detection import SensorReading
 from app.models.food import DateSource, FoodItem, FoodItemStatus, StorageType
-from app.services import recipes as recipes_service
+from app.services import recipe_service
 
 router = APIRouter(prefix="/inventory", tags=["legacy-inventory"])
 scan_router = APIRouter(prefix="/scan-candidates", tags=["legacy-scan"])
-# 4번 파트(mobile-app)가 쓰는 두 개의 레거시 엔드포인트.
-# 온습도는 board-b-sensor(BME680)가 POST /api/v1/sensor-readings로 올린 최신값을 그대로 내려주고,
-# 레시피는 HJ 브랜치의 식품안전나라 Open API 연동을 그대로 재사용한다(app/services/recipes.py).
+recipe_router = APIRouter(prefix="/recipes", tags=["legacy-recipes"])
+# 온습도는 kang 브랜치엔 없는, 이 통합본에서만 추가한 레거시 엔드포인트 —
+# board-b-sensor(BME680)가 POST /api/v1/sensor-readings로 올린 최신값을 그대로 내려준다.
 climate_router = APIRouter(prefix="/climate", tags=["legacy-climate"])
-recipes_router = APIRouter(prefix="/recipes", tags=["legacy-recipes"])
 
 
 def parse_payload(data: dict) -> dict:
@@ -95,7 +94,6 @@ async def climate(session: AsyncSession = Depends(get_db)) -> dict:
     }
 
 
-@recipes_router.get("", response_model=list[dict])
-async def recipes() -> list[dict]:
-    """식품안전나라 Open API 기반 레시피 목록. 키 미설정/요청 실패 시 빈 목록(앱이 목업으로 폴백)."""
-    return recipes_service.fetch_recipes()
+@recipe_router.get("", response_model=list[dict])
+async def list_recipes() -> list[dict]:
+    return await recipe_service.get_recipes()

@@ -24,9 +24,8 @@ class Settings(BaseSettings):
     minimax_video_model: str = "MiniMax-H3"
     vlm_base_url: str | None = None
     expiring_soon_days: int = 3
-    # 4번 파트(mobile-app) 레거시 GET /api/recipes 호환용 — 식품안전나라 Open API 키.
-    # 비워두면 /api/recipes가 빈 목록을 반환하고 앱은 자체 목업 레시피로 폴백한다.
-    food_safety_api_key: str = ""
+    foodsafety_api_key: str | None = None
+    foodsafety_recipe_count: int = 100
 
     model_config = SettingsConfigDict(
         env_file=".env",
