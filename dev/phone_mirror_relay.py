@@ -2,18 +2,25 @@
 
 React Native(Expo Go)에서 앱 화면을 직접 캡처해서 보내는 건 매우 까다롭다(네이티브
 모듈이 필요해서 Expo Go로는 안 되고, dev client를 새로 빌드해야 함 — 이 컴퓨터엔
-Xcode 시뮬레이터도 제대로 안 깔려있어서 지금 당장은 무리). 그래서 대신:
+Xcode 시뮬레이터도 제대로 안 깔려있어서 지금 당장은 무리). 그래서 대신 **OS 자체
+미러링 도구로 폰을 이 맥의 창 하나로 띄우고, 그 창을 캡처해서 전송**한다 —
+이 방식은 iOS/Android 둘 다 된다(둘 다 "이 맥에 뜬 미러링 창을 캡처"까지만
+플랫폼별로 다르고, 그 다음은 완전히 동일한 코드다):
 
-  1. macOS 기본 앱 QuickTime Player로 iPhone을 USB로 미러링한다
-     (파일 > 새로운 화면 기록 아님 — "새로운 동영상 녹화" > 카메라를 iPhone으로 선택)
-  2. 그 QuickTime 창을 dev/screen_capture_sender.py로 캡처해서 이 릴레이 서버로
-     WebSocket으로 계속 전송한다
+  1a. iOS  — macOS 기본 앱 QuickTime Player로 iPhone을 USB로 미러링
+      (파일 > 새로운 동영상 녹화 > 녹화 버튼 옆 화살표에서 카메라를 iPhone으로 선택.
+      "새로운 화면 기록"이 아니라 "새로운 동영상 녹화"임에 주의)
+  1b. Android — scrcpy로 USB 미러링 (`brew install scrcpy android-platform-tools`,
+      USB 디버깅 켠 뒤 터미널에서 `scrcpy` 실행하면 창이 뜬다)
+  2. 그 미러링 창을 dev/screen_capture_sender.py로 캡처해서 이 릴레이 서버로
+     WebSocket으로 계속 전송한다 (iOS/Android 무관 — 그냥 화면의 한 영역을 캡처할 뿐)
   3. 이 릴레이는 받은 최신 프레임을 HTTP로 서빙한다 — demo_panel.py가 mock 카메라를
      보여줄 때와 똑같은 방식(<img src="/latest.jpg">)으로 그대로 갖다 쓸 수 있다.
 
-⚠ 2번(화면 캡처)은 macOS 화면 기록 권한이 필요해서 이 Claude Code 세션(샌드박스)
-안에서는 실행할 수 없다 — 반드시 사용자가 일반 터미널에서 직접 실행해야 한다.
-이 릴레이 서버 자체는 여기서 실행해도 된다(캡처 권한이 필요 없음).
+⚠ 1번(미러링 도구 실행)과 2번(화면 캡처)은 macOS 화면 기록 권한이 필요해서 이
+Claude Code 세션(샌드박스) 안에서는 실행할 수 없다 — 반드시 사용자가 일반
+터미널에서 직접 실행해야 한다. 이 릴레이 서버 자체는 여기서 실행해도 된다
+(캡처 권한이 필요 없음).
 
 실행 (릴레이 서버 — 이 컴퓨터 어디서든, 이 세션에서 실행해도 됨):
   pip install websockets
@@ -24,7 +31,7 @@ Xcode 시뮬레이터도 제대로 안 깔려있어서 지금 당장은 무리).
   python dev/screen_capture_sender.py --relay ws://localhost:9600/ingest
 
 데모 패널에서 보기:
-  http://localhost:9601/latest.jpg  (또는 demo_panel.py에 나중에 소스 전환 붙임)
+  http://localhost:9601/latest.jpg  (또는 demo_panel.py의 "📱 실물 폰 미러링" 토글)
 """
 
 from __future__ import annotations
