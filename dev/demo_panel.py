@@ -47,6 +47,7 @@ CONFIG = {
     "yj": "http://localhost:8601",
     "wa": "http://localhost:5007",
     "app": "http://localhost:8081",
+    "phone_relay": "http://localhost:9601",  # phone_mirror_relay.py의 HTTP 포트
 }
 
 PAGE = r"""<!doctype html><html lang="ko"><head><meta charset="utf-8">
@@ -92,6 +93,14 @@ th{color:var(--muted);font-weight:600}
 .chrome-browser .url{margin-left:8px;background:#0f1012;color:#8b93a1;font-size:11px;padding:4px 10px;border-radius:6px;
   font-family:ui-monospace,monospace;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .iframe-card iframe{border:0;width:100%;flex:1;min-height:420px;background:#fff}
+.app-mirror-img{display:none;width:100%;flex:1;min-height:0;object-fit:cover;background:#000}
+#mirrorBtn{border-color:#333}
+#mirrorBtn.on{border-color:#33d17a;color:#33d17a}
+/* 미러링 켜지면: 앱 iframe 숨기고 실물 폰 이미지로 교체(분할/오버랩 둘 다) */
+body.mirror-on #paneApp iframe,
+body.mirror-on .hero-phone iframe{display:none}
+body.mirror-on .app-mirror-img{display:block}
+body.mirror-on .hero-phone .phone-bezel{background:#000}
 
 /* ===== 오버랩 레이아웃(앱 중점) — 분할 레이아웃과 토글로 선택 ===== */
 .layout-switch{display:flex;gap:8px;margin-bottom:14px}
@@ -182,11 +191,14 @@ body.fs .iframe-grid{height:100vh}
 <div class="layout-switch">
   <button id="layoutBtnSplit" class="active" onclick="setLayout('split')">분할</button>
   <button id="layoutBtnOverlap" onclick="setLayout('overlap')">오버랩 (앱 중점)</button>
+  <span style="flex:1"></span>
+  <button id="mirrorBtn" onclick="togglePhoneMirror()">📱 실물 폰 미러링: <span id="mirrorState">꺼짐</span></button>
 </div>
 <div class="iframe-grid">
   <div class="iframe-card" id="paneApp">
     <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="appUrl">localhost:8081</span></div>
     <iframe src="/proxy/app-page"></iframe>
+    <img class="app-mirror-img" id="mirrorImgSplit">
   </div>
   <div class="iframe-card" id="paneDash">
     <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="dashUrl">localhost:8000/dashboard/</span></div>
@@ -198,6 +210,7 @@ body.fs .iframe-grid{height:100vh}
     <div class="phone-bezel">
       <div class="notch"></div>
       <iframe src="/proxy/app-page"></iframe>
+      <img class="app-mirror-img" id="mirrorImgOverlap">
       <div class="home-bar"></div>
     </div>
   </div>
@@ -217,6 +230,26 @@ function updatePaneWidths(){
 }
 updatePaneWidths();
 window.addEventListener('resize', updatePaneWidths);
+
+let mirrorOn = false, mirrorTimer = null;
+function togglePhoneMirror(){
+  mirrorOn = !mirrorOn;
+  document.body.classList.toggle('mirror-on', mirrorOn);
+  document.getElementById('mirrorBtn').classList.toggle('on', mirrorOn);
+  document.getElementById('mirrorState').textContent = mirrorOn ? '켜짐' : '꺼짐';
+  if(mirrorOn){
+    mirrorTick();
+    mirrorTimer = setInterval(mirrorTick, 150);
+  }else if(mirrorTimer){
+    clearInterval(mirrorTimer); mirrorTimer = null;
+  }
+}
+function mirrorTick(){
+  const t = Date.now();
+  const a = document.getElementById('mirrorImgSplit'), b = document.getElementById('mirrorImgOverlap');
+  if(a) a.src = '/proxy/phone.jpg?t=' + t;
+  if(b) b.src = '/proxy/phone.jpg?t=' + t;
+}
 
 function toggleFullscreen(){
   if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); document.body.classList.add('fs'); }
@@ -379,6 +412,12 @@ def make_handler():
             elif path == "/proxy/dashboard":
                 status, body = _get(f"{CONFIG['backend']}/api/v1/dashboard/summary")
                 self._send(status if status < 400 else 503, "application/json", body)
+            elif path == "/proxy/phone.jpg":
+                status, body = _get(f"{CONFIG['phone_relay']}/latest.jpg")
+                self._send(status if status < 400 else 503, "image/jpeg", body)
+            elif path == "/proxy/phone-status":
+                status, body = _get(f"{CONFIG['phone_relay']}/status")
+                self._send(status if status < 400 else 503, "application/json", body)
             elif path == "/proxy/dashboard-page":
                 # 대시보드/앱은 API 응답만 있는 게 아니라 자체 JS·CSS 에셋을 상대경로로
                 # 물고 오는 완전한 페이지라, 이 서버가 내용을 대신 fetch해서 재서빙하면
@@ -424,8 +463,10 @@ def main():
     ap.add_argument("--yj-url", default=CONFIG["yj"])
     ap.add_argument("--wa-url", default=CONFIG["wa"])
     ap.add_argument("--app-url", default=CONFIG["app"])
+    ap.add_argument("--phone-relay-url", default=CONFIG["phone_relay"])
     args = ap.parse_args()
-    CONFIG.update(backend=args.backend_url, board=args.board_url, yj=args.yj_url, wa=args.wa_url, app=args.app_url)
+    CONFIG.update(backend=args.backend_url, board=args.board_url, yj=args.yj_url, wa=args.wa_url, app=args.app_url,
+                  phone_relay=args.phone_relay_url)
 
     server = ThreadingHTTPServer(("0.0.0.0", args.port), make_handler())
     print(f"[demo-panel] http://localhost:{args.port} 에서 대기 중")
