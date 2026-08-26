@@ -83,19 +83,15 @@ th{color:var(--muted);font-weight:600}
 .tabs button.active .num{background:var(--accent)}
 .scene{display:none}
 .scene.active{display:block}
-.iframe-grid{display:flex;gap:0;height:calc(100vh - 150px);justify-content:center}
-@media(max-width:900px){.iframe-grid{flex-direction:column;height:auto}}
-.iframe-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
-  flex:none;min-width:240px}
-.iframe-card .label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;
-  padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
-.iframe-card .label .px{font-weight:400;text-transform:none;letter-spacing:0;opacity:.7}
+.iframe-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;height:calc(100vh - 150px)}
+@media(max-width:900px){.iframe-grid{grid-template-columns:1fr;height:auto}}
+.iframe-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.chrome-browser{display:flex;align-items:center;gap:6px;background:#1c1e21;padding:9px 12px;flex:none}
+.chrome-browser .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.chrome-browser .dot.r{background:#ec6a5e}.chrome-browser .dot.y{background:#f4bf4f}.chrome-browser .dot.g{background:#61c454}
+.chrome-browser .url{margin-left:8px;background:#0f1012;color:#8b93a1;font-size:11px;padding:4px 10px;border-radius:6px;
+  font-family:ui-monospace,monospace;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .iframe-card iframe{border:0;width:100%;flex:1;min-height:420px;background:#fff}
-.resizer{flex:none;width:16px;margin:0 -1px;cursor:col-resize;display:flex;align-items:center;justify-content:center;
-  z-index:2;position:relative}
-.resizer::after{content:'';width:4px;height:44px;border-radius:3px;background:var(--line)}
-.resizer:hover::after,.resizer.dragging::after{background:var(--accent)}
-@media(max-width:900px){.resizer{display:none}}
 .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
 .fsbtn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:9px 16px;border-radius:9px;
   cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;flex:none}
@@ -143,67 +139,27 @@ body.fs .iframe-grid{height:100vh}
 </div>
 
 <div id="scene2" class="scene">
-<div class="iframe-grid" id="iframeGrid">
-  <div class="iframe-card" id="paneApp" style="width:400px">
-    <div class="label"><span>앱 (폰 사이즈)</span><span class="px" id="appPx">400px</span></div>
+<div class="iframe-grid">
+  <div class="iframe-card" id="paneApp">
+    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="appUrl">localhost:8081</span></div>
     <iframe src="/proxy/app-page"></iframe>
   </div>
-  <div class="resizer" id="resizer"></div>
-  <div class="iframe-card" id="paneDash" style="width:520px">
-    <div class="label"><span>웹 대시보드</span><span class="px" id="dashPx">520px</span></div>
+  <div class="iframe-card" id="paneDash">
+    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="dashUrl">localhost:8000/dashboard/</span></div>
     <iframe src="/proxy/dashboard-page"></iframe>
   </div>
 </div>
 </div>
 <script>
-(function initResizer(){
-  const resizer = document.getElementById('resizer');
-  const paneApp = document.getElementById('paneApp');
-  const paneDash = document.getElementById('paneDash');
-  const appPx = document.getElementById('appPx');
-  const dashPx = document.getElementById('dashPx');
-
-  // 이전에 드래그해서 맞춰둔 폭을 기억해둔다(새로고침해도 유지).
-  try{
-    const saved = JSON.parse(localStorage.getItem('peak-demo-panel-widths') || 'null');
-    if(saved){ paneApp.style.width = saved.app + 'px'; paneDash.style.width = saved.dash + 'px'; }
-  }catch(e){}
-  function updateLabels(){
-    appPx.textContent = Math.round(paneApp.getBoundingClientRect().width) + 'px';
-    dashPx.textContent = Math.round(paneDash.getBoundingClientRect().width) + 'px';
-  }
-  updateLabels();
-
-  let dragging = false, startX = 0, startApp = 0, startDash = 0;
-  resizer.addEventListener('mousedown', (e) => {
-    dragging = true; startX = e.clientX;
-    startApp = paneApp.getBoundingClientRect().width;
-    startDash = paneDash.getBoundingClientRect().width;
-    resizer.classList.add('dragging');
-    document.body.style.userSelect = 'none';
-  });
-  window.addEventListener('mousemove', (e) => {
-    if(!dragging) return;
-    const dx = e.clientX - startX;
-    const newApp = Math.max(240, startApp + dx);
-    const newDash = Math.max(240, startDash - dx);
-    paneApp.style.width = newApp + 'px';
-    paneDash.style.width = newDash + 'px';
-    updateLabels();
-  });
-  window.addEventListener('mouseup', () => {
-    if(!dragging) return;
-    dragging = false;
-    resizer.classList.remove('dragging');
-    document.body.style.userSelect = '';
-    try{
-      localStorage.setItem('peak-demo-panel-widths', JSON.stringify({
-        app: Math.round(paneApp.getBoundingClientRect().width),
-        dash: Math.round(paneDash.getBoundingClientRect().width),
-      }));
-    }catch(e){}
-  });
-})();
+function updatePaneWidths(){
+  const paneApp = document.getElementById('paneApp'), paneDash = document.getElementById('paneDash');
+  const appUrl = document.getElementById('appUrl'), dashUrl = document.getElementById('dashUrl');
+  if(!paneApp || !paneDash) return;
+  appUrl.textContent = `localhost:8081 · ${Math.round(paneApp.getBoundingClientRect().width)}px`;
+  dashUrl.textContent = `localhost:8000/dashboard/ · ${Math.round(paneDash.getBoundingClientRect().width)}px`;
+}
+updatePaneWidths();
+window.addEventListener('resize', updatePaneWidths);
 
 function toggleFullscreen(){
   if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); document.body.classList.add('fs'); }
@@ -216,6 +172,7 @@ function showScene(n){
   document.getElementById('scene2').classList.toggle('active', n===2);
   document.getElementById('tabBtn1').classList.toggle('active', n===1);
   document.getElementById('tabBtn2').classList.toggle('active', n===2);
+  if(n===2) updatePaneWidths();
 }
 let doorOpen = false, waLoopTimer = null;
 function pill(el, text, cls){ el.textContent = text; el.className = 'pill ' + cls; }
