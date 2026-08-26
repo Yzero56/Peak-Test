@@ -31,13 +31,29 @@
    `retest_data/`, `cropped_dataset/`, `yolo_world_evaluation/`, 총 80MB+)은 시연에
    필요 없어서 제외했다 — 필요하면 `origin/Wa` 브랜치에 그대로 있다. 학습된 모델
    (`category_classifier.joblib`), 컨테이너 등록 DB, 임베딩 캐시(.npz)는 포함.
-5. **신규 통합 펌웨어** `firmware/board-a-door-container/board-a-door-container.ino`:
-   YJ의 `reed_switch_test.ino` + `webcam_ap_collect.ino`와 Wa의 `01_container_collector.ino`를
-   합친 새 스케치. 근거: 두 팀의 카메라 스냅샷 계약이 이미 동일(`GET /jpg` →
-   `image/jpeg`)했기 때문에, 리드스위치 상태를 새 `GET /reed`로 노출하는 것 말고는
-   합치는 데 코드 충돌이 없었다. AP+STA 겸용 Wi-Fi는 YJ의 커밋 메시지(`92367d4`)에
-   설명된 동작을 재구성한 것 — **실제 STA 접속·mDNS 동작은 하드웨어로 검증 안 됨**
-   (아래 "검증 필요" 참고).
+5. **신규 통합 펌웨어** `firmware/board-a-door-container/board-a-door-container.ino`.
+
+   **[정정] 처음에 잘못 설계했던 부분**: 처음엔 "YJ는 리드스위치만, Wa는 카메라만
+   써봤으니 새 계약(`GET /jpg`+`GET /reed`)으로 합치면 된다"고 판단하고 그렇게
+   만들었었다 — **틀렸다.** YJ는 이미 실제 펌웨어(`webcam_ap_capture.ino`, Wi-Fi
+   비밀번호 때문에 git에 없음)에서 리드스위치+카메라를 한 보드로 같이 써왔고,
+   그 결과 튜닝된 계약이 `part1-inout/tools/inout_classifier/server.py`와
+   `tools/web_capture/http_cam.py`에 실측값 그대로 남아있었다:
+   `GET /door` → `{"open": bool}`, `GET /capture?quality=standard` → JPEG
+   800x600 quality=12(`server.py`의 `check_door()`/`fetch_preview_frame()` 참고,
+   화질이 학습 데이터와 다르면 오분류 편향이 생긴다는 실측 코멘트까지 있었음).
+   이 사실은 git에 없는 파일 목록만 보고 "동시 사용 안 해봤다"고 결론 낸 게
+   원인 — 실제로 그 firmware와 통신하는 **파이썬 클라이언트 코드**를 먼저
+   확인했어야 했다.
+
+   **지금 버전**은 이 실제 계약(`/door`, `/capture?quality=`, `/preview`)을 그대로
+   구현하고, 여기에 Wa가 쓰는 기존 계약(`GET /jpg`)을 추가해서 두 파이썬 클라이언트
+   다 코드 수정 없이 붙게 만들었다. 해상도(SVGA 800x600)·품질 값(12/16/20/8)도
+   YJ 코드에 실측으로 박혀있던 값을 그대로 가져왔다 — 임의로 바꾸면 안 됨.
+   AP+STA 겸용 Wi-Fi는 YJ의 커밋 메시지(`92367d4`)에 설명된 동작을 재구성한 것 —
+   **실제 STA 접속·mDNS 동작, 그리고 리드스위치+카메라 동시 사용 자체는 여전히
+   하드웨어로 검증 안 됨**(아래 "검증 필요" 참고 — 이번엔 최소한 계약은 맞춰놨지만
+   실물 배선·GPIO 동작까지 보장하는 건 아님).
 6. **board-b-sensor**: HJ의 `firmware/xiao-esp32s3-cam`을 그대로 가져오되, 센서 보고
    endpoint를 kang 백엔드 계약(`POST /api/v1/sensor-readings`, 인증 헤더 없음)으로
    교체. 하트비트(`/api/devices/{id}/heartbeat`)는 대응하는 kang 엔드포인트가 없어서
@@ -66,7 +82,7 @@ motion 이벤트와 container 이벤트를 시간창(기본 8초) 안에서 짝�
 
 ⚠️ 브릿지는 **순수 시간 매칭**이라(문 세션 ID로 확인하는 게 아님), 냉장고를 아주 빠르게
 연속으로 여닫으면 잘못 짝지어질 수 있다 — 더 정확하게 하려면 board-a-door-container의
-`GET /reed`가 주는 문 세션 시작 시각을 두 스크립트가 detections에 같이 실어 보내고
+`GET /door`가 주는 문 상태 변화 시각을 두 스크립트가 detections에 같이 실어 보내고
 세션 ID로 매칭하는 게 낫다(스크립트 docstring에 적어둠, 지금은 미구현).
 
 - YJ: `--backend-url`, `--device-id`(기본 `board-a-door-container`) 인자 추가.
@@ -89,9 +105,12 @@ kang 백엔드는 클라이언트가 `POST /api/v1/food-images`로 직접 올리
 - `firmware/board-a-door-container`의 STA/AP 폴백·mDNS. (YJ의 실제 최종 스케치
   `firmware/webcam_ap_capture/webcam_ap_capture.ino`는 Wi-Fi 비밀번호가 들어있어서
   `.gitignore`로 추적 해제돼 있었고 저장소 어디에도 없다 — 이번 통합 스케치는
-  그 커밋 메시지 설명을 바탕으로 새로 작성한 것이라 원본과 미세하게 다를 수 있음)
-- board-a에서 리드스위치(D0)와 카메라를 **동시에** 쓸 때 GPIO 충돌이 없는지
-  (기존 두 프로토타입은 각각 카메라만 썼거나 리드스위치만 썼음, 동시 사용은 이번이 처음)
+  그 커밋 메시지 설명 + 파이썬 클라이언트가 실제로 요청하는 HTTP 계약을 바탕으로
+  새로 작성한 것이라, GPIO 배선까지 원본과 100% 같다는 보장은 없음)
+- board-a에서 리드스위치(D0)와 카메라를 **이 스케치 형태로** 동시에 쓸 때 GPIO
+  충돌이 없는지(YJ의 원본 webcam_ap_capture.ino는 실제로 이미 검증된 조합이지만,
+  그 파일 자체를 볼 수 없어서 D0/D1 배선은 reed_switch_test.ino에서 가져온 것 —
+  원본과 배선이 같은지 실물로 확인 필요)
 - board-b의 kang 백엔드 재배선(`/api/v1/sensor-readings`) 실물 테스트
 
 ### 4. PostgreSQL 인프라
