@@ -74,22 +74,44 @@ th{color:var(--muted);font-weight:600}
 #log{font-size:12px;color:var(--muted);max-height:120px;overflow-y:auto;font-family:ui-monospace,monospace;line-height:1.6}
 .wide{grid-column:1/-1}
 .stat{font-size:13px;margin:4px 0}
-.step{display:flex;align-items:center;gap:10px;margin:22px 0 12px}
-.step .n{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;flex:none}
-.step .t{font-size:13px;font-weight:700;color:var(--text)}
-.step .d{flex:1;height:1px;background:var(--line)}
-.iframe-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:900px){.iframe-grid{grid-template-columns:1fr}}
+.tabs{display:flex;gap:8px;margin-bottom:18px}
+.tabs button{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--panel);
+  color:var(--muted);cursor:pointer;font-size:13.5px;font-weight:700;font-family:inherit}
+.tabs button.active{border-color:var(--accent);color:#fff;background:linear-gradient(180deg,#1a2740,var(--panel))}
+.tabs button .num{display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--line);
+  align-items:center;justify-content:center;font-size:10.5px;margin-right:7px}
+.tabs button.active .num{background:var(--accent)}
+.scene{display:none}
+.scene.active{display:block}
+.iframe-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;height:calc(100vh - 150px)}
+@media(max-width:900px){.iframe-grid{grid-template-columns:1fr;height:auto}}
 .iframe-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .iframe-card .label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;
   padding:10px 14px;border-bottom:1px solid var(--line)}
-.iframe-card iframe{border:0;width:100%;height:480px;background:#fff}
+.iframe-card iframe{border:0;width:100%;flex:1;min-height:420px;background:#fff}
+.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+.fsbtn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:9px 16px;border-radius:9px;
+  cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;flex:none}
+.fsbtn:hover{border-color:var(--accent)}
+body.fs{padding:0}
+body.fs .topbar,body.fs .tabs{display:none}
+body.fs .scene{padding:14px}
+body.fs .iframe-grid{height:100vh}
 </style></head><body>
-<h1>🧊 PEAK Smart — 라이브 데모 패널</h1>
-<div class="sub">위: 냉장고 OUT/IN 순간 카메라가 실제로 인식하는 과정. 아래: 그 결과가 반영된 진짜 화면. (실물 보드는 리드스위치가 자동 감지, mock일 때만 문 열기 버튼으로 테스트)</div>
+<div class="topbar">
+  <div>
+    <h1>🧊 PEAK Smart — 라이브 데모 패널</h1>
+    <div class="sub">발표 중 버튼으로 전환하세요 — 스크롤 없이 화면 하나가 꽉 차게 바뀝니다.</div>
+  </div>
+  <button class="fsbtn" onclick="toggleFullscreen()">⤢ 전체화면 (F11도 가능)</button>
+</div>
 
-<div class="step"><span class="n">1</span><span class="t">식재료 OUT/IN + 용기인식 (카메라가 실시간으로 보는 것)</span><span class="d"></span></div>
+<div class="tabs">
+  <button id="tabBtn1" class="active" onclick="showScene(1)"><span class="num">1</span>식재료 OUT/IN + 용기인식 (카메라)</button>
+  <button id="tabBtn2" onclick="showScene(2)"><span class="num">2</span>백엔드 등록 → 대시보드 · 앱 확인</button>
+</div>
+
+<div id="scene1" class="scene active">
 <div class="grid">
   <div class="card">
     <h2>카메라 (board-a)</h2>
@@ -106,25 +128,38 @@ th{color:var(--muted);font-weight:600}
     <div class="stat">Wa (용기/물건): <span id="waState" class="pill idle">-</span></div>
     <div id="waResult" class="stat">-</div>
   </div>
+  <div class="card wide">
+    <h2>최근 이벤트 로그</h2>
+    <div id="log"></div>
+  </div>
+</div>
 </div>
 
-<div class="step"><span class="n">2</span><span class="t">백엔드 등록 → 웹 대시보드 · 앱에서 확인 (진짜 화면, 실시간)</span><span class="d"></span></div>
+<div id="scene2" class="scene">
 <div class="iframe-grid">
-  <div class="iframe-card">
-    <div class="label">웹 대시보드</div>
-    <iframe src="/proxy/dashboard-page"></iframe>
-  </div>
   <div class="iframe-card">
     <div class="label">앱</div>
     <iframe src="/proxy/app-page"></iframe>
   </div>
+  <div class="iframe-card">
+    <div class="label">웹 대시보드</div>
+    <iframe src="/proxy/dashboard-page"></iframe>
+  </div>
 </div>
-
-<div class="card wide" style="margin-top:14px">
-  <h2>최근 이벤트 로그</h2>
-  <div id="log"></div>
 </div>
 <script>
+function toggleFullscreen(){
+  if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); document.body.classList.add('fs'); }
+  else{ document.exitFullscreen(); document.body.classList.remove('fs'); }
+}
+document.addEventListener('fullscreenchange', ()=>{ if(!document.fullscreenElement) document.body.classList.remove('fs'); });
+
+function showScene(n){
+  document.getElementById('scene1').classList.toggle('active', n===1);
+  document.getElementById('scene2').classList.toggle('active', n===2);
+  document.getElementById('tabBtn1').classList.toggle('active', n===1);
+  document.getElementById('tabBtn2').classList.toggle('active', n===2);
+}
 let doorOpen = false, waLoopTimer = null;
 function pill(el, text, cls){ el.textContent = text; el.className = 'pill ' + cls; }
 function logLine(msg){
