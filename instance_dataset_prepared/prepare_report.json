@@ -1,0 +1,1991 @@
+[
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203536_387_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203536_387_001.jpg",
+    "confidence": "0.227947"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203544_780_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203544_780_001.jpg",
+    "confidence": "0.361682"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203548_783_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203548_783_001.jpg",
+    "confidence": "0.038988"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203553_005_001.jpg",
+    "label": "달걀곽",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\달걀곽\\달걀곽_20260826_203553_005_001.jpg",
+    "confidence": "0.060734"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203558_271_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203558_271_001.jpg",
+    "confidence": "0.023932"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203605_139_001.jpg",
+    "label": "달걀곽",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\달걀곽\\달걀곽_20260826_203605_139_001.jpg",
+    "confidence": "0.127106"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203614_042_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203614_042_001.jpg",
+    "confidence": "0.062859"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203624_944_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203624_944_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203632_049_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203632_049_001.jpg",
+    "confidence": "0.249787"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203637_160_001.jpg",
+    "label": "달걀곽",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\달걀곽\\달걀곽_20260826_203637_160_001.jpg",
+    "confidence": "0.091664"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203642_981_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203642_981_001.jpg",
+    "confidence": "0.053256"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203651_249_001.jpg",
+    "label": "달걀곽",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\달걀곽\\달걀곽_20260826_203651_249_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203711_771_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203711_771_001.jpg",
+    "confidence": "0.250296"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203716_611_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203716_611_001.jpg",
+    "confidence": "0.043279"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203719_808_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203719_808_001.jpg",
+    "confidence": "0.023556"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203723_845_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203723_845_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203748_321_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203748_321_001.jpg",
+    "confidence": "0.049569"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203753_950_001.jpg",
+    "label": "달걀곽",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\달걀곽\\달걀곽_20260826_203753_950_001.jpg",
+    "confidence": "0.033821"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203838_136_001.jpg",
+    "label": "달걀곽",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\달걀곽\\달걀곽_20260826_203838_136_001.jpg",
+    "confidence": "0.333605"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\달걀곽\\달걀곽_20260826_203843_879_001.jpg",
+    "label": "달걀곽",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\달걀곽\\달걀곽_20260826_203843_879_001.jpg",
+    "confidence": "0.177954"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210244_868_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210244_868_001.jpg",
+    "confidence": "0.062219"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210247_950_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210247_950_001.jpg",
+    "confidence": "0.043109"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210252_945_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210252_945_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210255_847_001.jpg",
+    "label": "당근",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\당근\\당근_20260826_210255_847_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210259_872_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210259_872_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210303_964_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210303_964_001.jpg",
+    "confidence": "0.020862"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210306_104_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210306_104_001.jpg",
+    "confidence": "0.033889"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210309_723_001.jpg",
+    "label": "당근",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\당근\\당근_20260826_210309_723_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210318_984_001.jpg",
+    "label": "당근",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\당근\\당근_20260826_210318_984_001.jpg",
+    "confidence": "0.075680"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210338_451_001.jpg",
+    "label": "당근",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\당근\\당근_20260826_210338_451_001.jpg",
+    "confidence": "0.027666"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210342_048_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210342_048_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210345_822_001.jpg",
+    "label": "당근",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\당근\\당근_20260826_210345_822_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210347_789_001.jpg",
+    "label": "당근",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\당근\\당근_20260826_210347_789_001.jpg",
+    "confidence": "0.034257"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210352_273_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210352_273_001.jpg",
+    "confidence": "0.174308"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210414_772_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210414_772_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210418_855_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210418_855_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210422_485_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210422_485_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210425_885_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210425_885_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210430_072_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210430_072_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\당근\\당근_20260826_210433_778_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\당근\\당근_20260826_210433_778_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205020_688_001.jpg",
+    "label": "라떼",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\라떼\\라떼_20260826_205020_688_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205137_760_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205137_760_001.jpg",
+    "confidence": "0.031652"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205202_971_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205202_971_001.jpg",
+    "confidence": "0.022120"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205210_259_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205210_259_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205213_015_001.jpg",
+    "label": "라떼",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\라떼\\라떼_20260826_205213_015_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205216_199_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205216_199_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205220_050_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205220_050_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205224_851_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205224_851_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205228_473_001.jpg",
+    "label": "라떼",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\라떼\\라떼_20260826_205228_473_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205232_361_001.jpg",
+    "label": "라떼",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\라떼\\라떼_20260826_205232_361_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205235_878_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205235_878_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205239_563_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205239_563_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205244_001_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205244_001_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205246_985_001.jpg",
+    "label": "라떼",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\라떼\\라떼_20260826_205246_985_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205250_116_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205250_116_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205254_391_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205254_391_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205301_316_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205301_316_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205304_302_001.jpg",
+    "label": "라떼",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\라떼\\라떼_20260826_205304_302_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205307_143_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205307_143_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205310_435_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205310_435_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205313_870_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205313_870_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\라떼\\라떼_20260826_205317_454_001.jpg",
+    "label": "라떼",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\라떼\\라떼_20260826_205317_454_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_203932_219_001.jpg",
+    "label": "반찬용기",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\반찬용기\\반찬용기_20260826_203932_219_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_203937_272_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_203937_272_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_203946_503_001.jpg",
+    "label": "반찬용기",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\반찬용기\\반찬용기_20260826_203946_503_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_203950_681_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_203950_681_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_203957_037_001.jpg",
+    "label": "반찬용기",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\반찬용기\\반찬용기_20260826_203957_037_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204001_813_001.jpg",
+    "label": "반찬용기",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\반찬용기\\반찬용기_20260826_204001_813_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204010_964_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204010_964_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204016_157_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204016_157_001.jpg",
+    "confidence": "0.034599"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204020_309_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204020_309_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204025_797_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204025_797_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204031_325_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204031_325_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204038_439_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204038_439_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204045_674_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204045_674_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204050_989_001.jpg",
+    "label": "반찬용기",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\반찬용기\\반찬용기_20260826_204050_989_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204057_067_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204057_067_001.jpg",
+    "confidence": "0.020111"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204102_900_001.jpg",
+    "label": "반찬용기",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\반찬용기\\반찬용기_20260826_204102_900_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204106_245_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204106_245_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204110_711_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204110_711_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204116_466_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204116_466_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\반찬용기\\반찬용기_20260826_204128_446_001.jpg",
+    "label": "반찬용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\반찬용기\\반찬용기_20260826_204128_446_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204155_315_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204155_315_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204159_601_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204159_601_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204205_061_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204205_061_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204209_400_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204209_400_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204215_006_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204215_006_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204219_527_001.jpg",
+    "label": "밥용기",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\밥용기\\밥용기_20260826_204219_527_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204224_566_001.jpg",
+    "label": "밥용기",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\밥용기\\밥용기_20260826_204224_566_001.jpg",
+    "confidence": "0.033065"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204228_841_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204228_841_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204236_049_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204236_049_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204239_996_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204239_996_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204244_359_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204244_359_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204250_305_001.jpg",
+    "label": "밥용기",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\밥용기\\밥용기_20260826_204250_305_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204254_089_001.jpg",
+    "label": "밥용기",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\밥용기\\밥용기_20260826_204254_089_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204256_864_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204256_864_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204300_891_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204300_891_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204306_320_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204306_320_001.jpg",
+    "confidence": "0.029028"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204311_308_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204311_308_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204316_198_001.jpg",
+    "label": "밥용기",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\밥용기\\밥용기_20260826_204316_198_001.jpg",
+    "confidence": "0.036018"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204319_852_001.jpg",
+    "label": "밥용기",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\밥용기\\밥용기_20260826_204319_852_001.jpg",
+    "confidence": "0.112507"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204325_189_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204325_189_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\밥용기\\밥용기_20260826_204329_972_001.jpg",
+    "label": "밥용기",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\밥용기\\밥용기_20260826_204329_972_001.jpg",
+    "confidence": "0.026990"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205733_399_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205733_399_001.jpg",
+    "confidence": "0.221598"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205736_637_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205736_637_001.jpg",
+    "confidence": "0.243687"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205739_304_001.jpg",
+    "label": "사이다",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\사이다\\사이다_20260826_205739_304_001.jpg",
+    "confidence": "0.144750"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205742_177_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205742_177_001.jpg",
+    "confidence": "0.077898"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205745_496_001.jpg",
+    "label": "사이다",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\사이다\\사이다_20260826_205745_496_001.jpg",
+    "confidence": "0.161708"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205748_443_001.jpg",
+    "label": "사이다",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\사이다\\사이다_20260826_205748_443_001.jpg",
+    "confidence": "0.156661"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205755_297_001.jpg",
+    "label": "사이다",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\사이다\\사이다_20260826_205755_297_001.jpg",
+    "confidence": "0.105948"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205758_625_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205758_625_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205802_064_001.jpg",
+    "label": "사이다",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\사이다\\사이다_20260826_205802_064_001.jpg",
+    "confidence": "0.184398"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205804_709_001.jpg",
+    "label": "사이다",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\사이다\\사이다_20260826_205804_709_001.jpg",
+    "confidence": "0.052436"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205808_610_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205808_610_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205811_979_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205811_979_001.jpg",
+    "confidence": "0.118515"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205819_032_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205819_032_001.jpg",
+    "confidence": "0.189804"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205821_593_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205821_593_001.jpg",
+    "confidence": "0.238468"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205824_215_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205824_215_001.jpg",
+    "confidence": "0.223424"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205826_963_001.jpg",
+    "label": "사이다",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\사이다\\사이다_20260826_205826_963_001.jpg",
+    "confidence": "0.259111"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205830_561_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205830_561_001.jpg",
+    "confidence": "0.229133"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205833_048_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205833_048_001.jpg",
+    "confidence": "0.173110"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205835_898_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205835_898_001.jpg",
+    "confidence": "0.095463"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205838_415_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205838_415_001.jpg",
+    "confidence": "0.179110"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205841_646_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205841_646_001.jpg",
+    "confidence": "0.150840"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205844_630_001.jpg",
+    "label": "사이다",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\사이다\\사이다_20260826_205844_630_001.jpg",
+    "confidence": "0.125176"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205850_829_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205850_829_001.jpg",
+    "confidence": "0.106631"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205906_364_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205906_364_001.jpg",
+    "confidence": "0.094603"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205909_988_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205909_988_001.jpg",
+    "confidence": "0.039330"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\사이다\\사이다_20260826_205913_716_001.jpg",
+    "label": "사이다",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\사이다\\사이다_20260826_205913_716_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204432_859_001.jpg",
+    "label": "스팸",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\스팸\\스팸_20260826_204432_859_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204437_575_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204437_575_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204441_609_001.jpg",
+    "label": "스팸",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\스팸\\스팸_20260826_204441_609_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204445_745_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204445_745_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204450_591_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204450_591_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204454_885_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204454_885_001.jpg",
+    "confidence": "0.023535"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204500_773_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204500_773_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204504_338_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204504_338_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204508_288_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204508_288_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204518_829_001.jpg",
+    "label": "스팸",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\스팸\\스팸_20260826_204518_829_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204522_411_001.jpg",
+    "label": "스팸",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\스팸\\스팸_20260826_204522_411_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204526_366_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204526_366_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204533_892_001.jpg",
+    "label": "스팸",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\스팸\\스팸_20260826_204533_892_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204538_461_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204538_461_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204542_670_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204542_670_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204548_397_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204548_397_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204558_561_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204558_561_001.jpg",
+    "confidence": "0.041558"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204622_201_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204622_201_001.jpg",
+    "confidence": "0.060638"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204659_455_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204659_455_001.jpg",
+    "confidence": "0.035268"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204702_914_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204702_914_001.jpg",
+    "confidence": "0.025218"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204706_126_001.jpg",
+    "label": "스팸",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\스팸\\스팸_20260826_204706_126_001.jpg",
+    "confidence": "0.033289"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\스팸\\스팸_20260826_204709_824_001.jpg",
+    "label": "스팸",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\스팸\\스팸_20260826_204709_824_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204835_239_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204835_239_001.jpg",
+    "confidence": "0.039105"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204837_889_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204837_889_001.jpg",
+    "confidence": "0.021894"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204840_838_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204840_838_001.jpg",
+    "confidence": "0.021141"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204844_510_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204844_510_001.jpg",
+    "confidence": "0.025522"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204848_190_001.jpg",
+    "label": "아메리카노",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\아메리카노\\아메리카노_20260826_204848_190_001.jpg",
+    "confidence": "0.022150"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204851_470_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204851_470_001.jpg",
+    "confidence": "0.029354"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204854_600_001.jpg",
+    "label": "아메리카노",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\아메리카노\\아메리카노_20260826_204854_600_001.jpg",
+    "confidence": "0.020292"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204857_927_001.jpg",
+    "label": "아메리카노",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\아메리카노\\아메리카노_20260826_204857_927_001.jpg",
+    "confidence": "0.020990"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204902_538_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204902_538_001.jpg",
+    "confidence": "0.024517"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204908_829_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204908_829_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204912_073_001.jpg",
+    "label": "아메리카노",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\아메리카노\\아메리카노_20260826_204912_073_001.jpg",
+    "confidence": "0.032603"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204914_811_001.jpg",
+    "label": "아메리카노",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\아메리카노\\아메리카노_20260826_204914_811_001.jpg",
+    "confidence": "0.035959"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204917_650_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204917_650_001.jpg",
+    "confidence": "0.021035"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204920_895_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204920_895_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204924_130_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204924_130_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204928_239_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204928_239_001.jpg",
+    "confidence": "0.036776"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204932_311_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204932_311_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204936_254_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204936_254_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204945_833_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204945_833_001.jpg",
+    "confidence": "0.029834"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204949_939_001.jpg",
+    "label": "아메리카노",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\아메리카노\\아메리카노_20260826_204949_939_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\아메리카노\\아메리카노_20260826_204954_009_001.jpg",
+    "label": "아메리카노",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\아메리카노\\아메리카노_20260826_204954_009_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_205942_985_001.jpg",
+    "label": "우유",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\우유\\우유_20260826_205942_985_001.jpg",
+    "confidence": "0.303372"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_205950_665_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_205950_665_001.jpg",
+    "confidence": "0.164753"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_205953_764_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_205953_764_001.jpg",
+    "confidence": "0.242288"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_205957_032_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_205957_032_001.jpg",
+    "confidence": "0.177005"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210000_412_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210000_412_001.jpg",
+    "confidence": "0.190713"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210003_219_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210003_219_001.jpg",
+    "confidence": "0.260219"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210007_891_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210007_891_001.jpg",
+    "confidence": "0.258349"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210013_428_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210013_428_001.jpg",
+    "confidence": "0.075627"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210016_738_001.jpg",
+    "label": "우유",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\우유\\우유_20260826_210016_738_001.jpg",
+    "confidence": "0.256801"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210020_314_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210020_314_001.jpg",
+    "confidence": "0.084605"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210023_570_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210023_570_001.jpg",
+    "confidence": "0.097292"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210026_658_001.jpg",
+    "label": "우유",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\우유\\우유_20260826_210026_658_001.jpg",
+    "confidence": "0.063056"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210029_512_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210029_512_001.jpg",
+    "confidence": "0.052043"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210032_225_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210032_225_001.jpg",
+    "confidence": "0.107014"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210035_168_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210035_168_001.jpg",
+    "confidence": "0.154395"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210038_181_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210038_181_001.jpg",
+    "confidence": "0.289394"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210041_152_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210041_152_001.jpg",
+    "confidence": "0.233852"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210048_218_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210048_218_001.jpg",
+    "confidence": "0.307912"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210052_552_001.jpg",
+    "label": "우유",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\우유\\우유_20260826_210052_552_001.jpg",
+    "confidence": "0.079384"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210058_250_001.jpg",
+    "label": "우유",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\우유\\우유_20260826_210058_250_001.jpg",
+    "confidence": "0.183857"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210104_630_001.jpg",
+    "label": "우유",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\우유\\우유_20260826_210104_630_001.jpg",
+    "confidence": "0.090498"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\우유\\우유_20260826_210107_764_001.jpg",
+    "label": "우유",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\우유\\우유_20260826_210107_764_001.jpg",
+    "confidence": "0.090908"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210544_171_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210544_171_001.jpg",
+    "confidence": "0.034698"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210613_622_001.jpg",
+    "label": "종이팩음료",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\종이팩음료\\종이팩음료_20260826_210613_622_001.jpg",
+    "confidence": "0.022443"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210616_345_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210616_345_001.jpg",
+    "confidence": "0.053982"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210618_867_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210618_867_001.jpg",
+    "confidence": "0.022535"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210621_774_001.jpg",
+    "label": "종이팩음료",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\종이팩음료\\종이팩음료_20260826_210621_774_001.jpg",
+    "confidence": "0.031745"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210625_169_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210625_169_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210629_156_001.jpg",
+    "label": "종이팩음료",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\종이팩음료\\종이팩음료_20260826_210629_156_001.jpg",
+    "confidence": "0.059629"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210632_554_001.jpg",
+    "label": "종이팩음료",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\종이팩음료\\종이팩음료_20260826_210632_554_001.jpg",
+    "confidence": "0.027897"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210636_244_001.jpg",
+    "label": "종이팩음료",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\종이팩음료\\종이팩음료_20260826_210636_244_001.jpg",
+    "confidence": "0.041012"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210639_813_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210639_813_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210644_168_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210644_168_001.jpg",
+    "confidence": "0.070540"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210647_130_001.jpg",
+    "label": "종이팩음료",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\종이팩음료\\종이팩음료_20260826_210647_130_001.jpg",
+    "confidence": "0.049730"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210650_157_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210650_157_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210653_876_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210653_876_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210657_852_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210657_852_001.jpg",
+    "confidence": "0.037959"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210706_648_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210706_648_001.jpg",
+    "confidence": "0.028763"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210708_748_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210708_748_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210710_920_001.jpg",
+    "label": "종이팩음료",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\종이팩음료\\종이팩음료_20260826_210710_920_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210712_958_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210712_958_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210716_013_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210716_013_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210718_245_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210718_245_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210720_592_001.jpg",
+    "label": "종이팩음료",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\종이팩음료\\종이팩음료_20260826_210720_592_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210723_878_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210723_878_001.jpg",
+    "confidence": "0.076776"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210726_761_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210726_761_001.jpg",
+    "confidence": "0.034453"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\종이팩음료\\종이팩음료_20260826_210730_370_001.jpg",
+    "label": "종이팩음료",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\종이팩음료\\종이팩음료_20260826_210730_370_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205444_608_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205444_608_001.jpg",
+    "confidence": "0.138003"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205448_528_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205448_528_001.jpg",
+    "confidence": "0.083507"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205451_930_001.jpg",
+    "label": "콜라",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\콜라\\콜라_20260826_205451_930_001.jpg",
+    "confidence": "0.025353"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205455_052_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205455_052_001.jpg",
+    "confidence": "0.027591"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205458_412_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205458_412_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205504_541_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205504_541_001.jpg",
+    "confidence": "0.051972"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205507_986_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205507_986_001.jpg",
+    "confidence": "0.036873"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205511_469_001.jpg",
+    "label": "콜라",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\콜라\\콜라_20260826_205511_469_001.jpg",
+    "confidence": "0.028684"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205515_240_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205515_240_001.jpg",
+    "confidence": "0.056900"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205518_092_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205518_092_001.jpg",
+    "confidence": "0.062425"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205521_555_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205521_555_001.jpg",
+    "confidence": "0.027599"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205525_682_001.jpg",
+    "label": "콜라",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\콜라\\콜라_20260826_205525_682_001.jpg",
+    "confidence": "0.055568"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205529_906_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205529_906_001.jpg",
+    "confidence": "0.144687"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205532_836_001.jpg",
+    "label": "콜라",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\콜라\\콜라_20260826_205532_836_001.jpg",
+    "confidence": "0.041346"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205536_153_001.jpg",
+    "label": "콜라",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\콜라\\콜라_20260826_205536_153_001.jpg",
+    "confidence": "0.159850"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205539_606_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205539_606_001.jpg",
+    "confidence": "0.068843"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205543_644_001.jpg",
+    "label": "콜라",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\콜라\\콜라_20260826_205543_644_001.jpg",
+    "confidence": "0.121617"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205547_862_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205547_862_001.jpg",
+    "confidence": "0.170858"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205553_265_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205553_265_001.jpg",
+    "confidence": "0.020319"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205558_214_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205558_214_001.jpg",
+    "confidence": "0.107031"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\콜라\\콜라_20260826_205604_399_001.jpg",
+    "label": "콜라",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\콜라\\콜라_20260826_205604_399_001.jpg",
+    "confidence": "0.175882"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210840_342_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210840_342_001.jpg",
+    "confidence": "0.030073"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210843_085_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210843_085_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210845_521_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210845_521_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210848_818_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210848_818_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210856_831_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210856_831_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210859_415_001.jpg",
+    "label": "파&마늘",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\파&마늘\\파&마늘_20260826_210859_415_001.jpg",
+    "confidence": "0.051162"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210902_318_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210902_318_001.jpg",
+    "confidence": "0.025696"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210905_242_001.jpg",
+    "label": "파&마늘",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\파&마늘\\파&마늘_20260826_210905_242_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210907_881_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210907_881_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210911_483_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210911_483_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210914_601_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210914_601_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210919_246_001.jpg",
+    "label": "파&마늘",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\파&마늘\\파&마늘_20260826_210919_246_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210921_937_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210921_937_001.jpg",
+    "confidence": "0.036359"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210926_172_001.jpg",
+    "label": "파&마늘",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\파&마늘\\파&마늘_20260826_210926_172_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210930_210_001.jpg",
+    "label": "파&마늘",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\파&마늘\\파&마늘_20260826_210930_210_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210933_425_001.jpg",
+    "label": "파&마늘",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\파&마늘\\파&마늘_20260826_210933_425_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210936_768_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210936_768_001.jpg",
+    "confidence": "0.032006"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210939_660_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210939_660_001.jpg",
+    "confidence": "0.029547"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210942_611_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210942_611_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210945_493_001.jpg",
+    "label": "파&마늘",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\val\\파&마늘\\파&마늘_20260826_210945_493_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210949_350_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210949_350_001.jpg",
+    "confidence": "0.058423"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210952_245_001.jpg",
+    "label": "파&마늘",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\test\\파&마늘\\파&마늘_20260826_210952_245_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210955_610_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210955_610_001.jpg",
+    "confidence": "0.024536"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_raw\\파&마늘\\파&마늘_20260826_210959_637_001.jpg",
+    "label": "파&마늘",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\instance_dataset_prepared\\train\\파&마늘\\파&마늘_20260826_210959_637_001.jpg"
+  }
+]
