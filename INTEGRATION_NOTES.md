@@ -49,7 +49,7 @@
 
 `part1-inout/tools/inout_classifier/server.py`와 `part2-container/browser_container_realtime.py`는
 지금 각자 로컬 브라우저 대시보드에만 결과를 보여준다. kang 백엔드의
-`POST /api/v1/refrigerator`가 정확히 이 두 파트의 결과를 받아서 자동 입출고 처리를
+`POST /api/v1/events/refrigerator`가 정확히 이 두 파트의 결과를 받아서 자동 입출고 처리를
 하도록 설계돼 있으니(스키마: `container_id`, `motion_direction`("in"/"out"),
 `recognition_status`, `confidence`, `food_name` 등), 두 스크립트에 HTTP POST 한 줄만
 추가하면 된다 — 다만 **실제 하드웨어로 재고가 정상 반영되는지 확인이 필요해서
@@ -68,7 +68,7 @@ import requests
 def report_to_backend(container_id: str, motion_direction: str, **extra):
     try:
         requests.post(
-            "http://<backend-host>:8000/api/v1/refrigerator",
+            "http://<backend-host>:8000/api/v1/events/refrigerator",
             json={
                 "container_id": container_id,
                 "motion_direction": motion_direction,  # "in" | "out"

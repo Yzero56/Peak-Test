@@ -57,7 +57,7 @@ docs/                발표 자료, 파트별 연동 계약, 프로젝트 개요
    cd part2-container && python browser_container_realtime.py <board-a-ip>
    ```
    ⚠️ 두 스크립트 모두 아직 로컬 대시보드에만 결과를 표시한다 — 백엔드
-   `/api/v1/refrigerator`로 자동 반영하는 연동은 [`INTEGRATION_NOTES.md`](INTEGRATION_NOTES.md)의
+   `/api/v1/events/refrigerator`로 자동 반영하는 연동은 [`INTEGRATION_NOTES.md`](INTEGRATION_NOTES.md)의
    "남은 작업" 참고.
 
 4. **보드 B(BME680 센서)** — `firmware/board-b-sensor/secrets.h.example`을 `secrets.h`로
