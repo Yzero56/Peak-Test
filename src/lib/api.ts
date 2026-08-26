@@ -15,6 +15,8 @@ async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> 
       headers: {
         'Content-Type': 'application/json',
         'X-App-Token': config.token,
+        // ngrok 무료 도메인은 이 헤더가 없으면 브라우저 요청에 HTML 경고 페이지를 끼워 넣는다.
+        'ngrok-skip-browser-warning': 'true',
         ...options.headers,
       },
     });
