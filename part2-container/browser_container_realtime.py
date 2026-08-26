@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import argparse
 import sys
+import threading
 import time
 from pathlib import Path
 
 import cv2
+import requests
 from flask import Flask, Response, jsonify, render_template_string
 
 from browser_container_recognition_v2 import RecognitionServiceV2
@@ -17,6 +19,36 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
+
+
+# [통합] kang 백엔드(/api/v1/detections)로 재식별 결과를 보고한다.
+# Part2는 "이 용기가 무엇인지"만 안다 — 그게 들어간 건지 나간 건지(motion_direction)는
+# 모른다. 그래서 재고를 직접 등록/소진하는 POST /api/v1/events/refrigerator(motion_direction
+# 필수)가 아니라, 탐지 이력만 남기는 POST /api/v1/detections로 보낸다. Part1(IN/OUT) 결과와
+# 같은 door 세션 안에서 합쳐 재고에 반영하는 건 아직 없는 별도 작업 —
+# INTEGRATION_NOTES.md 참고. 기본은 비활성(backend_url="") — --backend-url로 켠다.
+def report_detection_to_backend(backend_url: str, device_id: str, result: dict) -> None:
+    if not backend_url or result.get("status") != "matched" or not result.get("container_id"):
+        return
+
+    def _send():
+        try:
+            requests.post(
+                f"{backend_url.rstrip('/')}/api/v1/detections",
+                json={
+                    "device_id": device_id,
+                    "detections": [{
+                        "label": result["container_id"],
+                        "confidence": min(float(result["similarity"]), 1.0),
+                        "container_id": result["container_id"],
+                    }],
+                },
+                timeout=3,
+            )
+        except requests.RequestException as e:
+            print(f"[backend] 보고 실패: {e}")
+
+    threading.Thread(target=_send, daemon=True).start()
 
 PAGE = r"""<!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>실시간 용기 자동 인식</title>
@@ -59,7 +91,7 @@ loop();
 </script></body></html>"""
 
 
-def create_app(service: RecognitionServiceV2):
+def create_app(service: RecognitionServiceV2, backend_url: str = "", device_id: str = "board-a-door-container"):
     app = Flask(__name__)
 
     @app.get("/")
@@ -85,6 +117,7 @@ def create_app(service: RecognitionServiceV2):
             result, frame = service.recognize()
             result.update(width=frame.shape[1], height=frame.shape[0],
                           elapsed_seconds=round(time.perf_counter() - started, 2))
+            report_detection_to_backend(backend_url, device_id, result)
             return jsonify(result)
         except ValueError as error:
             return jsonify(status="no_detection", message=str(error),
@@ -102,11 +135,16 @@ def main():
     parser.add_argument("--log", type=Path, default=ROOT / "realtime_recognition_log.csv")
     parser.add_argument("--identity-threshold", type=float, default=DEFAULT_THRESHOLD_V2)
     parser.add_argument("--port", type=int, default=5002)
+    parser.add_argument("--backend-url", default="",
+                         help="kang 백엔드 주소(예: http://localhost:8000). 비우면 보고하지 않음(기본).")
+    parser.add_argument("--device-id", default="board-a-door-container")
     args = parser.parse_args()
     service = RecognitionServiceV2(args.address, args.db, args.log, args.identity_threshold)
     print("실시간 인식 프로그램이 ESP32 카메라 연결을 기다립니다.")
     print(f"브라우저 주소: http://127.0.0.1:{args.port}")
-    create_app(service).run(host="127.0.0.1", port=args.port, threaded=True, debug=False)
+    if args.backend_url:
+        print(f"[backend] 인식 결과를 {args.backend_url}/api/v1/detections 로 보고합니다 (device_id={args.device_id}).")
+    create_app(service, args.backend_url, args.device_id).run(host="127.0.0.1", port=args.port, threaded=True, debug=False)
 
 
 if __name__ == "__main__":

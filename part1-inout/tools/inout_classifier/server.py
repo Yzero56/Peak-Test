@@ -79,6 +79,44 @@ poll_interval = 0.3
 http_port = 8600
 stop_flag = threading.Event()
 
+# [통합] kang 백엔드(/api/v1/detections)로 판정 결과를 보고하는 설정.
+# 기본은 빈 문자열(비활성) — --backend-url을 명시적으로 줘야 전송한다(기존 동작 그대로 유지).
+# device_id는 board-a-door-container 펌웨어를 식별하는 값 — 여러 냉장고를 운영하게 되면
+# 보드마다 다르게 줘야 한다.
+backend_url = ""
+backend_device_id = "board-a-door-container"
+
+# Part1은 "무언가 들어갔다/나갔다"만 안다 — 그게 무엇인지(용기 종류)는 모른다.
+# 그래서 재고를 직접 등록/소진하는 POST /api/v1/events/refrigerator(container_id 필수)가
+# 아니라, 탐지 이력만 남기는 POST /api/v1/detections(container_id 선택)로 보낸다.
+# Part2(용기 인식) 결과와 같은 door 세션 안에서 합쳐 재고에 반영하는 건 아직 없는
+# 별도 작업 — INTEGRATION_NOTES.md 참고.
+_LABEL_TO_MOTION = {"in-pair": "in", "out-pair": "out"}
+
+
+def report_detection_to_backend(label: str, confidence: float) -> None:
+    if not backend_url:
+        return
+    motion_direction = _LABEL_TO_MOTION.get(label)
+    if motion_direction is None:
+        return  # hand_only-pair / uncertain은 재고 이벤트가 아니라서 보고하지 않는다
+
+    def _send():
+        try:
+            requests.post(
+                f"{backend_url.rstrip('/')}/api/v1/detections",
+                json={
+                    "device_id": backend_device_id,
+                    "motion_direction": motion_direction,
+                    "detections": [{"label": label, "confidence": confidence}],
+                },
+                timeout=3,
+            )
+        except requests.RequestException as e:
+            print(f"[backend] 보고 실패: {e}")
+
+    threading.Thread(target=_send, daemon=True).start()
+
 # 리드스위치는 "열림/닫힘" 이진 신호일 뿐, 문이 실제로 얼마나 열렸는지는 모른다.
 # 실측 확인: before는 열림 감지 후 0.6초만 기다려도 대체로 잘 나왔는데
 # (문이 빨리 열리고 한동안 유지되는 듯), after는 "닫힘 감지 시점보다 0.6초
@@ -443,6 +481,8 @@ def record_result(pair_filename: str | None, result: dict | None, ref_box, start
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     with state_lock:
         shared["latest_result"] = entry
+    if result is not None:
+        report_detection_to_backend(result["label"], result["confidence"])
 
 
 def finish_session(close_ts: float):
@@ -637,16 +677,23 @@ def serve_session_file(filename: str):
 
 
 def main():
-    global esp_host, poll_interval, http_port
+    global esp_host, poll_interval, http_port, backend_url, backend_device_id
     ap = argparse.ArgumentParser()
     ap.add_argument("--esp-host", default="192.168.4.1")
     ap.add_argument("--interval", type=float, default=0.3)
     ap.add_argument("--http-port", type=int, default=8600)
+    ap.add_argument("--backend-url", default="",
+                     help="kang 백엔드 주소(예: http://localhost:8000). 비우면 보고하지 않음(기본).")
+    ap.add_argument("--device-id", default="board-a-door-container")
     args = ap.parse_args()
 
     esp_host = args.esp_host
     poll_interval = args.interval
     http_port = args.http_port
+    backend_url = args.backend_url
+    backend_device_id = args.device_id
+    if backend_url:
+        print(f"[backend] 판정 결과를 {backend_url}/api/v1/detections 로 보고합니다 (device_id={backend_device_id}).")
 
     if not _EI_RUNNER_AVAILABLE:
         print("⚠ edge_impulse_linux 패키지가 없어서 분류는 건너뛰고 세션 감지/크롭까지만 동작합니다.")

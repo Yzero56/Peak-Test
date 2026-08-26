@@ -45,40 +45,29 @@
 
 ## 미해결 — 다음에 손봐야 할 것
 
-### 1. Part1/Part2 결과가 아직 백엔드에 안 올라간다 (가장 큰 공백)
+### 1. Part1/Part2 결과 → 백엔드 보고 (연결 완료, 재고 자동화는 아직)
 
-`part1-inout/tools/inout_classifier/server.py`와 `part2-container/browser_container_realtime.py`는
-지금 각자 로컬 브라우저 대시보드에만 결과를 보여준다. kang 백엔드의
-`POST /api/v1/events/refrigerator`가 정확히 이 두 파트의 결과를 받아서 자동 입출고 처리를
-하도록 설계돼 있으니(스키마: `container_id`, `motion_direction`("in"/"out"),
-`recognition_status`, `confidence`, `food_name` 등), 두 스크립트에 HTTP POST 한 줄만
-추가하면 된다 — 다만 **실제 하드웨어로 재고가 정상 반영되는지 확인이 필요해서
-일부러 자동으로 넣지 않았다.**
+`part1-inout/tools/inout_classifier/server.py`(`record_result()`)와
+`part2-container/browser_container_realtime.py`(`recognize_next()`)에 백엔드 보고 코드를
+추가했다. 둘 다 `--backend-url http://<host>:8000`을 주면(기본은 빈 문자열 = 비활성,
+기존 동작 그대로) 결과가 나올 때마다 별도 스레드로 `POST /api/v1/detections`를 보낸다 —
+실제 코드가 만드는 것과 동일한 payload로 로컬 백엔드에 쏴서 `GET /api/v1/detections`에
+정상 조회되는 것까지 확인함(하드웨어 없이, 코드 레벨로 검증한 것 — 실물 카메라로
+연속 호출될 때의 타이밍/스레드 동작은 아직 미검증).
 
-- YJ 쪽 삽입 지점: `part1-inout/tools/inout_classifier/server.py`의 `record_result()`
-  (판정이 나올 때마다 호출됨, `result["label"]`이 `"in"`/`"out"`/`"hand_only-pair"`).
-- Wa 쪽 삽입 지점: `part2-container/browser_container_realtime.py`의 `recognize_next()`
-  라우트(분류 `result` dict를 만든 직후).
+**왜 `/api/v1/events/refrigerator`(재고 자동 등록)가 아니라 `/api/v1/detections`(탐지 이력)로
+보내는지**: 재고를 등록/소진하려면 `container_id`(뭐가)와 `motion_direction`(들어갔는지
+나갔는지)이 둘 다 필요한데, Part1은 motion_direction만 알고 Part2는 container_id만 안다 —
+어느 한쪽도 혼자서는 유효한 `RefrigeratorEventCreate`를 못 만든다. 지금은 두 파트가
+각자 자기가 아는 것만 detections로 남기고, **같은 door 세션 안에서 둘을 시간으로
+매칭해서 최종 `/api/v1/events/refrigerator` 한 번을 호출하는 "브릿지"는 아직 없다**
+(board-a-door-container가 둘을 한 보드로 합친 이유가 이 매칭을 하려는 것이었는데,
+그 매칭 로직 자체는 별도 구현이 필요 — 만들지 여부는 팀 결정 필요).
 
-예시 POST (두 곳 공통으로 쓸 수 있는 형태):
-
-```python
-import requests
-
-def report_to_backend(container_id: str, motion_direction: str, **extra):
-    try:
-        requests.post(
-            "http://<backend-host>:8000/api/v1/events/refrigerator",
-            json={
-                "container_id": container_id,
-                "motion_direction": motion_direction,  # "in" | "out"
-                **extra,
-            },
-            timeout=3,
-        )
-    except requests.RequestException as e:
-        print(f"[backend] 보고 실패: {e}")
-```
+- YJ: `--backend-url`, `--device-id`(기본 `board-a-door-container`) 인자 추가.
+  `in-pair`/`out-pair`만 보고하고 `hand_only-pair`/`uncertain`은 보고 안 함.
+- Wa: `--backend-url`, `--device-id` 인자 추가. `status == "matched"`(알려진 용기로
+  확정 재식별됐을 때)만 보고.
 
 ### 2. board-b-sensor의 "지금 스캔하기" pull 흐름이 안 이어짐
 
