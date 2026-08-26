@@ -1,4 +1,15 @@
 <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="rounded-2xl bg-white p-4 shadow-sm hover:shadow-md">
+    <div class="flex items-center justify-between">
+      <a href="/fridge" class="font-bold hover:underline">우리집 냉장고</a>
+      <span class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if fridge_online else 'text-neutral-400' }}">
+        <span class="h-2 w-2 rounded-full {{ 'bg-emerald-500' if fridge_online else 'bg-neutral-300' }}"></span>
+        {{ "온라인" if fridge_online else "오프라인" }}
+      </span>
+    </div>
+    <p class="mt-1 text-xs text-neutral-400">kang 백엔드 연동</p>
+    <p class="mt-3 text-sm text-neutral-400">재고 · 센서값 · 스캔 결과 보기 →</p>
+  </div>
   {% for card in device_cards %}
   <div class="rounded-2xl bg-white p-4 shadow-sm hover:shadow-md">
     <div class="flex items-center justify-between">

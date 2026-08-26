@@ -42,7 +42,10 @@ export function createInventoryItems(items: Omit<InventoryItem, 'id'>[]): Promis
   });
 }
 
-export function patchInventoryItem(id: number, patch: Partial<Pick<InventoryItem, 'quantity' | 'expiresAt'>>): Promise<InventoryItem> {
+export function patchInventoryItem(
+  id: number,
+  patch: Partial<Pick<InventoryItem, 'name' | 'category' | 'location' | 'quantity' | 'expiresAt'>>,
+): Promise<InventoryItem> {
   return apiFetch<InventoryItem>(`/api/inventory/${id}`, {
     method: 'PATCH',
     body: JSON.stringify(patch),

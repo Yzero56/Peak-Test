@@ -9,7 +9,7 @@ from app import live_scan, services
 from app.config import get_settings
 from app.database import Base, SessionLocal, engine, ensure_schema
 from app.models import Device
-from app.routers import app_api, auth, dashboard, ingest
+from app.routers import app_api, auth, dashboard, ingest, presentation
 
 settings = get_settings()
 
@@ -32,6 +32,7 @@ app.include_router(auth.router)
 app.include_router(dashboard.router)
 app.include_router(ingest.router)
 app.include_router(app_api.router)
+app.include_router(presentation.router)
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 STATIC_DIR.mkdir(parents=True, exist_ok=True)

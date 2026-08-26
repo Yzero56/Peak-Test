@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./fridge.db"
     media_dir: str = "./media"
     food_safety_api_key: str = ""
+    kang_backend_url: str = "https://antonym-tighten-backdrop.ngrok-free.dev"
+    kang_fridge_device_id: str = "home-fridge-01"
 
     model_config = SettingsConfigDict(env_file=BACKEND_DIR / ".env", extra="ignore")
 

@@ -79,6 +79,7 @@ type FridgeContextValue = {
   openSheet: (id: number) => void;
   closeSheet: () => void;
   bumpSheetQty: (delta: number) => void;
+  updateSheetItem: (patch: Partial<Pick<InventoryItem, 'name' | 'category' | 'location' | 'expiresAt'>>) => void;
   removeSheetItem: () => void;
 
   setAddMode: (m: AddMode) => void;
@@ -403,6 +404,24 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  const updateSheetItem = useCallback(
+    (patch: Partial<Pick<InventoryItem, 'name' | 'category' | 'location' | 'expiresAt'>>) => {
+      setSheetItemId((currentId) => {
+        if (currentId == null) return currentId;
+        setItems((prev) => {
+          const snapshot = prev;
+          const next = prev.map((item) => (item.id === currentId ? { ...item, ...patch } : item));
+          if (backendConfigured.current) {
+            patchInventoryItem(currentId, patch).catch(() => setItems(snapshot));
+          }
+          return next;
+        });
+        return currentId;
+      });
+    },
+    [],
+  );
+
   const value = useMemo<FridgeContextValue>(
     () => ({
       items,
@@ -430,6 +449,7 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
       openSheet,
       closeSheet,
       bumpSheetQty: bumpSheetQtyImpl,
+      updateSheetItem,
       removeSheetItem,
 
       setAddMode,
@@ -456,7 +476,7 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
     [
       items, recipeCatalog, meals, rescuedCount, sheetItemId, toast, recipeSort, inventoryView, addMode,
       manualForm, scanned, scanCandidates, scanPicked, quickPicked, selectedDate, leadTime, toggles,
-      backendConnected, climate, openSheet, closeSheet, bumpSheetQtyImpl, removeSheetItem, updateManualForm, submitManualAdd,
+      backendConnected, climate, openSheet, closeSheet, bumpSheetQtyImpl, updateSheetItem, removeSheetItem, updateManualForm, submitManualAdd,
       startScan, toggleScanPick, submitScanAdd, toggleQuickPick, submitQuickAdd, resetAddFlow,
       cookRecipe, toggleSetting, dismissToast, runToastAction, loadFromBackend,
     ],

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}우리집 냉장고 · 냉장고 지킴이 관리자{% endblock %}
+{% block content %}
+{% if not read_only %}
+<a href="/" class="text-sm text-neutral-500 hover:text-neutral-900">← 개요</a>
+{% endif %}
+
+<div class="mt-2 flex items-center justify-between">
+  <div>
+    <h1 class="text-lg font-bold">우리집 냉장고</h1>
+    {% if not read_only %}
+    <p class="text-xs text-neutral-400">kang 백엔드 연동 · {{ kang_backend_url }}</p>
+    {% endif %}
+  </div>
+  <span class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if online else 'text-neutral-400' }}">
+    <span class="h-2 w-2 rounded-full {{ 'bg-emerald-500' if online else 'bg-neutral-300' }}"></span>
+    {{ "온라인" if online else "오프라인" }}
+  </span>
+</div>
+
+<div id="fridge-body" hx-get="{{ fridge_partial_url or '/partials/fridge' }}" hx-trigger="every 10s" hx-swap="innerHTML">
+  {% include "dashboard/_fridge_body.html" %}
+</div>
+{% endblock %}
