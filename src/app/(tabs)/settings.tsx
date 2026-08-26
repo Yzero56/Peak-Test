@@ -130,7 +130,7 @@ export default function SettingsScreen() {
           <View className="mt-3 gap-2.5">
             <TextInput
               className="min-h-[44px] rounded-xl bg-neutral-100 px-3 text-[15px] text-neutral-900"
-              placeholder="https://sitcom-clause-recipient.ngrok-free.dev"
+              placeholder="https://antonym-tighten-backdrop.ngrok-free.dev"
               placeholderTextColor="#a8adaa"
               autoCapitalize="none"
               autoCorrect={false}
