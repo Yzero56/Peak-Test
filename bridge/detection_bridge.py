@@ -14,7 +14,8 @@ board-a-door-container 한 보드에 YJ(리드스위치+IN/OUT 판정)와 Wa(용
 둘 다 --backend-url을 켜두면 각자 아는 것만 POST /api/v1/detections로 남긴다(이미
 연결해둠 — INTEGRATION_NOTES.md 참고). 이 브릿지는 그렇게 쌓인 detections를 device_id별로
 계속 지켜보다가, "컨테이너 이벤트"와 "모션 이벤트"가 서로 가까운 시각(--window-seconds,
-기본 8초 — YJ의 문 세션 프레임 버퍼 길이와 맞춤)에 나오면 짝지어서 최종
+기본 25초 — YJ의 문 세션 프레임 버퍼 길이 FRAME_LOG_MAX_S와 맞춤, 2026-08-27 8초→25초로
+늘어난 것 반영)에 나오면 짝지어서 최종
 POST /api/v1/events/refrigerator 한 번을 호출해 실제로 재고를 등록/소진시킨다.
 
 ## 한계 (의도적으로 단순하게 만든 부분)
@@ -172,7 +173,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("##")[0])
     ap.add_argument("--backend-url", default="http://localhost:8000")
     ap.add_argument("--device-id", default="board-a-door-container")
-    ap.add_argument("--window-seconds", type=float, default=8.0,
+    ap.add_argument("--window-seconds", type=float, default=25.0,
                      help="motion/container 이벤트를 같은 사건으로 볼 최대 시간 간격")
     ap.add_argument("--poll-interval", type=float, default=1.0)
     args = ap.parse_args()
