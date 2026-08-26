@@ -84,75 +84,38 @@ th{color:var(--muted);font-weight:600}
 .scene{display:none}
 .scene.active{display:block}
 
-/* ===== 대시보드+앱 스타일 3종 ===== */
-.style-picker{display:flex;gap:8px;margin-bottom:16px}
-.style-picker button{padding:8px 16px;border-radius:9px;border:1px solid var(--line);background:var(--panel);
-  color:var(--muted);cursor:pointer;font-size:13px;font-weight:700;font-family:inherit}
-.style-picker button.active{border-color:#f7f83e;color:#080909;background:#f7f83e}
-
-.stage{position:relative;background:#080909;border-radius:18px;padding:36px;height:calc(100vh - 200px);
-  display:flex;align-items:stretch;justify-content:center;gap:0;overflow:hidden}
+/* ===== 대시보드+앱: 오버랩 히어로 (대시보드 배경 + 폰이 앞으로 겹침, 폰은 정상 폭) ===== */
+.stage{position:relative;background:#080909;border-radius:18px;padding:60px 60px 70px;height:calc(100vh - 190px);
+  display:flex;align-items:stretch;justify-content:flex-start;overflow:visible}
 body.fs .stage{border-radius:0;height:100vh}
-@media(max-width:900px){.stage{flex-direction:column;height:auto;padding:20px}
-  .pane-app,.pane-dash{height:520px}}
+@media(max-width:900px){.stage{flex-direction:column;height:auto;padding:24px;overflow:visible}}
 
-.pane-app,.pane-dash{flex:none;min-width:220px;display:flex;flex-direction:column}
-.pane-app{width:420px}
-.pane-dash{width:560px}
-
-.chrome-browser{display:flex;align-items:center;gap:6px;background:#1c1e21;padding:9px 12px;border-radius:10px 10px 0 0;flex:none}
+.pane-dash{width:100%;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.chrome-browser{display:flex;align-items:center;gap:6px;background:#1c1e21;padding:9px 12px;flex:none}
 .chrome-browser .dot{width:9px;height:9px;border-radius:50%;flex:none}
 .chrome-browser .dot.r{background:#ec6a5e}.chrome-browser .dot.y{background:#f4bf4f}.chrome-browser .dot.g{background:#61c454}
 .chrome-browser .url{margin-left:8px;background:#0f1012;color:#8b93a1;font-size:11px;padding:4px 10px;border-radius:6px;
   font-family:ui-monospace,monospace;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pane-dash iframe{border:0;width:100%;flex:1;min-height:0;background:#fff}
 
-.phone-bezel{background:#111;border-radius:0 0 14px 14px;padding:0;position:relative;flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
-.phone-bezel .notch{display:none}
-.phone-bezel .home-bar{display:none}
-.phone-bezel iframe{border:0;width:100%;flex:1;min-height:0;background:#fff}
-
-.pane-dash > iframe{border:0;width:100%;flex:1;min-height:0;background:#fff;border-radius:0 0 14px 14px}
-
-.resizer{flex:none;width:16px;margin:0 -1px;cursor:col-resize;display:flex;align-items:center;justify-content:center;z-index:2}
-.resizer::after{content:'';width:4px;height:44px;border-radius:3px;background:#333}
-.resizer:hover::after,.resizer.dragging::after{background:#f7f83e}
-
-/* --- A: 클린 스플릿(브라우저 크롬만, 기본) --- */
-.stage[data-mode="a"] .pane-app,.stage[data-mode="a"] .pane-dash{box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.stage[data-mode="a"] .resizer{display:flex}
-
-/* --- B: 폰 베젤 + 브라우저 프레임 (고정 비율, 실물처럼, 세로로 꽉 참) --- */
-.stage[data-mode="b"] .resizer{display:none}
-.stage[data-mode="b"] .pane-app{width:380px!important}
-.stage[data-mode="b"] .pane-dash{width:640px!important}
-.stage[data-mode="b"] .chrome-browser{display:none}
-.stage[data-mode="b"] .pane-dash .chrome-browser{display:flex}
-.stage[data-mode="b"] .phone-bezel{border:12px solid #1a1a1a;border-radius:44px;box-shadow:0 30px 70px rgba(0,0,0,.55);
-  padding-top:34px}
-.stage[data-mode="b"] .phone-bezel .notch{display:block;position:absolute;top:12px;left:50%;transform:translateX(-50%);
-  width:90px;height:22px;background:#1a1a1a;border-radius:14px;z-index:3}
-.stage[data-mode="b"] .phone-bezel .home-bar{display:block;position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
-  width:110px;height:4px;background:#e6e6e6;border-radius:3px;z-index:3;opacity:.85}
-.stage[data-mode="b"] .pane-dash{box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.stage[data-mode="b"] .pane-dash > iframe{border-radius:0 0 10px 10px}
-
-/* --- C: 오버랩 히어로 (대시보드가 배경, 폰이 앞으로 겹침) --- */
-.stage[data-mode="c"]{justify-content:flex-start;padding:60px 60px 70px;align-items:stretch}
-.stage[data-mode="c"] .resizer{display:none}
-.stage[data-mode="c"] .pane-dash{width:100%!important;box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.stage[data-mode="c"] .pane-dash .chrome-browser{display:flex}
-.stage[data-mode="c"] .pane-app{position:absolute!important;left:60px;bottom:-40px;top:120px;width:300px!important;height:auto;z-index:4}
-.stage[data-mode="c"] .chrome-browser{display:none}
-.stage[data-mode="c"] .pane-app .phone-bezel{border:10px solid #1a1a1a;border-radius:36px;padding-top:26px;
+/* 폰 — 정상적인 폰 폭(390px, iPhone 기준)으로 고정. 실물 카메라 시연 때 옆에서
+   봐도 "이게 폰이구나"라고 바로 인지되는 게 목적이라 화면 비율보다 인지 가능한
+   폭을 우선했다. */
+.pane-app{position:absolute;left:60px;top:80px;bottom:-30px;width:390px;z-index:4;display:flex;flex-direction:column}
+@media(max-width:900px){.pane-app{position:static;width:340px;height:640px;margin-top:-40px;align-self:flex-start}}
+.phone-bezel{background:#111;border:12px solid #1a1a1a;border-radius:44px;padding-top:34px;position:relative;
+  flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;
   box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.06)}
-.stage[data-mode="c"] .pane-app .phone-bezel .notch{display:block;position:absolute;top:9px;left:50%;transform:translateX(-50%);
-  width:74px;height:18px;background:#1a1a1a;border-radius:12px;z-index:3}
-.stage[data-mode="c"] .pane-app .phone-bezel .home-bar{display:block;position:absolute;bottom:7px;left:50%;transform:translateX(-50%);
-  width:90px;height:3.5px;background:#e6e6e6;border-radius:3px;z-index:3;opacity:.85}
-@media(max-width:900px){
-  .stage[data-mode="c"]{flex-direction:column;height:auto;padding:20px}
-  .stage[data-mode="c"] .pane-app{position:static!important;margin-top:-30px;align-self:flex-start;height:480px}
-}
+.phone-bezel .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:90px;height:22px;
+  background:#1a1a1a;border-radius:14px;z-index:3}
+.phone-bezel .home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:4px;
+  background:#e6e6e6;border-radius:3px;z-index:3;opacity:.85}
+.phone-bezel iframe{border:0;width:100%;flex:1;min-height:0;background:#fff}
+.phone-resize-handle{position:absolute;right:-9px;bottom:40%;width:18px;height:44px;cursor:ew-resize;z-index:5}
+.phone-resize-handle::after{content:'';display:block;width:5px;height:44px;margin:0 auto;border-radius:3px;background:#333}
+.phone-resize-handle:hover::after,.phone-resize-handle.dragging::after{background:#f7f83e}
+
 .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
 .fsbtn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:9px 16px;border-radius:9px;
   cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;flex:none}
@@ -160,7 +123,6 @@ body.fs .stage{border-radius:0;height:100vh}
 body.fs{padding:0}
 body.fs .topbar,body.fs .tabs{display:none}
 body.fs .scene{padding:0}
-body.fs .style-picker{display:none}
 </style></head><body>
 <div class="topbar">
   <div>
@@ -200,86 +162,53 @@ body.fs .style-picker{display:none}
 </div>
 
 <div id="scene2" class="scene">
-<div class="style-picker">
-  <button id="modeBtnA" class="active" onclick="setMode('a')">A · 클린 스플릿</button>
-  <button id="modeBtnB" onclick="setMode('b')">B · 폰 + 브라우저 프레임</button>
-  <button id="modeBtnC" onclick="setMode('c')">C · 오버랩 히어로</button>
-</div>
-<div class="stage" id="stage" data-mode="a">
+<div class="stage" id="stage">
+  <div class="pane-dash" id="paneDash">
+    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">localhost:8000/dashboard/ — 웹 대시보드</span></div>
+    <iframe src="/proxy/dashboard-page"></iframe>
+  </div>
   <div class="pane-app" id="paneApp">
-    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="appUrl">localhost:8081</span></div>
     <div class="phone-bezel">
       <div class="notch"></div>
       <iframe src="/proxy/app-page"></iframe>
       <div class="home-bar"></div>
     </div>
-  </div>
-  <div class="resizer" id="resizer"></div>
-  <div class="pane-dash" id="paneDash">
-    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="dashUrl">localhost:8000/dashboard/</span></div>
-    <iframe src="/proxy/dashboard-page"></iframe>
+    <div id="phoneResizeHandle" class="phone-resize-handle" title="드래그해서 폰 폭 조절"></div>
   </div>
 </div>
 </div>
 <script>
-(function initResizer(){
-  const resizer = document.getElementById('resizer');
+(function initPhoneResize(){
+  // 폰 오른쪽 아래 모서리를 드래그하면 폰 폭만 조절된다(대시보드는 항상 배경 전체 폭).
   const paneApp = document.getElementById('paneApp');
-  const paneDash = document.getElementById('paneDash');
-  const appUrl = document.getElementById('appUrl');
-  const dashUrl = document.getElementById('dashUrl');
+  const handle = document.getElementById('phoneResizeHandle');
+  if(!paneApp || !handle) return;
 
-  // 이전에 드래그해서 맞춰둔 폭을 기억해둔다(새로고침해도 유지) — A 모드에서만 의미 있음.
   try{
-    const saved = JSON.parse(localStorage.getItem('peak-demo-panel-widths-v2') || 'null');
-    if(saved){ paneApp.style.width = saved.app + 'px'; paneDash.style.width = saved.dash + 'px'; }
+    const saved = localStorage.getItem('peak-demo-panel-phone-width');
+    if(saved) paneApp.style.width = saved + 'px';
   }catch(e){}
-  function updateLabels(){
-    appUrl.textContent = `localhost:8081 · ${Math.round(paneApp.getBoundingClientRect().width)}px`;
-    dashUrl.textContent = `localhost:8000/dashboard/ · ${Math.round(paneDash.getBoundingClientRect().width)}px`;
-  }
-  updateLabels();
 
-  let dragging = false, startX = 0, startApp = 0, startDash = 0;
-  resizer.addEventListener('mousedown', (e) => {
-    dragging = true; startX = e.clientX;
-    startApp = paneApp.getBoundingClientRect().width;
-    startDash = paneDash.getBoundingClientRect().width;
-    resizer.classList.add('dragging');
+  let dragging = false, startX = 0, startW = 0;
+  handle.addEventListener('mousedown', (e) => {
+    dragging = true; startX = e.clientX; startW = paneApp.getBoundingClientRect().width;
+    handle.classList.add('dragging');
     document.body.style.userSelect = 'none';
+    e.preventDefault();
   });
   window.addEventListener('mousemove', (e) => {
     if(!dragging) return;
-    const dx = e.clientX - startX;
-    const newApp = Math.max(240, startApp + dx);
-    const newDash = Math.max(240, startDash - dx);
-    paneApp.style.width = newApp + 'px';
-    paneDash.style.width = newDash + 'px';
-    updateLabels();
+    const w = Math.max(260, Math.min(560, startW + (e.clientX - startX)));
+    paneApp.style.width = w + 'px';
   });
   window.addEventListener('mouseup', () => {
     if(!dragging) return;
     dragging = false;
-    resizer.classList.remove('dragging');
+    handle.classList.remove('dragging');
     document.body.style.userSelect = '';
-    try{
-      localStorage.setItem('peak-demo-panel-widths-v2', JSON.stringify({
-        app: Math.round(paneApp.getBoundingClientRect().width),
-        dash: Math.round(paneDash.getBoundingClientRect().width),
-      }));
-    }catch(e){}
+    try{ localStorage.setItem('peak-demo-panel-phone-width', Math.round(paneApp.getBoundingClientRect().width)); }catch(e){}
   });
 })();
-
-function setMode(m){
-  document.getElementById('stage').dataset.mode = m;
-  ['A','B','C'].forEach(k => document.getElementById('modeBtn'+k).classList.toggle('active', k.toLowerCase()===m));
-  try{ localStorage.setItem('peak-demo-panel-mode', m); }catch(e){}
-}
-try{
-  const savedMode = localStorage.getItem('peak-demo-panel-mode');
-  if(savedMode) setMode(savedMode);
-}catch(e){}
 
 function toggleFullscreen(){
   if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); document.body.classList.add('fs'); }
