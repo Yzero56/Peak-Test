@@ -1,12 +1,18 @@
 """demo_panel.py — 발표용 통합 대시보드 한 장.
 
-지금은 백엔드(8000)·mock 보드(9000)·YJ(8601)·Wa(5007)가 전부 따로 떨어진 탭이라
-발표 중에 알트탭을 반복해야 한다. 이 스크립트는 그 넷을 전부 서버사이드로
-대신 호출해서(=CORS 문제 없음, 각 서버 코드 수정 없음) 결과를 **탭 하나**에
-모아 보여준다:
+지금은 백엔드(8000)·mock 보드(9000)·YJ(8601)·Wa(5007)·앱(8081)이 전부 따로 떨어진
+탭이라 발표 중에 알트탭을 반복해야 한다. 이 스크립트는 그걸 전부 **탭 하나**에
+모아 보여준다. 레이아웃은 실제 시연 순서 그대로 위→아래로 읽힌다:
 
-  [카메라 미리보기 + (mock 전용) 문 열기/닫기 버튼] [YJ 최신 판정] [Wa 최근 인식]
-  [재고 목록(실시간)]                                              [최근 이벤트 로그]
+  1~3단계: [카메라 미리보기 + (mock 전용) 문 열기/닫기 버튼] [YJ 최신 판정 · Wa 최근 인식]
+  4단계:   [웹 대시보드 — 진짜 화면 iframe]   [앱 — 진짜 화면 iframe]
+           [최근 이벤트 로그]
+
+즉 "냉장고 OUT → (동시에) 용기인식 → 백엔드 등록 → 웹 대시보드에서 확인"과
+"만든 음식 IN → 용기인식 → 백엔드 등록 → 웹 대시보드에서 확인" 두 사이클 다,
+카메라/인식 증명(위)과 그 결과가 반영된 실제 화면(아래)을 화면 전환 없이 한 번에
+보여준다. 대시보드·앱은 재고 요약을 흉내낸 게 아니라 진짜 그 서비스를 iframe으로
+그대로 띄운 것 — 재고 테이블 대신 이걸 넣은 이유.
 
 ⚠ **문 열기/닫기는 실제 시스템에서 버튼이 아니다.** 실물 보드에서는 리드스위치가
 문 상태를 자동으로 감지해서 GET /door에 반영할 뿐, 수동으로 열고 닫는 조작 자체가
@@ -40,6 +46,7 @@ CONFIG = {
     "board": "http://localhost:9000",
     "yj": "http://localhost:8601",
     "wa": "http://localhost:5007",
+    "app": "http://localhost:8081",
 }
 
 PAGE = r"""<!doctype html><html lang="ko"><head><meta charset="utf-8">
@@ -64,12 +71,25 @@ h1{font-size:20px;margin:0 0 4px}.sub{color:var(--muted);font-size:13px;margin-b
 table{width:100%;border-collapse:collapse;font-size:13px}
 td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}
 th{color:var(--muted);font-weight:600}
-#log{font-size:12px;color:var(--muted);max-height:160px;overflow-y:auto;font-family:ui-monospace,monospace;line-height:1.6}
+#log{font-size:12px;color:var(--muted);max-height:120px;overflow-y:auto;font-family:ui-monospace,monospace;line-height:1.6}
 .wide{grid-column:1/-1}
 .stat{font-size:13px;margin:4px 0}
+.step{display:flex;align-items:center;gap:10px;margin:22px 0 12px}
+.step .n{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.step .t{font-size:13px;font-weight:700;color:var(--text)}
+.step .d{flex:1;height:1px;background:var(--line)}
+.iframe-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:900px){.iframe-grid{grid-template-columns:1fr}}
+.iframe-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.iframe-card .label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  padding:10px 14px;border-bottom:1px solid var(--line)}
+.iframe-card iframe{border:0;width:100%;height:480px;background:#fff}
 </style></head><body>
 <h1>🧊 PEAK Smart — 라이브 데모 패널</h1>
-<div class="sub">냉장고 OUT/IN → 인식 → 백엔드 등록 → 대시보드 반영까지 한 화면에서 확인 (실물 보드는 리드스위치가 자동 감지, mock일 때만 아래 버튼으로 테스트)</div>
+<div class="sub">위: 냉장고 OUT/IN 순간 카메라가 실제로 인식하는 과정. 아래: 그 결과가 반영된 진짜 화면. (실물 보드는 리드스위치가 자동 감지, mock일 때만 문 열기 버튼으로 테스트)</div>
+
+<div class="step"><span class="n">1</span><span class="t">식재료 OUT/IN + 용기인식 (카메라가 실시간으로 보는 것)</span><span class="d"></span></div>
 <div class="grid">
   <div class="card">
     <h2>카메라 (board-a)</h2>
@@ -86,15 +106,23 @@ th{color:var(--muted);font-weight:600}
     <div class="stat">Wa (용기/물건): <span id="waState" class="pill idle">-</span></div>
     <div id="waResult" class="stat">-</div>
   </div>
-  <div class="card wide">
-    <h2>재고 (백엔드 실시간)</h2>
-    <table><thead><tr><th>이름</th><th>상태</th><th>container_id</th><th>D-day</th></tr></thead>
-      <tbody id="inventoryBody"></tbody></table>
+</div>
+
+<div class="step"><span class="n">2</span><span class="t">백엔드 등록 → 웹 대시보드 · 앱에서 확인 (진짜 화면, 실시간)</span><span class="d"></span></div>
+<div class="iframe-grid">
+  <div class="iframe-card">
+    <div class="label">웹 대시보드</div>
+    <iframe src="/proxy/dashboard-page"></iframe>
   </div>
-  <div class="card wide">
-    <h2>최근 이벤트 로그</h2>
-    <div id="log"></div>
+  <div class="iframe-card">
+    <div class="label">앱</div>
+    <iframe src="/proxy/app-page"></iframe>
   </div>
+</div>
+
+<div class="card wide" style="margin-top:14px">
+  <h2>최근 이벤트 로그</h2>
+  <div id="log"></div>
 </div>
 <script>
 let doorOpen = false, waLoopTimer = null;
@@ -137,7 +165,7 @@ async function toggleDoor(){
   await fetch('/proxy/door', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({open: next})});
   logLine(next ? '🚪 문 열림 — Wa 인식 시작 (실물 카메라면 지금 물건을 보여주세요)' : '🚪 문 닫힘 — YJ 판정 + bridge 매칭 대기 중');
   await refreshDoor();
-  if(next){ startWaLoop(); } else { stopWaLoop(); setTimeout(refreshInventory, 6000); }
+  if(next){ startWaLoop(); } else { stopWaLoop(); logLine('⏳ 대시보드·앱은 자체적으로 몇 초 내 자동 갱신됩니다'); }
   btn.disabled = false;
 }
 
@@ -169,26 +197,12 @@ async function waClassifyOnce(){
 function startWaLoop(){ stopWaLoop(); waClassifyOnce(); waLoopTimer = setInterval(waClassifyOnce, 1200); }
 function stopWaLoop(){ if(waLoopTimer){ clearInterval(waLoopTimer); waLoopTimer = null; } }
 
-async function refreshInventory(){
-  try{
-    const r = await fetch('/proxy/dashboard'); const d = await r.json();
-    const body = document.getElementById('inventoryBody');
-    body.innerHTML = (d.items||[]).map(i => `<tr>
-      <td>${i.display_name}</td>
-      <td><span class="pill ${i.expiry_status==='expired'?'bad':(i.expiry_status==='expiring_soon'?'warn':'good')}">${i.status}</span></td>
-      <td>${i.container_id ?? '-'}</td>
-      <td>${i.days_remaining ?? '-'}</td>
-    </tr>`).join('');
-  }catch(e){}
-}
-
 document.getElementById('cam').addEventListener('error', function(){ this.src = this.src; });
 setInterval(()=>{ document.getElementById('cam').src = '/proxy/camera.jpg?t=' + Date.now(); }, 700);
 setInterval(refreshDoor, 1500);
 setInterval(refreshBoardMode, 5000);
 setInterval(refreshYJ, 1500);
-setInterval(refreshInventory, 2500);
-refreshDoor(); refreshYJ(); refreshInventory(); refreshBoardMode();
+refreshDoor(); refreshYJ(); refreshBoardMode();
 </script>
 </body></html>"""
 
@@ -252,6 +266,20 @@ def make_handler():
             elif path == "/proxy/dashboard":
                 status, body = _get(f"{CONFIG['backend']}/api/v1/dashboard/summary")
                 self._send(status if status < 400 else 503, "application/json", body)
+            elif path == "/proxy/dashboard-page":
+                # 대시보드/앱은 API 응답만 있는 게 아니라 자체 JS·CSS 에셋을 상대경로로
+                # 물고 오는 완전한 페이지라, 이 서버가 내용을 대신 fetch해서 재서빙하면
+                # (다른 proxy/* 처럼) 그 상대경로들이 이 프록시 기준으로 깨진다. 그래서
+                # 내용을 프록시하는 대신, iframe이 실제 origin으로 바로 이동하도록
+                # 리다이렉트만 해준다 — CONFIG(=--backend-url 등 인자)를 그대로 반영하기
+                # 위한 간접 참조일 뿐, 페이지 자체는 항상 진짜 서버가 직접 서빙한다.
+                self.send_response(302)
+                self.send_header("Location", f"{CONFIG['backend']}/dashboard/")
+                self.end_headers()
+            elif path == "/proxy/app-page":
+                self.send_response(302)
+                self.send_header("Location", CONFIG["app"])
+                self.end_headers()
             else:
                 self._send(404, "text/plain", b"not found")
 
@@ -282,12 +310,13 @@ def main():
     ap.add_argument("--board-url", default=CONFIG["board"])
     ap.add_argument("--yj-url", default=CONFIG["yj"])
     ap.add_argument("--wa-url", default=CONFIG["wa"])
+    ap.add_argument("--app-url", default=CONFIG["app"])
     args = ap.parse_args()
-    CONFIG.update(backend=args.backend_url, board=args.board_url, yj=args.yj_url, wa=args.wa_url)
+    CONFIG.update(backend=args.backend_url, board=args.board_url, yj=args.yj_url, wa=args.wa_url, app=args.app_url)
 
     server = ThreadingHTTPServer(("0.0.0.0", args.port), make_handler())
     print(f"[demo-panel] http://localhost:{args.port} 에서 대기 중")
-    print(f"[demo-panel]   backend={CONFIG['backend']} board={CONFIG['board']} yj={CONFIG['yj']} wa={CONFIG['wa']}")
+    print(f"[demo-panel]   backend={CONFIG['backend']} board={CONFIG['board']} yj={CONFIG['yj']} wa={CONFIG['wa']} app={CONFIG['app']}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
