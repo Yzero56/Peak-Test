@@ -80,6 +80,34 @@ def latest_reading(db: Session, device_id: str) -> SensorReading | None:
     return db.execute(stmt).scalar_one_or_none()
 
 
+def latest_climate_reading(db: Session) -> SensorReading | None:
+    """단일 냉장고 가정 — 기기 구분 없이 온습도가 채워진 가장 최근 판독값 하나를 가져온다.
+
+    (문 상태만 담긴 판독값은 temperature_c가 비어있어 대상에서 제외한다.)
+    """
+    stmt = (
+        select(SensorReading)
+        .where(SensorReading.temperature_c.is_not(None))
+        .order_by(SensorReading.recorded_at.desc())
+        .limit(1)
+    )
+    return db.execute(stmt).scalar_one_or_none()
+
+
+def chart_points(db: Session, device_id: str, limit: int = 50) -> list[dict]:
+    """온습도 추이 차트용 포인트 — 차트 라벨이 문자열을 그대로 슬라이싱해서 시:분을 뽑아
+    쓰므로(JS Date 파싱 아님) KST로 미리 변환해서 내려준다."""
+    readings = recent_readings(db, device_id, limit=limit)
+    return [
+        {
+            "t": to_kst(r.recorded_at).isoformat(),
+            "temperature_c": r.temperature_c,
+            "humidity_pct": r.humidity_pct,
+        }
+        for r in reversed(readings)
+    ]
+
+
 def recent_readings(db: Session, device_id: str, limit: int = 50) -> list[SensorReading]:
     stmt = (
         select(SensorReading)

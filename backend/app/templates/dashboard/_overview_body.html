@@ -61,16 +61,3 @@
   </p>
   {% endfor %}
 </div>
-
-<h2 class="mb-3 mt-8 text-sm font-bold text-neutral-700">최근 캡처</h2>
-<div class="flex gap-3 overflow-x-auto pb-2">
-  {% for capture in captures %}
-  <a href="/captures/{{ capture.id }}" class="block flex-none">
-    <img
-      src="/media/captures/{{ capture.id }}?t={{ capture.captured_at.strftime('%Y%m%d%H%M%S%f') }}"
-      class="h-28 w-28 rounded-xl object-cover" />
-  </a>
-  {% else %}
-  <p class="text-sm text-neutral-400">아직 캡처된 사진이 없어요</p>
-  {% endfor %}
-</div>

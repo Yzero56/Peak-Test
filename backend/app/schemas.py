@@ -51,3 +51,27 @@ class ScanCandidateOut(BaseModel):
     expiresAt: str
     category: str
     location: str
+
+
+class ClimateOut(BaseModel):
+    """앱 홈 화면에 보여줄 냉장고 온습도 — 단일 냉장고 가정이라 기기 구분 없이 하나만 내려준다."""
+
+    temperatureC: float | None = None
+    humidityPct: float | None = None
+
+
+class RecipeIngredientOut(BaseModel):
+    name: str
+    amount: str
+    essential: bool
+
+
+class RecipeOut(BaseModel):
+    id: str
+    title: str
+    time: str
+    level: str
+    kcal: int
+    note: str
+    uses: list[RecipeIngredientOut]
+    steps: list[str]

@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     secret_key: str
     database_url: str = "sqlite:///./fridge.db"
     media_dir: str = "./media"
+    food_safety_api_key: str = ""
 
     model_config = SettingsConfigDict(env_file=BACKEND_DIR / ".env", extra="ignore")
 

@@ -108,7 +108,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script>
   const points = {{ chart_points_json | safe }};
-  new Chart(document.getElementById("readingsChart"), {
+  const readingsChart = new Chart(document.getElementById("readingsChart"), {
     type: "line",
     data: {
       labels: points.map((p) => p.t.slice(11, 16)),
@@ -192,6 +192,16 @@
   refreshDeviceStatus();
   setInterval(refreshDeviceStatus, 2000);
 
+  async function refreshChart() {
+    const res = await fetch("/partials/devices/{{ device.id }}/chart");
+    if (!res.ok) return;
+    const data = await res.json();
+    readingsChart.data.labels = data.points.map((p) => p.t.slice(11, 16));
+    readingsChart.data.datasets[0].data = data.points.map((p) => p.temperature_c);
+    readingsChart.data.datasets[1].data = data.points.map((p) => p.humidity_pct);
+    readingsChart.update();
+  }
+
   // 온도/습도/가스는 도어·카메라 스트림만큼 반응성이 필요하지 않아 5분 간격으로 갱신.
   async function refreshEnvStatus() {
     try {
@@ -220,6 +230,8 @@
       if (gasAnomalyBadge) {
         gasAnomalyBadge.classList.toggle("hidden", !data.gas_anomaly);
       }
+
+      await refreshChart();
     } catch (err) {
       // 네트워크 순간 끊김 정도는 무시하고 다음 폴링에서 다시 시도한다.
     }

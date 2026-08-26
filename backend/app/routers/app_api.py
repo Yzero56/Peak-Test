@@ -8,10 +8,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app import recipes as recipes_service
 from app import services
 from app.database import get_db
 from app.models import InventoryItem
-from app.schemas import InventoryItemIn, InventoryItemOut, InventoryItemPatch, ScanCandidateOut
+from app.schemas import ClimateOut, InventoryItemIn, InventoryItemOut, InventoryItemPatch, RecipeOut, ScanCandidateOut
 from app.security import require_app_token
 
 router = APIRouter(prefix="/api", tags=["app"], dependencies=[Depends(require_app_token)])
@@ -87,6 +88,21 @@ def delete_inventory_item(item_id: int, db: Session = Depends(get_db)) -> None:
         raise HTTPException(status_code=404, detail="Inventory item not found")
     db.delete(item)
     db.commit()
+
+
+@router.get("/climate", response_model=ClimateOut)
+def climate(db: Session = Depends(get_db)) -> ClimateOut:
+    reading = services.latest_climate_reading(db)
+    if reading is None:
+        return ClimateOut()
+    return ClimateOut(temperatureC=reading.temperature_c, humidityPct=reading.humidity_pct)
+
+
+@router.get("/recipes", response_model=list[RecipeOut])
+def list_recipes() -> list[RecipeOut]:
+    """식품안전나라 레시피 DB에서 가져온 추천 레시피. 키 미설정/요청 실패 시 빈 리스트를
+    반환하며, 앱은 이 경우 자체 목업 레시피로 폴백한다."""
+    return [RecipeOut(**r) for r in recipes_service.fetch_recipes()]
 
 
 @router.get("/scan-candidates", response_model=list[ScanCandidateOut])

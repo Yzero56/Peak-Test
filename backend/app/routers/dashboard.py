@@ -37,22 +37,20 @@ def _device_card(db: Session, device: Device) -> dict:
 @router.get("/", response_class=HTMLResponse)
 def overview(request: Request, db: Session = Depends(get_db)):
     devices = [_device_card(db, d) for d in services.all_devices(db)]
-    captures = services.recent_captures(db, limit=12)
     return templates.TemplateResponse(
         request,
         "dashboard/overview.html",
-        {"device_cards": devices, "captures": captures},
+        {"device_cards": devices},
     )
 
 
 @router.get("/partials/overview", response_class=HTMLResponse)
 def overview_partial(request: Request, db: Session = Depends(get_db)):
     devices = [_device_card(db, d) for d in services.all_devices(db)]
-    captures = services.recent_captures(db, limit=12)
     return templates.TemplateResponse(
         request,
         "dashboard/_overview_body.html",
-        {"device_cards": devices, "captures": captures},
+        {"device_cards": devices},
     )
 
 
@@ -92,16 +90,6 @@ def device_detail(request: Request, device_id: str, scan_error: str | None = Non
         raise HTTPException(status_code=404, detail="Device not found")
 
     readings = services.recent_readings(db, device_id, limit=50)
-    chart_points = [
-        {
-            # 차트 라벨이 문자열을 그대로 슬라이싱해서 시:분을 뽑아 쓰므로(JS Date 파싱 아님)
-            # KST로 미리 변환한 값을 내려줘야 화면에 실제 시각이 맞게 뜬다.
-            "t": services.to_kst(r.recorded_at).isoformat(),
-            "temperature_c": r.temperature_c,
-            "humidity_pct": r.humidity_pct,
-        }
-        for r in reversed(readings)
-    ]
     captures = services.recent_captures(db, device_id, limit=1)
     return templates.TemplateResponse(
         request,
@@ -116,7 +104,7 @@ def device_detail(request: Request, device_id: str, scan_error: str | None = Non
             "baseline_gas_resistance_ohm": device.baseline_gas_resistance_ohm,
             "door_events": services.recent_door_events(db, device_id),
             "capture": captures[0] if captures else None,
-            "chart_points_json": json.dumps(chart_points),
+            "chart_points_json": json.dumps(services.chart_points(db, device_id)),
             "scan_error": scan_error,
             "live_active": live_scan.is_active(device_id),
             "camera_on": bool(readings and readings[0].door_open),
@@ -143,6 +131,12 @@ def device_status(device_id: str, db: Session = Depends(get_db)) -> dict:
         "gas_status": services.classify_gas(reading.gas_resistance_ohm) if reading else "알 수 없음",
         "gas_anomaly": services.gas_anomaly(device, reading.gas_resistance_ohm if reading else None),
     }
+
+
+@router.get("/partials/devices/{device_id}/chart")
+def device_chart(device_id: str, db: Session = Depends(get_db)) -> dict:
+    """온습도 추이 그래프가 새로고침 없이 스스로 갱신되도록 최신 포인트를 내려준다."""
+    return {"points": services.chart_points(db, device_id)}
 
 
 @router.get("/partials/devices/{device_id}/live", response_class=HTMLResponse)
