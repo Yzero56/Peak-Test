@@ -83,51 +83,27 @@ th{color:var(--muted);font-weight:600}
 .tabs button.active .num{background:var(--accent)}
 .scene{display:none}
 .scene.active{display:block}
-
-/* ===== 대시보드+앱: 오버랩 히어로 (대시보드 배경 + 폰이 앞으로 겹침, 폰은 정상 폭) ===== */
-.stage{position:relative;background:#080909;border-radius:18px;padding:60px;height:calc(100vh - 190px);
-  display:flex;align-items:center;justify-content:center;overflow:visible}
-body.fs .stage{border-radius:0;height:100vh}
-@media(max-width:900px){.stage{flex-direction:column;height:auto;padding:24px;overflow:visible}}
-
-/* 대시보드 자체 콘텐츠 폭(내부 .wrap max-width:1040px)에 맞춰 브라우저 창 비율이
-   과하게 옆으로 안 늘어나게 캡을 씌운다 — 전에는 stage 전체 폭(거의 화면 끝까지)로
-   늘어나서 "브라우저 창인데 왜 이렇게 옆으로 길쭉하지"처럼 보였다. */
-.composition{position:relative;width:min(1120px,100%);height:100%;display:flex}
-@media(max-width:900px){.composition{display:block;height:auto}}
-
-.pane-dash{width:100%;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);
-  border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.chrome-browser{display:flex;align-items:center;gap:6px;background:#1c1e21;padding:9px 12px;flex:none}
-.chrome-browser .dot{width:9px;height:9px;border-radius:50%;flex:none}
-.chrome-browser .dot.r{background:#ec6a5e}.chrome-browser .dot.y{background:#f4bf4f}.chrome-browser .dot.g{background:#61c454}
-.chrome-browser .url{margin-left:8px;background:#0f1012;color:#8b93a1;font-size:11px;padding:4px 10px;border-radius:6px;
-  font-family:ui-monospace,monospace;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pane-dash iframe{border:0;width:100%;flex:1;min-height:0;background:#fff}
-
-/* 폰 — 정상적인 폰 폭(390px, iPhone 기준)으로 고정. composition 기준으로 왼쪽 아래에
-   겹치게 배치(= stage가 아니라 대시보드 박스 자체의 왼쪽 아래 모서리). */
-.pane-app{position:absolute;left:-24px;top:60px;bottom:-40px;width:390px;z-index:4;display:flex;flex-direction:column}
-@media(max-width:900px){.pane-app{position:static;width:340px;height:640px;margin-top:-40px;align-self:flex-start}}
-.phone-bezel{background:#111;border:12px solid #1a1a1a;border-radius:44px;padding-top:34px;position:relative;
-  flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;
-  box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.06)}
-.phone-bezel .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:90px;height:22px;
-  background:#1a1a1a;border-radius:14px;z-index:3}
-.phone-bezel .home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:4px;
-  background:#e6e6e6;border-radius:3px;z-index:3;opacity:.85}
-.phone-bezel iframe{border:0;width:100%;flex:1;min-height:0;background:#fff}
-.phone-resize-handle{position:absolute;right:-9px;bottom:40%;width:18px;height:44px;cursor:ew-resize;z-index:5}
-.phone-resize-handle::after{content:'';display:block;width:5px;height:44px;margin:0 auto;border-radius:3px;background:#333}
-.phone-resize-handle:hover::after,.phone-resize-handle.dragging::after{background:#f7f83e}
-
+.iframe-grid{display:flex;gap:0;height:calc(100vh - 150px);justify-content:center}
+@media(max-width:900px){.iframe-grid{flex-direction:column;height:auto}}
+.iframe-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
+  flex:none;min-width:240px}
+.iframe-card .label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.iframe-card .label .px{font-weight:400;text-transform:none;letter-spacing:0;opacity:.7}
+.iframe-card iframe{border:0;width:100%;flex:1;min-height:420px;background:#fff}
+.resizer{flex:none;width:16px;margin:0 -1px;cursor:col-resize;display:flex;align-items:center;justify-content:center;
+  z-index:2;position:relative}
+.resizer::after{content:'';width:4px;height:44px;border-radius:3px;background:var(--line)}
+.resizer:hover::after,.resizer.dragging::after{background:var(--accent)}
+@media(max-width:900px){.resizer{display:none}}
 .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
 .fsbtn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:9px 16px;border-radius:9px;
   cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;flex:none}
 .fsbtn:hover{border-color:var(--accent)}
 body.fs{padding:0}
 body.fs .topbar,body.fs .tabs{display:none}
-body.fs .scene{padding:0}
+body.fs .scene{padding:14px}
+body.fs .iframe-grid{height:100vh}
 </style></head><body>
 <div class="topbar">
   <div>
@@ -167,53 +143,65 @@ body.fs .scene{padding:0}
 </div>
 
 <div id="scene2" class="scene">
-<div class="stage" id="stage">
-  <div class="composition">
-    <div class="pane-dash" id="paneDash">
-      <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">localhost:8000/dashboard/ — 웹 대시보드</span></div>
-      <iframe src="/proxy/dashboard-page"></iframe>
-    </div>
-    <div class="pane-app" id="paneApp">
-      <div class="phone-bezel">
-        <div class="notch"></div>
-        <iframe src="/proxy/app-page"></iframe>
-        <div class="home-bar"></div>
-      </div>
-      <div id="phoneResizeHandle" class="phone-resize-handle" title="드래그해서 폰 폭 조절"></div>
-    </div>
+<div class="iframe-grid" id="iframeGrid">
+  <div class="iframe-card" id="paneApp" style="width:400px">
+    <div class="label"><span>앱 (폰 사이즈)</span><span class="px" id="appPx">400px</span></div>
+    <iframe src="/proxy/app-page"></iframe>
+  </div>
+  <div class="resizer" id="resizer"></div>
+  <div class="iframe-card" id="paneDash" style="width:520px">
+    <div class="label"><span>웹 대시보드</span><span class="px" id="dashPx">520px</span></div>
+    <iframe src="/proxy/dashboard-page"></iframe>
   </div>
 </div>
 </div>
 <script>
-(function initPhoneResize(){
-  // 폰 오른쪽 아래 모서리를 드래그하면 폰 폭만 조절된다(대시보드는 항상 배경 전체 폭).
+(function initResizer(){
+  const resizer = document.getElementById('resizer');
   const paneApp = document.getElementById('paneApp');
-  const handle = document.getElementById('phoneResizeHandle');
-  if(!paneApp || !handle) return;
+  const paneDash = document.getElementById('paneDash');
+  const appPx = document.getElementById('appPx');
+  const dashPx = document.getElementById('dashPx');
 
+  // 이전에 드래그해서 맞춰둔 폭을 기억해둔다(새로고침해도 유지).
   try{
-    const saved = localStorage.getItem('peak-demo-panel-phone-width');
-    if(saved) paneApp.style.width = saved + 'px';
+    const saved = JSON.parse(localStorage.getItem('peak-demo-panel-widths') || 'null');
+    if(saved){ paneApp.style.width = saved.app + 'px'; paneDash.style.width = saved.dash + 'px'; }
   }catch(e){}
+  function updateLabels(){
+    appPx.textContent = Math.round(paneApp.getBoundingClientRect().width) + 'px';
+    dashPx.textContent = Math.round(paneDash.getBoundingClientRect().width) + 'px';
+  }
+  updateLabels();
 
-  let dragging = false, startX = 0, startW = 0;
-  handle.addEventListener('mousedown', (e) => {
-    dragging = true; startX = e.clientX; startW = paneApp.getBoundingClientRect().width;
-    handle.classList.add('dragging');
+  let dragging = false, startX = 0, startApp = 0, startDash = 0;
+  resizer.addEventListener('mousedown', (e) => {
+    dragging = true; startX = e.clientX;
+    startApp = paneApp.getBoundingClientRect().width;
+    startDash = paneDash.getBoundingClientRect().width;
+    resizer.classList.add('dragging');
     document.body.style.userSelect = 'none';
-    e.preventDefault();
   });
   window.addEventListener('mousemove', (e) => {
     if(!dragging) return;
-    const w = Math.max(260, Math.min(560, startW + (e.clientX - startX)));
-    paneApp.style.width = w + 'px';
+    const dx = e.clientX - startX;
+    const newApp = Math.max(240, startApp + dx);
+    const newDash = Math.max(240, startDash - dx);
+    paneApp.style.width = newApp + 'px';
+    paneDash.style.width = newDash + 'px';
+    updateLabels();
   });
   window.addEventListener('mouseup', () => {
     if(!dragging) return;
     dragging = false;
-    handle.classList.remove('dragging');
+    resizer.classList.remove('dragging');
     document.body.style.userSelect = '';
-    try{ localStorage.setItem('peak-demo-panel-phone-width', Math.round(paneApp.getBoundingClientRect().width)); }catch(e){}
+    try{
+      localStorage.setItem('peak-demo-panel-widths', JSON.stringify({
+        app: Math.round(paneApp.getBoundingClientRect().width),
+        dash: Math.round(paneDash.getBoundingClientRect().width),
+      }));
+    }catch(e){}
   });
 })();
 
