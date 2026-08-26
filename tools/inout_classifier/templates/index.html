@@ -99,6 +99,7 @@
   .result-badge.in-pair { background: var(--success-soft); color: var(--success); }
   .result-badge.out-pair { background: var(--warn-soft); color: var(--warn); }
   .result-badge.none { background: var(--danger-soft); color: var(--danger); font-size: 14px; }
+  .result-badge.uncertain { background: var(--warn-soft); color: var(--warn); font-size: 15px; }
   .result-pair img { width: 100%; border-radius: 12px; display: block; background: var(--surface-alt); margin-bottom: 10px; cursor: zoom-in; }
   .score-rows { display: flex; flex-direction: column; gap: 8px; }
   .score-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
@@ -143,6 +144,7 @@
   .hist-badge.in-pair { background: var(--success-soft); color: var(--success); }
   .hist-badge.out-pair { background: var(--warn-soft); color: var(--warn); }
   .hist-badge.none { background: var(--danger-soft); color: var(--danger); }
+  .hist-badge.uncertain { background: var(--warn-soft); color: var(--warn); }
   .hist-time { font-size: 11px; color: var(--text-tertiary); }
   .hist-sub { margin-top: 2px; font-size: 11.5px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
   .empty-note { font-size: 13px; color: var(--text-tertiary); padding: 24px 0; text-align: center; }
@@ -241,7 +243,7 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxClose = document.getElementById('lightboxClose');
 
-const LABEL_TEXT = { 'hand_only-pair': '아무 일도 없음', 'in-pair': 'IN · 넣음', 'out-pair': 'OUT · 꺼냄', 'none': '판정 불가' };
+const LABEL_TEXT = { 'hand_only-pair': '아무 일도 없음', 'in-pair': 'IN · 넣음', 'out-pair': 'OUT · 꺼냄', 'none': '판정 불가', 'uncertain': '판단 애매함' };
 const DOOR_BUDGET_S = 5;
 let lastResultTs = null;
 

@@ -382,6 +382,17 @@ def _get_ei_runner():
     return _ei_runner
 
 
+# 정확도가 아직 100%가 아니라서(테스트셋 기준 73%), 애매한 판정을 확신하는 척
+# 확정적으로 보여주는 게 제일 나쁘다 — 특히 시연처럼 사람이 결과를 지켜보는
+# 상황에서는. confidence가 이 밑이면 "IN/OUT 중 하나로 확정" 대신
+# "판단 애매함"으로 정직하게 보여준다(원래 점수는 그대로 다 보여줌).
+# 0.65로 잡은 근거(held-out 테스트 74장 기준 실측):
+#   th=0.55 -> 노출 57/74, 그중 정확도 78.9%
+#   th=0.65 -> 노출 45/74, 그중 정확도 84.4%  (채택 — 노출량과 정확도의 균형)
+#   th=0.75 -> 노출 30/74, 그중 정확도 90.0%(너무 많이 숨겨짐)
+UNCERTAIN_CONFIDENCE_TH = 0.65
+
+
 def classify_pair(pair_bytes: bytes, fname: str) -> dict | None:
     """합성사진을 로컬 모델로 바로 분류한다. 실패하면 None — 호출부가
     "판정 불가"로 표시."""
@@ -396,7 +407,10 @@ def classify_pair(pair_bytes: bytes, fname: str) -> dict | None:
             res = runner.classify(features)
         scores = res["result"]["classification"]
         label = max(scores, key=scores.get)
-        return {"label": label, "confidence": round(scores[label], 3),
+        confidence = round(scores[label], 3)
+        if confidence < UNCERTAIN_CONFIDENCE_TH:
+            label = "uncertain"
+        return {"label": label, "confidence": confidence,
                 "scores": {k: round(v, 3) for k, v in scores.items()}}
     except Exception as e:
         print(f"[classify_pair] 분류 예외: {type(e).__name__}: {e}")
