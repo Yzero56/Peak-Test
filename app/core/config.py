@@ -24,6 +24,8 @@ class Settings(BaseSettings):
     minimax_video_model: str = "MiniMax-H3"
     vlm_base_url: str | None = None
     expiring_soon_days: int = 3
+    foodsafety_api_key: str | None = None
+    foodsafety_recipe_count: int = 100
 
     model_config = SettingsConfigDict(
         env_file=".env",

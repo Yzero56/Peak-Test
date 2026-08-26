@@ -7,9 +7,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.routes.food_items import get_legacy_item, to_legacy_response
 from app.core.database import get_db
 from app.models.food import DateSource, FoodItem, FoodItemStatus, StorageType
+from app.services import recipe_service
 
 router = APIRouter(prefix="/inventory", tags=["legacy-inventory"])
 scan_router = APIRouter(prefix="/scan-candidates", tags=["legacy-scan"])
+recipe_router = APIRouter(prefix="/recipes", tags=["legacy-recipes"])
 
 
 def parse_payload(data: dict) -> dict:
@@ -74,3 +76,8 @@ async def delete_inventory(item_id: int, session: AsyncSession = Depends(get_db)
 async def scan_candidates() -> list[dict]:
     # The existing HJ app treats an empty result as a valid no-candidate response.
     return []
+
+
+@recipe_router.get("", response_model=list[dict])
+async def list_recipes() -> list[dict]:
+    return await recipe_service.get_recipes()
