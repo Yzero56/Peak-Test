@@ -83,27 +83,83 @@ th{color:var(--muted);font-weight:600}
 .tabs button.active .num{background:var(--accent)}
 .scene{display:none}
 .scene.active{display:block}
-.iframe-grid{display:flex;gap:0;height:calc(100vh - 150px);justify-content:center}
-@media(max-width:900px){.iframe-grid{flex-direction:column;height:auto}}
-.iframe-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
-  flex:none;min-width:240px}
-.iframe-card .label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;
-  padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
-.iframe-card .label .px{font-weight:400;text-transform:none;letter-spacing:0;opacity:.7}
-.iframe-card iframe{border:0;width:100%;flex:1;min-height:420px;background:#fff}
-.resizer{flex:none;width:16px;margin:0 -1px;cursor:col-resize;display:flex;align-items:center;justify-content:center;
-  z-index:2;position:relative}
-.resizer::after{content:'';width:4px;height:44px;border-radius:3px;background:var(--line)}
-.resizer:hover::after,.resizer.dragging::after{background:var(--accent)}
-@media(max-width:900px){.resizer{display:none}}
+
+/* ===== 대시보드+앱 스타일 3종 ===== */
+.style-picker{display:flex;gap:8px;margin-bottom:16px}
+.style-picker button{padding:8px 16px;border-radius:9px;border:1px solid var(--line);background:var(--panel);
+  color:var(--muted);cursor:pointer;font-size:13px;font-weight:700;font-family:inherit}
+.style-picker button.active{border-color:#f7f83e;color:#080909;background:#f7f83e}
+
+.stage{position:relative;background:#080909;border-radius:18px;padding:40px;min-height:calc(100vh - 210px);
+  display:flex;align-items:center;justify-content:center;gap:0;overflow:hidden}
+body.fs .stage{border-radius:0;min-height:100vh}
+@media(max-width:900px){.stage{flex-direction:column;padding:20px}}
+
+.pane-app,.pane-dash{flex:none;min-width:220px;display:flex;flex-direction:column}
+.pane-app{width:400px}
+.pane-dash{width:520px}
+
+.chrome-browser{display:flex;align-items:center;gap:6px;background:#1c1e21;padding:8px 12px;border-radius:10px 10px 0 0}
+.chrome-browser .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.chrome-browser .dot.r{background:#ec6a5e}.chrome-browser .dot.y{background:#f4bf4f}.chrome-browser .dot.g{background:#61c454}
+.chrome-browser .url{margin-left:8px;background:#0f1012;color:#8b93a1;font-size:11px;padding:4px 10px;border-radius:6px;
+  font-family:ui-monospace,monospace;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.phone-bezel{background:#111;border-radius:0 0 14px 14px;padding:0;position:relative;flex:1;display:flex;flex-direction:column;overflow:hidden}
+.phone-bezel .notch{display:none}
+.phone-bezel .home-bar{display:none}
+.phone-bezel iframe{border:0;width:100%;flex:1;min-height:420px;background:#fff}
+
+.pane-dash > iframe{border:0;width:100%;flex:1;min-height:420px;background:#fff;border-radius:0 0 14px 14px}
+
+.resizer{flex:none;width:16px;margin:0 -1px;cursor:col-resize;display:flex;align-items:center;justify-content:center;z-index:2}
+.resizer::after{content:'';width:4px;height:44px;border-radius:3px;background:#333}
+.resizer:hover::after,.resizer.dragging::after{background:#f7f83e}
+
+/* --- A: 클린 스플릿(브라우저 크롬만, 기본) --- */
+.stage[data-mode="a"] .pane-app,.stage[data-mode="a"] .pane-dash{box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.stage[data-mode="a"] .resizer{display:flex}
+
+/* --- B: 폰 베젤 + 브라우저 프레임 (고정 비율, 실물처럼) --- */
+.stage[data-mode="b"] .resizer{display:none}
+.stage[data-mode="b"] .pane-app{width:340px!important}
+.stage[data-mode="b"] .pane-dash{width:580px!important}
+.stage[data-mode="b"] .chrome-browser{display:none}
+.stage[data-mode="b"] .pane-dash .chrome-browser{display:flex}
+.stage[data-mode="b"] .phone-bezel{border:12px solid #1a1a1a;border-radius:44px;box-shadow:0 30px 70px rgba(0,0,0,.55)}
+.stage[data-mode="b"] .phone-bezel .notch{display:block;position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:90px;height:22px;background:#1a1a1a;border-radius:14px;z-index:3}
+.stage[data-mode="b"] .phone-bezel .home-bar{display:block;position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  width:110px;height:4px;background:#e6e6e6;border-radius:3px;z-index:3;opacity:.85}
+.stage[data-mode="b"] .pane-dash{box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.stage[data-mode="b"] .pane-dash > iframe{border-radius:0 0 10px 10px}
+
+/* --- C: 오버랩 히어로 (대시보드가 배경, 폰이 앞으로 겹침) --- */
+.stage[data-mode="c"]{justify-content:flex-start;padding:56px 60px 40px}
+.stage[data-mode="c"] .resizer{display:none}
+.stage[data-mode="c"] .pane-dash{width:100%!important;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.stage[data-mode="c"] .pane-dash .chrome-browser{display:flex}
+.stage[data-mode="c"] .pane-app{position:absolute!important;left:60px;bottom:-28px;width:280px!important;z-index:4}
+.stage[data-mode="c"] .chrome-browser{display:none}
+.stage[data-mode="c"] .pane-app .phone-bezel{border:10px solid #1a1a1a;border-radius:36px;
+  box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.06)}
+.stage[data-mode="c"] .pane-app .phone-bezel iframe{min-height:340px}
+.stage[data-mode="c"] .pane-app .phone-bezel .notch{display:block;position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  width:74px;height:18px;background:#1a1a1a;border-radius:12px;z-index:3}
+.stage[data-mode="c"] .pane-app .phone-bezel .home-bar{display:block;position:absolute;bottom:7px;left:50%;transform:translateX(-50%);
+  width:90px;height:3.5px;background:#e6e6e6;border-radius:3px;z-index:3;opacity:.85}
+@media(max-width:900px){
+  .stage[data-mode="c"]{flex-direction:column;padding:20px}
+  .stage[data-mode="c"] .pane-app{position:static!important;margin-top:-30px;align-self:flex-start}
+}
 .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
 .fsbtn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:9px 16px;border-radius:9px;
   cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;flex:none}
 .fsbtn:hover{border-color:var(--accent)}
 body.fs{padding:0}
 body.fs .topbar,body.fs .tabs{display:none}
-body.fs .scene{padding:14px}
-body.fs .iframe-grid{height:100vh}
+body.fs .scene{padding:0}
+body.fs .style-picker{display:none}
 </style></head><body>
 <div class="topbar">
   <div>
@@ -143,14 +199,23 @@ body.fs .iframe-grid{height:100vh}
 </div>
 
 <div id="scene2" class="scene">
-<div class="iframe-grid" id="iframeGrid">
-  <div class="iframe-card" id="paneApp" style="width:400px">
-    <div class="label"><span>앱 (폰 사이즈)</span><span class="px" id="appPx">400px</span></div>
-    <iframe src="/proxy/app-page"></iframe>
+<div class="style-picker">
+  <button id="modeBtnA" class="active" onclick="setMode('a')">A · 클린 스플릿</button>
+  <button id="modeBtnB" onclick="setMode('b')">B · 폰 + 브라우저 프레임</button>
+  <button id="modeBtnC" onclick="setMode('c')">C · 오버랩 히어로</button>
+</div>
+<div class="stage" id="stage" data-mode="a">
+  <div class="pane-app" id="paneApp" style="width:400px">
+    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="appUrl">localhost:8081</span></div>
+    <div class="phone-bezel">
+      <div class="notch"></div>
+      <iframe src="/proxy/app-page"></iframe>
+      <div class="home-bar"></div>
+    </div>
   </div>
   <div class="resizer" id="resizer"></div>
-  <div class="iframe-card" id="paneDash" style="width:520px">
-    <div class="label"><span>웹 대시보드</span><span class="px" id="dashPx">520px</span></div>
+  <div class="pane-dash" id="paneDash" style="width:520px">
+    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="dashUrl">localhost:8000/dashboard/</span></div>
     <iframe src="/proxy/dashboard-page"></iframe>
   </div>
 </div>
@@ -160,17 +225,17 @@ body.fs .iframe-grid{height:100vh}
   const resizer = document.getElementById('resizer');
   const paneApp = document.getElementById('paneApp');
   const paneDash = document.getElementById('paneDash');
-  const appPx = document.getElementById('appPx');
-  const dashPx = document.getElementById('dashPx');
+  const appUrl = document.getElementById('appUrl');
+  const dashUrl = document.getElementById('dashUrl');
 
-  // 이전에 드래그해서 맞춰둔 폭을 기억해둔다(새로고침해도 유지).
+  // 이전에 드래그해서 맞춰둔 폭을 기억해둔다(새로고침해도 유지) — A 모드에서만 의미 있음.
   try{
     const saved = JSON.parse(localStorage.getItem('peak-demo-panel-widths') || 'null');
     if(saved){ paneApp.style.width = saved.app + 'px'; paneDash.style.width = saved.dash + 'px'; }
   }catch(e){}
   function updateLabels(){
-    appPx.textContent = Math.round(paneApp.getBoundingClientRect().width) + 'px';
-    dashPx.textContent = Math.round(paneDash.getBoundingClientRect().width) + 'px';
+    appUrl.textContent = `localhost:8081 · ${Math.round(paneApp.getBoundingClientRect().width)}px`;
+    dashUrl.textContent = `localhost:8000/dashboard/ · ${Math.round(paneDash.getBoundingClientRect().width)}px`;
   }
   updateLabels();
 
@@ -204,6 +269,16 @@ body.fs .iframe-grid{height:100vh}
     }catch(e){}
   });
 })();
+
+function setMode(m){
+  document.getElementById('stage').dataset.mode = m;
+  ['A','B','C'].forEach(k => document.getElementById('modeBtn'+k).classList.toggle('active', k.toLowerCase()===m));
+  try{ localStorage.setItem('peak-demo-panel-mode', m); }catch(e){}
+}
+try{
+  const savedMode = localStorage.getItem('peak-demo-panel-mode');
+  if(savedMode) setMode(savedMode);
+}catch(e){}
 
 function toggleFullscreen(){
   if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); document.body.classList.add('fs'); }
