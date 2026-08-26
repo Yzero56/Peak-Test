@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+data/raw_captures/
+data/raw_captures_sidebyside_archive/
+data/raw_captures_excluded_lowsignal/
+data/exports/
+data/inout_sessions/
+build/
+*.bin
+*.eim*
+.DS_Store
+tmp_preview/
+weights/
+*.pt
+
+# 와이파이 비밀번호가 채워질 수 있는 펌웨어 — 추적 해제(git rm --cached 완료), 실수로 커밋되지 않게 예방
+firmware/webcam_ap_capture/webcam_ap_capture.ino

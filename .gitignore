@@ -1,9 +1,58 @@
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.venv/
+# === 공통 ===
+.DS_Store
+*.pem
+.env
+.env*.local
+
+# === backend/ (kang, FastAPI + PostgreSQL) ===
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.env
+backend/*.db
+backend/media/
+backend/*.log
 data/uploads/
 .mypy_cache/
 .ruff_cache/
 *.egg-info/
-.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# === mobile-app/ (HJ, Expo + React Native) ===
+mobile-app/node_modules/
+mobile-app/.expo/
+mobile-app/dist/
+mobile-app/web-build/
+mobile-app/expo-env.d.ts
+mobile-app/.kotlin/
+mobile-app/*.orig.*
+mobile-app/*.jks
+mobile-app/*.p8
+mobile-app/*.p12
+mobile-app/*.key
+mobile-app/*.mobileprovision
+mobile-app/.metro-health-check*
+mobile-app/npm-debug.*
+mobile-app/yarn-debug.*
+mobile-app/yarn-error.*
+mobile-app/*.tsbuildinfo
+mobile-app/ios
+mobile-app/android
+
+# === part1-inout/, part2-container/ (YJ, Wa — 파이썬 학습/추론 스크립트) ===
+part1-inout/.venv/
+part1-inout/data/raw_captures/
+part1-inout/data/exports/
+part1-inout/build/
+part1-inout/*.bin
+part1-inout/*.eim*
+part1-inout/tmp_preview/
+part1-inout/weights/
+part2-container/*.pt
+part2-container/*.zip
+
+# === firmware/ (Arduino Wi-Fi 비밀번호/토큰이 담긴 실제 값 파일) ===
+firmware/**/secrets.h

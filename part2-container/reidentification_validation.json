@@ -1,0 +1,36 @@
+{
+  "containers": {
+    "락앤락": 100,
+    "생수병": 100,
+    "원형용기": 100
+  },
+  "same_pairs": 14850,
+  "different_pairs": 30000,
+  "same_similarity": {
+    "mean": 0.537834,
+    "min": 0.106668,
+    "max": 0.984322
+  },
+  "different_similarity": {
+    "mean": 0.333177,
+    "min": -0.039462,
+    "max": 0.753126
+  },
+  "current_threshold_result": {
+    "threshold": 0.44,
+    "same_container_accuracy": 0.704646,
+    "different_container_accuracy": 0.820233,
+    "balanced_accuracy": 0.76244,
+    "same_container_missed": 4386,
+    "different_container_confused": 5393
+  },
+  "recommended_threshold_result": {
+    "threshold": 0.451,
+    "same_container_accuracy": 0.681347,
+    "different_container_accuracy": 0.8477,
+    "balanced_accuracy": 0.764523,
+    "same_container_missed": 4732,
+    "different_container_confused": 4569
+  },
+  "warning": "용기 3개로 얻은 임시 결과이며, 용기가 늘면 다시 검증해야 합니다."
+}

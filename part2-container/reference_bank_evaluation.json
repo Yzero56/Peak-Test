@@ -1,0 +1,149 @@
+{
+  "meaning": "새 용기 최초 감지 때 사용자가 아닌 카메라가 연속 프레임을 자동 저장하는 방식",
+  "results": [
+    {
+      "automatic_initial_frames": 1,
+      "comparison_method": "max",
+      "test_images": 297,
+      "known_identity_accuracy": 0.713805,
+      "threshold_0.44_balanced_accuracy": 0.784512,
+      "recommended_threshold": 0.452,
+      "recommended_balanced_accuracy": 0.792929,
+      "same_container_accuracy": 0.649832,
+      "different_container_accuracy": 0.936027
+    },
+    {
+      "automatic_initial_frames": 1,
+      "comparison_method": "top3",
+      "test_images": 297,
+      "known_identity_accuracy": 0.713805,
+      "threshold_0.44_balanced_accuracy": 0.784512,
+      "recommended_threshold": 0.452,
+      "recommended_balanced_accuracy": 0.792929,
+      "same_container_accuracy": 0.649832,
+      "different_container_accuracy": 0.936027
+    },
+    {
+      "automatic_initial_frames": 1,
+      "comparison_method": "mean",
+      "test_images": 297,
+      "known_identity_accuracy": 0.713805,
+      "threshold_0.44_balanced_accuracy": 0.784512,
+      "recommended_threshold": 0.452,
+      "recommended_balanced_accuracy": 0.792929,
+      "same_container_accuracy": 0.649832,
+      "different_container_accuracy": 0.936027
+    },
+    {
+      "automatic_initial_frames": 3,
+      "comparison_method": "max",
+      "test_images": 291,
+      "known_identity_accuracy": 0.721649,
+      "threshold_0.44_balanced_accuracy": 0.775773,
+      "recommended_threshold": 0.469,
+      "recommended_balanced_accuracy": 0.783505,
+      "same_container_accuracy": 0.656357,
+      "different_container_accuracy": 0.910653
+    },
+    {
+      "automatic_initial_frames": 3,
+      "comparison_method": "top3",
+      "test_images": 291,
+      "known_identity_accuracy": 0.697595,
+      "threshold_0.44_balanced_accuracy": 0.775773,
+      "recommended_threshold": 0.456,
+      "recommended_balanced_accuracy": 0.778351,
+      "same_container_accuracy": 0.618557,
+      "different_container_accuracy": 0.938144
+    },
+    {
+      "automatic_initial_frames": 3,
+      "comparison_method": "mean",
+      "test_images": 291,
+      "known_identity_accuracy": 0.704467,
+      "threshold_0.44_balanced_accuracy": 0.768041,
+      "recommended_threshold": 0.465,
+      "recommended_balanced_accuracy": 0.780928,
+      "same_container_accuracy": 0.628866,
+      "different_container_accuracy": 0.93299
+    },
+    {
+      "automatic_initial_frames": 5,
+      "comparison_method": "max",
+      "test_images": 285,
+      "known_identity_accuracy": 0.729825,
+      "threshold_0.44_balanced_accuracy": 0.738596,
+      "recommended_threshold": 0.525,
+      "recommended_balanced_accuracy": 0.765789,
+      "same_container_accuracy": 0.582456,
+      "different_container_accuracy": 0.949123
+    },
+    {
+      "automatic_initial_frames": 5,
+      "comparison_method": "top3",
+      "test_images": 285,
+      "known_identity_accuracy": 0.733333,
+      "threshold_0.44_balanced_accuracy": 0.75614,
+      "recommended_threshold": 0.479,
+      "recommended_balanced_accuracy": 0.768421,
+      "same_container_accuracy": 0.614035,
+      "different_container_accuracy": 0.922807
+    },
+    {
+      "automatic_initial_frames": 5,
+      "comparison_method": "mean",
+      "test_images": 285,
+      "known_identity_accuracy": 0.684211,
+      "threshold_0.44_balanced_accuracy": 0.746491,
+      "recommended_threshold": 0.474,
+      "recommended_balanced_accuracy": 0.766667,
+      "same_container_accuracy": 0.610526,
+      "different_container_accuracy": 0.922807
+    },
+    {
+      "automatic_initial_frames": 10,
+      "comparison_method": "max",
+      "test_images": 270,
+      "known_identity_accuracy": 0.766667,
+      "threshold_0.44_balanced_accuracy": 0.765741,
+      "recommended_threshold": 0.535,
+      "recommended_balanced_accuracy": 0.806481,
+      "same_container_accuracy": 0.707407,
+      "different_container_accuracy": 0.905556
+    },
+    {
+      "automatic_initial_frames": 10,
+      "comparison_method": "top3",
+      "test_images": 270,
+      "known_identity_accuracy": 0.82963,
+      "threshold_0.44_balanced_accuracy": 0.793519,
+      "recommended_threshold": 0.473,
+      "recommended_balanced_accuracy": 0.825926,
+      "same_container_accuracy": 0.818519,
+      "different_container_accuracy": 0.833333
+    },
+    {
+      "automatic_initial_frames": 10,
+      "comparison_method": "mean",
+      "test_images": 270,
+      "known_identity_accuracy": 0.803704,
+      "threshold_0.44_balanced_accuracy": 0.798148,
+      "recommended_threshold": 0.436,
+      "recommended_balanced_accuracy": 0.8,
+      "same_container_accuracy": 0.774074,
+      "different_container_accuracy": 0.825926
+    }
+  ],
+  "best_result": {
+    "automatic_initial_frames": 10,
+    "comparison_method": "top3",
+    "test_images": 270,
+    "known_identity_accuracy": 0.82963,
+    "threshold_0.44_balanced_accuracy": 0.793519,
+    "recommended_threshold": 0.473,
+    "recommended_balanced_accuracy": 0.825926,
+    "same_container_accuracy": 0.818519,
+    "different_container_accuracy": 0.833333
+  },
+  "limitation": "현재 3개 용기의 기존 촬영 데이터로 한 검증이며 실제 냉장고에서 다시 확인해야 함"
+}
