@@ -85,10 +85,16 @@ th{color:var(--muted);font-weight:600}
 .scene.active{display:block}
 
 /* ===== 대시보드+앱: 오버랩 히어로 (대시보드 배경 + 폰이 앞으로 겹침, 폰은 정상 폭) ===== */
-.stage{position:relative;background:#080909;border-radius:18px;padding:60px 60px 70px;height:calc(100vh - 190px);
-  display:flex;align-items:stretch;justify-content:flex-start;overflow:visible}
+.stage{position:relative;background:#080909;border-radius:18px;padding:60px;height:calc(100vh - 190px);
+  display:flex;align-items:center;justify-content:center;overflow:visible}
 body.fs .stage{border-radius:0;height:100vh}
 @media(max-width:900px){.stage{flex-direction:column;height:auto;padding:24px;overflow:visible}}
+
+/* 대시보드 자체 콘텐츠 폭(내부 .wrap max-width:1040px)에 맞춰 브라우저 창 비율이
+   과하게 옆으로 안 늘어나게 캡을 씌운다 — 전에는 stage 전체 폭(거의 화면 끝까지)로
+   늘어나서 "브라우저 창인데 왜 이렇게 옆으로 길쭉하지"처럼 보였다. */
+.composition{position:relative;width:min(1120px,100%);height:100%;display:flex}
+@media(max-width:900px){.composition{display:block;height:auto}}
 
 .pane-dash{width:100%;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);
   border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
@@ -99,10 +105,9 @@ body.fs .stage{border-radius:0;height:100vh}
   font-family:ui-monospace,monospace;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pane-dash iframe{border:0;width:100%;flex:1;min-height:0;background:#fff}
 
-/* 폰 — 정상적인 폰 폭(390px, iPhone 기준)으로 고정. 실물 카메라 시연 때 옆에서
-   봐도 "이게 폰이구나"라고 바로 인지되는 게 목적이라 화면 비율보다 인지 가능한
-   폭을 우선했다. */
-.pane-app{position:absolute;left:60px;top:80px;bottom:-30px;width:390px;z-index:4;display:flex;flex-direction:column}
+/* 폰 — 정상적인 폰 폭(390px, iPhone 기준)으로 고정. composition 기준으로 왼쪽 아래에
+   겹치게 배치(= stage가 아니라 대시보드 박스 자체의 왼쪽 아래 모서리). */
+.pane-app{position:absolute;left:-24px;top:60px;bottom:-40px;width:390px;z-index:4;display:flex;flex-direction:column}
 @media(max-width:900px){.pane-app{position:static;width:340px;height:640px;margin-top:-40px;align-self:flex-start}}
 .phone-bezel{background:#111;border:12px solid #1a1a1a;border-radius:44px;padding-top:34px;position:relative;
   flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;
@@ -163,17 +168,19 @@ body.fs .scene{padding:0}
 
 <div id="scene2" class="scene">
 <div class="stage" id="stage">
-  <div class="pane-dash" id="paneDash">
-    <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">localhost:8000/dashboard/ — 웹 대시보드</span></div>
-    <iframe src="/proxy/dashboard-page"></iframe>
-  </div>
-  <div class="pane-app" id="paneApp">
-    <div class="phone-bezel">
-      <div class="notch"></div>
-      <iframe src="/proxy/app-page"></iframe>
-      <div class="home-bar"></div>
+  <div class="composition">
+    <div class="pane-dash" id="paneDash">
+      <div class="chrome-browser"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">localhost:8000/dashboard/ — 웹 대시보드</span></div>
+      <iframe src="/proxy/dashboard-page"></iframe>
     </div>
-    <div id="phoneResizeHandle" class="phone-resize-handle" title="드래그해서 폰 폭 조절"></div>
+    <div class="pane-app" id="paneApp">
+      <div class="phone-bezel">
+        <div class="notch"></div>
+        <iframe src="/proxy/app-page"></iframe>
+        <div class="home-bar"></div>
+      </div>
+      <div id="phoneResizeHandle" class="phone-resize-handle" title="드래그해서 폰 폭 조절"></div>
+    </div>
   </div>
 </div>
 </div>
