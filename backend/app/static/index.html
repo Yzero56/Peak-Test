@@ -4,87 +4,122 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PEAK Smart Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { color-scheme: light; font-family: system-ui, sans-serif; }
-    body { max-width: 960px; margin: 0 auto; padding: 24px; color: #172033; background: #f5f7fb; }
-    h1 { margin-bottom: 4px; }
-    .muted { color: #667085; }
-    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0; }
-    .card, .item { background: white; border: 1px solid #e4e7ec; border-radius: 12px; padding: 16px; }
-    .number { display: block; font-size: 28px; font-weight: 700; margin-top: 6px; }
+    /* 발표 덱(PEAK Smart pitch deck)과 같은 팔레트 — "밤에 냉장고 문을 살짝 연 느낌" */
+    :root {
+      --void: #0b0f14; --panel: #121a22; --panel-line: #223039;
+      --frost: #eaf3f2; --steel: #6b7c86;
+      --mint: #4fd1ae; --amber: #f0a94e; --coral: #e8615a;
+      --font-display: 'Bricolage Grotesque', 'Apple SD Gothic Neo', sans-serif;
+      --font-body: 'IBM Plex Sans', 'Apple SD Gothic Neo', -apple-system, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--void); color: var(--frost);
+      font-family: var(--font-body); -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(ellipse 60% 40% at 50% -10%, rgba(79,209,174,.08), transparent 60%);
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: clamp(20px, 4vw, 48px); }
+    header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+    h1 { font-family: var(--font-display); font-size: clamp(24px, 3vw, 34px); font-weight: 800; margin: 0; letter-spacing: -.02em; }
+    .muted { color: var(--steel); font-size: 13px; }
+    .live-dot { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--mint); font-family: var(--font-mono); }
+    .live-dot::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 8px var(--mint); animation: pulse 1.8s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 0 0 32px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--panel-line); border-radius: 14px;
+      padding: 18px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .card span:first-child { font-size: 12px; color: var(--steel); text-transform: uppercase; letter-spacing: .06em; }
+    .number { font-family: var(--font-display); font-size: 32px; font-weight: 800; }
+    .card.fresh .number { color: var(--mint); }
+    .card.warn .number { color: var(--amber); }
+    .card.bad .number { color: var(--coral); }
+
+    h2 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--steel);
+         text-transform: uppercase; letter-spacing: .06em; margin: 0 0 14px; }
     .items { display: grid; gap: 10px; }
-    .item { display: flex; justify-content: space-between; gap: 16px; }
-    .status { font-weight: 600; }
-    .fresh { color: #087443; }
-    .expiring_soon { color: #b54708; }
-    .expired { color: #b42318; }
-    .unknown { color: #667085; }
-    .ad { margin-top: 28px; background: #101828; color: white; border-radius: 16px; padding: 20px; }
-    button { border: 0; border-radius: 8px; padding: 10px 14px; font-weight: 700; cursor: pointer; }
-    video { display: block; width: 100%; max-height: 520px; margin-top: 16px; border-radius: 10px; background: #000; }
-    @media (max-width: 640px) { body { padding: 16px; } .cards { grid-template-columns: repeat(2, 1fr); } .item { display: block; } }
+    .item {
+      background: var(--panel); border: 1px solid var(--panel-line); border-radius: 12px;
+      padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .item strong { font-size: 15px; font-weight: 600; }
+    .item .expiry { color: var(--steel); font-size: 12.5px; margin-top: 2px; font-family: var(--font-mono); }
+    .badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+    .fresh .badge { background: rgba(79,209,174,.14); color: var(--mint); }
+    .expiring_soon .badge { background: rgba(240,169,78,.14); color: var(--amber); }
+    .expired .badge { background: rgba(232,97,90,.14); color: var(--coral); }
+    .unknown .badge { background: rgba(107,124,134,.18); color: var(--steel); }
+
+    @media (max-width: 640px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .item { flex-direction: column; align-items: flex-start; gap: 6px; }
+    }
   </style>
 </head>
 <body>
-  <h1>PEAK Smart</h1>
-  <p class="muted">Food expiry and cooking status</p>
-  <section class="cards" id="summary" aria-live="polite"></section>
-  <h2>Active food items</h2>
-  <section class="items" id="items"><p class="muted">Loading...</p></section>
-  <section class="ad">
-    <h2>MiniMax 테스트 광고</h2>
-    <p id="ad-status">15초 세로 테스트 영상을 생성해 브라우저에서 재생합니다.</p>
-    <button id="create-ad">테스트 광고 생성</button>
-    <video id="ad-video" controls playsinline hidden></video>
-  </section>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>PEAK Smart</h1>
+        <p class="muted">냉장고 재고 · 유통기한 실시간 현황</p>
+      </div>
+      <span class="live-dot">LIVE</span>
+    </header>
+    <section class="cards" id="summary" aria-live="polite"></section>
+    <h2>냉장고 안 재료</h2>
+    <section class="items" id="items"><p class="muted">불러오는 중...</p></section>
+  </div>
   <script>
-    const labels = [
-      ['total_active', 'Active'],
-      ['fresh', 'Fresh'],
-      ['expiring_soon', 'Expiring soon'],
-      ['expired', 'Expired']
+    const CARD_KEYS = [
+      ['total_active', '전체', ''],
+      ['fresh', '신선', 'fresh'],
+      ['expiring_soon', '임박', 'warn'],
+      ['expired', '만료', 'bad'],
     ];
+    const STATUS_LABEL = { fresh: '신선', expiring_soon: '임박', expired: '만료', unknown: '미확인' };
+
     const summary = document.querySelector('#summary');
     const items = document.querySelector('#items');
-    const adButton = document.querySelector('#create-ad');
-    const adStatus = document.querySelector('#ad-status');
-    const adVideo = document.querySelector('#ad-video');
-    fetch('/api/v1/dashboard/summary')
-      .then(response => { if (!response.ok) throw new Error('Dashboard API failed'); return response.json(); })
-      .then(data => {
-        summary.innerHTML = labels.map(([key, label]) => `<div class="card"><span>${label}</span><span class="number">${data[key]}</span></div>`).join('');
-        if (!data.items.length) { items.innerHTML = '<p class="muted">No active food items.</p>'; return; }
-        items.innerHTML = data.items.map(item => `<article class="item"><div><strong>${item.display_name}</strong><div class="muted">${item.expires_at ?? 'Expiry unknown'}</div></div><div class="status ${item.expiry_status}">${item.can_cook ? 'Cooking candidate' : 'Do not cook'}<br><small>${item.expiry_status}</small></div></article>`).join('');
-      })
-      .catch(error => { summary.innerHTML = `<p>${error.message}</p>`; items.innerHTML = ''; });
 
-    adButton.addEventListener('click', async () => {
-      adButton.disabled = true;
-      adVideo.hidden = true;
-      adStatus.textContent = 'MiniMax에서 영상을 생성하는 중입니다...';
-      try {
-        const created = await fetch('/api/v1/advertisements/test-video', { method: 'POST' });
-        if (!created.ok) throw new Error(await created.text());
-        const { task_id: taskId } = await created.json();
-        let task;
-        for (let attempt = 0; attempt < 60; attempt++) {
-          await new Promise(resolve => setTimeout(resolve, 5000));
-          const response = await fetch(`/api/v1/advertisements/test-video/${taskId}`);
-          if (!response.ok) throw new Error(await response.text());
-          task = (await response.json()).task;
-          adStatus.textContent = `생성 상태: ${task.status}`;
-          if (task.status === 'succeeded' || task.status === 'failed' || task.status === 'cancelled') break;
-        }
-        if (!task || task.status !== 'succeeded') throw new Error(task?.error?.message || '영상 생성 시간이 초과되었습니다.');
-        adVideo.src = `/api/v1/advertisements/test-video/${taskId}/stream`;
-        adVideo.hidden = false;
-        adStatus.textContent = '생성이 완료되었습니다.';
-      } catch (error) {
-        adStatus.textContent = `생성 실패: ${error.message}`;
-      } finally {
-        adButton.disabled = false;
+    function render(data) {
+      summary.innerHTML = CARD_KEYS.map(([key, label, cls]) =>
+        `<div class="card ${cls}"><span>${label}</span><span class="number">${data[key]}</span></div>`
+      ).join('');
+      if (!data.items.length) {
+        items.innerHTML = '<p class="muted">냉장고가 비어있습니다.</p>';
+        return;
       }
-    });
+      items.innerHTML = data.items.map(item => `
+        <article class="item ${item.expiry_status}">
+          <div>
+            <strong>${item.display_name}</strong>
+            <div class="expiry">${item.expires_at ? `D${item.days_remaining >= 0 ? '-' + item.days_remaining : '+' + Math.abs(item.days_remaining)}` : '유통기한 미확인'}</div>
+          </div>
+          <span class="badge">${STATUS_LABEL[item.expiry_status] ?? item.expiry_status}</span>
+        </article>
+      `).join('');
+    }
+
+    async function load() {
+      try {
+        const response = await fetch('/api/v1/dashboard/summary');
+        if (!response.ok) throw new Error('대시보드 API 호출 실패');
+        render(await response.json());
+      } catch (error) {
+        summary.innerHTML = `<p class="muted">${error.message}</p>`;
+        items.innerHTML = '';
+      }
+    }
+    load();
+    setInterval(load, 4000);
   </script>
 </body>
 </html>
