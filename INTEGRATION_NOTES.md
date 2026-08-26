@@ -58,16 +58,23 @@
 **왜 `/api/v1/events/refrigerator`(재고 자동 등록)가 아니라 `/api/v1/detections`(탐지 이력)로
 보내는지**: 재고를 등록/소진하려면 `container_id`(뭐가)와 `motion_direction`(들어갔는지
 나갔는지)이 둘 다 필요한데, Part1은 motion_direction만 알고 Part2는 container_id만 안다 —
-어느 한쪽도 혼자서는 유효한 `RefrigeratorEventCreate`를 못 만든다. 지금은 두 파트가
-각자 자기가 아는 것만 detections로 남기고, **같은 door 세션 안에서 둘을 시간으로
-매칭해서 최종 `/api/v1/events/refrigerator` 한 번을 호출하는 "브릿지"는 아직 없다**
-(board-a-door-container가 둘을 한 보드로 합친 이유가 이 매칭을 하려는 것이었는데,
-그 매칭 로직 자체는 별도 구현이 필요 — 만들지 여부는 팀 결정 필요).
+어느 한쪽도 혼자서는 유효한 `RefrigeratorEventCreate`를 못 만든다. 그래서 두 파트는
+각자 아는 것만 detections로 남기고, **`bridge/detection_bridge.py`가 같은 device_id의
+motion 이벤트와 container 이벤트를 시간창(기본 8초) 안에서 짝지어 최종
+`/api/v1/events/refrigerator` 한 번을 호출한다** — 실제로 컨테이너 이벤트 → 3초 뒤
+모션 이벤트를 넣어봐서 재고에 새 식품이 등록되는 것까지 확인함.
+
+⚠️ 브릿지는 **순수 시간 매칭**이라(문 세션 ID로 확인하는 게 아님), 냉장고를 아주 빠르게
+연속으로 여닫으면 잘못 짝지어질 수 있다 — 더 정확하게 하려면 board-a-door-container의
+`GET /reed`가 주는 문 세션 시작 시각을 두 스크립트가 detections에 같이 실어 보내고
+세션 ID로 매칭하는 게 낫다(스크립트 docstring에 적어둠, 지금은 미구현).
 
 - YJ: `--backend-url`, `--device-id`(기본 `board-a-door-container`) 인자 추가.
   `in-pair`/`out-pair`만 보고하고 `hand_only-pair`/`uncertain`은 보고 안 함.
 - Wa: `--backend-url`, `--device-id` 인자 추가. `status == "matched"`(알려진 용기로
   확정 재식별됐을 때)만 보고.
+- 브릿지: `python bridge/detection_bridge.py --backend-url http://<host>:8000`으로 실행
+  (기본 device-id `board-a-door-container`, window 8초, poll 1초 — 전부 인자로 조정 가능).
 
 ### 2. board-b-sensor의 "지금 스캔하기" pull 흐름이 안 이어짐
 

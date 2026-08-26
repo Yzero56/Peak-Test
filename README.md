@@ -49,16 +49,20 @@ docs/                발표 자료, 파트별 연동 계약, 프로젝트 개요
    백엔드는 인증을 검사하지 않는다) 입력.
 
 3. **보드 A(문 감지+용기 인식)** — `firmware/board-a-door-container/secrets.h.example`을
-   `secrets.h`로 복사해 채운 뒤 업로드. 이후 파이썬 클라이언트 실행:
+   `secrets.h`로 복사해 채운 뒤 업로드. 이후 파이썬 클라이언트 실행 — `--backend-url`을
+   주면 결과를 kang 백엔드에 자동 보고한다:
    ```bash
    # Part1 IN/OUT 판정 대시보드
-   cd part1-inout && ./.venv/bin/python tools/inout_classifier/server.py --esp-host <board-a-ip>
+   cd part1-inout && ./.venv/bin/python tools/inout_classifier/server.py \
+     --esp-host <board-a-ip> --backend-url http://<backend-host>:8000
    # Part2 용기 인식
-   cd part2-container && python browser_container_realtime.py <board-a-ip>
+   cd part2-container && python browser_container_realtime.py <board-a-ip> \
+     --backend-url http://<backend-host>:8000
+   # 위 둘의 결과(모션 방향 + 용기 종류)를 시간창으로 매칭해서 실제 재고에 반영
+   python bridge/detection_bridge.py --backend-url http://<backend-host>:8000
    ```
-   ⚠️ 두 스크립트 모두 아직 로컬 대시보드에만 결과를 표시한다 — 백엔드
-   `/api/v1/events/refrigerator`로 자동 반영하는 연동은 [`INTEGRATION_NOTES.md`](INTEGRATION_NOTES.md)의
-   "남은 작업" 참고.
+   세 프로세스가 다 떠 있어야 "문 열고 용기를 보여주면 앱 재고가 자동으로 바뀌는" 전체
+   흐름이 완성된다. 매칭 로직의 한계는 [`INTEGRATION_NOTES.md`](INTEGRATION_NOTES.md) 참고.
 
 4. **보드 B(BME680 센서)** — `firmware/board-b-sensor/secrets.h.example`을 `secrets.h`로
    복사해 `BACKEND_BASE_URL`을 위 백엔드 주소로 채운 뒤 업로드. 온습도/가스 값이 자동으로
