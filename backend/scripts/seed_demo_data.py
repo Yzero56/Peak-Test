@@ -62,9 +62,14 @@ async def main() -> None:
         await session.execute(delete(FoodImage))
         await session.execute(delete(FoodItem))
 
-        for label, display_name, category, storage, days_offset, date_source in ITEMS:
+        for legacy_id, (label, display_name, category, storage, days_offset, date_source) in enumerate(ITEMS, start=1):
+            # legacy_id는 HJ 앱(GET /api/inventory)이 InventoryRow의 React key로 그대로 쓰는
+            # 값이다 — 안 채우면 전부 None이 돼서 "두 자식이 같은 key를 가짐" 에러가 난다
+            # (실제로 앱에서 겪은 버그, POST /api/inventory 경로로 안 넣고 DB에 직접 넣으면서
+            # 이 자동 채번 로직을 놓쳤었음).
             expires_at = TODAY + timedelta(days=days_offset) if days_offset is not None else None
             session.add(FoodItem(
+                legacy_id=legacy_id,
                 display_name=display_name,
                 category=category,
                 container_id=label,

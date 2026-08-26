@@ -134,3 +134,23 @@ kang 백엔드는 SQLite가 아니라 PostgreSQL이 필요하다(`backend/.env`�
 kang 백엔드는 아직 인증이 없다(개발 단계 명시). 공용 네트워크에서 시연할 때
 외부인이 `/api/v1/food-items` 등을 건드릴 수 있다는 뜻 — 데모 당일 네트워크
 격리(자체 AP/핫스팟 사용 등)로 완화하거나, 최소한의 토큰 체크를 추가할지 결정 필요.
+
+### 6. 팀 실제 배포본과 cross-check (2026-08-27)
+
+민아님이 공유한 팀 터널 3개로 실제로 확인함:
+
+- **백엔드** `https://antonym-tighten-backdrop.ngrok-free.dev` — 살아있음.
+  `/openapi.json`의 라우트 목록을 우리 통합 브랜치와 전부 diff해봤는데
+  **완전히 일치**했다(우리가 kang을 재동기화한 게 정확했다는 뜻) — 유일한 차이는
+  우리 쪽에만 있는 `GET /api/climate`(이 통합 브랜치에서만 추가한 것, kang
+  브랜치 자체엔 없음). 즉 이 배포본에 이 통합 브랜치가 push되기 전까지는
+  실제 배포본에서 앱 온습도 카드가 안 뜬다 — push하면 바로 해결됨.
+  실제 데이터도 확인함: 양파/김치/토마토/닭가슴살 등 그쪽 자체 테스트 재고가
+  들어있고, `/api/v1/sensor-readings`는 비어있어서 아직 실물 센서 보드는
+  안 붙은 상태로 보임.
+- **관리자 대시보드(최신)** `https://necklace-exciting-tariff-submitted.trycloudflare.com`
+  — 확인 시점에 DNS 조회 자체가 실패(죽어있음). Cloudflare Quick Tunnel은
+  재시작할 때마다 URL이 바뀌는 게 원래 그런 것(HJ 원본 README에도 경고돼 있던
+  내용) — **최신 URL은 시연 당일 다시 받기로 함.**
+- **앱 확인용** `https://uaaqktu-hxex-8082.exp.direct` — 살아있음, 실제 Expo
+  번들 정상 서빙 확인.
