@@ -152,11 +152,23 @@ bool initCamera() {
   return true;
 }
 
+// 연결 실패 직후 바로 재시도하면 이전 시도를 드라이버가 채 정리하기 전에 WiFi.begin()이
+// 다시 걸려서 "sta is connecting, cannot set config" 에러로 계속 서로 충돌하는 경우가 있다.
+// 재시도 사이에 최소한의 쿨다운을 둬서 이걸 방지한다.
+#ifndef WIFI_RETRY_COOLDOWN_MS
+#define WIFI_RETRY_COOLDOWN_MS 5000
+#endif
+unsigned long lastWifiAttemptAt = 0;
+
 void connectWiFi() {
   if (WiFi.status() == WL_CONNECTED) return;
+  if (lastWifiAttemptAt != 0 && millis() - lastWifiAttemptAt < WIFI_RETRY_COOLDOWN_MS) return;
+  lastWifiAttemptAt = millis();
 
   Serial.printf("[wifi] 연결 시도: %s\n", WIFI_SSID);
   WiFi.mode(WIFI_STA);
+  WiFi.disconnect(true, true);  // 이전 시도의 잔여 상태를 완전히 정리하고 새로 시작
+  delay(200);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
   unsigned long start = millis();
@@ -168,7 +180,7 @@ void connectWiFi() {
   if (WiFi.status() == WL_CONNECTED) {
     Serial.printf("\n[wifi] 연결됨, IP: %s\n", WiFi.localIP().toString().c_str());
   } else {
-    Serial.println("\n[wifi] 연결 실패, 다음 루프에서 재시도");
+    Serial.println("\n[wifi] 연결 실패, 잠시 후 재시도");
   }
 }
 
