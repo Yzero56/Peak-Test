@@ -5,7 +5,11 @@ XIAO ESP32-S3 Sense + OV3660 카메라와 리드스위치로 냉장고 문 개�
 아무 일도 없었는지(hand_only)**를 실시간으로 판정하는 시스템.
 
 결과·설계 요약은 [`docs/PART1_INOUT_REPORT.md`](docs/PART1_INOUT_REPORT.md)
-(held-out 테스트 정확도 73.0%, confusion matrix 포함) 참고.
+(held-out 테스트 정확도 76.1%, confusion matrix 포함) 참고.
+
+**학습된 모델(`tools/inout_classifier/model/model.eim`)이 저장소에 포함돼있어서,
+Edge Impulse 계정/API 키 없이도 카메라만 있으면 바로 실시간 판정을 돌릴 수 있다.**
+API 키(`EI_API_KEY`)는 재학습(데이터 업로드·학습·모델 재다운로드)할 때만 필요하다.
 
 ## 구성
 
@@ -23,7 +27,8 @@ python3 -m venv .venv
 ./.venv/bin/pip install -r requirements.txt
 ```
 
-`.env`에 Edge Impulse API 키를 넣는다:
+**재학습할 때만** `.env`에 Edge Impulse API 키가 필요하다 (실시간 판정
+대시보드만 쓸 거면 이 단계는 건너뛰어도 된다 — 모델이 이미 저장소에 있음):
 
 ```
 EI_API_KEY=<Edge Impulse 프로젝트 API 키>

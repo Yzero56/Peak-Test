@@ -9,7 +9,9 @@ data/exports/
 data/inout_sessions/
 build/
 *.bin
-*.eim*
+# 학습된 모델 자체(model.eim)는 저장소에 포함한다 — API 키 없이도 실행 가능하게 하기 위함.
+# 시행착오 중 만든 백업 사본(model.eim.bak_*)만 제외.
+*.eim.bak_*
 .DS_Store
 tmp_preview/
 weights/
