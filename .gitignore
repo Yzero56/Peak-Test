@@ -7,6 +7,12 @@ data/raw_captures_sidebyside_archive/
 data/raw_captures_excluded_lowsignal/
 data/exports/
 data/inout_sessions/
+data/rgb_pairs/
+data/events/
+data/category_eval_captures/
+
+# Claude Code 로컬 스킬/설정 — 팀 저장소에 넣을 코드가 아님
+.claude/
 build/
 *.bin
 # 학습된 모델 자체(model.eim)는 저장소에 포함한다 — API 키 없이도 실행 가능하게 하기 위함.
