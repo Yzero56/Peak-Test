@@ -5,13 +5,22 @@
 대신 호출해서(=CORS 문제 없음, 각 서버 코드 수정 없음) 결과를 **탭 하나**에
 모아 보여준다:
 
-  [카메라 미리보기 + 문 열기/닫기 버튼] [YJ 최신 판정] [Wa 최근 인식]
-  [재고 목록(실시간)]                                  [최근 이벤트 로그]
+  [카메라 미리보기 + (mock 전용) 문 열기/닫기 버튼] [YJ 최신 판정] [Wa 최근 인식]
+  [재고 목록(실시간)]                                              [최근 이벤트 로그]
 
-문 열기 버튼을 누르면: mock 보드 door=open 토글 -> Wa 인식을 몇 번 자동 트리거
+⚠ **문 열기/닫기는 실제 시스템에서 버튼이 아니다.** 실물 보드에서는 리드스위치가
+문 상태를 자동으로 감지해서 GET /door에 반영할 뿐, 수동으로 열고 닫는 조작 자체가
+없다. 그 버튼은 mock_server.py(리드스위치가 없는 순수 소프트웨어 시뮬레이터)를
+붙였을 때만 "문이 열렸다고 치자"를 흉내내기 위한 테스트 전용 기능이다 — 이 페이지가
+서버사이드로 보드의 "/"를 찔러서 mock인지 실물인지 자동 판별하고(`is_mock`),
+실물 보드일 때는 그 버튼을 아예 숨기고 리드스위치가 감지한 실제 상태만 읽기 전용으로
+보여준다.
+
+mock에 붙어서 버튼을 누르면: door=open 토글 -> Wa 인식을 몇 번 자동 트리거
 (실물 카메라가 있으면 그동안 물건을 보여주면 됨) -> 문 닫기 -> YJ가 판정하고
 bridge가 매칭할 시간을 준 뒤 재고 목록이 자동 갱신된다. 즉 "문 열고 → 물건
-보여주고 → 문 닫고 → 대시보드에 반영되는" 실제 시연 흐름을 버튼 하나로 리허설할 수 있다.
+보여주고 → 문 닫고 → 대시보드에 반영되는" 실제 시연 흐름을 하드웨어 없이 리허설할 수
+있다. 실물 보드가 붙으면 이 버튼 없이도 진짜 리드스위치로 똑같은 흐름이 자동으로 돈다.
 
 실행:
   python dev/demo_panel.py --port 9500
@@ -60,12 +69,13 @@ th{color:var(--muted);font-weight:600}
 .stat{font-size:13px;margin:4px 0}
 </style></head><body>
 <h1>🧊 PEAK Smart — 라이브 데모 패널</h1>
-<div class="sub">문 열기 버튼 하나로 냉장고 OUT/IN → 인식 → 백엔드 등록 → 대시보드 반영까지 한 화면에서 확인</div>
+<div class="sub">냉장고 OUT/IN → 인식 → 백엔드 등록 → 대시보드 반영까지 한 화면에서 확인 (실물 보드는 리드스위치가 자동 감지, mock일 때만 아래 버튼으로 테스트)</div>
 <div class="grid">
   <div class="card">
     <h2>카메라 (board-a)</h2>
     <img id="cam" src="/proxy/camera.jpg">
-    <button id="doorBtn" class="doorbtn" onclick="toggleDoor()">🚪 문 열기</button>
+    <button id="doorBtn" class="doorbtn" onclick="toggleDoor()">🚪 (mock) 문 열기</button>
+    <div id="doorHint" class="stat" style="color:var(--muted);font-size:12px"></div>
     <div class="stat">문 상태: <span id="doorState" class="pill idle">확인 중</span></div>
   </div>
   <div class="card">
@@ -95,12 +105,29 @@ function logLine(msg){
   el.innerHTML = `[${t}] ${msg}<br>` + el.innerHTML;
 }
 
+let isMockBoard = null;  // null=아직 모름, true=mock_server.py, false=실물 보드(리드스위치)
+
+async function refreshBoardMode(){
+  try{
+    const r = await fetch('/proxy/board-info'); const d = await r.json();
+    isMockBoard = d.is_mock;
+    const btn = document.getElementById('doorBtn'), hint = document.getElementById('doorHint');
+    if(isMockBoard){
+      btn.style.display = '';
+      hint.textContent = '⚠ mock 서버 전용 테스트 버튼 — 실물 보드에선 리드스위치가 자동 감지하고 이 버튼은 없음';
+    }else{
+      btn.style.display = 'none';
+      hint.textContent = '실물 리드스위치가 문 상태를 자동으로 감지 중 (버튼 없음)';
+    }
+  }catch(e){ /* 보드 자체가 안 잡히면 refreshDoor() 쪽에서 이미 '연결 안 됨' 표시함 */ }
+}
+
 async function refreshDoor(){
   try{
     const r = await fetch('/proxy/door'); const d = await r.json();
     doorOpen = d.open;
     pill(document.getElementById('doorState'), doorOpen?'열림':'닫힘', doorOpen?'warn':'good');
-    document.getElementById('doorBtn').textContent = doorOpen ? '🚪 문 닫기' : '🚪 문 열기';
+    document.getElementById('doorBtn').textContent = doorOpen ? '🚪 (mock) 문 닫기' : '🚪 (mock) 문 열기';
   }catch(e){ pill(document.getElementById('doorState'), '연결 안 됨', 'bad'); }
 }
 
@@ -158,9 +185,10 @@ async function refreshInventory(){
 document.getElementById('cam').addEventListener('error', function(){ this.src = this.src; });
 setInterval(()=>{ document.getElementById('cam').src = '/proxy/camera.jpg?t=' + Date.now(); }, 700);
 setInterval(refreshDoor, 1500);
+setInterval(refreshBoardMode, 5000);
 setInterval(refreshYJ, 1500);
 setInterval(refreshInventory, 2500);
-refreshDoor(); refreshYJ(); refreshInventory();
+refreshDoor(); refreshYJ(); refreshInventory(); refreshBoardMode();
 </script>
 </body></html>"""
 
@@ -210,6 +238,14 @@ def make_handler():
             elif path == "/proxy/door":
                 status, body = _get(f"{CONFIG['board']}/door")
                 self._send(status if status < 400 else 503, "application/json", body)
+            elif path == "/proxy/board-info":
+                # mock_server.py의 "/" 응답엔 "mock"이라는 단어가 들어있고, 실물
+                # board-a-door-container.ino의 "/" 응답엔 없다 — 이걸로 구분해서
+                # mock일 때만 문 열기/닫기 테스트 버튼을 보여준다(실물 리드스위치가
+                # 있을 땐 그 버튼 자체가 오해를 부르므로 숨김).
+                status, body = _get(f"{CONFIG['board']}/")
+                is_mock = status < 400 and b"mock" in body.lower()
+                self._send(200, "application/json", json.dumps({"is_mock": is_mock}).encode())
             elif path == "/proxy/yj-status":
                 status, body = _get(f"{CONFIG['yj']}/api/status")
                 self._send(status if status < 400 else 503, "application/json", body)
