@@ -137,7 +137,7 @@ kang 백엔드는 아직 인증이 없다(개발 단계 명시). 공용 네트�
 
 ### 6. 팀 실제 배포본과 cross-check (2026-08-27)
 
-민아님이 공유한 팀 터널 3개로 실제로 확인함:
+팀원이 공유한 팀 터널 3개로 실제로 확인함:
 
 - **백엔드** `https://antonym-tighten-backdrop.ngrok-free.dev` — 살아있음.
   `/openapi.json`의 라우트 목록을 우리 통합 브랜치와 전부 diff해봤는데
