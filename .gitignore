@@ -12,7 +12,7 @@ backend/.env
 backend/*.db
 backend/media/
 backend/*.log
-data/uploads/
+backend/data/uploads/
 .mypy_cache/
 .ruff_cache/
 *.egg-info/

@@ -17,6 +17,7 @@ from pathlib import Path
 
 import cv2
 import joblib
+import requests
 from flask import Flask, Response, jsonify, render_template_string
 from PIL import Image
 from ultralytics import YOLOWorld
@@ -24,6 +25,34 @@ from ultralytics import YOLOWorld
 from container_detector import DEFAULT_MODEL, ContainerDetection
 from container_registry import DinoV2Embedder
 from live_container_recognition import fetch_jpg, make_jpg_url
+
+# [통합] kang 백엔드(/api/v1/detections)로 인식 결과를 보고한다. 이 모델엔 물건별
+# 고유 식별자(container_id)가 없다 — 12개 클래스 라벨(예: "당근")만 나온다. 그래서
+# 라벨 자체를 container_id로도 같이 보낸다(같은 종류 물건 여러 개를 구분 못 하는
+# 한계는 있지만, 시연 시나리오처럼 "이 종류가 나갔다/들어왔다" 수준에서는 충분함).
+# Part1(motion_direction)과의 매칭은 bridge/detection_bridge.py가 한다.
+def report_detections_to_backend(backend_url: str, device_id: str, objects: list[dict]) -> None:
+    if not backend_url or not objects:
+        return
+
+    def _send():
+        try:
+            requests.post(
+                f"{backend_url.rstrip('/')}/api/v1/detections",
+                json={
+                    "device_id": device_id,
+                    "detections": [
+                        {"label": obj["label"], "confidence": min(float(obj["confidence"]), 1.0),
+                         "container_id": obj["label"]}
+                        for obj in objects
+                    ],
+                },
+                timeout=3,
+            )
+        except requests.RequestException as e:
+            print(f"[backend] 보고 실패: {e}")
+
+    threading.Thread(target=_send, daemon=True).start()
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -88,10 +117,12 @@ async function loop(){try{const r=await fetch('/classify-next',{method:'POST'}),
 
 
 class InstanceRealtimeMultiService:
-    def __init__(self, address: str, model_path: Path, log_path: Path, max_objects: int = MAX_OBJECTS):
+    def __init__(self, address: str, model_path: Path, log_path: Path, max_objects: int = MAX_OBJECTS,
+                 backend_url: str = "", device_id: str = "board-a-door-container"):
         self.camera_url = make_jpg_url(address)
         self.model_path, self.log_path = model_path, log_path
         self.max_objects = max_objects
+        self.backend_url, self.device_id = backend_url, device_id
         self.frame_lock, self.analysis_lock = threading.Lock(), threading.Lock()
         self.latest_frame = None; self.camera_error = "카메라 연결 대기 중"
         self.detector = self.embedder = self.classifier_bundle = None
@@ -168,6 +199,7 @@ class InstanceRealtimeMultiService:
                                 'detection_confidence':detection.confidence,
                                 'prompt':detection.prompt,'box':list(detection.box)})
             self.append_log(objects)
+            report_detections_to_backend(self.backend_url, self.device_id, objects)
             return {'status':'ok','objects':objects,'width':frame.shape[1],'height':frame.shape[0]}
 
 
@@ -195,8 +227,12 @@ def main():
     parser.add_argument('address',nargs='?',default='192.168.4.1');parser.add_argument('--model',type=Path,default=MODEL_PATH)
     parser.add_argument('--log',type=Path,default=LOG_PATH);parser.add_argument('--port',type=int,default=5007)
     parser.add_argument('--max-objects',type=int,default=MAX_OBJECTS)
-    args=parser.parse_args();service=InstanceRealtimeMultiService(args.address,args.model,args.log,args.max_objects)
+    parser.add_argument('--backend-url',default='',help='kang 백엔드 주소(예: http://localhost:8000). 비우면 보고하지 않음(기본).')
+    parser.add_argument('--device-id',default='board-a-door-container')
+    args=parser.parse_args()
+    service=InstanceRealtimeMultiService(args.address,args.model,args.log,args.max_objects,args.backend_url,args.device_id)
     print('다중 물체 개별 인식 서버가 ESP32 카메라 연결을 기다립니다.');print(f'브라우저 주소: http://127.0.0.1:{args.port}')
+    if args.backend_url: print(f'[backend] 인식 결과를 {args.backend_url}/api/v1/detections 로 보고합니다 (device_id={args.device_id}).')
     create_app(service).run(host='127.0.0.1',port=args.port,threaded=True,debug=False)
 
 
