@@ -1,10 +1,45 @@
 import base64
 import json
+import re
 
 from openai import AsyncOpenAI
 
 from app.core.config import settings
 from app.schemas.analysis import ExtractedFoodInfo
+
+_THINK_BLOCK = re.compile(r"<think>.*?</think>", re.DOTALL)
+_JSON_FENCE = re.compile(r"```(?:json)?\s*(\{.*?\})\s*```", re.DOTALL)
+
+# 일부 VLM(예: MiniMax-M3)은 response_format=json_schema를 강제해도 필드 이름을
+# 스키마와 다르게 준다 — 흔히 쓰는 대체 키를 우리 스키마 키로 맞춰준다.
+_KEY_ALIASES = {
+    "expiration_date": "labeled_expires_at",
+    "manufactured_date": "manufactured_at",
+}
+
+
+def _extract_json_object(content: str) -> dict:
+    """느슨한 JSON 추출: <think> 블록/마크다운 코드펜스로 감싸져 오는 응답도 파싱한다."""
+    stripped = _THINK_BLOCK.sub("", content).strip()
+    try:
+        return json.loads(stripped)
+    except json.JSONDecodeError:
+        pass
+    fence_match = _JSON_FENCE.search(stripped)
+    if fence_match:
+        return json.loads(fence_match.group(1))
+    brace_start, brace_end = stripped.find("{"), stripped.rfind("}")
+    if brace_start != -1 and brace_end > brace_start:
+        return json.loads(stripped[brace_start : brace_end + 1])
+    raise ValueError(f"VLM response has no parseable JSON object: {content[:200]!r}")
+
+
+def _normalize_extracted_fields(data: dict) -> dict:
+    for alt_key, real_key in _KEY_ALIASES.items():
+        if alt_key in data and real_key not in data:
+            data[real_key] = data.pop(alt_key)
+    data.setdefault("confidence", 0.5)  # 모델이 누락하면 검토 필요로 처리
+    return data
 
 NULLABLE_STRING = {"anyOf": [{"type": "string"}, {"type": "null"}]}
 NULLABLE_DATE = {"anyOf": [{"type": "string"}, {"type": "null"}]}
@@ -42,11 +77,16 @@ EXTRACTION_SCHEMA = {
 }
 
 SYSTEM_PROMPT = """You extract food and expiry information from a kitchen food image.
-Return only JSON matching the supplied schema.
+Respond with ONLY a single raw JSON object — no <think> blocks, no markdown code
+fences, no commentary before or after it.
+Use exactly these keys: food_name, category, manufactured_date_text,
+expiration_date_text, manufactured_at, labeled_expires_at, storage_type,
+confidence, notes. Do not use any other key names.
 Use only information visible in the image. Never guess a date.
 If a value is unreadable or absent, return null.
 Normalize dates to YYYY-MM-DD only when the printed date is unambiguous.
 Keep the original printed date in manufactured_date_text or expiration_date_text.
+confidence is a number from 0 to 1 for how certain you are overall.
 """
 
 
@@ -100,4 +140,5 @@ class OpenAIVLMAdapter:
         content = response.choices[0].message.content
         if not content:
             raise ValueError("VLM returned an empty response")
-        return ExtractedFoodInfo.model_validate(json.loads(content))
+        data = _normalize_extracted_fields(_extract_json_object(content))
+        return ExtractedFoodInfo.model_validate(data)

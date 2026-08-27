@@ -108,6 +108,10 @@ def fire_refrigerator_event(backend_url: str, motion: PendingEvent, container: P
             f"{backend_url.rstrip('/')}/api/v1/events/refrigerator",
             json={
                 "container_id": container.container_id,
+                # container_id 자체가 Wa 분류기가 인식한 라벨 텍스트라("당근", "파&마늘" 등)
+                # 그대로 표시 이름으로도 쓴다 — 안 보내면 백엔드가 "미확인 식품"으로
+                # 대체해버려서, 새로 등록되는 물건 이름이 뭐가 들어왔는지 안 보였다.
+                "food_name": container.container_id,
                 "motion_direction": motion.motion_direction,
                 "confidence": min(container.confidence, 1.0),
                 "recognition_status": "matched",

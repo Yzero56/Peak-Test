@@ -42,12 +42,16 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse
 
 CONFIG = {
-    "backend": "http://localhost:8000",
+    "backend": "http://localhost:8000",  # YJ/Wa/bridge가 실제로 등록하는 로컬 API — 건드리지 않음
     "board": "http://localhost:9000",
     "yj": "http://localhost:8601",
     "wa": "http://localhost:5007",
     "app": "http://localhost:8081",
     "phone_relay": "http://localhost:9601",  # phone_mirror_relay.py의 HTTP 포트
+    # Scene 2에서 "보여주는" 대시보드 화면 — 기본은 로컬 백엔드 대시보드.
+    # 시연 당일 팀 배포본/터널 URL로 바꾸려면 --admin-dashboard-url로 넘기면 된다
+    # (임시 터널 URL은 곧 만료되므로 코드에 하드코딩하지 않는다).
+    "admin_dashboard": "http://localhost:8000/dashboard/",
 }
 
 PAGE = r"""<!doctype html><html lang="ko"><head><meta charset="utf-8">
@@ -175,6 +179,7 @@ body.fs .iframe-grid{height:100vh}
   <div class="card">
     <h2>인식 상태</h2>
     <div class="stat">YJ (IN/OUT): <span id="yjState" class="pill idle">-</span></div>
+    <div class="stat">크롭 영역: <span id="yjCrop" class="pill idle">-</span></div>
     <div class="stat" id="yjResult">최근 판정 없음</div>
     <hr style="border-color:var(--line);margin:10px 0">
     <div class="stat">Wa (용기/물건): <span id="waState" class="pill idle">-</span></div>
@@ -271,7 +276,7 @@ function showScene(n){
   document.getElementById('tabBtn2').classList.toggle('active', n===2);
   if(n===2) updatePaneWidths();
 }
-let doorOpen = false, waLoopTimer = null;
+let doorOpen = null, waLoopTimer = null;  // null=아직 최초 폴링 전(전환 로그 억제용)
 function pill(el, text, cls){ el.textContent = text; el.className = 'pill ' + cls; }
 function logLine(msg){
   const el = document.getElementById('log');
@@ -299,9 +304,20 @@ async function refreshBoardMode(){
 async function refreshDoor(){
   try{
     const r = await fetch('/proxy/door'); const d = await r.json();
+    const wasOpen = doorOpen;
     doorOpen = d.open;
     pill(document.getElementById('doorState'), doorOpen?'열림':'닫힘', doorOpen?'warn':'good');
     document.getElementById('doorBtn').textContent = doorOpen ? '🚪 (mock) 문 닫기' : '🚪 (mock) 문 열기';
+    // 실물 보드는 리드스위치가 door를 직접 여닫으므로(버튼 없음), 여기서
+    // 상태 전환을 감지해서 Wa 인식 루프를 직접 켜고/꺼야 한다 — mock 버튼의
+    // toggleDoor()에만 맡겨두면 실물에선 Wa가 영영 시작되지 않는다.
+    if(doorOpen && !wasOpen){
+      startWaLoop();
+      if(wasOpen !== null) logLine('🚪 문 열림 — Wa 인식 시작 (물건을 카메라에 보여주세요)');
+    } else if(!doorOpen && wasOpen){
+      stopWaLoop();
+      logLine('🚪 문 닫힘 — YJ 판정 + bridge 매칭 대기 중 (몇 초 내 백엔드·대시보드 자동 갱신)');
+    }
   }catch(e){ pill(document.getElementById('doorState'), '연결 안 됨', 'bad'); }
 }
 
@@ -309,9 +325,7 @@ async function toggleDoor(){
   const btn = document.getElementById('doorBtn'); btn.disabled = true;
   const next = !doorOpen;
   await fetch('/proxy/door', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({open: next})});
-  logLine(next ? '🚪 문 열림 — Wa 인식 시작 (실물 카메라면 지금 물건을 보여주세요)' : '🚪 문 닫힘 — YJ 판정 + bridge 매칭 대기 중');
-  await refreshDoor();
-  if(next){ startWaLoop(); } else { stopWaLoop(); logLine('⏳ 대시보드·앱은 자체적으로 몇 초 내 자동 갱신됩니다'); }
+  await refreshDoor();  // 문 상태 전환 로그·Wa 루프 시작/정지는 refreshDoor()가 일괄 처리
   btn.disabled = false;
 }
 
@@ -320,11 +334,62 @@ async function refreshYJ(){
     const r = await fetch('/proxy/yj-status'); const d = await r.json();
     pill(document.getElementById('yjState'), d.session_active?'세션 진행 중':(d.connected?'연결됨':'연결 안 됨'),
          d.session_active?'warn':(d.connected?'good':'bad'));
+    // 개발용 페이지의 "✓ 크롭 영역 확정됨" 배지와 동일한 기준(door open && hand_seen)
+    const cropEl = document.getElementById('yjCrop');
+    if(!d.session_active){ pill(cropEl, '-', 'idle'); }
+    else if(d.hand_seen){ pill(cropEl, '✓ 확정됨', 'good'); }
+    else { pill(cropEl, '탐색 중 (손 못 찾음)', 'warn'); }
     const res = d.latest_result;
     document.getElementById('yjResult').textContent = res
       ? `최근 판정: ${res.label ?? '(' + (res.reason||'실패') + ')'} ${res.confidence!=null?'('+(res.confidence*100).toFixed(0)+'%)':''}`
       : '최근 판정 없음';
+    if(res && res.ts && res.ts !== lastYjTs){
+      lastYjTs = res.ts;
+      logLine(res.label
+        ? `🎯 YJ 판정: ${res.label} (${(res.confidence*100).toFixed(0)}%)`
+        : `⚠ YJ 판정 실패: ${res.reason || '알 수 없음'}`);
+    }
   }catch(e){ pill(document.getElementById('yjState'), '연결 안 됨', 'bad'); }
+}
+
+let lastYjTs = null, lastDetectionAt = null, dashboardSnapshot = null;
+
+async function refreshDetections(){
+  // YJ/Wa 판정이 백엔드까지 실제로 도착했는지("연동") 확인용 — /api/v1/detections 새 항목을 로그에 표시
+  try{
+    const r = await fetch('/proxy/detections'); const list = await r.json();
+    if(!Array.isArray(list) || !list.length) return;
+    const fresh = list.filter(d => !lastDetectionAt || new Date(d.detected_at) > new Date(lastDetectionAt))
+                       .sort((a,b) => new Date(a.detected_at) - new Date(b.detected_at));
+    for(const d of fresh){
+      const dir = d.motion_direction ? ` 방향=${d.motion_direction}` : '';
+      const cid = d.container_id ? ` 용기=${d.container_id}` : '';
+      logLine(`🔗 백엔드 수신: label=${d.label}${dir}${cid} (conf ${Math.round(parseFloat(d.confidence)*100)}%)`);
+    }
+    if(fresh.length) lastDetectionAt = fresh[fresh.length - 1].detected_at;
+  }catch(e){ /* 백엔드 안 잡히면 조용히 무시 — 다른 상태 표시에서 이미 드러남 */ }
+}
+
+async function refreshDashboardDiff(){
+  // /dashboard/summary는 status=active인 것만 돌려준다(백엔드 쿼리 자체가
+  // WHERE status==ACTIVE) — 그래서 소비된 물건은 status 값이 바뀌어서 오는 게
+  // 아니라 목록에서 그냥 사라진다. 그러므로 IN/OUT은 상태값 비교가 아니라
+  // "이전 스냅샷엔 있었는데 지금은 없어짐 = OUT" 식으로, 두 스냅샷의 id
+  // 집합 차이로 판단해야 한다.
+  try{
+    const r = await fetch('/proxy/dashboard'); const d = await r.json();
+    const next = {};
+    for(const item of (d.items || [])){ next[item.id] = {name: item.display_name, status: item.status}; }
+    if(dashboardSnapshot){
+      for(const id in next){
+        if(!(id in dashboardSnapshot)) logLine(`📥 IN: ${next[id].name} — 냉장고에 새로 들어옴`);
+      }
+      for(const id in dashboardSnapshot){
+        if(!(id in next)) logLine(`📤 OUT: ${dashboardSnapshot[id].name} — 냉장고에서 나감`);
+      }
+    }
+    dashboardSnapshot = next;
+  }catch(e){ /* 조용히 무시 */ }
 }
 
 async function waClassifyOnce(){
@@ -348,7 +413,9 @@ setInterval(()=>{ document.getElementById('cam').src = '/proxy/camera.jpg?t=' + 
 setInterval(refreshDoor, 1500);
 setInterval(refreshBoardMode, 5000);
 setInterval(refreshYJ, 1500);
-refreshDoor(); refreshYJ(); refreshBoardMode();
+setInterval(refreshDetections, 2000);
+setInterval(refreshDashboardDiff, 2000);
+refreshDoor(); refreshYJ(); refreshBoardMode(); refreshDetections(); refreshDashboardDiff();
 </script>
 </body></html>"""
 
@@ -393,7 +460,16 @@ def make_handler():
             if path == "/":
                 self._send(200, "text/html; charset=utf-8", PAGE.encode())
             elif path == "/proxy/camera.jpg":
-                status, body = _get(f"{CONFIG['board']}/jpg")
+                # 보드를 또 때리지 않고 YJ가 이미 캐싱해둔 최신 프레임을 재사용한다 —
+                # 실기기(싱글스레드 동기식 웹서버)에서 demo_panel까지 새로 요청을
+                # 얹으면 서로 대기열에 걸려 화면이 뚝뚝 끊긴다. (Wa 캐시도 같이
+                # 쓰는 걸 시도했으나, Wa는 자체적으로 상하반전(cv2.flip)해서
+                # 캐싱하기 때문에 YJ 캐시와 번갈아 쓰면 화면이 뒤집혀 보였다 —
+                # 되돌림. YJ가 안 떠있거나 프레임이 아직 없으면(mock 등) 보드에
+                # 직접 묻는 걸로 폴백한다.)
+                status, body = _get(f"{CONFIG['yj']}/api/frame.jpg")
+                if status >= 400:
+                    status, body = _get(f"{CONFIG['board']}/jpg")
                 self._send(status if status < 400 else 503, "image/jpeg", body)
             elif path == "/proxy/door":
                 status, body = _get(f"{CONFIG['board']}/door")
@@ -412,6 +488,12 @@ def make_handler():
             elif path == "/proxy/dashboard":
                 status, body = _get(f"{CONFIG['backend']}/api/v1/dashboard/summary")
                 self._send(status if status < 400 else 503, "application/json", body)
+            elif path == "/proxy/detections":
+                # 이벤트 로그에서 "백엔드까지 실제로 도착했는지" 확인용
+                status, body = _get(
+                    f"{CONFIG['backend']}/api/v1/detections?device_id=board-a-door-container&limit=10"
+                )
+                self._send(status if status < 400 else 503, "application/json", body)
             elif path == "/proxy/phone.jpg":
                 status, body = _get(f"{CONFIG['phone_relay']}/latest.jpg")
                 self._send(status if status < 400 else 503, "image/jpeg", body)
@@ -423,10 +505,13 @@ def make_handler():
                 # 물고 오는 완전한 페이지라, 이 서버가 내용을 대신 fetch해서 재서빙하면
                 # (다른 proxy/* 처럼) 그 상대경로들이 이 프록시 기준으로 깨진다. 그래서
                 # 내용을 프록시하는 대신, iframe이 실제 origin으로 바로 이동하도록
-                # 리다이렉트만 해준다 — CONFIG(=--backend-url 등 인자)를 그대로 반영하기
-                # 위한 간접 참조일 뿐, 페이지 자체는 항상 진짜 서버가 직접 서빙한다.
+                # 리다이렉트만 해준다 — CONFIG(=--admin-dashboard-url 등 인자)를 그대로
+                # 반영하기 위한 간접 참조일 뿐, 페이지 자체는 항상 진짜 서버가 직접 서빙한다.
+                # 팀 최신 관리자 대시보드는 공용 비밀번호 로그인이 있어서, iframe이 처음
+                # /login으로 넘어가면 그 안에서 비밀번호를 한 번 입력해야 한다(그 뒤엔
+                # 쿠키 세션이라 같은 브라우저에서 계속 유지됨).
                 self.send_response(302)
-                self.send_header("Location", f"{CONFIG['backend']}/dashboard/")
+                self.send_header("Location", CONFIG["admin_dashboard"])
                 self.end_headers()
             elif path == "/proxy/app-page":
                 self.send_response(302)
@@ -464,9 +549,11 @@ def main():
     ap.add_argument("--wa-url", default=CONFIG["wa"])
     ap.add_argument("--app-url", default=CONFIG["app"])
     ap.add_argument("--phone-relay-url", default=CONFIG["phone_relay"])
+    ap.add_argument("--admin-dashboard-url", default=CONFIG["admin_dashboard"],
+                     help="팀 최신 관리자 대시보드 URL (링크 바뀌면 이 옵션으로 갱신)")
     args = ap.parse_args()
     CONFIG.update(backend=args.backend_url, board=args.board_url, yj=args.yj_url, wa=args.wa_url, app=args.app_url,
-                  phone_relay=args.phone_relay_url)
+                  phone_relay=args.phone_relay_url, admin_dashboard=args.admin_dashboard_url)
 
     server = ThreadingHTTPServer(("0.0.0.0", args.port), make_handler())
     print(f"[demo-panel] http://localhost:{args.port} 에서 대기 중")

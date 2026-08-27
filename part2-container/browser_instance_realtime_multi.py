@@ -118,11 +118,13 @@ async function loop(){try{const r=await fetch('/classify-next',{method:'POST'}),
 
 class InstanceRealtimeMultiService:
     def __init__(self, address: str, model_path: Path, log_path: Path, max_objects: int = MAX_OBJECTS,
-                 backend_url: str = "", device_id: str = "board-a-door-container"):
+                 backend_url: str = "", device_id: str = "board-a-door-container",
+                 capture_interval: float = 0.12):
         self.camera_url = make_jpg_url(address)
         self.model_path, self.log_path = model_path, log_path
         self.max_objects = max_objects
         self.backend_url, self.device_id = backend_url, device_id
+        self.capture_interval = capture_interval
         self.frame_lock, self.analysis_lock = threading.Lock(), threading.Lock()
         self.latest_frame = None; self.camera_error = "카메라 연결 대기 중"
         self.detector = self.embedder = self.classifier_bundle = None
@@ -133,7 +135,7 @@ class InstanceRealtimeMultiService:
             try:
                 frame = cv2.flip(fetch_jpg(self.camera_url), 0)
                 with self.frame_lock: self.latest_frame, self.camera_error = frame, ""
-                time.sleep(0.12)
+                time.sleep(self.capture_interval)
             except Exception as error:
                 with self.frame_lock: self.camera_error = str(error)
                 time.sleep(0.7)
@@ -229,8 +231,11 @@ def main():
     parser.add_argument('--max-objects',type=int,default=MAX_OBJECTS)
     parser.add_argument('--backend-url',default='',help='kang 백엔드 주소(예: http://localhost:8000). 비우면 보고하지 않음(기본).')
     parser.add_argument('--device-id',default='board-a-door-container')
+    parser.add_argument('--capture-interval',type=float,default=0.12,
+                         help='보드 폴링 간격(초). 핫스팟 경유처럼 보드 응답이 느릴 때 늘려서 경합을 줄인다.')
     args=parser.parse_args()
-    service=InstanceRealtimeMultiService(args.address,args.model,args.log,args.max_objects,args.backend_url,args.device_id)
+    service=InstanceRealtimeMultiService(args.address,args.model,args.log,args.max_objects,args.backend_url,
+                                          args.device_id,args.capture_interval)
     print('다중 물체 개별 인식 서버가 ESP32 카메라 연결을 기다립니다.');print(f'브라우저 주소: http://127.0.0.1:{args.port}')
     if args.backend_url: print(f'[backend] 인식 결과를 {args.backend_url}/api/v1/detections 로 보고합니다 (device_id={args.device_id}).')
     create_app(service).run(host='127.0.0.1',port=args.port,threaded=True,debug=False)
