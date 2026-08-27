@@ -14,12 +14,12 @@ python -m venv .venv
 
 pip install -r requirements.txt
 copy .env.example .env        # Windows: copy, macOS/Linux: cp
-# .env 파일을 열어 ADMIN_PASSWORD, SECRET_KEY를 실제 값으로 채우기
+# .env 파일을 열어 ADMIN_PASSWORD를 실제 값으로 채우기
 
 uvicorn app.main:app --reload --port 8000
 ```
 
-브라우저에서 http://localhost:8000 접속 → `.env`에 설정한 `ADMIN_PASSWORD`로 로그인.
+브라우저에서 http://localhost:8000 접속 — 대시보드는 로그인 없이 바로 열립니다.
 
 ## 기기 등록 & 인입 API
 
@@ -62,9 +62,10 @@ pull해서 인식·저장합니다(기기당 최신 1건만 유지, 쌓이지 �
   지우고 새 캡처 1건으로 교체한 뒤 `detect_objects()`를 실행합니다.
 - `app/live_scan.py` — 문 열림/닫힘에 따른 자동 스캔 반복 루프(기기별 백그라운드 스레드).
   `routers/ingest.py`의 `/sensors`에서 `door_open` 상태 전환을 감지해 시작/중단시킵니다.
-- `app/security.py` — 관리자 대시보드는 공용 비밀번호 세션 로그인, 기기 인입 API는 기기별 토큰(SHA-256 해시 저장) 인증.
-- 미디어(캡처 이미지)는 `backend/media/captures/{device_id}/latest.jpg`에 저장되고, 로그인한 관리자만
-  `/media/captures/{capture_id}`로 조회할 수 있습니다 (공개 정적 경로 아님). 단, ESP32 자체의
-  `/stream`·`/capture`는 인증이 없으니 로컬 데모 범위로만 사용하세요.
+- `app/security.py` — 관리자 대시보드는 로그인 없이 열람 가능, 기기 인입 API는 기기별 토큰(SHA-256 해시 저장) 인증,
+  모바일 앱 API는 `ADMIN_PASSWORD`를 토큰으로 재사용(`X-App-Token` 헤더).
+- 미디어(캡처 이미지)는 `backend/media/captures/{device_id}/latest.jpg`에 저장되고,
+  `/media/captures/{capture_id}`로 조회할 수 있습니다. 대시보드에 로그인이 없으므로 이 URL도 사실상
+  공개 경로입니다 — 로컬 데모 범위로만 사용하세요. ESP32 자체의 `/stream`·`/capture`도 마찬가지로 인증이 없습니다.
 
 `backend/.env`, `backend/media/`, `backend/fridge.db`는 커밋하지 않습니다 (`.gitignore` 참고).

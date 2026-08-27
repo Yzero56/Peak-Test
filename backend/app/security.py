@@ -2,36 +2,16 @@ import hashlib
 import hmac
 import secrets
 
-from fastapi import Header, HTTPException, Request, status
+from fastapi import Header, HTTPException, status
 
 from app.config import get_settings
 from app.models import Device
 
-SESSION_KEY = "authed"
-
 
 def check_admin_password(password: str) -> bool:
     # compare_digest는 비-ASCII 문자가 섞인 str을 주면 TypeError를 던지므로
-    # (로그인 폼에 한글 등이 섞여 들어오는 경우가 있음) bytes로 맞춰서 비교한다.
+    # (한글 등이 섞여 들어오는 경우가 있음) bytes로 맞춰서 비교한다.
     return hmac.compare_digest(password.encode("utf-8"), get_settings().admin_password.encode("utf-8"))
-
-
-def log_in(request: Request) -> None:
-    request.session[SESSION_KEY] = True
-
-
-def log_out(request: Request) -> None:
-    request.session.pop(SESSION_KEY, None)
-
-
-def is_logged_in(request: Request) -> bool:
-    return bool(request.session.get(SESSION_KEY))
-
-
-def require_login(request: Request) -> None:
-    """대시보드 HTML 라우트용 의존성 — 세션이 없으면 로그인 페이지로 리다이렉트."""
-    if not is_logged_in(request):
-        raise HTTPException(status_code=status.HTTP_302_FOUND, headers={"Location": "/login"})
 
 
 def require_app_token(x_app_token: str = Header(...)) -> None:

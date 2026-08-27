@@ -8,7 +8,6 @@ BACKEND_DIR = Path(__file__).resolve().parent.parent
 
 class Settings(BaseSettings):
     admin_password: str
-    secret_key: str
     database_url: str = "sqlite:///./fridge.db"
     media_dir: str = "./media"
     food_safety_api_key: str = ""

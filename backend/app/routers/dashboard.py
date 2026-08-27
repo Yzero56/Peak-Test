@@ -12,13 +12,13 @@ from app.config import get_settings
 from app.database import get_db
 from app.models import Capture, Device
 from app.schemas import DeviceCreate
-from app.security import generate_device_token, hash_token, require_login
+from app.security import generate_device_token, hash_token
 from app.templating import templates
 
 SCAN_TIMEOUT_SECONDS = 5
 FRIDGE_ONLINE_WITHIN = timedelta(minutes=5)
 
-router = APIRouter(dependencies=[Depends(require_login)])
+router = APIRouter()
 
 
 def _device_card(db: Session, device: Device) -> dict:
