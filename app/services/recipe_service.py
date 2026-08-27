@@ -13,6 +13,37 @@ _CACHE_TTL_SECONDS = 60 * 60  # HJ 앱의 fridge-store.tsx 주석 기준: "백�
 
 _cache: dict[str, Any] = {"data": None, "fetched_at": 0.0}
 
+# 식품안전나라 API에는 없는, 직접 등록한 레시피. 매 응답에 항상 합쳐서 내려준다.
+_LOCAL_RECIPES: list[dict[str, Any]] = [
+    {
+        "id": "local-spam-fried-rice",
+        "title": "간단 볶음밥",
+        "time": "15분",
+        "level": "쉬움",
+        "kcal": 480,
+        "note": "당근과 양파를 잘게 썰어 볶고 계란과 밥을 더해 간단하게 완성한다.",
+        "uses": [
+            {"name": "밥", "amount": "1공기(210g)", "essential": True},
+            {"name": "양파", "amount": "1/4개", "essential": True},
+            {"name": "대파", "amount": "1/2대", "essential": True},
+            {"name": "당근", "amount": "1/6개", "essential": True},
+            {"name": "계란", "amount": "1개", "essential": True},
+        ],
+        "steps": [
+            "1. 양파와 당근은 사방 1cm로 작게 썰고, 대파는 송송 썬다.",
+            "2. 팬에 식용유를 두르고 중간 불에서 양파, 당근, 대파 흰 부분을 넣어 양파가 투명해질 때까지 볶는다.",
+            "3. 밥을 넣고 주걱으로 누르듯 펴가며 알알이 풀어지도록 3~4분 볶는다.",
+            "4. 계란을 풀어 팬 한쪽에 붓고 스크램블하듯 익힌 뒤 나머지 재료와 섞는다.",
+            "5. 대파 푸른 부분을 넣고 소금으로 간을 맞춘 뒤 한 번 더 섞어 불을 끈다.",
+        ],
+    },
+]
+
+
+def _merge_local_recipes(recipes: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    local_ids = {r["id"] for r in _LOCAL_RECIPES}
+    return _LOCAL_RECIPES + [r for r in recipes if r["id"] not in local_ids]
+
 _BRACKET_RE = re.compile(r"\[[^\]]*\]")
 _LABEL_PREFIX_RE = re.compile(r"^[·•]?\s*[^\d,:()]{1,20}:\s*")
 _NAME_AMOUNT_RE = re.compile(r"^(?P<name>[^\d]+?)\s*(?P<amount>\d.*)$")
@@ -107,7 +138,7 @@ async def get_recipes() -> list[dict[str, Any]]:
     now = time.monotonic()
     if _cache["data"] is not None and now - _cache["fetched_at"] < _CACHE_TTL_SECONDS:
         return _cache["data"]
-    recipes = await _fetch_from_api()
+    recipes = _merge_local_recipes(await _fetch_from_api())
     _cache["data"] = recipes
     _cache["fetched_at"] = now
     return recipes
