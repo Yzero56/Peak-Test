@@ -4,7 +4,7 @@ import { Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useFridge } from '@/state/fridge-store';
-import { decorateItem, ingredientMatches } from '@/utils/fridge-logic';
+import { decorateItem, ingredientMatches, mealSlotForTime } from '@/utils/fridge-logic';
 
 export default function RecipeDetailScreen() {
   const router = useRouter();
@@ -40,7 +40,6 @@ export default function RecipeDetailScreen() {
         </Pressable>
         <Text className="mt-3.5 text-[25px] font-bold text-neutral-900">{recipe.title}</Text>
         <View className="mt-2.5 flex-row flex-wrap gap-1.5">
-          <Tag label={recipe.time} />
           <Tag label={recipe.level} />
           <Tag label={`${recipe.kcal}kcal`} />
           <Tag label={`매칭 ${matchPct}%`} accent />
@@ -98,7 +97,7 @@ export default function RecipeDetailScreen() {
         className="absolute inset-x-0 bottom-0 bg-surface px-5 pb-6 pt-3.5"
         style={Platform.select({ web: { position: 'relative' as const }, default: {} })}>
         <Text className="mb-2.5 text-center text-xs text-neutral-500">
-          완료하면 재료가 빠지고 오늘 저녁 식단에 기록돼요
+          완료하면 재료가 빠지고 오늘 {mealSlotForTime()} 식단에 기록돼요
         </Text>
         <Pressable onPress={handleCook} className="rounded-full bg-accent-600 py-4 shadow-md">
           <Text className="text-center text-[17px] font-bold text-white">다 만들었어요</Text>

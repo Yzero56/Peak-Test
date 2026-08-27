@@ -41,7 +41,7 @@ export default function HomeScreen() {
     [items],
   );
   const urgent = decorated.filter((i) => i.dday <= 1);
-  const heroWord = (urgent[0] ?? decorated[0])?.name ?? '';
+  const heroWords = urgent.length > 0 ? urgent.map((i) => i.name) : [decorated[0]?.name].filter((n): n is string => !!n);
   const heroPre = urgent.length > 0 ? '오늘은 ' : '지금은 ';
   const heroPost = urgent.length > 0 ? '부터 쓰면 좋아요' : ' 하나만 챙기면 돼요';
   const heroSub =
@@ -86,7 +86,12 @@ export default function HomeScreen() {
 
           <Text className="mt-5 text-[25px] leading-8 text-neutral-900">
             {heroPre}
-            <Text className="rounded-sm bg-amber-200 font-bold">{heroWord}</Text>
+            {heroWords.map((name, idx) => (
+              <Text key={`${name}-${idx}`}>
+                <Text className="rounded-sm bg-amber-200 font-bold">{name}</Text>
+                {idx < heroWords.length - 1 ? ', ' : ''}
+              </Text>
+            ))}
             {heroPost}
           </Text>
           <Text className="mt-2 text-[13px] text-neutral-600">{heroSub}</Text>

@@ -29,9 +29,11 @@ export type RecipeDef = {
   steps: string[];
 };
 
+export type MealSlot = '아침' | '점심' | '저녁';
+
 export type MealLogEntry = {
   date: string; // ISO date (YYYY-MM-DD)
-  slot: '아침' | '점심' | '저녁';
+  slot: MealSlot;
   title: string;
   kcal: number;
 };

@@ -16,9 +16,7 @@ export function RecipeHeroCard({ match, onPress }: { match: RecipeMatch; onPress
         <Text className={`text-[11px] font-semibold ${useTone.text}`}>{useLabel}</Text>
       </View>
       <Text className="mt-2.5 text-[15.5px] font-bold leading-5 text-neutral-900">{recipe.title}</Text>
-      <Text className="mt-1.5 text-xs text-neutral-500">
-        {recipe.time} · 매칭 {pct}%
-      </Text>
+      <Text className="mt-1.5 text-xs text-neutral-500">매칭 {pct}%</Text>
     </Pressable>
   );
 }

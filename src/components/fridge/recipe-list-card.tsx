@@ -31,8 +31,6 @@ export function RecipeListCard({ match, onPress }: { match: RecipeMatch; onPress
       </View>
 
       <View className="mt-3 flex-row flex-wrap gap-x-3 gap-y-1.5">
-        <Text className="text-xs text-neutral-500">{recipe.time}</Text>
-        <Text className="text-xs text-neutral-500">·</Text>
         <Text className="text-xs text-neutral-500">{recipe.level}</Text>
         <Text className="text-xs text-neutral-500">·</Text>
         <Text className="text-xs text-neutral-500">{recipe.kcal}kcal</Text>

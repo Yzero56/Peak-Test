@@ -27,7 +27,7 @@ import type {
   InventoryViewMode,
   ToastState,
 } from '@/types/fridge';
-import { bumpQuantity, ingredientsToConsume, toDateKey } from '@/utils/fridge-logic';
+import { bumpQuantity, ingredientsToConsume, mealSlotForTime, toDateKey } from '@/utils/fridge-logic';
 
 const BACKEND_POLL_MS = 6000;
 const CLIMATE_POLL_MS = 5 * 60 * 1000;
@@ -337,7 +337,9 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
       setItems((prevItems) => {
         const drop = ingredientsToConsume(recipe, prevItems);
         const snapshotItems = prevItems;
-        const today = toDateKey(new Date());
+        const now = new Date();
+        const today = toDateKey(now);
+        const slot = mealSlotForTime(now);
 
         if (backendConfigured.current) {
           const droppedIds = prevItems.filter((i) => drop.includes(i.name)).map((i) => i.id);
@@ -351,7 +353,7 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
           setRescuedCount((prevRescued) => {
             const snapshotRescued = prevRescued;
             setToast({
-              message: `재료 ${drop.length}개를 정리하고 저녁 식단에 기록했어요`,
+              message: `재료 ${drop.length}개를 정리하고 ${slot} 식단에 기록했어요`,
               actionLabel: '되돌리기',
               onAction: () => {
                 setItems(snapshotItems);
@@ -361,7 +363,7 @@ export function FridgeProvider({ children }: { children: ReactNode }) {
             });
             return prevRescued + drop.length;
           });
-          return [...prevMeals, { date: today, slot: '저녁', title: recipe.title, kcal: recipe.kcal }];
+          return [...prevMeals, { date: today, slot, title: recipe.title, kcal: recipe.kcal }];
         });
         return prevItems.filter((i) => !drop.includes(i.name));
       });

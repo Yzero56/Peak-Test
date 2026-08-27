@@ -2,6 +2,7 @@ import type {
   Category,
   InventoryItem,
   MealLogEntry,
+  MealSlot,
   RecipeDef,
 } from '@/types/fridge';
 import { getDday } from '@/utils/dday';
@@ -208,6 +209,14 @@ export function buildMonthGrid(year: number, month: number, meals: MealLogEntry[
     });
   }
   return cells;
+}
+
+/** 기록 시각 기준으로 아침/점심/저녁 슬롯을 정한다 — 05~10시 아침, 11~16시 점심, 그 외 저녁. */
+export function mealSlotForTime(date: Date = new Date()): MealSlot {
+  const hour = date.getHours();
+  if (hour >= 5 && hour < 11) return '아침';
+  if (hour >= 11 && hour < 17) return '점심';
+  return '저녁';
 }
 
 export function toDateKey(date: Date): string {
