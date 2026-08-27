@@ -1,0 +1,1110 @@
+[
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050036_506_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050036_506_001.jpg",
+    "confidence": "0.519715"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050038_933_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050038_933_001.jpg",
+    "confidence": "0.559948"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050040_731_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050040_731_001.jpg",
+    "confidence": "0.537235"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050042_680_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050042_680_001.jpg",
+    "confidence": "0.561015"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050044_684_001.jpg",
+    "label": "김치",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\김치\\김치_20260827_050044_684_001.jpg",
+    "confidence": "0.606968"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050046_998_001.jpg",
+    "label": "김치",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\김치\\김치_20260827_050046_998_001.jpg",
+    "confidence": "0.483631"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050049_303_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050049_303_001.jpg",
+    "confidence": "0.525008"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050051_796_001.jpg",
+    "label": "김치",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\김치\\김치_20260827_050051_796_001.jpg",
+    "confidence": "0.616781"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050053_627_001.jpg",
+    "label": "김치",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\김치\\김치_20260827_050053_627_001.jpg",
+    "confidence": "0.528702"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050055_873_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050055_873_001.jpg",
+    "confidence": "0.515013"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050058_432_001.jpg",
+    "label": "김치",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\김치\\김치_20260827_050058_432_001.jpg",
+    "confidence": "0.569289"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050100_994_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050100_994_001.jpg",
+    "confidence": "0.583893"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050103_102_001.jpg",
+    "label": "김치",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\김치\\김치_20260827_050103_102_001.jpg",
+    "confidence": "0.421806"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050104_911_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050104_911_001.jpg",
+    "confidence": "0.417671"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050107_137_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050107_137_001.jpg",
+    "confidence": "0.438539"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050109_141_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050109_141_001.jpg",
+    "confidence": "0.412911"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050110_944_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050110_944_001.jpg",
+    "confidence": "0.524861"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050113_077_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050113_077_001.jpg",
+    "confidence": "0.483379"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050114_928_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050114_928_001.jpg",
+    "confidence": "0.620193"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050117_052_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050117_052_001.jpg",
+    "confidence": "0.519285"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050119_809_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050119_809_001.jpg",
+    "confidence": "0.604409"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050121_799_001.jpg",
+    "label": "김치",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\김치\\김치_20260827_050121_799_001.jpg",
+    "confidence": "0.567499"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050126_529_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050126_529_001.jpg",
+    "confidence": "0.573558"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050128_776_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050128_776_001.jpg",
+    "confidence": "0.576474"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050131_115_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050131_115_001.jpg",
+    "confidence": "0.693284"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050133_148_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050133_148_001.jpg",
+    "confidence": "0.420238"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050135_284_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050135_284_001.jpg",
+    "confidence": "0.480855"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050137_282_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050137_282_001.jpg",
+    "confidence": "0.481348"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050139_509_001.jpg",
+    "label": "김치",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\김치\\김치_20260827_050139_509_001.jpg",
+    "confidence": "0.638817"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050142_016_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050142_016_001.jpg",
+    "confidence": "0.650072"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050144_314_001.jpg",
+    "label": "김치",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\김치\\김치_20260827_050144_314_001.jpg",
+    "confidence": "0.804712"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050146_414_001.jpg",
+    "label": "김치",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\김치\\김치_20260827_050146_414_001.jpg",
+    "confidence": "0.446947"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050149_934_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050149_934_001.jpg",
+    "confidence": "0.465606"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050152_132_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050152_132_001.jpg",
+    "confidence": "0.604041"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050154_226_001.jpg",
+    "label": "김치",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\김치\\김치_20260827_050154_226_001.jpg",
+    "confidence": "0.497267"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050156_161_001.jpg",
+    "label": "김치",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\김치\\김치_20260827_050156_161_001.jpg",
+    "confidence": "0.545212"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050158_476_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050158_476_001.jpg",
+    "confidence": "0.330418"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050201_025_001.jpg",
+    "label": "김치",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\김치\\김치_20260827_050201_025_001.jpg",
+    "confidence": "0.653911"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050203_671_001.jpg",
+    "label": "김치",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\김치\\김치_20260827_050203_671_001.jpg",
+    "confidence": "0.595694"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050206_137_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050206_137_001.jpg",
+    "confidence": "0.578435"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050208_001_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050208_001_001.jpg",
+    "confidence": "0.516331"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050211_339_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050211_339_001.jpg",
+    "confidence": "0.525308"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050214_676_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050214_676_001.jpg",
+    "confidence": "0.520100"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050216_995_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050216_995_001.jpg",
+    "confidence": "0.474879"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050219_910_001.jpg",
+    "label": "김치",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\김치\\김치_20260827_050219_910_001.jpg",
+    "confidence": "0.590456"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050222_274_001.jpg",
+    "label": "김치",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\김치\\김치_20260827_050222_274_001.jpg",
+    "confidence": "0.640694"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050224_765_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050224_765_001.jpg",
+    "confidence": "0.312598"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050227_650_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050227_650_001.jpg",
+    "confidence": "0.594281"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050230_477_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050230_477_001.jpg",
+    "confidence": "0.527720"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050233_232_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050233_232_001.jpg",
+    "confidence": "0.542791"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050235_839_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050235_839_001.jpg",
+    "confidence": "0.386094"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\김치\\김치_20260827_050239_057_001.jpg",
+    "label": "김치",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\김치\\김치_20260827_050239_057_001.jpg",
+    "confidence": "0.692860"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081408_699_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081408_699_001.jpg",
+    "confidence": "0.753973"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081411_862_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081411_862_001.jpg",
+    "confidence": "0.398860"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081414_899_001.jpg",
+    "label": "당근",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\당근\\당근_20260827_081414_899_001.jpg",
+    "confidence": "0.115505"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081424_132_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081424_132_001.jpg",
+    "confidence": "0.150817"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081427_130_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081427_130_001.jpg",
+    "confidence": "0.195073"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081429_994_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081429_994_001.jpg",
+    "confidence": "0.723040"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081432_557_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081432_557_001.jpg",
+    "confidence": "0.604166"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081435_617_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081435_617_001.jpg",
+    "confidence": "0.777391"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081442_566_001.jpg",
+    "label": "당근",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\당근\\당근_20260827_081442_566_001.jpg",
+    "confidence": "0.733473"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081447_614_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081447_614_001.jpg",
+    "confidence": "0.231273"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081459_017_001.jpg",
+    "label": "당근",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\당근\\당근_20260827_081459_017_001.jpg",
+    "confidence": "0.179203"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081501_794_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081501_794_001.jpg",
+    "confidence": "0.583215"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081504_564_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081504_564_001.jpg",
+    "confidence": "0.507876"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081508_535_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081508_535_001.jpg",
+    "confidence": "0.236891"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081511_702_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081511_702_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081515_452_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081515_452_001.jpg",
+    "confidence": "0.414441"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081518_809_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081518_809_001.jpg",
+    "confidence": "0.546655"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081521_764_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081521_764_001.jpg",
+    "confidence": "0.429112"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081527_023_001.jpg",
+    "label": "당근",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\당근\\당근_20260827_081527_023_001.jpg",
+    "confidence": "0.461627"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081531_610_001.jpg",
+    "label": "당근",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\당근\\당근_20260827_081531_610_001.jpg",
+    "confidence": "0.575181"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081534_753_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081534_753_001.jpg",
+    "confidence": "0.247180"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081540_355_001.jpg",
+    "label": "당근",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\당근\\당근_20260827_081540_355_001.jpg",
+    "confidence": "0.243898"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081549_458_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081549_458_001.jpg",
+    "confidence": "0.488703"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081552_524_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081552_524_001.jpg",
+    "confidence": "0.511450"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081605_156_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081605_156_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081607_403_001.jpg",
+    "label": "당근",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\당근\\당근_20260827_081607_403_001.jpg",
+    "confidence": "0.261400"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081609_427_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081609_427_001.jpg",
+    "confidence": "0.383194"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081611_899_001.jpg",
+    "label": "당근",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\당근\\당근_20260827_081611_899_001.jpg",
+    "confidence": "0.553293"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081614_382_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081614_382_001.jpg",
+    "confidence": "0.606337"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\당근\\당근_20260827_081616_337_001.jpg",
+    "label": "당근",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\당근\\당근_20260827_081616_337_001.jpg",
+    "confidence": "0.014744"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080746_499_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080746_499_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080757_860_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080757_860_001.jpg",
+    "confidence": "0.101682"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080802_279_001.jpg",
+    "label": "대파",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\대파\\양파_20260827_080802_279_001.jpg",
+    "confidence": "0.093277"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080829_714_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080829_714_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080835_079_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080835_079_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080841_228_001.jpg",
+    "label": "대파",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\대파\\양파_20260827_080841_228_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080847_371_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080847_371_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080850_655_001.jpg",
+    "label": "대파",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\대파\\양파_20260827_080850_655_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080853_921_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080853_921_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080856_787_001.jpg",
+    "label": "대파",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\대파\\양파_20260827_080856_787_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080902_865_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080902_865_001.jpg",
+    "confidence": "0.010321"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080904_861_001.jpg",
+    "label": "대파",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\대파\\양파_20260827_080904_861_001.jpg",
+    "confidence": "0.011729"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080908_277_001.jpg",
+    "label": "대파",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\대파\\양파_20260827_080908_277_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080911_665_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080911_665_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080915_897_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080915_897_001.jpg",
+    "confidence": "0.015104"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080920_785_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080920_785_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080923_508_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080923_508_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080926_065_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_080926_065_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_080935_020_001.jpg",
+    "label": "대파",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\대파\\양파_20260827_080935_020_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081003_408_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081003_408_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081007_023_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081007_023_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081010_705_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081010_705_001.jpg",
+    "confidence": "0.014261"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081018_741_001.jpg",
+    "label": "대파",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\대파\\양파_20260827_081018_741_001.jpg",
+    "confidence": "0.039491"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081021_868_001.jpg",
+    "label": "대파",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\대파\\양파_20260827_081021_868_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081025_467_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081025_467_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081031_169_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081031_169_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081037_074_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081037_074_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081039_576_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081039_576_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081042_721_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081042_721_001.jpg",
+    "confidence": "0.046598"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081045_008_001.jpg",
+    "label": "대파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\대파\\양파_20260827_081045_008_001.jpg",
+    "confidence": "0.019458"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\대파\\양파_20260827_081046_677_001.jpg",
+    "label": "대파",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\대파\\양파_20260827_081046_677_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081125_595_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081125_595_001.jpg",
+    "confidence": "0.047361"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081129_562_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081129_562_001.jpg",
+    "confidence": "0.049432"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081134_482_001.jpg",
+    "label": "양파",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\양파\\대파_20260827_081134_482_001.jpg",
+    "confidence": "0.184804"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081137_429_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081137_429_001.jpg",
+    "confidence": "0.111961"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081140_589_001.jpg",
+    "label": "양파",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\양파\\대파_20260827_081140_589_001.jpg",
+    "confidence": "0.054059"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081143_294_001.jpg",
+    "label": "양파",
+    "split": "test",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\양파\\대파_20260827_081143_294_001.jpg",
+    "confidence": "0.069502"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081151_631_001.jpg",
+    "label": "양파",
+    "split": "val",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\양파\\대파_20260827_081151_631_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081156_262_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081156_262_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081201_049_001.jpg",
+    "label": "양파",
+    "split": "test",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\test\\양파\\대파_20260827_081201_049_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081204_551_001.jpg",
+    "label": "양파",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\양파\\대파_20260827_081204_551_001.jpg",
+    "confidence": "0.078341"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081207_013_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081207_013_001.jpg",
+    "confidence": "0.037905"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081208_156_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081208_156_001.jpg",
+    "confidence": "0.065843"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081211_283_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081211_283_001.jpg",
+    "confidence": "0.086212"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081214_455_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081214_455_001.jpg",
+    "confidence": "0.155934"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081220_245_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081220_245_001.jpg",
+    "confidence": "0.024045"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081223_648_001.jpg",
+    "label": "양파",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\양파\\대파_20260827_081223_648_001.jpg",
+    "confidence": "0.102026"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081229_754_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081229_754_001.jpg",
+    "confidence": "0.056814"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081234_592_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081234_592_001.jpg",
+    "confidence": "0.082667"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081249_898_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081249_898_001.jpg",
+    "confidence": "0.016240"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081254_830_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "fallback_full_image",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081254_830_001.jpg"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081257_932_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081257_932_001.jpg",
+    "confidence": "0.139619"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081301_579_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081301_579_001.jpg",
+    "confidence": "0.258993"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081305_674_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081305_674_001.jpg",
+    "confidence": "0.132861"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081311_078_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081311_078_001.jpg",
+    "confidence": "0.257948"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081314_936_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081314_936_001.jpg",
+    "confidence": "0.096683"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081318_795_001.jpg",
+    "label": "양파",
+    "split": "val",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\val\\양파\\대파_20260827_081318_795_001.jpg",
+    "confidence": "0.024465"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081322_861_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081322_861_001.jpg",
+    "confidence": "0.046359"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081326_691_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081326_691_001.jpg",
+    "confidence": "0.034429"
+  },
+  {
+    "source": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_raw\\양파\\대파_20260827_081331_971_001.jpg",
+    "label": "양파",
+    "split": "train",
+    "status": "accepted",
+    "crop": "C:\\Users\\PKNU-ICEE\\Desktop\\project\\pantry_dataset_prepared\\train\\양파\\대파_20260827_081331_971_001.jpg",
+    "confidence": "0.135111"
+  }
+]

@@ -31,7 +31,20 @@ pip install -r requirements.txt
   python browser_instance_realtime_multi.py
   ```
 
-실행 후 브라우저에서 `http://127.0.0.1:5003`, `5005`, `5007` 중 해당 주소로 접속.
+- 주방 재료(양파/대파/당근/김치) 다중 인식 — 하늘에서 수직으로 내려다보는 카메라 전용,
+  냉장고 용기 인식과는 별개 프로그램 (포트 5009):
+  ```bash
+  python browser_pantry_realtime_multi.py
+  ```
+- 주방 재료 인식 + 신규 등록 — 위와 같은 인식에 더해, 처음 보는 재료면 용기 단위로
+  자동 등록해 SQLite(`pantry_registry.db`)에 기록하는 스트리밍 서버 (포트 5010).
+  당근/대파/양파 → `A용기`, 김치 → `김치용기`로 자동 분류 등록되며, 당근(주황)/대파(초록)/
+  양파(흰색+둥근 모양)는 분류기 확률이 낮아도 색상·모양으로 보정하는 안전장치가 들어있다:
+  ```bash
+  python browser_pantry_registration.py
+  ```
+
+실행 후 브라우저에서 `http://127.0.0.1:5003`, `5005`, `5007`, `5009`, `5010` 중 해당 주소로 접속.
 
 ## 학습된 모델
 
@@ -44,6 +57,13 @@ pip install -r requirements.txt
      (`instance_dataset_raw/<라벨>/`에 저장, 저장소에는 포함 안 됨 — 각자 촬영 필요)
   2. `python prepare_instance_dataset.py` — YOLO-World로 자동 크롭해 `instance_dataset_prepared/` 생성
   3. `python train_instance_classifier.py` — `instance_classifier.joblib` 재생성
+  4. 자동 크롭이 실패한 사진은 `python manual_crop_tool.py`로 마우스 드래그해 수동으로 잘라
+     보완할 수 있다 (`instance_dataset_manual_crop/<라벨>/`에 저장).
+- `pantry_classifier.joblib` — 주방 재료 4종(양파/대파/당근/김치) 분류기, DINOv2 임베딩 기반.
+  실제 시연에 쓸 용기·조명 조건 그대로 촬영해 학습했다. 재학습하려면:
+  1. `python pantry_instance_collector.py` (포트 5008)로 재료 하나씩 라벨 버튼 클릭 후 촬영
+     (`pantry_dataset_raw/<라벨>/`에 저장, 저장소에는 포함 안 됨)
+  2. `python prepare_pantry_dataset.py` → `python train_pantry_classifier.py`
 
 ## 프로젝트 전체 구조
 

@@ -1,0 +1,108 @@
+{
+  "classes": [
+    "김치",
+    "당근",
+    "대파",
+    "양파"
+  ],
+  "tuning": [
+    {
+      "C": 0.03,
+      "validation_accuracy": 0.9047619047619048
+    },
+    {
+      "C": 0.1,
+      "validation_accuracy": 0.9523809523809523
+    },
+    {
+      "C": 0.3,
+      "validation_accuracy": 0.9523809523809523
+    },
+    {
+      "C": 1.0,
+      "validation_accuracy": 0.9523809523809523
+    },
+    {
+      "C": 3.0,
+      "validation_accuracy": 1.0
+    },
+    {
+      "C": 10.0,
+      "validation_accuracy": 1.0
+    }
+  ],
+  "best_c": 3.0,
+  "validation_accuracy": 1.0,
+  "test_accuracy": 1.0,
+  "classification_report": {
+    "김치": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 8.0
+    },
+    "당근": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 4.0
+    },
+    "대파": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 5.0
+    },
+    "양파": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 4.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 21.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 21.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      8,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      4,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      5,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      4
+    ]
+  ],
+  "confusion_matrix_labels": [
+    "김치",
+    "당근",
+    "대파",
+    "양파"
+  ]
+}

@@ -67,3 +67,15 @@ instance_classifier_predictions.csv
 instance_realtime_multi_log.csv
 instance_collector.log
 crop_stats.txt
+crop_stats2.txt
+crop_needed.txt
+blur_stats.txt
+instance_dataset_manual_crop/
+
+# 주방 재료 인식(pantry) - 원본 촬영본/백업/중간 산출물/DB는 재현에 불필요해 커밋 제외
+pantry_dataset_raw/
+pantry_dataset_raw_backup/
+pantry_classifier_embeddings.npz
+pantry_classifier_predictions.csv
+pantry_realtime_multi_log.csv
+pantry_registry.db
